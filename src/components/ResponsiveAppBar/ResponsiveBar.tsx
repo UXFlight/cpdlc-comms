@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react";
+import React from "react";
 import NavContainer from "./NavContainer";
 import {PAGES} from "../../constants/NavBarConst";
 import { useRouter } from 'next/navigation';
@@ -17,17 +17,19 @@ export default function ResponsiveBar() {
 
   return (
     <header>
-      <div className="bg-[linear-gradient(90deg,_#1cccc4_0%,#3b9673_100%)] bg-cover bg-50%_50% bg-blend-normal bg-no-repeat flex flex-col justify-center mr-3 w-12 shrink-0 h-12 items-center rounded-[48px]">
-        <img
-          src="/CPDLC.svg"
-          className="w-6"
-          alt="HOME"
-        />
-      </div>
+      <div className="bg-nav-bar h-[80.32px] flex align-center w-full items-center">
+        <div className="p-[10px]">
+          <img
+            src="/CPDLC.svg"
+            className="w-[48px] h-[48px] bg-gradient-to-l from-teal-600 to-teal-400 rounded-[48px]"
+            alt="HOME"
+          />
+        </div>
       <NavContainer
         pages={PAGES}
         onClick={handleClick}
       />
+      </div>
     </header>
   );
 }

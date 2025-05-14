@@ -12,7 +12,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="bg-[url('/bg-cockpit4.jpg')] bg-cover bg-center h-screen w-screen">{children}</body>
     </html>
   )
 }

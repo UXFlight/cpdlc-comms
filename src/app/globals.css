@@ -1,28 +1,34 @@
 @import "tailwindcss";
+@tailwind base;
+@tailwind components;
+/*@tailwind utilities;*/
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-white-10: #FFFFFF1A;
+  --color-white-80: #FFFFFFCC;
+  --color-white-100: #FFFFFF;
+  --color-nav-bar: #242424;
+  --color-background: #020202;  
+  --color-medium-gray: #2B2B2C;
+  --color-light-gray: #8C8C8C; 
+  --color-green: #3B9673;
+  --color-dark-blue: #3A75B6;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@layer base {
+  h3 {
+    @apply text-[rgba(255,255,255,0.80)] text-center font-sans text-[10px] font-bold leading-[18px] uppercase whitespace-nowrap
+
+  }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer components {
+  .icon {
+    @apply w-[28px] h-[28px] aspect-square
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  /*copy from yanne's code*/
   font-family: sans-serif;
   -webkit-font-smoothing: auto;
   -moz-font-smoothing: auto;
