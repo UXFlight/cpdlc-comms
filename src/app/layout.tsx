@@ -1,4 +1,7 @@
 import './globals.css';
+import FmsTable from '../components/Fms/FmsTable';
+import ResponsiveBar from '../components/ResponsiveBar/ResponsiveBar';
+import ConnectionBar from '../components/ConnectionBar/ConnectionBar';
 
 export const metadata = {
   title: 'Next.js',
@@ -12,7 +15,28 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-[url('/bg-cockpit4.jpg')] bg-cover bg-center h-screen w-screen">{children}</body>
+      <body /*className="bg-[url('/bg-cockpit4.jpg')] bg-cover bg-center h-screen w-screen"*/>
+        <div className="grid lg:grid-cols-2 grid-cols-1 h-screen gap-8">
+          <div className="flex justify-center items-center">
+            <div className="w-[600px] h-[800px] relative bg-black overflow-hidden lg:block hidden">
+              <FmsTable/>
+            </div>
+          </div>
+          <div className="flex justify-center items-center mx-auto">
+            <div className="w-[600px] h-[800px] relative bg-black overflow-hidden grid grid-rows-3">
+              <div>
+              <ResponsiveBar/>
+              </div>
+              <div>
+              {children}
+              </div>
+              <div className="self-end">
+              <ConnectionBar/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </body>
     </html>
   )
 }

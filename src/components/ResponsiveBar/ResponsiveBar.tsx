@@ -12,7 +12,7 @@ export default function ResponsiveBar() {
       ...page,
       active: page.page === clickedPage.page
     }));*/
-    router.push(`/${clickedPage.path.toLowerCase().replace(/\s/g, "")}`);
+    router.push(`/?tab=${clickedPage.path.toLowerCase().replace(/\s/g, "")}`);
   };
 
   return (

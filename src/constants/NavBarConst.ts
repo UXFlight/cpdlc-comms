@@ -4,7 +4,7 @@ export const PAGES = [
   { page: "logon",
     path: "login",
     icon: "/login.svg",
-    active: true,
+    active: false,
   },
   {page: "message log",
     path: "logs",
