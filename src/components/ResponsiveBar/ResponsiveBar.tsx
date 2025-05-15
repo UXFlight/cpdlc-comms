@@ -1,7 +1,7 @@
 "use client"
 import React from "react";
 import NavContainer from "./NavContainer";
-import {PAGES} from "../../constants/NavBarConst";
+import {TABS} from "../../constants/NavBarConst";
 import { useRouter } from 'next/navigation';
 
 export default function ResponsiveBar() {
@@ -26,7 +26,7 @@ export default function ResponsiveBar() {
           />
         </div>
       <NavContainer
-        pages={PAGES}
+        pages={TABS}
         onClick={handleClick}
       />
       </div>

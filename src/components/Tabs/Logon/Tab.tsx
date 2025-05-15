@@ -1,6 +1,6 @@
-import AtcConnection from "../../components/Login/AtcConnection"
+import AtcConnection from "./AtcConnection"
 
-export default function App() { 
+export default function LogonTab() { 
   return (
       <div className="flex flex-row h-screen gap-8">
        <div>
