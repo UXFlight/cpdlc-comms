@@ -4,7 +4,12 @@ import NavContainer from "./NavContainer";
 import {TABS} from "../../constants/NavBarConst";
 import { useRouter } from 'next/navigation';
 
-export default function ResponsiveBar() {
+type Props = {
+  activeTab: string;
+  onTabChange: (tab: string) => void;
+};
+
+export default function ResponsiveBar({ activeTab, onTabChange }: Props) {
   const router = useRouter();
   
   const handleClick = (clickedPage) => {

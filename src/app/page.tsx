@@ -21,11 +21,14 @@ const TAB_COMPONENTS: Record<string, JSX.Element> = {
 };
 
 export default function CpdlcMainView() {
-  const [activeTab, setActiveTab] = useState('login');
+  const [activeTab, setActiveTab] = useState('logon');
 
   return (
-    <div>
-      {/*<TabsBar activeTab={activeTab} onTabChange={setActiveTab} /> in progress*/}
+    <div className="h-full">
+      <TabsBar activeTab={activeTab} onTabChange={setActiveTab} />
+      <div className="p-4">
+        {TAB_COMPONENTS[activeTab]}
+      </div>
     </div>
   );
 }
