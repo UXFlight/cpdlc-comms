@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import users from "../../../data/users.json"
 
-export default function CharInput({ length = 4 }) {
+export default function CharInput({ length = 4, onResult }) {
   const [value, setValue] = useState("");
   const inputRef = useRef(null);
 
@@ -10,18 +10,18 @@ export default function CharInput({ length = 4 }) {
     setValue(raw.slice(0, length));
   };
 
-  function temporaryFunction(input: string) { 
-    users.find((user) => user.username.toUpperCase().replace(/[^A-Z0-9]/g, "") === input);
-
+  function temporaryFunction(input: string) {
+    return users.some((user) => user.username.toUpperCase().replace(/[^A-Z0-9]/g, "") === input);
   }
 
   const handleEnter = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
-
-      inputRef.current?.blur();
+      const valid = temporaryFunction(inputRef.current.value);
+      onResult?.(valid); // passer le result au parent
+      console.log(`${temporaryFunction(inputRef.current.value)}`);
+      //inputRef.current?.blur();
     }
-
   };
 
   return (
