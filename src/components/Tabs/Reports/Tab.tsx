@@ -1,9 +1,9 @@
 export default function ReportsTab() {
   return (
-    <div className="flex flex-row h-screen gap-8">
-      <div></div>
-      <div></div>
-      <div></div>
+    <div className="flex flex-col h-full p-4 gap-4 text-white">
+      <div className="flex flex-row items-center justify-between">
+        <h1>reports</h1>
+      </div>
     </div>
   );
 }

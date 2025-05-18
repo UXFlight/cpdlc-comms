@@ -24,7 +24,7 @@ export default function NavButton({
             ? "border-[#1cccc4] bg-[#3b9673] text-white"
             : "text-white/80 hover:bg-[#3b9673]"
         }
-          ${label === "print" ? "border-2 border-solid border-green rounded-[100px]" : ""}`}
+          ${label === "print" ? "border-1 border-solid border-green rounded-[100px] m-[9px]" : ""}`}
       >
         <img src={icon} alt={label} className="icon" />
         <h3 className="align-self-stretch">{label}</h3>

@@ -5,7 +5,7 @@ export default function LogonTab() {
   return (
     <div className="flex flex-col h-full p-4 gap-4 text-white">
       <div className="flex flex-row items-center justify-between">
-        <h1>LOGON</h1>
+        <h1>logon</h1>
         <div className="relative w-[130.962px] h-[36px]">
         <div className="absolute inset-0 flex items-center gap-2 bg-white-10 text-white px-3 py-2 rounded pointer-events-none">
           <img src="/fans-button.svg" alt="icon" className="w-[23.548px] h-[20px]" />
@@ -30,6 +30,6 @@ export default function LogonTab() {
           <Logon />
         </div>
       </div>
-      </div>
+    </div>
   );
 }

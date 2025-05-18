@@ -21,7 +21,7 @@
   }
 
   h1 {
-    @apply text-white font-sans text-[20px] not-italic font-normal leading-normal;
+    @apply text-white font-sans text-[20px] not-italic font-normal leading-normal uppercase;
   }
 
   h2 {
