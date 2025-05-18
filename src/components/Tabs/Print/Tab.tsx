@@ -1,15 +1,9 @@
-export default function PrintTab() { 
+export default function PrintTab() {
   return (
-      <div className="flex flex-row h-screen gap-8">
-       <div>
-
-       </div>
-       <div>
-
-       </div>
-       <div> 
-          
-       </div>
-      </div>
-  )
+    <div className="flex flex-row h-screen gap-8">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  );
 }

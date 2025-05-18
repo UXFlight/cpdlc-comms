@@ -11,7 +11,7 @@ export default function ConnectionBar() {
 
   const formattedTime = new Date().toLocaleTimeString("en-US", {
     hour: "2-digit",
-    minute: "2-digit"
+    minute: "2-digit",
   });
 
   return (
@@ -36,7 +36,7 @@ export default function ConnectionBar() {
   );
 }
 
- /* return (
+/* return (
     <footer className="bg-nav-bar h-[16px] flex justify-between items-center w-full ">
     <div className="bg-nav-bar h-[16px] grid grid-col-3">
       <div>
@@ -65,4 +65,3 @@ export default function ConnectionBar() {
     </footer>
   );
 }*/
-

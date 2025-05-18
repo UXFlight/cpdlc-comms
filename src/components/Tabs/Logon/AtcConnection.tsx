@@ -2,24 +2,24 @@ import React from "react";
 
 export default function AtcConnection() {
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-teal-500 to-teal-300">
-      <h1 className="text-4xl font-bold text-white mb-4">ATC Connection</h1>
-      <p className="text-lg text-white mb-8">Connecting to ATC...</p>
+    <div className="container flex flex-col items-start">
+      <h2>Connection</h2>
+      <div className="flex items-center justify-between w-full">
+      <p className="secondary-text pt-[10px]">ATC Data Link</p>
+      <label className="relative inline-block w-[49px] h-[31px]">
+        <input type="checkbox" className="sr-only peer" />
+        {/* Bg switch */}
+        <div className="absolute inset-0 bg-gray-300 peer-checked:bg-green rounded-md transition-colors duration-300"></div>
+        {/* Slide ::before */}
+        <div
+          className="absolute left-1 top-1 w-[24px] h-[24px] bg-light-gray text-white-80 font-sans text-[10px] not-italic font-semibold leading-normal flex items-center justify-center rounded-md
+          transition-all duration-300 peer-checked:translate-x-[18px]
+          before:content-['OFF'] peer-checked:before:content-['ON']"
+        ></div>
+      </label>
+      </div>
+
       <div className="loader"></div>
-      <style jsx>{`
-        .loader {
-          border: 16px solid #f3f3f3; /* Light grey */
-          border-top: 16px solid #3498db; /* Blue */
-          border-radius: 50%;
-          width: 120px;
-          height: 120px;
-          animation: spin 2s linear infinite;
-        }
-        @keyframes spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-      `}</style>
     </div>
   );
 }

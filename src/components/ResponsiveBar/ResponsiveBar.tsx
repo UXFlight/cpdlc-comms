@@ -1,8 +1,7 @@
-"use client"
+"use client";
 import React from "react";
 import NavContainer from "./NavContainer";
-import {TABS} from "../../constants/NavBarConst";
-import { useRouter } from 'next/navigation';
+import { TABS } from "../../constants/NavBarConst";
 
 type Props = {
   activeTab: string;
@@ -10,16 +9,6 @@ type Props = {
 };
 
 export default function ResponsiveBar({ activeTab, onTabChange }: Props) {
-  const router = useRouter();
-  
-  const handleClick = (clickedPage) => {
-    /*const updatedPages = PAGES.map((page) => ({
-      ...page,
-      active: page.page === clickedPage.page
-    }));*/
-    router.push(`/?tab=${clickedPage.path.toLowerCase().replace(/\s/g, "")}`);
-  };
-
   return (
     <header>
       <div className="bg-nav-bar h-[80.32px] flex align-center w-full items-center">
@@ -30,12 +19,12 @@ export default function ResponsiveBar({ activeTab, onTabChange }: Props) {
             alt="HOME"
           />
         </div>
-      <NavContainer
-        pages={TABS}
-        onClick={handleClick}
-      />
+        <NavContainer
+          pages={TABS}
+          onTabChange={onTabChange}
+          activeTab={activeTab}
+        />
       </div>
     </header>
   );
 }
-

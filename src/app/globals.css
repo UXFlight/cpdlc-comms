@@ -4,27 +4,46 @@
 /*@tailwind utilities;*/
 
 @theme {
-  --color-white-10: #FFFFFF1A;
-  --color-white-80: #FFFFFFCC;
-  --color-white-100: #FFFFFF;
+  --color-white-10: #ffffff1a;
+  --color-white-80: #ffffffcc;
+  --color-white-100: #ffffff;
   --color-nav-bar: #242424;
-  --color-background: #020202;  
-  --color-medium-gray: #2B2B2C;
-  --color-light-gray: #8C8C8C; 
-  --color-green: #3B9673;
-  --color-dark-blue: #3A75B6;
+  --color-background: #020202;
+  --color-medium-gray: #2b2b2c;
+  --color-light-gray: #8c8c8c;
+  --color-green: #3b9673;
+  --color-dark-blue: #3a75b6;
 }
 
 @layer base {
   h3 {
-    @apply text-[rgba(255,255,255,0.80)] text-center font-sans text-[10px] font-bold leading-[18px] uppercase whitespace-nowrap
+    @apply text-[rgba(255,255,255,0.80)] text-center font-sans text-[10px] font-bold leading-[18px] uppercase whitespace-nowrap;
+  }
 
+  h1 {
+    @apply text-white font-sans text-[20px] not-italic font-normal leading-normal;
+  }
+
+  h2 {
+    @apply text-white font-sans text-[16px] not-italic font-medium leading-normal uppercase;
   }
 }
 
 @layer components {
   .icon {
-    @apply w-[28px] h-[28px] aspect-square
+    @apply w-[28px] h-[28px] aspect-square;
+  }
+
+  .scroll-btn {
+    @apply text-white-80 font-sans text-base not-italic font-semibold leading-normal;
+  }
+
+  .secondary-text {
+    @apply text-white-80 font-sans text-base not-italic font-normal leading-[18px]
+  }
+
+  .container {
+    @apply p-4 gap-3 self-stretch bg-medium-gray rounded;
   }
 }
 
