@@ -18,11 +18,13 @@ export default function CpdlcMainView() {
     console.log(`${activeTab}`);
   });
 
-  const [isLogonSuccessful, setIsLogonSuccessful] = useState<boolean | null>(null);
+  const [isLogonSuccessful, setIsLogonSuccessful] = useState<boolean | null>(
+    null,
+  );
   const [activeTab, setActiveTab] = useState("logon");
 
   const TAB_COMPONENTS: Record<string, JSX.Element> = {
-    logon: <LogonTab onLogonResult={setIsLogonSuccessful}/>,
+    logon: <LogonTab onLogonResult={setIsLogonSuccessful} />,
     logs: <LogsTab />,
     request: <RequestTab />,
     reports: <ReportsTab />,
@@ -50,7 +52,7 @@ export default function CpdlcMainView() {
 
           {/* footer en bas */}
           <div className="self-end">
-            <ConnectionBar isLogonSuccessful={isLogonSuccessful}/>
+            <ConnectionBar isLogonSuccessful={isLogonSuccessful} />
           </div>
         </div>
       </div>

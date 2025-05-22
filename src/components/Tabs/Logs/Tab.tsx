@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import Message from "./Message";
 
 export default function LogsTab() {
   return (
@@ -38,6 +39,9 @@ export default function LogsTab() {
             </option>
           </select>
         </div>
+      </div>
+      <div>
+        <Message />
       </div>
     </div>
   );

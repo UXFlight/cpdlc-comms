@@ -43,13 +43,15 @@ export default function LogonTab({ onLogonResult }) {
           <AtcConnection isConnected={isConnected} />
         </div>
         <div className="flex flex-col gap-4">
-          <Logon onResult={(result) => {
-            setIsConnected(result);
-            onLogonResult?.(result);
-          }} />
+          <Logon
+            onResult={(result) => {
+              setIsConnected(result);
+              onLogonResult?.(result);
+            }}
+          />
         </div>
         <div>
-          <Connection isConnected={isConnected}/>
+          <Connection isConnected={isConnected} />
         </div>
       </div>
     </div>

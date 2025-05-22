@@ -1,8 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 
-export default function ConnectionBar({isLogonSuccessful}) {
-
+export default function ConnectionBar({ isLogonSuccessful }) {
   const formattedTime = new Date().toLocaleTimeString("en-US", {
     hour: "2-digit",
     minute: "2-digit",
