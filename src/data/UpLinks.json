@@ -1,0 +1,1472 @@
+[
+    {
+        "Ref_Num": "UM 0",
+        "Message_Intent": "Indicates that ATC cannot comply with the request.",
+        "Message_Element": "UNABLE",
+        "Response": "N or NE",
+        "Category": "Responses/Acknowledgements (uplink)"
+    },
+    {
+        "Ref_Num": "UM 1",
+        "Message_Intent": "Indicates that ATC has received the message and will respond. Note.— The flight crew is informed that the request is being assessed and there will be a short-term delay (e.g. as appropriate, given the situation, but not to exceed 10 minutes). The exchange is not closed and the request will be responded to when conditions allow.",
+        "Message_Element": "STANDBY",
+        "Response": "N or NE",
+        "Category": "Responses/Acknowledgements (uplink)"
+    },
+    {
+        "Ref_Num": "UM 2",
+        "Message_Intent": "Indicates that ATC has received the request but it has been deferred until later. Note.— The flight crew is informed that the request is being assessed and a long- term delay can be expected. The exchange is not closed and the request will be responded to when conditions allow.",
+        "Message_Element": "REQUEST DEFERRED",
+        "Response": "N or NE",
+        "Category": "Responses/Acknowledgements (uplink)"
+    },
+    {
+        "Ref_Num": "UM 3",
+        "Message_Intent": "Indicates that ATC has received and understood the message.",
+        "Message_Element": "ROGER",
+        "Response": "N or NE",
+        "Category": "Responses/Acknowledgements (uplink)"
+    },
+    {
+        "Ref_Num": "UM 4",
+        "Message_Intent": "Yes.",
+        "Message_Element": "AFFIRM",
+        "Response": "N or NE",
+        "Category": "Responses/Acknowledgements (uplink)"
+    },
+    {
+        "Ref_Num": "UM 5",
+        "Message_Intent": "No",
+        "Message_Element": "NEGATIVE",
+        "Response": "N or NE",
+        "Category": "Responses/Acknowledgements (uplink)"
+    },
+    {
+        "Ref_Num": "UM 235",
+        "Message_Intent": "Notification of receipt of unlawful interference message.",
+        "Message_Element": "ROGER 7500",
+        "Response": "N",
+        "Category": "Responses/Acknowledgements (uplink)"
+    },
+    {
+        "Ref_Num": "UM 211",
+        "Message_Intent": "Indicates that the ATC has received the request and has passed it to the next control authority. FANS 1/A and FANS 1/A-ATN B1.— Uses UM 169x free text for FANS 1/A aircraft.",
+        "Message_Element": "REQUEST FORWARDED",
+        "Response": "N",
+        "Category": "Responses/Acknowledgements (uplink)"
+    },
+    {
+        "Ref_Num": "UM 218",
+        "Message_Intent": "Indicates to the pilot that the request has already been received on the ground.",
+        "Message_Element": "REQUEST ALREADY RECEIVED",
+        "Response": "N",
+        "Category": "Responses/Acknowledgements (uplink)"
+    },
+    {
+        "Ref_Num": "UM 237",
+        "Message_Intent": "Indicates that the request cannot be responded to by the current unit and that it should be requested from the next unit. FANS 1/A and FANS 1/A-ATN B1.— Uses UM 169ab free text for FANS 1/A aircraft.",
+        "Message_Element": "REQUEST AGAIN WITH NEXT UNIT",
+        "Response": "N",
+        "Category": "Responses/Acknowledgements (uplink)"
+    },
+    {
+        "Ref_Num": "UM 6",
+        "Message_Intent": "Notification that a level change instruction should be expected. Note.— Avoid use of this message element due to potential misinterpretation.",
+        "Message_Element": "EXPECT [level]",
+        "Response": "R",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 7",
+        "Message_Intent": "Notification that an instruction should be expected for the aircraft to commence climb at the specified time. Note.— The controller should only use this message to respond to a flight crew request (e.g. WHEN CAN WE EXPECT).",
+        "Message_Element": "EXPECT CLIMB AT [time]",
+        "Response": "R",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 8",
+        "Message_Intent": "Notification that an instruction should be expected for the aircraft to commence climb at the specified position. Note.— The controller should only use this message to respond to a flight crew request (e.g. WHEN CAN WE EXPECT).",
+        "Message_Element": "EXPECT CLIMB AT [position]",
+        "Response": "R",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 9",
+        "Message_Intent": "Notification that an instruction should be expected for the aircraft to commence descent at the specified time. Note.— The controller should only use this message to respond to a flight crew request (e.g. WHEN CAN WE EXPECT).",
+        "Message_Element": "EXPECT DESCENT AT [time]",
+        "Response": "R",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 10",
+        "Message_Intent": "Notification that an instruction should be expected for the aircraft to commence descent at the specified position. Note.— The controller should only use this message to respond to a flight crew request (e.g. WHEN CAN WE EXPECT).",
+        "Message_Element": "EXPECT DESCENT AT [position]",
+        "Response": "R",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 11",
+        "Message_Intent": "Notification that an instruction should be expected for the aircraft to commence cruise climb at the specified time. Note.— Avoid use of this message element due to potential misinterpretation.",
+        "Message_Element": "EXPECT CRUISE CLIMB AT [time]",
+        "Response": "R",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 12",
+        "Message_Intent": "Notification that an instruction should be expected for the aircraft to commence cruise climb at the specified position. Note.— Avoid use of this message element due to potential misinterpretation.",
+        "Message_Element": "EXPECT CRUISE CLIMB AT [position]",
+        "Response": "R",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 19",
+        "Message_Intent": "Instruction to maintain the specified level.",
+        "Message_Element": "MAINTAIN [level]",
+        "Response": "W/U",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 20",
+        "Message_Intent": "Instruction that a climb to a specified level is to commence and once reached the specified level is to be maintained.",
+        "Message_Element": "CLIMB TO [level] or CLIMB TO AND MAINTAIN [altitude]",
+        "Response": "W/U",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 21",
+        "Message_Intent": "Instruction that at the specified time a climb to the specified level is to commence and once reached the specified level is to be maintained. Note 1.— Instruction that NOT BEFORE the specified time, a climb to the specified level is to commence and once reached the specified level is to be maintained. Note 2.— Precede this message element with UM 19 MAINTAIN [level], to prevent the premature execution of the instruction.",
+        "Message_Element": "AT [time] CLIMB TO [level] or AT [time] CLIMB TO AND MAINTAIN [altitude]",
+        "Response": "W/U",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 22",
+        "Message_Intent": "Instruction that at the specified position a climb to the specified level is to commence and once reached the specified level is to be maintained. Note 1.— Instruction that AFTER PASSING the specified position, a climb to the specified level is to commence and once reached the specified level is to be maintained. Note 2.— Precede this message element with UM 19 MAINTAIN [level], to prevent the premature execution of the instruction.",
+        "Message_Element": "AT [position] CLIMB TO [level] or AT [position] CLIMB TO AND MAINTAIN [altitude]",
+        "Response": "W/U",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 23",
+        "Message_Intent": "Instruction that a descent to a specified level is to commence and once reached the specified level is to be maintained.",
+        "Message_Element": "DESCEND TO [level] or DESCEND TO AND MAINTAIN [altitude]",
+        "Response": "W/U",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 24",
+        "Message_Intent": "Instruction that at a specified time a descent to a specified level is to commence and once reached the specified level is to be maintained. Note 1.— Instruction that NOT BEFORE the specified time, a descent to the specified level is to commence, and once reached, the specified level is to be maintained. Note 2.— Precede this message element with UM 19 MAINTAIN [level], to prevent the premature execution of the instruction.",
+        "Message_Element": "AT [time] DESCEND TO [level] or AT [time] DESCEND TO AND MAINTAIN [altitude]",
+        "Response": "W/U",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 25",
+        "Message_Intent": "Instruction that at the specified position a descent to the specified level is to commence and once reached the specified level is to be maintained. Note 1.— Instruction that AFTER PASSING the specified position, a descent to the specified level is to commence and once reached the specified level is to be maintained. Note 2.— Precede this message element with UM 19 MAINTAIN [level], to prevent the premature execution of the instruction.",
+        "Message_Element": "AT [position] DESCEND TO [level] or AT [position] DESCEND TO AND MAINTAIN [altitude]",
+        "Response": "W/U",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 26",
+        "Message_Intent": "Instruction that a climb is to commence at a rate such that the specified level is reached at or before the specified time. When this message element is not concatenated with another vertical clearance, the level specified is the assigned level which is to be maintained. Note.— Instruction that a climb is to commence at a rate such that the specified level is reached NOT LATER THAN the specified time.",
+        "Message_Element": "CLIMB TO REACH [level] BY [time]",
+        "Response": "W/U",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 27",
+        "Message_Intent": "Instruction that a climb is to commence at a rate such that the specified level is reached at or before the specified position. When this message element is not concatenated with another vertical clearance, the level specified is the assigned level which is to be maintained. Note.— Instruction that a climb is to commence at a rate such that the specified level is reached BEFORE PASSING the specified position.",
+        "Message_Element": "CLIMB TO REACH [level] BY [position]",
+        "Response": "W/U",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 28",
+        "Message_Intent": "Instruction that a descent is to commence at a rate such that the specified level is reached at or before the specified time. When this message element is not concatenated with another vertical clearance, the level specified is the assigned level which is to be maintained. Note.— Instruction that a descent is to commence at a rate such that the specified level is reached NOT LATER THAN the specified time.",
+        "Message_Element": "DESCEND TO REACH [level] BY [time]",
+        "Response": "W/U",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 29",
+        "Message_Intent": "Instruction that a descent is to commence at a rate such that the specified level is reached at or before the specified position. When this message element is not concatenated with another vertical clearance, the level specified is the assigned level which is to be maintained. Note.— Instruction that a descent is to commence at a rate such that the specified level is reached BEFORE PASSING the specified position.",
+        "Message_Element": "DESCEND TO REACH [level] BY [position]",
+        "Response": "W/U",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 192",
+        "Message_Intent": "Instruction that a change of level is to continue, but at a rate such that the specified level is reached at or before the specified time.",
+        "Message_Element": "REACH [level] BY [time]",
+        "Response": "W/U",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 209",
+        "Message_Intent": "Instruction that a change of level is to continue, but at a rate such that the specified level is reached at or before the specified position.",
+        "Message_Element": "REACH [level] BY [position]",
+        "Response": "W/U",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 30",
+        "Message_Intent": "Instruction that a level within the defined vertical range specified is to be maintained. FANS 1/A-ATN B1.— FANS 1/A aircraft only. ATN B1 aircraft accepts UM 19 MAINTAIN [level], where [level] is a vertical range.",
+        "Message_Element": "MAINTAIN BLOCK [level] TO [level]",
+        "Response": "W/U",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 31",
+        "Message_Intent": "Instruction that a climb to a level within the vertical range defined is to commence. FANS 1/A-ATN B1.— FANS 1/A aircraft only. ATN B1 aircraft accepts UM 20 CLIMB TO [level], where [level] is a vertical range.",
+        "Message_Element": "CLIMB TO AND MAINTAIN BLOCK [level] TO [level]",
+        "Response": "W/U",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 32",
+        "Message_Intent": "Instruction that a descent to a level within the vertical range defined is to commence. FANS 1/A-ATN B1.— FANS 1/A aircraft only. ATN B1 aircraft accepts UM 23 DESCEND TO [level], where [level] is a vertical range.",
+        "Message_Element": "DESCEND TO AND MAINTAIN BLOCK [level] TO [level]",
+        "Response": "W/U",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 34",
+        "Message_Intent": "Instruction that a cruise climb to the specified level is to commence and continue and, once reached the specified level is to be maintained. Note.— Avoid use of this message element due to potential misinterpretation.",
+        "Message_Element": "CRUISE CLIMB TO [level]",
+        "Response": "W/U",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 35",
+        "Message_Intent": "Instruction to be used in conjunction with an associated level instruction indicating that a cruise climb can commence once above the specified level. Note.— Avoid use of this message element due to potential misinterpretation.",
+        "Message_Element": "WHEN ABOVE [level] COMMENCE CRUISE CLIMB or CRUISE CLIMB ABOVE [level]",
+        "Response": "W/U",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 219",
+        "Message_Intent": "Instruction to stop the climb at the specified level and, once reached, this level is to be maintained. The specified level will be below the previously assigned level.",
+        "Message_Element": "STOP CLIMB AT [level]",
+        "Response": "W/U",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 220",
+        "Message_Intent": "Instruction to stop the descent at the specified level and, once reached, this level is to be maintained. The specified level will be above the previously assigned level.",
+        "Message_Element": "STOP DESCENT AT [level]",
+        "Response": "W/U",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 36",
+        "Message_Intent": "Instruction that the climb to the specified level should be made at the aircraft’s best rate.",
+        "Message_Element": "EXPEDITE CLIMB TO [level]",
+        "Response": "W/U",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 37",
+        "Message_Intent": "Instruction that the descent to the specified level should be made at the aircraft’s best rate.",
+        "Message_Element": "EXPEDITE DESCENT TO[level]",
+        "Response": "W/U",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 38",
+        "Message_Intent": "Urgent instruction to immediately climb to the specified level and, once reached, the specified level is to be maintained.",
+        "Message_Element": "IMMEDIATELY CLIMB TO [level]",
+        "Response": "W/U",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 39",
+        "Message_Intent": "Urgent instruction to immediately descend to the specified level and, once reached, the specified level is to be maintained.",
+        "Message_Element": "IMMEDIATELY DESCEND TO [level]",
+        "Response": "W/U",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 171",
+        "Message_Intent": "Instruction to climb at not less than the specified rate.",
+        "Message_Element": "CLIMB AT [vertical rate] MINIMUM",
+        "Response": "W/U",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 172",
+        "Message_Intent": "Instruction to climb at not above the specified rate.",
+        "Message_Element": "CLIMB AT [vertical rate] MAXIMUM",
+        "Response": "W/U",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 173",
+        "Message_Intent": "Instruction to descend at not less than the specified rate.",
+        "Message_Element": "DESCEND AT [vertical rate] MINIMUM",
+        "Response": "W/U",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 174",
+        "Message_Intent": "Instruction to descend at not above the specified rate.",
+        "Message_Element": "DESCEND AT [vertical rate] MAXIMUM",
+        "Response": "W/U",
+        "Category": "Vertical Clearances (uplink)"
+    },
+    {
+        "Ref_Num": "UM 46",
+        "Message_Intent": "Instruction that the specified position is to be crossed at the specified level. This may require the aircraft to modify its climb or descent profile.",
+        "Message_Element": "CROSS [position] AT [level]",
+        "Response": "W/U",
+        "Category": "Crossing Constraints (uplink)"
+    },
+    {
+        "Ref_Num": "UM 47",
+        "Message_Intent": "Instruction that the specified position is to be crossed at or above the specified level.",
+        "Message_Element": "CROSS [position] AT OR ABOVE [level]",
+        "Response": "W/U",
+        "Category": "Crossing Constraints (uplink)"
+    },
+    {
+        "Ref_Num": "UM 48",
+        "Message_Intent": "Instruction that the specified position is to be crossed at or below the specified level.",
+        "Message_Element": "CROSS [position] AT OR BELOW [level]",
+        "Response": "W/U",
+        "Category": "Crossing Constraints (uplink)"
+    },
+    {
+        "Ref_Num": "UM 49",
+        "Message_Intent": "Instruction that the specified position is to be crossed at the specified level and that level is to be maintained when reached.",
+        "Message_Element": "CROSS [position] AT AND MAINTAIN [level]",
+        "Response": "W/U",
+        "Category": "Crossing Constraints (uplink)"
+    },
+    {
+        "Ref_Num": "UM 50",
+        "Message_Intent": "Instruction that the specified position is to be crossed at a level between the specified levels.",
+        "Message_Element": "CROSS [position] BETWEEN [level] AND [level]",
+        "Response": "W/U",
+        "Category": "Crossing Constraints (uplink)"
+    },
+    {
+        "Ref_Num": "UM 51",
+        "Message_Intent": "Instruction that the specified position is to be crossed at the specified time.",
+        "Message_Element": "CROSS [position] AT [time]",
+        "Response": "W/U",
+        "Category": "Crossing Constraints (uplink)"
+    },
+    {
+        "Ref_Num": "UM 52",
+        "Message_Intent": "Instruction that the specified position is to be crossed at or before the specified time.",
+        "Message_Element": "CROSS [position] AT OR BEFORE [time]",
+        "Response": "W/U",
+        "Category": "Crossing Constraints (uplink)"
+    },
+    {
+        "Ref_Num": "UM 53",
+        "Message_Intent": "Instruction that the specified position is to be crossed at or after the specified time.",
+        "Message_Element": "CROSS [position] AT OR AFTER [time]",
+        "Response": "W/U",
+        "Category": "Crossing Constraints (uplink)"
+    },
+    {
+        "Ref_Num": "UM 54",
+        "Message_Intent": "Instruction that the specified position is to be crossed at a time between the specified times.",
+        "Message_Element": "CROSS [position] BETWEEN [time] AND [time]",
+        "Response": "W/U",
+        "Category": "Crossing Constraints (uplink)"
+    },
+    {
+        "Ref_Num": "UM 55",
+        "Message_Intent": "Instruction that the specified position is to be crossed at the specified speed and the specified speed is to be maintained until further advised.",
+        "Message_Element": "CROSS [position] AT [speed]",
+        "Response": "W/U",
+        "Category": "Crossing Constraints (uplink)"
+    },
+    {
+        "Ref_Num": "UM 56",
+        "Message_Intent": "Instruction that the specified position is to be crossed at a speed equal to or less than the specified speed and the specified speed or less is to be maintained until further advised.",
+        "Message_Element": "CROSS [position] AT OR LESS THAN [speed]",
+        "Response": "W/U",
+        "Category": "Crossing Constraints (uplink)"
+    },
+    {
+        "Ref_Num": "UM 57",
+        "Message_Intent": "Instruction that the specified position is to be crossed at a speed equal to or greater than the specified speed and the specified speed or greater is to be maintained until further advised.",
+        "Message_Element": "CROSS [position] AT OR GREATER THAN [speed]",
+        "Response": "W/U",
+        "Category": "Crossing Constraints (uplink)"
+    },
+    {
+        "Ref_Num": "UM 58",
+        "Message_Intent": "Instruction that the specified position is to be crossed at the specified time and the specified level.",
+        "Message_Element": "CROSS [position] AT [time] AT [level]",
+        "Response": "W/U",
+        "Category": "Crossing Constraints (uplink)"
+    },
+    {
+        "Ref_Num": "UM 59",
+        "Message_Intent": "Instruction that the specified position is to be crossed at or before the specified time and at the specified level.",
+        "Message_Element": "CROSS [position] AT OR BEFORE [time] AT [level]",
+        "Response": "W/U",
+        "Category": "Crossing Constraints (uplink)"
+    },
+    {
+        "Ref_Num": "UM 60",
+        "Message_Intent": "Instruction that the specified position is to be crossed at or after the specified time and at the specified level.",
+        "Message_Element": "CROSS [position] AT OR AFTER [time] AT [level]",
+        "Response": "W/U",
+        "Category": "Crossing Constraints (uplink)"
+    },
+    {
+        "Ref_Num": "UM 61",
+        "Message_Intent": "Instruction that the specified position is to be crossed at the specified level and speed, and the level and speed are to be maintained.",
+        "Message_Element": "CROSS [position] AT AND MAINTAIN [level] AT [speed]",
+        "Response": "W/U",
+        "Category": "Crossing Constraints (uplink)"
+    },
+    {
+        "Ref_Num": "UM 62",
+        "Message_Intent": "Instruction that at the specified time the specified position is to be crossed at the specified level and the level is to be maintained.",
+        "Message_Element": "AT [time] CROSS [position] AT AND MAINTAIN [level]",
+        "Response": "W/U",
+        "Category": "Crossing Constraints (uplink)"
+    },
+    {
+        "Ref_Num": "UM 63",
+        "Message_Intent": "Instruction that at the specified time the specified position is to be crossed at the specified level and speed, and the level and speed are to be maintained.",
+        "Message_Element": "AT [time] CROSS [position] AT AND MAINTAIN [level] AT [speed]",
+        "Response": "W/U",
+        "Category": "Crossing Constraints (uplink)"
+    },
+    {
+        "Ref_Num": "UM 64",
+        "Message_Intent": "Instruction to fly a parallel track to the cleared route at a displacement of the specified distance in the specified direction.",
+        "Message_Element": "OFFSET [specified distance] [direction] OF ROUTE",
+        "Response": "W/U",
+        "Category": "Lateral Offsets (uplink)"
+    },
+    {
+        "Ref_Num": "UM 65",
+        "Message_Intent": "Instruction to fly a parallel track to the cleared route at a displacement of the specified distance in the specified direction and commencing at the specified position.",
+        "Message_Element": "AT [position] OFFSET [specified distance] [direction] OF ROUTE",
+        "Response": "W/U",
+        "Category": "Lateral Offsets (uplink)"
+    },
+    {
+        "Ref_Num": "UM 66",
+        "Message_Intent": "Instruction to fly a parallel track to the cleared route at a displacement of the specified distance in the specified direction and commencing at the specified time.",
+        "Message_Element": "AT [time] OFFSET [specified distance] [direction] OF ROUTE",
+        "Response": "W/U",
+        "Category": "Lateral Offsets (uplink)"
+    },
+    {
+        "Ref_Num": "UM 67",
+        "Message_Intent": "Instruction that the cleared flight route is to be rejoined.",
+        "Message_Element": "PROCEED BACK ON ROUTE",
+        "Response": "W/U",
+        "Category": "Lateral Offsets (uplink)"
+    },
+    {
+        "Ref_Num": "UM 68",
+        "Message_Intent": "Instruction that the cleared flight route is to be rejoined at or before the specified position.",
+        "Message_Element": "REJOIN ROUTE BY [position]",
+        "Response": "W/U",
+        "Category": "Lateral Offsets (uplink)"
+    },
+    {
+        "Ref_Num": "UM 69",
+        "Message_Intent": "Instruction that the cleared flight route is to be rejoined at or before the specified time.",
+        "Message_Element": "REJOIN ROUTE BY [time]",
+        "Response": "W/U",
+        "Category": "Lateral Offsets (uplink)"
+    },
+    {
+        "Ref_Num": "UM 70",
+        "Message_Intent": "Notification that a clearance may be issued to enable the aircraft to rejoin the cleared route at or before the specified position.",
+        "Message_Element": "EXPECT BACK ON ROUTE BY [position]",
+        "Response": "R",
+        "Category": "Lateral Offsets (uplink)"
+    },
+    {
+        "Ref_Num": "UM 71",
+        "Message_Intent": "Notification that a clearance may be issued to enable the aircraft to rejoin the cleared route at or before the specified time.",
+        "Message_Element": "EXPECT BACK ON ROUTE BY [time]",
+        "Response": "R",
+        "Category": "Lateral Offsets (uplink)"
+    },
+    {
+        "Ref_Num": "UM 72",
+        "Message_Intent": "Instruction to resume own navigation following a period of tracking or heading clearances. May be used in conjunction with an instruction on how or where to rejoin the cleared route.",
+        "Message_Element": "RESUME OWN NAVIGATION",
+        "Response": "W/U",
+        "Category": "Lateral Offsets (uplink)"
+    },
+    {
+        "Ref_Num": "UM 73",
+        "Message_Intent": "Instruction to be followed from departure until the specified clearance limit.",
+        "Message_Element": "[departure clearance]",
+        "Response": "W/U",
+        "Category": "Route Modifications (uplink)"
+    },
+    {
+        "Ref_Num": "UM 74",
+        "Message_Intent": "Instruction to proceed directly from its present position to the specified position.",
+        "Message_Element": "PROCEED DIRECT TO [position]",
+        "Response": "W/U",
+        "Category": "Route Modifications (uplink)"
+    },
+    {
+        "Ref_Num": "UM 75",
+        "Message_Intent": "Instruction to proceed, when able, directly to the specified position.",
+        "Message_Element": "WHEN ABLE PROCEED DIRECT TO [position]",
+        "Response": "W/U",
+        "Category": "Route Modifications (uplink)"
+    },
+    {
+        "Ref_Num": "UM 76",
+        "Message_Intent": "Instruction to proceed, at the specified time, directly to the specified position.",
+        "Message_Element": "AT [time] PROCEED DIRECT TO [position]",
+        "Response": "W/U",
+        "Category": "Route Modifications (uplink)"
+    },
+    {
+        "Ref_Num": "UM 77",
+        "Message_Intent": "Instruction to proceed, at the specified position, directly to the next specified position.",
+        "Message_Element": "AT [position] PROCEED DIRECT TO [position]",
+        "Response": "W/U",
+        "Category": "Route Modifications (uplink)"
+    },
+    {
+        "Ref_Num": "UM 78",
+        "Message_Intent": "Instruction to proceed, upon reaching the specified level, directly to the specified position.",
+        "Message_Element": "AT [level] PROCEED DIRECT TO [position]",
+        "Response": "W/U",
+        "Category": "Route Modifications (uplink)"
+    },
+    {
+        "Ref_Num": "UM 79",
+        "Message_Intent": "Instruction to proceed to the specified position via the specified route.",
+        "Message_Element": "CLEARED TO [position] VIA [route clearance]",
+        "Response": "W/U",
+        "Category": "Route Modifications (uplink)"
+    },
+    {
+        "Ref_Num": "UM 80",
+        "Message_Intent": "Instruction to proceed via the specified route.",
+        "Message_Element": "CLEARED [route clearance]",
+        "Response": "W/U",
+        "Category": "Route Modifications (uplink)"
+    },
+    {
+        "Ref_Num": "UM 81",
+        "Message_Intent": "Instruction to proceed in accordance with the specified procedure.",
+        "Message_Element": "CLEARED [procedure name]",
+        "Response": "W/U",
+        "Category": "Route Modifications (uplink)"
+    },
+    {
+        "Ref_Num": "UM 236",
+        "Message_Intent": "Instruction to leave controlled airspace.",
+        "Message_Element": "LEAVE CONTROLLED AIRSPACE",
+        "Response": "W/U",
+        "Category": "Route Modifications (uplink)"
+    },
+    {
+        "Ref_Num": "UM 82",
+        "Message_Intent": "Approval to deviate up to the specified distance from the cleared route in the specified direction.",
+        "Message_Element": "CLEARED TO DEVIATE UP TO [specified distance] [direction] OF ROUTE",
+        "Response": "W/U",
+        "Category": "Route Modifications (uplink)"
+    },
+    {
+        "Ref_Num": "UM 83",
+        "Message_Intent": "Instruction to proceed from the specified position via the specified route.",
+        "Message_Element": "AT [position] CLEARED [route clearance]",
+        "Response": "W/U",
+        "Category": "Route Modifications (uplink)"
+    },
+    {
+        "Ref_Num": "UM 84",
+        "Message_Intent": "Instruction to proceed from the specified position via the specified procedure.",
+        "Message_Element": "AT [position] CLEARED [procedure name]",
+        "Response": "W/U",
+        "Category": "Route Modifications (uplink)"
+    },
+    {
+        "Ref_Num": "UM 85",
+        "Message_Intent": "Notification that a clearance to fly on the specified route may be issued. Note.— Avoid use of this message element due to potential misinterpretation.",
+        "Message_Element": "EXPECT [route clearance]",
+        "Response": "R",
+        "Category": "Route Modifications (uplink)"
+    },
+    {
+        "Ref_Num": "UM 86",
+        "Message_Intent": "Notification that a clearance to fly on the specified route from the specified position may be issued. Note.— Avoid use of this message element due to potential misinterpretation.",
+        "Message_Element": "AT [position] EXPECT [route clearance]",
+        "Response": "R",
+        "Category": "Route Modifications (uplink)"
+    },
+    {
+        "Ref_Num": "UM 87",
+        "Message_Intent": "Notification that a clearance to fly directly to the specified position may be issued. Note.— Avoid use of this message element due to potential misinterpretation.",
+        "Message_Element": "EXPECT DIRECT TO [position]",
+        "Response": "R",
+        "Category": "Route Modifications (uplink)"
+    },
+    {
+        "Ref_Num": "UM 88",
+        "Message_Intent": "Notification that a clearance to fly directly from the first specified position to the next specified position may be issued. Note.— Avoid use of this message element due to potential misinterpretation.",
+        "Message_Element": "AT [position] EXPECT DIRECT TO [position]",
+        "Response": "R",
+        "Category": "Route Modifications (uplink)"
+    },
+    {
+        "Ref_Num": "UM 89",
+        "Message_Intent": "Notification that a clearance to fly directly to the specified position commencing at the specified time may be issued. Note.— Avoid use of this message element due to potential misinterpretation.",
+        "Message_Element": "AT [time] EXPECT DIRECT TO [position]",
+        "Response": "R",
+        "Category": "Route Modifications (uplink)"
+    },
+    {
+        "Ref_Num": "UM 90",
+        "Message_Intent": "Notification that a clearance to fly directly to the specified position commencing when the specified level is reached may be issued. Note.— Avoid use of this message element due to potential misinterpretation.",
+        "Message_Element": "AT [level] EXPECT DIRECT TO [position]",
+        "Response": "R",
+        "Category": "Route Modifications (uplink)"
+    },
+    {
+        "Ref_Num": "UM 91",
+        "Message_Intent": "Instruction to enter a holding pattern with the specified characteristics at the specified position and level.",
+        "Message_Element": "HOLD AT [position] MAINTAIN [level] INBOUND TRACK [degrees] [direction] TURNS [leg type] or HOLD AT [position] MAINTAIN [altitude] INBOUND TRACK [degrees][direction] TURN LEG TIME [leg type]",
+        "Response": "W/U",
+        "Category": "Route Modifications (uplink)"
+    },
+    {
+        "Ref_Num": "UM 92",
+        "Message_Intent": "Instruction to enter a holding pattern with the published characteristics at the specified position and level.",
+        "Message_Element": "HOLD AT [position] AS PUBLISHED MAINTAIN [level]",
+        "Response": "W/U",
+        "Category": "Route Modifications (uplink)"
+    },
+    {
+        "Ref_Num": "UM 93",
+        "Message_Intent": "Notification that an onwards clearance may be issued at the specified time.",
+        "Message_Element": "EXPECT FURTHER CLEARANCE AT [time]",
+        "Response": "R",
+        "Category": "Route Modifications (uplink)"
+    },
+    {
+        "Ref_Num": "UM 94",
+        "Message_Intent": "Instruction to turn left or right as specified on to the specified heading.",
+        "Message_Element": "TURN [direction] HEADING [degrees]",
+        "Response": "W/U",
+        "Category": "Route Modifications (uplink)"
+    },
+    {
+        "Ref_Num": "UM 95",
+        "Message_Intent": "Instruction to turn left or right as specified on to the specified track.",
+        "Message_Element": "TURN [direction] GROUND TRACK [degrees]",
+        "Response": "W/U",
+        "Category": "Route Modifications (uplink)"
+    },
+    {
+        "Ref_Num": "UM 215",
+        "Message_Intent": "Instruction to turn a specified number of degrees left or right.",
+        "Message_Element": "TURN [direction] [degrees] DEGREES",
+        "Response": "W/U",
+        "Category": "Route Modifications (uplink)"
+    },
+    {
+        "Ref_Num": "UM 190",
+        "Message_Intent": "Instruction to fly on the specified heading.",
+        "Message_Element": "FLY HEADING [degrees]",
+        "Response": "W/U",
+        "Category": "Route Modifications (uplink)"
+    },
+    {
+        "Ref_Num": "UM 96",
+        "Message_Intent": "Instruction to continue to fly on the current heading.",
+        "Message_Element": "CONTINUE PRESENT HEADING or FLY PRESENT HEADING",
+        "Response": "W/U",
+        "Category": "Route Modifications (uplink)"
+    },
+    {
+        "Ref_Num": "UM 97",
+        "Message_Intent": "Instruction to fly on the specified heading from the specified position.",
+        "Message_Element": "AT [position] FLY HEADING [degrees]",
+        "Response": "W/U",
+        "Category": "Route Modifications (uplink)"
+    },
+    {
+        "Ref_Num": "UM 221",
+        "Message_Intent": "Instruction to stop turn at the specified heading prior to reaching the previously assigned heading.",
+        "Message_Element": "STOP TURN HEADING [degrees]",
+        "Response": "W/U",
+        "Category": "Route Modifications (uplink)"
+    },
+    {
+        "Ref_Num": "UM 98",
+        "Message_Intent": "Instruction to turn immediately left or right as specified on to the specified heading.",
+        "Message_Element": "IMMEDIATELY TURN [direction] HEADING [degrees]",
+        "Response": "W/U",
+        "Category": "Route Modifications (uplink)"
+    },
+    {
+        "Ref_Num": "UM 99",
+        "Message_Intent": "Notification that a clearance may be issued for the aircraft to fly the specified procedure.",
+        "Message_Element": "EXPECT [procedure name]",
+        "Response": "R",
+        "Category": "Route Modifications (uplink)"
+    },
+    {
+        "Ref_Num": "UM 100",
+        "Message_Intent": "Notification that a speed instruction may be issued to be effective at the specified time.",
+        "Message_Element": "AT [time] EXPECT [speed]",
+        "Response": "R",
+        "Category": "Speed Changes (uplink)"
+    },
+    {
+        "Ref_Num": "UM 101",
+        "Message_Intent": "Notification that a speed instruction may be issued to be effective at the specified position.",
+        "Message_Element": "AT [position] EXPECT [speed]",
+        "Response": "R",
+        "Category": "Speed Changes (uplink)"
+    },
+    {
+        "Ref_Num": "UM 102",
+        "Message_Intent": "Notification that a speed instruction may be issued to be effective at the specified level. Note.— Avoid use of this message element due to potential misinterpretation.",
+        "Message_Element": "AT [level] EXPECT [speed]",
+        "Response": "R",
+        "Category": "Speed Changes (uplink)"
+    },
+    {
+        "Ref_Num": "UM 103",
+        "Message_Intent": "Notification that a speed range instruction may be issued to be effective at the specified time. Note.— Avoid use of this message element due to potential misinterpretation.",
+        "Message_Element": "AT [time] EXPECT [speed] TO [speed]",
+        "Response": "R",
+        "Category": "Speed Changes (uplink)"
+    },
+    {
+        "Ref_Num": "UM 104",
+        "Message_Intent": "Notification that a speed range instruction may be issued to be effective at the specified position. Note.— Avoid use of this message element due to potential misinterpretation.",
+        "Message_Element": "AT [position] EXPECT [speed] TO [speed]",
+        "Response": "R",
+        "Category": "Speed Changes (uplink)"
+    },
+    {
+        "Ref_Num": "UM 105",
+        "Message_Intent": "Notification that a speed range instruction may be issued to be effective at the specified level. Note.— Avoid use of this message element due to potential misinterpretation.",
+        "Message_Element": "AT [level] EXPECT [speed] TO [speed]",
+        "Response": "R",
+        "Category": "Speed Changes (uplink)"
+    },
+    {
+        "Ref_Num": "UM 106",
+        "Message_Intent": "Instruction that the specified speed is to be maintained.",
+        "Message_Element": "MAINTAIN [speed]",
+        "Response": "W/U",
+        "Category": "Speed Changes (uplink)"
+    },
+    {
+        "Ref_Num": "UM 188",
+        "Message_Intent": "Instruction that after passing the specified position the specified speed is to be maintained.",
+        "Message_Element": "AFTER PASSING [position] MAINTAIN [speed]",
+        "Response": "W/U",
+        "Category": "Speed Changes (uplink)"
+    },
+    {
+        "Ref_Num": "UM 107",
+        "Message_Intent": "Instruction that the present speed is to be maintained.",
+        "Message_Element": "MAINTAIN PRESENT SPEED",
+        "Response": "W/U",
+        "Category": "Speed Changes (uplink)"
+    },
+    {
+        "Ref_Num": "UM 108",
+        "Message_Intent": "Instruction that the specified speed or a greater speed is to be maintained.",
+        "Message_Element": "MAINTAIN [speed] OR GREATER",
+        "Response": "W/U",
+        "Category": "Speed Changes (uplink)"
+    },
+    {
+        "Ref_Num": "UM 109",
+        "Message_Intent": "Instruction that the specified speed or a lesser speed is to be maintained.",
+        "Message_Element": "MAINTAIN [speed] OR LESS",
+        "Response": "W/U",
+        "Category": "Speed Changes (uplink)"
+    },
+    {
+        "Ref_Num": "UM 110",
+        "Message_Intent": "Instruction that a speed within the specified range is to be maintained.",
+        "Message_Element": "MAINTAIN [speed] TO [speed]",
+        "Response": "W/U",
+        "Category": "Speed Changes (uplink)"
+    },
+    {
+        "Ref_Num": "UM 111",
+        "Message_Intent": "Instruction that the present speed is to be increased to the specified speed and maintained until further advised.",
+        "Message_Element": "INCREASE SPEED TO [speed]",
+        "Response": "W/U",
+        "Category": "Speed Changes (uplink)"
+    },
+    {
+        "Ref_Num": "UM 112",
+        "Message_Intent": "Instruction that the present speed is to be increased to the specified speed or greater, and maintained at or above the specified speed until further advised.",
+        "Message_Element": "INCREASE SPEED TO [speed] OR GREATER",
+        "Response": "W/U",
+        "Category": "Speed Changes (uplink)"
+    },
+    {
+        "Ref_Num": "UM 113",
+        "Message_Intent": "Instruction that the present speed is to be reduced to the specified speed and maintained until further advised.",
+        "Message_Element": "REDUCE SPEED TO [speed]",
+        "Response": "W/U",
+        "Category": "Speed Changes (uplink)"
+    },
+    {
+        "Ref_Num": "UM 114",
+        "Message_Intent": "Instruction that the present speed is to be reduced to the specified speed or less and maintained at or below the specified speed until further advised.",
+        "Message_Element": "REDUCE SPEED TO [speed] OR LESS",
+        "Response": "W/U",
+        "Category": "Speed Changes (uplink)"
+    },
+    {
+        "Ref_Num": "UM 115",
+        "Message_Intent": "Instruction that the specified speed is not to be exceeded.",
+        "Message_Element": "DO NOT EXCEED [speed]",
+        "Response": "W/U",
+        "Category": "Speed Changes (uplink)"
+    },
+    {
+        "Ref_Num": "UM 116",
+        "Message_Intent": "Instruction that the aircraft’s normal speed be resumed. The previously issued speed restriction(s) are cancelled.",
+        "Message_Element": "RESUME NORMAL SPEED",
+        "Response": "W/U",
+        "Category": "Speed Changes (uplink)"
+    },
+    {
+        "Ref_Num": "UM 189",
+        "Message_Intent": "Instruction that the present speed is to be changed to the specified speed.",
+        "Message_Element": "ADJUST SPEED TO [speed]",
+        "Response": "W/U",
+        "Category": "Speed Changes (uplink)"
+    },
+    {
+        "Ref_Num": "UM 222",
+        "Message_Intent": "Notification that the aircraft may keep its preferred speed without restriction. FANS 1/A and FANS 1/A-ATN B1.— Uses UM 169z free text for FANS 1/A aircraft.",
+        "Message_Element": "NO SPEED RESTRICTION",
+        "Response": "R",
+        "Category": "Speed Changes (uplink)"
+    },
+    {
+        "Ref_Num": "UM 223",
+        "Message_Intent": "Instruction to reduce present speed to the minimum safe approach speed.",
+        "Message_Element": "REDUCE TO MINIMUM APPROACH SPEED",
+        "Response": "W/U",
+        "Category": "Speed Changes (uplink)"
+    },
+    {
+        "Ref_Num": "UM 117",
+        "Message_Intent": "Instruction that the ATS unit with the specified ATS unit name is to be contacted on the specified frequency.",
+        "Message_Element": "CONTACT [unit name] [frequency]",
+        "Response": "W/U",
+        "Category": "Contact/Monitor/Surveillance Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 118",
+        "Message_Intent": "Instruction that at the specified position the ATS unit with the specified ATS unit name is to be contacted on the specified frequency.",
+        "Message_Element": "AT [position] CONTACT [unit name] [frequency]",
+        "Response": "W/U",
+        "Category": "Contact/Monitor/Surveillance Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 119",
+        "Message_Intent": "Instruction that at the specified time the ATS unit with the specified ATS unit name is to be contacted on the specified frequency.",
+        "Message_Element": "AT [time] CONTACT [unit name] [frequency]",
+        "Response": "W/U",
+        "Category": "Contact/Monitor/Surveillance Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 238",
+        "Message_Intent": "Notification that the secondary frequency is as specified. FANS 1/A.— Uses UM 169o free text for FANS 1/A aircraft.",
+        "Message_Element": "SECONDARY FREQUENCY [frequency]",
+        "Response": "R",
+        "Category": "Contact/Monitor/Surveillance Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 120",
+        "Message_Intent": "Instruction that the ATS unit with the specified ATS unit name is to be monitored on the specified frequency. Note.— The flight crew is not required to check in.",
+        "Message_Element": "MONITOR [unit name] [frequency]",
+        "Response": "W/U",
+        "Category": "Contact/Monitor/Surveillance Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 121",
+        "Message_Intent": "Instruction that at the specified position the ATS unit with the specified ATS unit name is to be monitored on the specified frequency. Note.— The flight crew is not required to check in.",
+        "Message_Element": "AT [position] MONITOR [unit name] [frequency]",
+        "Response": "W/U",
+        "Category": "Contact/Monitor/Surveillance Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 122",
+        "Message_Intent": "Instruction that at the specified time the ATS unit with the specified ATS unit name is to be monitored on the specified frequency. Note.— The flight crew is not required to check in.",
+        "Message_Element": "AT [time] MONITOR [unit name] [frequency]",
+        "Response": "W/U",
+        "Category": "Contact/Monitor/Surveillance Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 123",
+        "Message_Intent": "Instruction that the specified code (SSR code) is to be selected.",
+        "Message_Element": "SQUAWK [code]",
+        "Response": "W/U",
+        "Category": "Contact/Monitor/Surveillance Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 124",
+        "Message_Intent": "Instruction that the SSR transponder responses are to be disabled.",
+        "Message_Element": "STOP SQUAWK",
+        "Response": "W/U",
+        "Category": "Contact/Monitor/Surveillance Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 239",
+        "Message_Intent": "Instruction that the ADS-B transmissions are to be terminated.",
+        "Message_Element": "STOP ADS-B TRANSMISSION",
+        "Response": "W/U",
+        "Category": "Contact/Monitor/Surveillance Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 125",
+        "Message_Intent": "Instruction that the SSR transponder responses should include level information.",
+        "Message_Element": "SQUAWK MODE CHARLIE or SQUAWK ALTITUDE",
+        "Response": "W/U",
+        "Category": "Contact/Monitor/Surveillance Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 240",
+        "Message_Intent": "Instruction that the ADS-B transmissions should include level information.",
+        "Message_Element": "TRANSMIT ADS-B ALTITUDE",
+        "Response": "W/U",
+        "Category": "Contact/Monitor/Surveillance Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 126",
+        "Message_Intent": "Instruction that the SSR transponder responses should no longer include level information.",
+        "Message_Element": "STOP SQUAWK MODE CHARLIE or STOP ALTITUDE SQUAWK",
+        "Response": "W/U",
+        "Category": "Contact/Monitor/Surveillance Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 241",
+        "Message_Intent": "Instruction that the ADS-B transmissions should no longer include level information.",
+        "Message_Element": "STOP ADS-B ALTITUDE TRANSMISSION",
+        "Response": "W/U",
+        "Category": "Contact/Monitor/Surveillance Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 179",
+        "Message_Intent": "Instruction that the ‘ident’ function on the SSR transponder is to be actuated.",
+        "Message_Element": "SQUAWK IDENT",
+        "Response": "W/U",
+        "Category": "Contact/Monitor/Surveillance Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 242",
+        "Message_Intent": "Instruction that the “ident” function of the ADS-B emitter is to be activated. FANS 1/A.— Uses UM 169ai free text for FANS 1/A aircraft. The free text message is considered acceptable as the intended use does not change the volume of protected airspace (i.e. not a clearance).",
+        "Message_Element": "TRANSMIT ADS-B IDENT",
+        "Response": "W/U or R (free text)",
+        "Category": "Contact/Monitor/Surveillance Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 243",
+        "Message_Intent": "Instruction to report when the aircraft is clear of adverse meteorological conditions, and a clearance to regain cleared flight route can be accepted.",
+        "Message_Element": "REPORT CLEAR OF WEATHER",
+        "Response": "W/U",
+        "Category": "Contact/Monitor/Surveillance Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 127",
+        "Message_Intent": "Instruction to report when the aircraft is back on the cleared route.",
+        "Message_Element": "REPORT BACK ON ROUTE",
+        "Response": "W/U or R",
+        "Category": "Report/Confirmation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 128",
+        "Message_Intent": "Instruction to report when the aircraft has vacated the specified level that has either been maintained or passed through on climb or descent. Note.— Either a level that has been maintained, or a level passed through on climb or descent.",
+        "Message_Element": "REPORT LEAVING [level]",
+        "Response": "W/U or R",
+        "Category": "Report/Confirmation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 129",
+        "Message_Intent": "Instruction to report when the aircraft is in level flight at the specified level. Note.— This message element is only to be used with single altitude clearances.",
+        "Message_Element": "REPORT MAINTAINING [level] or REPORT LEVEL [altitude]",
+        "Response": "W/U or R",
+        "Category": "Report/Confirmation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 200",
+        "Message_Intent": "Instruction used in conjunction with a level clearance to report maintaining the level assigned.",
+        "Message_Element": "REPORT MAINTAINING",
+        "Response": "W/U",
+        "Category": "Report/Confirmation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 180",
+        "Message_Intent": "Instruction to report when the aircraft is within the specified vertical range.",
+        "Message_Element": "REPORT REACHING BLOCK [level] TO [level]",
+        "Response": "W/U or R",
+        "Category": "Report/Confirmation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 130",
+        "Message_Intent": "Instruction to report when the aircraft has passed the specified position.",
+        "Message_Element": "REPORT PASSING [position]",
+        "Response": "W/U or R",
+        "Category": "Report/Confirmation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 181",
+        "Message_Intent": "Instruction to report the present distance to or from the specified position.",
+        "Message_Element": "REPORT DISTANCE [to/from] [position]",
+        "Response": "Y or NE",
+        "Category": "Report/Confirmation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 184",
+        "Message_Intent": "Instruction to report at the specified time the distance to or from the specified position.",
+        "Message_Element": "AT TIME [time] REPORT DISTANCE [to/from] [position]",
+        "Response": "Y",
+        "Category": "Report/Confirmation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 228",
+        "Message_Intent": "Instruction to report the estimated time of arrival at the specified position. FANS 1/A.— Uses UM 169d free text for FANS 1/A aircraft.",
+        "Message_Element": "REPORT ETA [position]",
+        "Response": "Y DM 104",
+        "Category": "Report/Confirmation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 131",
+        "Message_Intent": "Instruction to report the amount of fuel remaining and the number of persons on board.",
+        "Message_Element": "REPORT REMAINING FUEL AND PERSONS ON BOARD or REPORT REMAINING FUEL AND SOULS ON BOARD",
+        "Response": "Y or NE",
+        "Category": "Report/Confirmation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 132",
+        "Message_Intent": "Instruction to report the present position.",
+        "Message_Element": "REPORT POSITION or CONFIRM POSITION",
+        "Response": "Y or NE",
+        "Category": "Report/Confirmation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 133",
+        "Message_Intent": "Instruction to report the present level.",
+        "Message_Element": "REPORT PRESENT LEVEL or CONFIRM ALTITUDE",
+        "Response": "Y or NE DM 32",
+        "Category": "Report/Confirmation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 134",
+        "Message_Intent": "Instruction to report the requested speed. Note.— Instruction to report the present speed. FANS 1/A.— Uses UM 169b free text for FANS 1/A aircraft when the controller is requesting the flight crew to report the present ground speed.",
+        "Message_Element": "REPORT [speed type] [speed type] [speed type] SPEED or CONFIRM SPEED",
+        "Response": "Y or NE or R DM 113",
+        "Category": "Report/Confirmation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 135",
+        "Message_Intent": "Instruction to confirm the currently assigned level.",
+        "Message_Element": "CONFIRM ASSIGNED LEVEL or CONFIRM ASSIGNED ALTITUDE",
+        "Response": "Y or NE DM 38 DM 77 (TBC)",
+        "Category": "Report/Confirmation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 136",
+        "Message_Intent": "Instruction to confirm the currently assigned speed.",
+        "Message_Element": "CONFIRM ASSIGNED SPEED",
+        "Response": "Y or NE",
+        "Category": "Report/Confirmation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 137",
+        "Message_Intent": "Instruction to confirm the currently assigned route.",
+        "Message_Element": "CONFIRM ASSIGNED ROUTE",
+        "Response": "Y or NE",
+        "Category": "Report/Confirmation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 138",
+        "Message_Intent": "Instruction to confirm the previously reported time over the last reported waypoint.",
+        "Message_Element": "CONFIRM TIME OVER REPORTED WAYPOINT",
+        "Response": "Y or NE",
+        "Category": "Report/Confirmation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 139",
+        "Message_Intent": "Instruction to confirm the identity of the previously reported waypoint.",
+        "Message_Element": "CONFIRM REPORTED WAYPOINT",
+        "Response": "Y or NE",
+        "Category": "Report/Confirmation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 140",
+        "Message_Intent": "Instruction to confirm the identity of the next waypoint.",
+        "Message_Element": "CONFIRM NEXT WAYPOINT",
+        "Response": "Y or NE",
+        "Category": "Report/Confirmation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 141",
+        "Message_Intent": "Instruction to confirm the previously reported estimated time at the next waypoint.",
+        "Message_Element": "CONFIRM NEXT WAYPOINT ETA",
+        "Response": "Y or NE",
+        "Category": "Report/Confirmation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 142",
+        "Message_Intent": "Instruction to confirm the identity of the next but one waypoint.",
+        "Message_Element": "CONFIRM ENSUING WAYPOINT",
+        "Response": "Y or NE",
+        "Category": "Report/Confirmation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 143",
+        "Message_Intent": "The request was not understood. It should be clarified and resubmitted.",
+        "Message_Element": "CONFIRM REQUEST",
+        "Response": "Y or NE",
+        "Category": "Report/Confirmation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 144",
+        "Message_Intent": "Instruction to report the selected (SSR) code.",
+        "Message_Element": "CONFIRM SQUAWK",
+        "Response": "Y or NE",
+        "Category": "Report/Confirmation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 145",
+        "Message_Intent": "Instruction to report the present heading.",
+        "Message_Element": "REPORT HEADING or CONFIRM HEADING",
+        "Response": "Y or NE",
+        "Category": "Report/Confirmation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 146",
+        "Message_Intent": "Instruction to report the present ground track.",
+        "Message_Element": "REPORT GROUND TRACK or CONFIRM GROUND TRACK",
+        "Response": "Y or NE",
+        "Category": "Report/Confirmation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 182",
+        "Message_Intent": "Instruction to report the identification code of the last ATIS received.",
+        "Message_Element": "CONFIRM ATIS CODE",
+        "Response": "Y or NE",
+        "Category": "Report/Confirmation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 147",
+        "Message_Intent": "Instruction to make a position report. Note.— To be used if the controller does not receive a scheduled position report.",
+        "Message_Element": "REQUEST POSITION REPORT",
+        "Response": "Y or NE",
+        "Category": "Report/Confirmation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 216",
+        "Message_Intent": "Instruction to file a flight plan.",
+        "Message_Element": "REQUEST FLIGHT PLAN",
+        "Response": "Y",
+        "Category": "Report/Confirmation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 217",
+        "Message_Intent": "Instruction to report that the aircraft has landed.",
+        "Message_Element": "REPORT ARRIVAL",
+        "Response": "Y",
+        "Category": "Report/Confirmation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 229",
+        "Message_Intent": "Instruction to report the preferred alternate aerodrome for landing.",
+        "Message_Element": "REPORT ALTERNATE AERODROME",
+        "Response": "Y",
+        "Category": "Report/Confirmation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 231",
+        "Message_Intent": "Instruction to indicate the pilot’s preferred level. FANS 1/A and FANS 1/A-ATN B1.— uses UM 169c free text for FANS 1/A aircraft.",
+        "Message_Element": "STATE PREFERRED LEVEL",
+        "Response": "Y DM 106",
+        "Category": "Report/Confirmation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 232",
+        "Message_Intent": "Instruction to indicate the pilot’s preferred time and/or position to commence descent to the aerodrome of intended arrival. FANS 1/A and FANS 1/A-ATN B1.— Uses UM 169aa free text for FANS 1/A aircraft.",
+        "Message_Element": "STATE TOP OF DESCENT",
+        "Response": "Y DM 109",
+        "Category": "Report/Confirmation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 148",
+        "Message_Intent": "Request for the earliest time or position at which the specified level can be accepted.",
+        "Message_Element": "WHEN CAN YOU ACCEPT [level]",
+        "Response": "Y or NE DM 81 DM 82",
+        "Category": "Negotiation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 149",
+        "Message_Intent": "Instruction to report whether or not the specified level can be accepted at the specified position.",
+        "Message_Element": "CAN YOU ACCEPT [level] AT [position]",
+        "Response": "A/N",
+        "Category": "Negotiation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 150",
+        "Message_Intent": "Instruction to report whether or not the specified level can be accepted at the specified time.",
+        "Message_Element": "CAN YOU ACCEPT [level] AT [time]",
+        "Response": "A/N",
+        "Category": "Negotiation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 151",
+        "Message_Intent": "Instruction to report the earliest time or position when the specified speed can be accepted.",
+        "Message_Element": "WHEN CAN YOU ACCEPT [speed]",
+        "Response": "Y or NE DM 83 DM 84",
+        "Category": "Negotiation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 152",
+        "Message_Intent": "Instruction to report the earliest time or position when the specified offset track can be accepted.",
+        "Message_Element": "WHEN CAN YOU ACCEPT [specified distance] [direction] OFFSET",
+        "Response": "Y or NE DM 85 DM 86",
+        "Category": "Negotiation Requests (uplink)"
+    },
+    {
+        "Ref_Num": "UM 153",
+        "Message_Intent": "ATS advisory that the altimeter setting should be the specified setting.",
+        "Message_Element": "ALTIMETER [altimeter]",
+        "Response": "R",
+        "Category": "Air Traffic Advisories (uplink)"
+    },
+    {
+        "Ref_Num": "UM 213",
+        "Message_Intent": "ATS advisory that the specified altimeter setting relates to the specified facility. FANS 1/A and FANS 1/A-ATN B1.— Uses UM 169y free text for FANS 1/A aircraft.",
+        "Message_Element": "[facility designation] ALTIMETER [altimeter]",
+        "Response": "R",
+        "Category": "Air Traffic Advisories (uplink)"
+    },
+    {
+        "Ref_Num": "UM 154",
+        "Message_Intent": "ATS advisory that the radar service is terminated.",
+        "Message_Element": "RADAR SERVICE TERMINATED or RADAR SERVICES TERMINATED",
+        "Response": "R",
+        "Category": "Air Traffic Advisories (uplink)"
+    },
+    {
+        "Ref_Num": "UM 244",
+        "Message_Intent": "ATS advisory that the radar and/or ADS-B service is terminated. FANS 1/A.— uses UM 169aj free text for FANS 1/A aircraft.",
+        "Message_Element": "IDENTIFICATION TERMINATED",
+        "Response": "R",
+        "Category": "Air Traffic Advisories (uplink)"
+    },
+    {
+        "Ref_Num": "UM 191",
+        "Message_Intent": "ATS advisory that the aircraft is entering airspace in which no air traffic services are provided and all existing air traffic services are terminated.",
+        "Message_Element": "ALL ATS TERMINATED",
+        "Response": "R",
+        "Category": "Air Traffic Advisories (uplink)"
+    },
+    {
+        "Ref_Num": "UM 155",
+        "Message_Intent": "ATS advisory that radar contact has been established at the specified position.",
+        "Message_Element": "RADAR CONTACT [position]",
+        "Response": "R",
+        "Category": "Air Traffic Advisories (uplink)"
+    },
+    {
+        "Ref_Num": "UM 156",
+        "Message_Intent": "ATS advisory that radar contact has been lost.",
+        "Message_Element": "RADAR CONTACT LOST",
+        "Response": "R",
+        "Category": "Air Traffic Advisories (uplink)"
+    },
+    {
+        "Ref_Num": "UM 210",
+        "Message_Intent": "ATS advisory that the aircraft has been identified on radar and/or ADS-B at the specified position.",
+        "Message_Element": "IDENTIFIED [position]",
+        "Response": "R",
+        "Category": "Air Traffic Advisories (uplink)"
+    },
+    {
+        "Ref_Num": "UM 193",
+        "Message_Intent": "Notification that radar and/or ADS-B identification has been lost.",
+        "Message_Element": "IDENTIFICATION LOST",
+        "Response": "R",
+        "Category": "Air Traffic Advisories (uplink)"
+    },
+    {
+        "Ref_Num": "UM 157",
+        "Message_Intent": "Instruction that a continuous transmission is detected on the specified frequency. Check the microphone button.",
+        "Message_Element": "CHECK STUCK MICROPHONE [frequency]",
+        "Response": "N or R",
+        "Category": "Air Traffic Advisories (uplink)"
+    },
+    {
+        "Ref_Num": "UM 158",
+        "Message_Intent": "ATS advisory that the ATIS information identified by the specified code is the current ATIS information.",
+        "Message_Element": "ATIS [atis code]",
+        "Response": "R",
+        "Category": "Air Traffic Advisories (uplink)"
+    },
+    {
+        "Ref_Num": "UM 212",
+        "Message_Intent": "ATS advisory that the specified ATIS information at the specified airport is current.",
+        "Message_Element": "[facility designation] ATIS [atis code] CURRENT",
+        "Response": "R",
+        "Category": "Air Traffic Advisories (uplink)"
+    },
+    {
+        "Ref_Num": "UM 214",
+        "Message_Intent": "ATS advisory that indicates the RVR value for the specified runway.",
+        "Message_Element": "RVR RUNWAY [runway] [rvr]",
+        "Response": "R",
+        "Category": "Air Traffic Advisories (uplink)"
+    },
+    {
+        "Ref_Num": "UM 224",
+        "Message_Intent": "ATS advisory that no delay is expected.",
+        "Message_Element": "NO DELAY EXPECTED",
+        "Response": "R",
+        "Category": "Air Traffic Advisories (uplink)"
+    },
+    {
+        "Ref_Num": "UM 225",
+        "Message_Intent": "ATS advisory that the expected delay has not been determined.",
+        "Message_Element": "DELAY NOT DETERMINED",
+        "Response": "R",
+        "Category": "Air Traffic Advisories (uplink)"
+    },
+    {
+        "Ref_Num": "UM 226",
+        "Message_Intent": "ATS advisory that the aircraft may expect to be cleared to commence its approach procedure at the specified time.",
+        "Message_Element": "EXPECTED APPROACH TIME [time]",
+        "Response": "R",
+        "Category": "Air Traffic Advisories (uplink)"
+    },
+    {
+        "Ref_Num": "UM 159",
+        "Message_Intent": "A system generated message notifying that the ground system has detected an error.",
+        "Message_Element": "ERROR [error information]",
+        "Response": "N or NE",
+        "Category": "System Management Messages (uplink)"
+    },
+    {
+        "Ref_Num": "UM 160",
+        "Message_Intent": "Notification to the avionics that the specified data authority is the next data authority. If no data authority is specified, this indicates that any previously specified next data authority is no longer valid.",
+        "Message_Element": "NEXT DATA AUTHORITY [facility designation]",
+        "Response": "N or NE",
+        "Category": "System Management Messages (uplink)"
+    },
+    {
+        "Ref_Num": "UM 161",
+        "Message_Intent": "Notification to the avionics that the data link connection with the current data authority is being terminated.",
+        "Message_Element": "END SERVICE",
+        "Response": "N or NE",
+        "Category": "System Management Messages (uplink)"
+    },
+    {
+        "Ref_Num": "UM 162",
+        "Message_Intent": "Notification that the ground system does not support this message. FANS 1/A and FANS 1/A ATN B1.— Uses UM 169u free text for FANS 1/A aircraft.",
+        "Message_Element": "MESSAGE NOT SUPPORTED BY THIS ATS UNIT or SERVICE UNAVAILABLE",
+        "Response": "N or NE",
+        "Category": "System Management Messages (uplink)"
+    },
+    {
+        "Ref_Num": "UM 234",
+        "Message_Intent": "Notification that the ground system does not have a flight plan for that aircraft.",
+        "Message_Element": "FLIGHT PLAN NOT HELD",
+        "Response": "N",
+        "Category": "System Management Messages (uplink)"
+    },
+    {
+        "Ref_Num": "UM 163",
+        "Message_Intent": "Notification to the pilot of an ATSU identifier.",
+        "Message_Element": "[facility designation] or [icao facility designation] [tP4+Table]",
+        "Response": "N or NE",
+        "Category": "System Management Messages (uplink)"
+    },
+    {
+        "Ref_Num": "UM 227",
+        "Message_Intent": "Confirmation to the aircraft system that the ground system has received the message to which the logical acknowledgement refers and found it acceptable for display to the responsible person. FANS 1/A-ATN B1.— ATN B1 only. Not available for FANS 1/A.",
+        "Message_Element": "LOGICAL ACKNOWLEDGEMENT",
+        "Response": "N",
+        "Category": "System Management Messages (uplink)"
+    },
+    {
+        "Ref_Num": "UM 233",
+        "Message_Intent": "Notification to the pilot that messages sent requiring a logical acknowledgement will not be accepted by this ground system.",
+        "Message_Element": "USE OF LOGICAL ACKNOWLEDGEMENT PROHIBITED",
+        "Response": "N",
+        "Category": "System Management Messages (uplink)"
+    },
+    {
+        "Ref_Num": "UM 164",
+        "Message_Intent": "The associated instruction may be complied with at any future time. Note.— See also UM 177 AT PILOTS DISCRETION.",
+        "Message_Element": "WHEN READY",
+        "Response": "N or NE",
+        "Category": "Additional Messages (uplink)"
+    },
+    {
+        "Ref_Num": "UM 230",
+        "Message_Intent": "The associated instruction is to be complied with immediately.",
+        "Message_Element": "IMMEDIATELY",
+        "Response": "N",
+        "Category": "Additional Messages (uplink)"
+    },
+    {
+        "Ref_Num": "UM 165",
+        "Message_Intent": "Used to link two messages, indicating the proper order of execution of clearances/ instructions.",
+        "Message_Element": "THEN",
+        "Response": "N or NE",
+        "Category": "Additional Messages (uplink)"
+    },
+    {
+        "Ref_Num": "UM 166",
+        "Message_Intent": "The associated instruction is issued due to traffic considerations.",
+        "Message_Element": "DUE TO [traffic type] TRAFFIC or DUE TO TRAFFIC",
+        "Response": "N or NE",
+        "Category": "Additional Messages (uplink)"
+    },
+    {
+        "Ref_Num": "UM 167",
+        "Message_Intent": "The associated instruction is issued due to airspace restrictions.",
+        "Message_Element": "DUE TO AIRSPACE RESTRICTION",
+        "Response": "N or NE",
+        "Category": "Additional Messages (uplink)"
+    },
+    {
+        "Ref_Num": "UM 168",
+        "Message_Intent": "The indicated communication should be ignored. Note.— The previously sent uplink CPDLC message should be ignored. DISREGARD should not refer to a clearance or instruction. If DISREGARD is used, another element should be added to clarify which message is to be disregarded.",
+        "Message_Element": "DISREGARD",
+        "Response": "R",
+        "Category": "Additional Messages (uplink)"
+    },
+    {
+        "Ref_Num": "UM 176",
+        "Message_Intent": "Instruction that the pilot is responsible for maintaining separation from other traffic and is also responsible for maintaining visual meteorological conditions.",
+        "Message_Element": "MAINTAIN OWN SEPARATION AND VMC",
+        "Response": "W/U",
+        "Category": "Additional Messages (uplink)"
+    },
+    {
+        "Ref_Num": "UM 177",
+        "Message_Intent": "Used in conjunction with a clearance/instruction to indicate that the pilot may execute when prepared to do so. Note 1.— When used in conjunction with altitude assignments, means that ATC has offered the pilot the option of starting climb or descent whenever he/she wishes and conducting the climb or descent at any rate he/she wishes. He/she may temporarily level off at any intermediate altitude. However, once he/she has vacated an altitude, he/she may not return to that altitude. Note 2.— There are considerable differences regarding the interpretation of “pilot’s discretion” and “when ready” and their meanings/intended uses. Note 3.— See also UM 164 WHEN READY.",
+        "Message_Element": "AT PILOTS DISCRETION",
+        "Response": "N",
+        "Category": "Additional Messages (uplink)"
+    }
+]

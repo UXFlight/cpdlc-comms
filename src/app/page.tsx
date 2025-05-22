@@ -13,22 +13,23 @@ import FmsTable from "../components/Fms/FmsTable";
 import ResponsiveBar from "../components/ResponsiveBar/ResponsiveBar";
 import ConnectionBar from "../components/ConnectionBar/ConnectionBar";
 
-const TAB_COMPONENTS: Record<string, JSX.Element> = {
-  logon: <LogonTab />,
-  logs: <LogsTab />,
-  request: <RequestTab />,
-  reports: <ReportsTab />,
-  emergency: <EmergencyTab />,
-  settings: <SettingsTab />,
-  print: <PrintTab />,
-};
-
 export default function CpdlcMainView() {
   useEffect(() => {
     console.log(`${activeTab}`);
   });
 
+  const [isLogonSuccessful, setIsLogonSuccessful] = useState<boolean | null>(null);
   const [activeTab, setActiveTab] = useState("logon");
+
+  const TAB_COMPONENTS: Record<string, JSX.Element> = {
+    logon: <LogonTab onLogonResult={setIsLogonSuccessful}/>,
+    logs: <LogsTab />,
+    request: <RequestTab />,
+    reports: <ReportsTab />,
+    emergency: <EmergencyTab />,
+    settings: <SettingsTab />,
+    print: <PrintTab />,
+  };
 
   return (
     <div className="grid lg:grid-cols-2 grid-cols-1 h-screen gap-8">
@@ -39,17 +40,17 @@ export default function CpdlcMainView() {
       </div>
       <div className="flex justify-center items-center mx-auto">
         <div className="w-[600px] h-[800px] relative bg-black overflow-hidden grid grid-rows-[auto_1fr_auto]">
-          {/* Ligne 1 : navbar */}
+          {/* navbar */}
           <div>
             <ResponsiveBar activeTab={activeTab} onTabChange={setActiveTab} />
           </div>
 
-          {/* Ligne 2 : contenu de l'onglet → occupe toute la hauteur restante */}
+          {/* contenu de l'onglet */}
           <div className="overflow-auto">{TAB_COMPONENTS[activeTab]}</div>
 
-          {/* Ligne 3 : footer en bas */}
+          {/* footer en bas */}
           <div className="self-end">
-            <ConnectionBar />
+            <ConnectionBar isLogonSuccessful={isLogonSuccessful}/>
           </div>
         </div>
       </div>

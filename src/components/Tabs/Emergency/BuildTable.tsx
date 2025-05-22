@@ -1,34 +1,38 @@
+import Input from "./Input";
 
 export default function BuildTable() {
   return (
-    <div className="container flex flex-col items-start">
-      <div>
-        <p>Emergency Type</p>
+    <div className="container flex  flex-col items-start w-[568px] h-auto px-[15.5px] py-[16px]">
+      <div className="emergency-div">
+        <p className="emergency-text">Emergency Type</p>
         {/*slide options*/}
       </div>
-      <div>
-        <p>Reason</p>
+      <div className="emergency-div">
+        <p className="emergency-text">Reason</p>
         {/*slide options*/}
       </div>
-      <div>
-        <p>Divert to</p>
+      <div className="emergency-div">
+        <p className="emergency-text">Divert to</p>
         {/*slide options*/}
       </div>
-      <div>
-        <p>Descend to ALT</p>
+      <div className="emergency-div">
+        <p className="emergency-text">Descend to ALT</p>
         {/*slide options*/}
       </div>
-      <div>
-        <p>Offset to</p>
+      <div className="emergency-div">
+        <p className="emergency-text">Offset to</p>
         {/*slide options*/}
       </div>
-      <div>
-        <p>Seouls/Fuel (HH:MM)</p>
+      <div className="emergency-div">
+        <p className="emergency-text">Seouls/Fuel (HH:MM)</p>
         {/*slide options*/}
       </div>
-      <div>
-        <p>Remarks</p>
+      <div className="emergency-div">
+        <p className="emergency-text">Remarks</p>
         {/*slide options*/}
+      </div>
+      <div className="w-full h-auto">
+        <Input />
       </div>
     </div>
   );

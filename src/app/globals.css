@@ -13,9 +13,13 @@
   --color-light-gray: #8c8c8c;
   --color-green: #3b9673;
   --color-dark-blue: #3a75b6;
+  --color-dark-blue-10: #539FDA1A;
 }
 
 @layer base {
+  body {
+    @apply tracking-wide;
+  }
   h3 {
     @apply text-[rgba(255,255,255,0.80)] text-center font-sans text-[10px] font-bold leading-[18px] uppercase whitespace-nowrap;
   }
@@ -25,7 +29,7 @@
   }
 
   h2 {
-    @apply text-white font-sans text-[16px] not-italic font-medium leading-normal uppercase;
+    @apply text-white font-sans text-[16px] not-italic font-medium leading-normal uppercase whitespace-nowrap;
   }
 }
 
@@ -39,11 +43,27 @@
   }
 
   .secondary-text {
-    @apply text-white-80 font-sans text-base not-italic font-normal leading-[18px]
+    @apply text-white-80 font-sans text-base not-italic font-normal leading-[18px];
   }
 
   .container {
     @apply p-4 gap-3 self-stretch bg-medium-gray rounded;
+  }
+
+  .emergency-text {
+    @apply text-white-80 text-right text-base font-semibold tracking-wide leading-[16px];
+  }
+
+  .emergency-div {
+    @apply flex items-center h-[35px];
+  }
+
+  .logon-titles {
+    @apply text-white-80 text-[16px] font-sans font-semibold leading-[18px] tracking-wide;
+  }
+
+  .logon-flight-details {
+    @apply tracking-widest text-[16px] font-normal mt-[8px];
   }
 }
 
