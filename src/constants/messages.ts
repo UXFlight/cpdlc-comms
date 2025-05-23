@@ -1,7 +1,7 @@
 export const UplinkMessages = {
   UM120: {
     ref: "UM 120",
-    element: "MONITOR CYOB 123.8MHz.",
+    element: "MONITOR CYOB 123.8MHz",
     intent:
       "Instruction that the ATS unit is to be monitored on the specified frequency.",
   },

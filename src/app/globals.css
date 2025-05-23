@@ -5,6 +5,8 @@
 
 @theme {
   --color-white-10: #ffffff1a;
+  --color-white-40: #FFFFFF66;
+  --color-white-50: #ffffff80;
   --color-white-80: #ffffffcc;
   --color-white-100: #ffffff;
   --color-nav-bar: #242424;
@@ -12,8 +14,10 @@
   --color-medium-gray: #2b2b2c;
   --color-light-gray: #8c8c8c;
   --color-green: #3b9673;
+  --color-light-blue: #539FDA;
   --color-dark-blue: #3a75b6;
   --color-dark-blue-10: #539fda1a;
+  --color-secondary-blue: #539FDA;
 }
 
 @layer base {
@@ -21,7 +25,7 @@
     @apply tracking-wide;
   }
   h3 {
-    @apply text-[rgba(255,255,255,0.80)] text-center font-sans text-[10px] font-bold leading-[18px] uppercase whitespace-nowrap;
+    @apply text-white-80 text-center font-sans text-[10px] font-bold leading-[18px] uppercase whitespace-nowrap;
   }
 
   h1 {
@@ -47,7 +51,7 @@
   }
 
   .container {
-    @apply p-4 gap-3 self-stretch bg-medium-gray rounded;
+    @apply p-4 self-stretch bg-medium-gray rounded;
   }
 
   .emergency-text {

@@ -1,12 +1,8 @@
 "use client";
-import React, { useState, useEffect } from "react";
+
+import Time from "../Time/time";
 
 export default function ConnectionBar({ isLogonSuccessful }) {
-  const formattedTime = new Date().toLocaleTimeString("en-US", {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-
   return (
     <footer
       className={`h-[24px] flex justify-between items-center px-4 w-full
@@ -23,7 +19,9 @@ export default function ConnectionBar({ isLogonSuccessful }) {
         </p>
       </div>
       <div>
-        <p className="text-white-100 text-[12px] uppercase">{formattedTime}</p>
+        <div className="text-white-100 text-[12px] uppercase">
+          <Time/>
+        </div>
       </div>
     </footer>
   );

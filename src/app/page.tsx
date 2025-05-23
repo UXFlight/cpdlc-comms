@@ -21,7 +21,7 @@ export default function CpdlcMainView() {
   const [isLogonSuccessful, setIsLogonSuccessful] = useState<boolean | null>(
     null,
   );
-  const [activeTab, setActiveTab] = useState("logon");
+  const [activeTab, setActiveTab] = useState("logs"); // default logon, swithc for easier dev 
 
   const TAB_COMPONENTS: Record<string, JSX.Element> = {
     logon: <LogonTab onLogonResult={setIsLogonSuccessful} />,

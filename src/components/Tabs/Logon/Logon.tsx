@@ -71,7 +71,7 @@ export default function Logon({ length = 4, onResult }) {
               ? setIsValid(true)
               : setIsValid(false);
           }}
-          className={`flex items-center gap-2 px-4 py-2 w-[149px] h-[48px] ${validValue() ? "bg-dark-blue hover:bg-dark-blue/70 cursor-pointer" : "bg-dark-blue-10 opacity-50 cursor-not-allowed"} text-white text-sm font-semibold rounded-md`}
+          className={`flex items-center justify-center gap-2 px-4 py-2 w-[149px] h-[48px] ${validValue() ? "bg-dark-blue hover:bg-dark-blue/70 cursor-pointer" : "bg-white-50"} text-white text-sm font-semibold rounded-md`}
         >
           <img src="/send.svg" alt="Send Icon" className="w-[20px] h-[20px]" />
           <span className="text-white-80 text-[14px] leading-[18px] whitespace-nowrap font-bold text-center">
@@ -82,9 +82,9 @@ export default function Logon({ length = 4, onResult }) {
       {isValid && (
         <button
           disabled
-          className="lex items-center gap-2 px-4 py-2 w-[149px] h-[48px] bg-green text-white text-sm font-semibold rounded-md"
+          className="flex items-center justify-center gap-2 px-4 py-2 w-[149px] h-[48px] bg-green text-white text-sm font-semibold rounded-md"
         >
-          <span className="text-white-80 text-[18px] leading-[18px] whitespace-nowrap font-semibold text-center tracking-wide uppercase">
+          <span className="text-white-80 text-[16px] leading-[18px] whitespace-nowrap font-bold text-center tracking-wide uppercase">
             Connected
           </span>
         </button>
