@@ -15,7 +15,7 @@ export default function Message() {
             <span className="uppercase text-[14px] text-light-blue font-semibold">new</span> 
           </div>
         </div>
-        <div className="-mt-1.5">
+        <div className="-mt-1.5 flex items-center w-full h-auto justify-between align-baseline">
           <span className="font-semibold text-[16px] not-italic leading-norm text-secondary-blue self-stretch">{UplinkMessages.UM120.element}</span>
           <div>
             <Time/>

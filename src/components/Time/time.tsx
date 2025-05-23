@@ -4,11 +4,15 @@ export default function Time() {
   const [time, setTime] = useState(getFormattedTime());
 
    function getFormattedTime() {
-    return new Date().toLocaleTimeString("en-US", {
+    const now = new Date();
+
+    // Format 24h + UTC
+    return now.toLocaleTimeString("en-GB", {
       hour: "2-digit",
-      //hour12: false,
       minute: "2-digit",
-    });
+      hour12: false,
+      timeZone: "UTC",
+    }) + " UTC";
   }
 
   useEffect(() => {
@@ -24,9 +28,9 @@ export default function Time() {
       <span className="text-[12px] font-bold text-white/80 leading-none font-sans">
         {time}
       </span>
-      <span className="text-[8px] font-light text-white/80 leading-none font-sans">
+      {/* <span className="text-[8px] font-light text-white/80 leading-none font-sans">
         UTC
-      </span>
+      </span> */}
     </div>
   );
 }
