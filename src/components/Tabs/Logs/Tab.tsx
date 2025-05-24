@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import Message from "./Message";
+import MessageContainer from "./MessageContainer";
+import { UplinkMessages } from "../../../constants/messages";
 
 export default function LogsTab() {
   return (
@@ -41,7 +41,7 @@ export default function LogsTab() {
         </div>
       </div>
       <div>
-        <Message />
+        <MessageContainer messages={UplinkMessages} />
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 "use client";
-import Time from "./Time";
+import Time from "../Time/time";
 
 type Props = {
   isLogonSuccessful: boolean | null;

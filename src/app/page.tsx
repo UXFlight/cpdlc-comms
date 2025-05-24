@@ -48,7 +48,7 @@ export default function CpdlcMainView() {
           </div>
 
           {/* contenu de l'onglet */}
-          <div className="overflow-auto">{TAB_COMPONENTS[activeTab]}</div>
+          <div className="overflow-auto mb-4">{TAB_COMPONENTS[activeTab]}</div>
 
           {/* footer en bas */}
           <div className="self-end">
