@@ -1,20 +1,20 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 import users from "../../../data/users.json";
+import { UserContext } from "../../../context/UserContext";
 
 type Props = {
   length?: number;
-  onResult?: (result: boolean) => void;
 };
 
-export default function Logon({ length = 4, onResult }: Props) {
-  const [isValid, setIsValid] = useState<boolean | null>(null);
-  //const [isConnecting, setIsConnecting] = useState<boolean | null>(null);
+export default function Logon({ length = 4}: Props) {
+  const { connectionState, setConnectionState } = useContext(UserContext);
   const [value, setValue] = useState("");
   const inputRef = useRef(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const raw = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "");
     setValue(raw.slice(0, length));
+    console.log(value);
   };
 
   const validValue = () => {
@@ -30,10 +30,9 @@ export default function Logon({ length = 4, onResult }: Props) {
     );
     if (result) {
       setTimeout(() => {
-        setIsValid(true);
+        setConnectionState(true);
       }, 1000);
     }
-    onResult?.(result);
     return result;
   }
 
@@ -71,13 +70,13 @@ export default function Logon({ length = 4, onResult }: Props) {
           />
         </div>
       </div>
-      {!isValid && (
+      {!connectionState && (
         <button
           disabled={!validValue()}
           onClick={() => {
             validateEntry(inputRef.current.value)
-              ? setIsValid(true)
-              : setIsValid(false);
+              ? setConnectionState(true)
+              : setConnectionState(false);
           }}
           className={`flex items-center justify-center gap-2 px-4 py-2 w-[149px] h-[48px] ${validValue() ? "bg-dark-blue hover:bg-dark-blue/70 cursor-pointer" : "bg-white-50"} text-white text-sm font-semibold rounded-md`}
         >
@@ -87,7 +86,7 @@ export default function Logon({ length = 4, onResult }: Props) {
           </span>
         </button>
       )}
-      {isValid && (
+      {connectionState && (
         <button
           disabled
           className="flex items-center justify-center gap-2 px-4 py-2 w-[149px] h-[48px] bg-green text-white text-sm font-semibold rounded-md"

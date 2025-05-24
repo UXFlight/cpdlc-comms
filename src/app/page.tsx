@@ -1,5 +1,5 @@
 "use client";
-import { act, JSX, useEffect, useState } from "react";
+import { act, JSX, useContext, useEffect, useState } from "react";
 
 // Import all tab components
 import LogonTab from "../components/Tabs/Logon/Tab";
@@ -12,6 +12,7 @@ import PrintTab from "../components/Tabs/Print/Tab";
 import FmsTable from "../components/Fms/FmsTable";
 import ResponsiveBar from "../components/ResponsiveBar/ResponsiveBar";
 import ConnectionBar from "../components/ConnectionBar/ConnectionBar";
+import { UserContext } from "../context/UserContext";
 
 export default function CpdlcMainView() {
   useEffect(() => {
@@ -21,8 +22,8 @@ export default function CpdlcMainView() {
   const [isLogonSuccessful, setIsLogonSuccessful] = useState<boolean | null>(
     null,
   );
-  const [activeTab, setActiveTab] = useState("logs"); // default logon, swithc for easier dev 
-
+  const [activeTab, setActiveTab] = useState("logon"); // default logon, swithc for easier dev 
+  
   const TAB_COMPONENTS: Record<string, JSX.Element> = {
     logon: <LogonTab onLogonResult={setIsLogonSuccessful} />,
     logs: <LogsTab />,
@@ -52,7 +53,7 @@ export default function CpdlcMainView() {
 
           {/* footer en bas */}
           <div className="self-end">
-            <ConnectionBar isLogonSuccessful={isLogonSuccessful} />
+            <ConnectionBar />
           </div>
         </div>
       </div>

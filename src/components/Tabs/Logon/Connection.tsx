@@ -1,19 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import flightDetails from "../../../data/flightDetails.json";
+import { UserContext } from "../../../context/UserContext";
 
-type Props = {
-  isConnected: boolean | null;
-};
-
-export default function Connection({ isConnected } : Props) {
-  if (isConnected === null) {
+export default function Connection() {
+  const { connectionState } = useContext(UserContext);
+  
+  if (connectionState === null) {
     return null;
   }
 
   return (
     <div className="container flex items-center justify-between">
       <div className="w-full">
-        {isConnected ? (
+        {connectionState ? (
           <div className="space-y-4">
             <div className="flex justify-between border-b border-white/10 pb-2">
               <div className="text-center flex-1">

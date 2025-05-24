@@ -1,3 +1,4 @@
+import { UserProvider } from "../context/UserContext";
 import "./globals.css";
 
 export const metadata = {
@@ -14,7 +15,9 @@ export default function RootLayout({
     <html lang="en">
       <body /*className="bg-[url('/bg-cockpit4.jpg')] bg-cover bg-center h-screen w-screen"*/
       >
+        <UserProvider>
         {children}
+        </UserProvider>
       </body>
     </html>
   );

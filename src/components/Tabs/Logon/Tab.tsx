@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import AtcConnection from "./AtcConnection";
 import Logon from "./Logon";
 import Connection from "./Connection";
+import { UserContext } from "../../../context/UserContext";
 
 export default function LogonTab({ onLogonResult }) {
-  const [isConnected, setIsConnected] = useState<boolean | null>(null);
+  const { connectionState } = useContext(UserContext);
+  
 
   return (
     <div className="flex flex-col h-full p-4 gap-4 text-white">
@@ -40,18 +42,13 @@ export default function LogonTab({ onLogonResult }) {
       </div>
       <div className="flex flex-col gap-4">
         <div className="rounded w-full">
-          <AtcConnection isConnected={isConnected} />
+          <AtcConnection />
         </div>
         <div className="flex flex-col gap-4">
-          <Logon
-            onResult={(result) => {
-              setIsConnected(result);
-              onLogonResult?.(result);
-            }}
-          />
+          <Logon />
         </div>
         <div>
-          <Connection isConnected={isConnected} />
+          <Connection />
         </div>
       </div>
     </div>

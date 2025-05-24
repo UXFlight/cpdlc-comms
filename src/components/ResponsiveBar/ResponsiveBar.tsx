@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import NavContainer from "./NavContainer";
-import { TABS } from "../../constants/NavBarConst";
 
 type Props = {
   activeTab: string;
@@ -20,7 +19,6 @@ export default function ResponsiveBar({ activeTab, onTabChange }: Props) {
           />
         </div>
         <NavContainer
-          pages={TABS}
           onTabChange={onTabChange}
           activeTab={activeTab}
         />

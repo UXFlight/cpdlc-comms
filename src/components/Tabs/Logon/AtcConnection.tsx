@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../../../context/UserContext";
 
-type Props = {
-  isConnected: boolean | null;
-};
+export default function AtcConnection() {
+  const { connectionState } = useContext(UserContext);
 
-export default function AtcConnection({ isConnected }: Props) {
+ 
+  
   return (
     <div className="container flex flex-col items-start">
       <h2>Connection</h2>
@@ -14,7 +15,7 @@ export default function AtcConnection({ isConnected }: Props) {
           <input
             type="checkbox"
             className="sr-only peer"
-            checked={isConnected === true}
+            checked={connectionState? true : false}
             readOnly
           />
           <div className="absolute inset-0 bg-gray-300 peer-checked:bg-green rounded-md transition-colors duration-300"></div>
