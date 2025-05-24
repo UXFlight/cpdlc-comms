@@ -1,13 +1,18 @@
 import { useState, useRef } from "react";
 import users from "../../../data/users.json";
 
-export default function Logon({ length = 4, onResult }) {
+type Props = {
+  length?: number;
+  onResult?: (result: boolean) => void;
+};
+
+export default function Logon({ length = 4, onResult }: Props) {
   const [isValid, setIsValid] = useState<boolean | null>(null);
   //const [isConnecting, setIsConnecting] = useState<boolean | null>(null);
   const [value, setValue] = useState("");
   const inputRef = useRef(null);
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const raw = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "");
     setValue(raw.slice(0, length));
   };
@@ -17,6 +22,9 @@ export default function Logon({ length = 4, onResult }) {
   };
 
   function validateEntry(input: string) {
+    if (input.length !== length) {
+      return false;
+    }
     const result = users.some(
       (user) => user.username.toUpperCase().replace(/[^A-Z0-9]/g, "") === input,
     );
@@ -29,7 +37,7 @@ export default function Logon({ length = 4, onResult }) {
     return result;
   }
 
-  const handleEnter = (e) => {
+  const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
       validateEntry(inputRef.current.value);

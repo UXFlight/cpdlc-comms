@@ -1,8 +1,11 @@
 "use client";
+import Time from "./Time";
 
-import Time from "../Time/time";
+type Props = {
+  isLogonSuccessful: boolean | null;
+};
 
-export default function ConnectionBar({ isLogonSuccessful }) {
+export default function ConnectionBar({ isLogonSuccessful }: Props) {
   return (
     <footer
       className={`h-[24px] flex justify-between items-center px-4 w-full
@@ -20,7 +23,7 @@ export default function ConnectionBar({ isLogonSuccessful }) {
       </div>
       <div>
         <div className="text-white-100 text-[12px] uppercase">
-          <Time/>
+          <Time />
         </div>
       </div>
     </footer>

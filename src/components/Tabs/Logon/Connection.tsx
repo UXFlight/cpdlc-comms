@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import flightDetails from "../../../data/flightDetails.json";
 
-export default function Connection({ isConnected }) {
+type Props = {
+  isConnected: boolean | null;
+};
+
+export default function Connection({ isConnected } : Props) {
   if (isConnected === null) {
     return null;
   }

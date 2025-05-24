@@ -1,6 +1,10 @@
 import React from "react";
 
-export default function AtcConnection({ isConnected }) {
+type Props = {
+  isConnected: boolean | null;
+};
+
+export default function AtcConnection({ isConnected }: Props) {
   return (
     <div className="container flex flex-col items-start">
       <h2>Connection</h2>
