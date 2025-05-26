@@ -12,20 +12,16 @@ import PrintTab from "../components/Tabs/Print/Tab";
 import FmsTable from "../components/Fms/FmsTable";
 import ResponsiveBar from "../components/ResponsiveBar/ResponsiveBar";
 import ConnectionBar from "../components/ConnectionBar/ConnectionBar";
-import { UserContext } from "../context/UserContext";
 
 export default function CpdlcMainView() {
   useEffect(() => {
     console.log(`${activeTab}`);
   });
 
-  const [isLogonSuccessful, setIsLogonSuccessful] = useState<boolean | null>(
-    null,
-  );
-  const [activeTab, setActiveTab] = useState("logon"); // default logon, swithc for easier dev 
+  const [activeTab, setActiveTab] = useState("logon"); // default logon, switch for easier dev 
   
   const TAB_COMPONENTS: Record<string, JSX.Element> = {
-    logon: <LogonTab onLogonResult={setIsLogonSuccessful} />,
+    logon: <LogonTab />,
     logs: <LogsTab />,
     request: <RequestTab />,
     reports: <ReportsTab />,
@@ -44,12 +40,14 @@ export default function CpdlcMainView() {
       <div className="flex justify-center items-center mx-auto">
         <div className="w-[600px] h-[800px] relative bg-black overflow-hidden grid grid-rows-[auto_1fr_auto]">
           {/* navbar */}
-          <div>
+          <div className="select-none">
             <ResponsiveBar activeTab={activeTab} onTabChange={setActiveTab} />
           </div>
 
           {/* contenu de l'onglet */}
-          <div className="overflow-auto mb-4">{TAB_COMPONENTS[activeTab]}</div>
+          <div className="overflow-auto mb-4 h-full">
+            {TAB_COMPONENTS[activeTab]}
+          </div>
 
           {/* footer en bas */}
           <div className="self-end">

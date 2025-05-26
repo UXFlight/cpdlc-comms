@@ -4,7 +4,7 @@ import Logon from "./Logon";
 import Connection from "./Connection";
 import { UserContext } from "../../../context/UserContext";
 
-export default function LogonTab({ onLogonResult }) {
+export default function LogonTab() {
   const { connectionState } = useContext(UserContext);
   
 

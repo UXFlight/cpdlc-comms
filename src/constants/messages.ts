@@ -1,20 +1,36 @@
+import { TIMEOUT } from "dns";
+
+export const MessageState = {
+  NEW: "new",
+  OPENED: "opened",
+  ACCEPTED : "accepted",
+  REJECTED: "rejected",
+  TIMEOUT: "time out",
+}
+
 export const UplinkMessages = [
   {
-    id: "UM120",
+    id: "123",
+    ref: "UM120",
+    state: MessageState.NEW,
     element: "MONITOR CYOB 123.8MHz",
     intent: "Instruction that the ATS unit is to be monitored on the specified frequency.",
   },
   {
-    id: "UM117",
+    id:"456",
+    ref: "UM117",
+    state: MessageState.NEW,
     element: "CONTACT [unit name] [frequency]",
     intent: "Instruction that the ATS unit is to be contacted on the specified frequency.",
   },
   {
-    id: "UM169",
+    id:"789",
+    ref: "UM169",
+    state: MessageState.NEW,
     element: "[free text]",
     intent: "Free text message (e.g., coordination or fallback communication).",
   },
-  {
+  /*{
     id: "UM160",
     element: "NEXT DATA AUTHORITY [facility designation]",
     intent: "Notification of the next data authority.",
@@ -48,7 +64,7 @@ export const UplinkMessages = [
     id: "UM3",
     element: "ROGER",
     intent: "Indicates that ATC has received and understood the message.",
-  },
+  },*/
 ];
 
 export const DownlinkMessages = [

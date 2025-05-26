@@ -5,6 +5,7 @@
 
 @theme {
   --color-white-10: #ffffff1a;
+  --color-white-30: #ffffff4d;
   --color-white-40: #FFFFFF66;
   --color-white-50: #ffffff80;
   --color-white-80: #ffffffcc;
@@ -14,6 +15,7 @@
   --color-medium-gray: #2b2b2c;
   --color-light-gray: #8c8c8c;
   --color-green: #3b9673;
+  --color-light-green: #b0d5c7;
   --color-light-blue: #539FDA;
   --color-dark-blue: #3a75b6;
   --color-dark-blue-10: #539fda1a;
@@ -21,6 +23,15 @@
 }
 
 @layer base {
+  * {
+    @apply box-border 
+  }
+
+  ::selection {
+    background: var(--color-light-green);
+    color: var(--color-black);
+  }
+
   body {
     @apply tracking-wide;
   }
@@ -35,6 +46,7 @@
   h2 {
     @apply text-white font-sans text-[16px] not-italic font-medium leading-normal uppercase whitespace-nowrap;
   }
+
 }
 
 @layer components {
@@ -68,6 +80,10 @@
 
   .logon-flight-details {
     @apply tracking-widest text-[16px] font-normal mt-[8px];
+  }
+
+  .logs-options {
+    @apply flex-1 min-w-[100px] flex items-center justify-center h-[45px] py-2 px-2 border border-[2px] border-white/10 rounded-md text-[12px] text-white/80 font-bold uppercase cursor-pointer;
   }
 }
 

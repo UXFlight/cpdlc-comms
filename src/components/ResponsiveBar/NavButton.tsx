@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../../context/UserContext";
 
 type Props = {
   icon: string;
@@ -15,9 +16,12 @@ export default function NavButton({
   active,
   onTabChange,
 }: Props) {
+
+  const { connectionState } = useContext(UserContext);
+
   return (
     <div className="flex flex-row justify-center items-center w-[75px]">
-      <button
+      <button disabled={!connectionState}
         onClick={() => onTabChange(`${id}`)}
         className={`flex flex-col items-center px-2 py-1 w-28 font-bold text-xs ${
           active
