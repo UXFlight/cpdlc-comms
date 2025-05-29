@@ -3,16 +3,23 @@ import AtcConnection from "./AtcConnection";
 import Logon from "./Logon";
 import Connection from "./Connection";
 import { UserContext } from "../../../context/UserContext";
+import SelectDropdown from "../../SelectDropdown";
 
 export default function LogonTab() {
   const { connectionState } = useContext(UserContext);
-  
+  const [value, setValue] = useState("FANS 1/A");
 
   return (
     <div className="flex flex-col h-full p-4 gap-4 text-white">
       <div className="flex flex-row items-center justify-between">
         <h1>logon</h1>
-        <div className="relative w-[130.962px] h-[36px]">
+        <SelectDropdown
+          options={["FANS 1/A", "FANS 2/B", "FANS 3/C", "LINK 2000+"]}
+          value={value}
+          onChange={setValue}
+          icon="/fans-button.svg"
+        />
+        {/* <div className="relative w-[130.962px] h-[36px]">
           <div className="absolute inset-0 flex items-center gap-2 bg-white-10 text-white px-3 py-2 rounded pointer-events-none">
             <img
               src="/fans-button.svg"
@@ -38,7 +45,7 @@ export default function LogonTab() {
               LINK 2000+
             </option>
           </select>
-        </div>
+        </div> */}
       </div>
       <div className="flex flex-col gap-4">
         <div className="rounded w-full">

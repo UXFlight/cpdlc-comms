@@ -67,11 +67,11 @@
   }
 
   .emergency-text {
-    @apply text-white-80 text-right text-base font-semibold tracking-wide leading-[16px];
+    @apply text-white-80 text-[16px] text-right text-base font-[550] tracking-wider leading-[16px];
   }
 
   .emergency-div {
-    @apply flex items-center h-[35px];
+    @apply flex items-center justify-between w-full h-[35px];
   }
 
   .logon-titles {
@@ -85,6 +85,10 @@
   .logs-options {
     @apply flex-1 min-w-[100px] flex items-center justify-center h-[45px] py-2 px-2 border border-[2px] border-white/10 rounded-md text-[12px] text-white/80 font-bold uppercase cursor-pointer;
   }
+
+  .emergency-options {
+    @apply flex-1 min-w-[100px] flex items-center justify-center h-[45px] py-2 px-2 border border-[2px] border-white/10 rounded-md text-[16px] text-white/80 font-[550] uppercase cursor-pointer;
+  }
 }
 
 body {
@@ -96,3 +100,31 @@ body {
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
 }
+
+/* styles/scrollbar.css */
+/* Applique à tous les scrollbars visibles dans ton app */
+* {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: rgba(100, 100, 100, 0.4) transparent;
+}
+
+/* Webkit (Chrome, Safari) */
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 100, 100, 0.4);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(100, 100, 100, 0.6);
+}
+
