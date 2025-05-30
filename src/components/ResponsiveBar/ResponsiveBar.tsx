@@ -18,10 +18,7 @@ export default function ResponsiveBar({ activeTab, onTabChange }: Props) {
             alt="HOME"
           />
         </div>
-        <NavContainer
-          onTabChange={onTabChange}
-          activeTab={activeTab}
-        />
+        <NavContainer onTabChange={onTabChange} activeTab={activeTab} />
       </div>
     </header>
   );

@@ -4,8 +4,8 @@ import Time from "../Time/Time";
 import { UserContext } from "../../context/UserContext";
 
 export default function ConnectionBar() {
-    const { connectionState } = useContext(UserContext);
-  
+  const { connectionState } = useContext(UserContext);
+
   return (
     <footer
       className={`h-[24px] flex justify-between items-center px-4 w-full

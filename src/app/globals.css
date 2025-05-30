@@ -6,7 +6,7 @@
 @theme {
   --color-white-10: #ffffff1a;
   --color-white-30: #ffffff4d;
-  --color-white-40: #FFFFFF66;
+  --color-white-40: #ffffff66;
   --color-white-50: #ffffff80;
   --color-white-80: #ffffffcc;
   --color-white-100: #ffffff;
@@ -16,15 +16,15 @@
   --color-light-gray: #8c8c8c;
   --color-green: #3b9673;
   --color-light-green: #b0d5c7;
-  --color-light-blue: #539FDA;
+  --color-light-blue: #539fda;
   --color-dark-blue: #3a75b6;
   --color-dark-blue-10: #539fda1a;
-  --color-secondary-blue: #539FDA;
+  --color-secondary-blue: #539fda;
 }
 
 @layer base {
   * {
-    @apply box-border 
+    @apply box-border;
   }
 
   ::selection {
@@ -46,7 +46,6 @@
   h2 {
     @apply text-white font-sans text-[16px] not-italic font-medium leading-normal uppercase whitespace-nowrap;
   }
-
 }
 
 @layer components {
@@ -127,4 +126,3 @@ body {
 *::-webkit-scrollbar-thumb:hover {
   background-color: rgba(100, 100, 100, 0.6);
 }
-

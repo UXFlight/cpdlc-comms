@@ -4,7 +4,7 @@ import { UserContext } from "../../../context/UserContext";
 
 export default function Connection() {
   const { connectionState } = useContext(UserContext);
-  
+
   if (connectionState === null) {
     return null;
   }

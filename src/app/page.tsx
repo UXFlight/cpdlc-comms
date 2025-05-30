@@ -18,8 +18,8 @@ export default function CpdlcMainView() {
     console.log(`${activeTab}`);
   });
 
-  const [activeTab, setActiveTab] = useState("emergency"); // default logon, switch for easier dev 
-  
+  const [activeTab, setActiveTab] = useState("logon"); // default logon, switch for easier dev
+
   const TAB_COMPONENTS: Record<string, JSX.Element> = {
     logon: <LogonTab />,
     logs: <LogsTab />,

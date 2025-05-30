@@ -7,13 +7,13 @@ export default function BuildTable() {
   const [emergency, setEmergency] = useState("MAYDAY");
   const [reason, setReason] = useState("NONE");
   const [divertTo, setDivertTo] = useState("NONE");
-  
+
   return (
     <div className="container flex  flex-col gap-[10px] items-start w-[568px] h-auto px-[15.5px] py-[16px]">
       <div className="emergency-div">
         <p className="emergency-text">Emergency Type</p>
         <div>
-          <SelectDropdown 
+          <SelectDropdown
             options={["MAYDAY", "PANPAN", "NONE"]}
             value={emergency}
             onChange={setEmergency}
@@ -23,14 +23,14 @@ export default function BuildTable() {
       <div className="emergency-div">
         <p className="emergency-text">Reason</p>
         <div>
-          <SelectDropdown 
-            options={ [
+          <SelectDropdown
+            options={[
               "WEATHER",
               "MEDICAL",
               "EMERGENCY",
               "CABIN PRESS",
               "ENGINE LOSS",
-              "LOW FUEL"  
+              "LOW FUEL",
             ]}
             value={reason}
             onChange={setReason}
@@ -40,7 +40,7 @@ export default function BuildTable() {
       <div className="emergency-div">
         <p className="emergency-text">Divert to</p>
         <div>
-          <SelectDropdown 
+          <SelectDropdown
             options={["MAYDAY", "PANPAN", "NONE"]}
             value={divertTo}
             onChange={setDivertTo}

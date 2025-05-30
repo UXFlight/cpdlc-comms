@@ -4,8 +4,6 @@ import { UserContext } from "../../../context/UserContext";
 export default function AtcConnection() {
   const { connectionState } = useContext(UserContext);
 
- 
-  
   return (
     <div className="container flex flex-col items-start">
       <h2>Connection</h2>
@@ -15,7 +13,7 @@ export default function AtcConnection() {
           <input
             type="checkbox"
             className="sr-only peer"
-            checked={connectionState? true : false}
+            checked={connectionState ? true : false}
             readOnly
           />
           <div className="absolute inset-0 bg-gray-300 peer-checked:bg-green rounded-md transition-colors duration-300"></div>

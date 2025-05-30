@@ -17,9 +17,7 @@ export default function RootLayout({
       <body /*className="bg-[url('/bg-cockpit4.jpg')] bg-cover bg-center h-screen w-screen"*/
       >
         <UserProvider>
-        <MessageProvider>
-        {children}
-        </MessageProvider>
+          <MessageProvider>{children}</MessageProvider>
         </UserProvider>
       </body>
     </html>

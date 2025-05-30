@@ -1,12 +1,5 @@
-import { TIMEOUT } from "dns";
-
-export const MessageState = {
-  NEW: "new",
-  OPENED: "opened",
-  ACCEPTED : "accepted",
-  REJECTED: "rejected",
-  TIMEOUT: "time out",
-}
+import { MessageState } from "../interfaces/MessageState";
+import { CPDLCRequestOption } from "../interfaces/Request";
 
 export const UplinkMessages = [
   {
@@ -14,17 +7,19 @@ export const UplinkMessages = [
     ref: "UM120",
     state: MessageState.NEW,
     element: "MONITOR CYOB 123.8MHz",
-    intent: "Instruction that the ATS unit is to be monitored on the specified frequency.",
+    intent:
+      "Instruction that the ATS unit is to be monitored on the specified frequency.",
   },
   {
-    id:"456",
+    id: "456",
     ref: "UM117",
     state: MessageState.NEW,
     element: "CONTACT [unit name] [frequency]",
-    intent: "Instruction that the ATS unit is to be contacted on the specified frequency.",
+    intent:
+      "Instruction that the ATS unit is to be contacted on the specified frequency.",
   },
   {
-    id:"789",
+    id: "789",
     ref: "UM169",
     state: MessageState.NEW,
     element: "[free text]",
@@ -119,3 +114,67 @@ export const DownlinkMessages = [
     intent: "Request to proceed direct to a specified waypoint.",
   },
 ];
+
+export const verticalRequestOptions: CPDLCRequestOption[] = [
+  {
+    label: "Request to fly at specified level",
+    template: "REQUEST [level]",
+    dataLinkSystems: ["FANS 1/A", "ATN B1", "FANS 1/A - ATN B1"],
+  },
+  {
+    label: "Request block level",
+    template: "REQUEST BLOCK [level] TO [level]",
+    dataLinkSystems: ["FANS 1/A"],
+  },
+  {
+    label: "Request cruise climb",
+    template: "REQUEST CRUISE CLIMB TO [level]",
+    note: "Avoid use due to potential misinterpretation",
+    dataLinkSystems: ["FANS 1/A"],
+  },
+  {
+    label: "Request climb to level",
+    template: "REQUEST CLIMB TO [level]",
+    dataLinkSystems: ["FANS 1/A", "ATN B1", "FANS 1/A - ATN B1"],
+  },
+  {
+    label: "Request descent to level",
+    template: "REQUEST DESCENT TO [level]",
+    dataLinkSystems: ["FANS 1/A", "ATN B1", "FANS 1/A - ATN B1"],
+  },
+  {
+    label: "Request climb at position",
+    template: "AT [position] REQUEST CLIMB TO [level]",
+    dataLinkSystems: ["FANS 1/A"],
+  },
+  {
+    label: "Request descent at position",
+    template: "AT [position] REQUEST DESCENT TO [level]",
+    dataLinkSystems: ["FANS 1/A"],
+  },
+  {
+    label: "Request climb at time",
+    template: "AT [time] REQUEST CLIMB TO [level]",
+    dataLinkSystems: ["FANS 1/A"],
+  },
+  {
+    label: "Request descent at time",
+    template: "AT [time] REQUEST DESCENT TO [level]",
+    dataLinkSystems: ["FANS 1/A"],
+  },
+  {
+    label: "Request VMC descent",
+    template: "REQUEST VMC DESCENT",
+    note: "Avoid use due to potential misinterpretation",
+    dataLinkSystems: ["FANS 1/A"],
+  },
+];
+
+export const VerticalOptionsArray = [
+  "[level]",
+  "BLOCK [level] TO [level]",
+  "CRUISE CLIMB TO [level]",
+  "CLIMB TO [level]",
+  "DESCENT TO [level]",
+  "VMC DESCENT",
+]

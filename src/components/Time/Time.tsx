@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 export default function Time() {
   const [time, setTime] = useState<string | null>(null);
 
-   function getFormattedTime() {
+  function getFormattedTime() {
     const now = new Date();
 
     // Format 24h + UTC

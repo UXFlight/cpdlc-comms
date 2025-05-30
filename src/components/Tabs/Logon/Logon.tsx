@@ -6,7 +6,7 @@ type Props = {
   length?: number;
 };
 
-export default function Logon({ length = 4}: Props) {
+export default function Logon({ length = 4 }: Props) {
   const { connectionState, setConnectionState } = useContext(UserContext);
   const [value, setValue] = useState("");
   const inputRef = useRef(null);
