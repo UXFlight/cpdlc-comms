@@ -1,3 +1,10 @@
+// types/Request.ts
+export type RequestState = {
+  arguments: string[] | null;
+  messageRef: string | null;
+  timeStamp: Date | null;
+};
+
 export enum RequestCategory {
   VERTICAL = "Vertical Requests",
   LATERAL = "Lateral Requests",

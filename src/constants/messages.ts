@@ -171,10 +171,10 @@ export const verticalRequestOptions: CPDLCRequestOption[] = [
 ];
 
 export const VerticalOptionsArray = [
-  "[level]",
-  "BLOCK [level] TO [level]",
-  "CRUISE CLIMB TO [level]",
-  "CLIMB TO [level]",
-  "DESCENT TO [level]",
-  "VMC DESCENT",
-]
+  { ref: "DM6", content: "[level]" },
+  { ref: "DM7", content: "BLOCK [level] TO [level]" },
+  { ref: "DM8", content: "CRUISE CLIMB TO [level]" },
+  { ref: null, content: "CLIMB TO [level]" },
+  { ref: null, content: "DESCENT TO [level]" },
+  { ref: "DM69", content: "VMC DESCENT" },
+];

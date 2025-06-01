@@ -4,6 +4,7 @@
 /*@tailwind utilities;*/
 
 @theme {
+  --color-white-5: #ffffff0d;
   --color-white-10: #ffffff1a;
   --color-white-30: #ffffff4d;
   --color-white-40: #ffffff66;
