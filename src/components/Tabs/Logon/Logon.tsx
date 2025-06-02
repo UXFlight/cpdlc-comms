@@ -7,7 +7,7 @@ type Props = {
 };
 
 export default function Logon({ length = 4 }: Props) {
-  const { connectionState, setConnectionState } = useContext(UserContext);
+  const { connectionState, setConnectionState, username, setUsername } = useContext(UserContext);
   const [value, setValue] = useState("");
   const inputRef = useRef(null);
 
@@ -29,6 +29,7 @@ export default function Logon({ length = 4 }: Props) {
       (user) => user.username.toUpperCase().replace(/[^A-Z0-9]/g, "") === input,
     );
     if (result) {
+      setUsername(input.toUpperCase().replace(/[^A-Z0-9]/g, ""));
       setTimeout(() => {
         setConnectionState(true);
       }, 1000);
