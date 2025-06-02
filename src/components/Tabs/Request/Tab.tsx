@@ -2,6 +2,7 @@ import { useState } from "react";
 import { RequestProvider } from "../../../context/RequestContext";
 import MessagePreview from "./MessagePreview";
 import VerticalRequests from "./VerticalRequest";
+import RouteModificationRequest from "./RouteModificationRequest";
 
 export default function RequestTab() {
   const [preview, setPreview] = useState(false);
@@ -13,6 +14,12 @@ export default function RequestTab() {
         </div>
         <div className="flex flex-col gap-4 disable">
           <VerticalRequests
+            disabled={preview}
+            onClick={() => setPreview(true)}
+          />
+        </div>
+        <div className="flex flex-col gap-4 disable">
+          <RouteModificationRequest
             disabled={preview}
             onClick={() => setPreview(true)}
           />

@@ -1,7 +1,5 @@
 import MessageContainer from "./MessageContainer";
-import {
-  MessageContext
-} from "../../../context/MessageContext";
+import { MessageContext } from "../../../context/MessageContext";
 import { useContext, useState } from "react";
 import MessageDisplayTab from "./MessageDisplayTab";
 import OptionBar from "./OptionBar";

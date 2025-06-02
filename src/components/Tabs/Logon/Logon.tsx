@@ -7,18 +7,17 @@ type Props = {
 };
 
 export default function Logon({ length = 4 }: Props) {
-  const { connectionState, setConnectionState, username, setUsername } = useContext(UserContext);
-  const [value, setValue] = useState("");
+  const { connectionState, setConnectionState, username, setUsername } =
+    useContext(UserContext);
   const inputRef = useRef(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const raw = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "");
-    setValue(raw.slice(0, length));
-    console.log(value);
+    setUsername(raw.slice(0, length));
   };
 
   const validValue = () => {
-    return value.length === length;
+    return username.length === length;
   };
 
   function validateEntry(input: string) {
@@ -57,13 +56,13 @@ export default function Logon({ length = 4 }: Props) {
               key={i}
               className="w-4 text-white text-lg font-mono border-b border-medium-gray text-center"
             >
-              {value[i] ?? "_"}
+              {username[i] ?? "_"}
             </div>
           ))}
           <input
             ref={inputRef}
             type="text"
-            value={value}
+            value={username}
             onChange={handleChange}
             onKeyDown={handleEnter}
             className="absolute opacity-0 w-0 h-0"

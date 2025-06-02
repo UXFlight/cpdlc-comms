@@ -34,15 +34,16 @@ export default function VerticalOption({
       .slice(0, 5);
     setInputValues(newValues);
     onUpdateArguments(newValues);
+    identifyRef(newValues);
   };
 
-  const identifyRef = () => {
+  const identifyRef = (values: string[] = inputValues) => {
     if (message.ref === null) {
       return null;
     }
 
     setRequest({
-      arguments: inputValues,
+      arguments: values,
       messageRef: message.ref,
       timeStamp: new Date(),
     });
@@ -61,6 +62,7 @@ export default function VerticalOption({
         checked={isActive}
         readOnly
         className="cursor-pointer checked:bg-dark-blue-10"
+        onChange={() => identifyRef()}
       />
       {parts.map((text, i) => (
         <span key={i} className="flex items-center gap-1">
@@ -73,7 +75,6 @@ export default function VerticalOption({
                 value={inputValues[i]}
                 onChange={(e) => {
                   handleChange(i, e.target.value);
-                  identifyRef();
                 }}
                 className="w-[60px] px-1 py-1 bg-medium-gray rounded border border-white-30 text-white rounded text-center uppercase text-sm tracking-widest"
                 placeholder="FLxxx"

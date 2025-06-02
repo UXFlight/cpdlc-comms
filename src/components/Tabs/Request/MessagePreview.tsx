@@ -1,17 +1,28 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { RequestContext } from "../../../context/RequestContext";
 import DownLinks from "../../../data/DownLinks.json";
 import { LogsArray } from "../../../constants/logs";
 import { MessageState } from "../../../interfaces/MessageState";
-
+import { time } from "console";
 
 export default function MessagePreview() {
   const { request } = useContext(RequestContext);
   const [isSending, setIsSending] = useState(false);
+  const [isSent, setIsSent] = useState(false);
+
+  useEffect(() => {
+    //simule le delai d envoi
+    if (isSending) {
+      setTimeout(() => {
+        setIsSent(true);
+        setIsSending(false);
+      }, 2000);
+    }
+  }, [isSending]);
 
   const formattedMessage = () => {
     const DMessage = DownLinks.find(
-      (msg) => msg.Ref_Num.replace(/\s+/g, "") === request.messageRef
+      (msg) => msg.Ref_Num.replace(/\s+/g, "") === request.messageRef,
     );
     if (!DMessage) return "";
 
@@ -44,9 +55,9 @@ export default function MessagePreview() {
       id: (Math.random() * 1000000).toFixed(0).toString(),
       ref: request.messageRef,
       state: MessageState.OPENED,
-      element: formattedMessage()
-   });
-  }
+      element: formattedMessage(),
+    });
+  };
 
   return (
     <div
@@ -66,28 +77,38 @@ export default function MessagePreview() {
 
       <div className="flex w-full gap-4">
         <button
-          className="flex-1 px-4 py-2 rounded bg-medium-gray text-white/60 font-semibold tracking-wide cursor-pointer"
+          className={`flex-1 px-4 py-2 rounded bg-white-20 ${isSent ? "" : "hover:bg-white-10 cursor-pointer"}  text-white-80 font-semibold tracking-wide uppercase`}
         >
           Reject
         </button>
 
-        {!isSending ? (
+        {!isSending && !isSent && (
           <button
             onClick={() => {
               setIsSending(true);
               addMessageLog();
             }}
-            className="flex-1 px-4 py-2 rounded bg-green text-white font-semibold tracking-wide hover:bg-green-700 transition-colors"
+            className="flex-1 px-4 py-2 rounded bg-dark-blue text-white-80 font-semibold tracking-wide hover:bg-dark-blue-50 transition-colors uppercase"
           >
-            Accept
+            Confirm
           </button>
-        ) : (
+        )}
+        {isSending && !isSent && (
           <button
             disabled
-            className="flex-1 px-4 py-2 rounded bg-gray-400 text-white font-semibold tracking-wide relative"
+            className="flex-1 px-4 py-2 rounded bg-gray-400 text-white font-semibold tracking-wide relative uppercase"
           >
             Sending
             <div className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full border-2 border-white border-t-transparent animate-spin" />
+          </button>
+        )}
+        {isSent && (
+          <button
+            disabled
+            className="flex items-center justify-center gap-2 flex-1 px-4 py-2 rounded bg-green text-white font-semibold tracking-wide"
+          >
+            <span className="uppercase">Sent</span>
+            <img src="/check.svg" alt="Check Icon" className="w-6 h-6" />
           </button>
         )}
       </div>

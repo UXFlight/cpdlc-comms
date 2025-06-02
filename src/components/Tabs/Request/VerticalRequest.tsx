@@ -3,6 +3,7 @@ import { VerticalOptionsArray } from "../../../constants/messages";
 import VerticalOption from "./VerticalOption";
 import { RequestContext } from "../../../context/RequestContext";
 import { RequestCategory } from "../../../interfaces/Request";
+import RequestContainer from "./RequestContainer";
 
 type Props = {
   onClick: () => void;
@@ -15,7 +16,9 @@ export default function VerticalRequests({ onClick, disabled = false }: Props) {
     content: string;
     nbOfInputs: number;
   } | null>(null);
-  const [selectedExtra, setSelectedExtra] = useState<"time" | "position" | null>(null);
+  const [selectedExtra, setSelectedExtra] = useState<
+    "time" | "position" | null
+  >(null);
   const [inputValues, setInputValues] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const { request, setRequest } = useContext(RequestContext);
@@ -60,7 +63,7 @@ export default function VerticalRequests({ onClick, disabled = false }: Props) {
     const messageRef = refMap[key];
     if (!messageRef) return;
 
-     setRequest({
+    setRequest({
       arguments: inputValues,
       messageRef,
       timeStamp: new Date(),
@@ -68,35 +71,39 @@ export default function VerticalRequests({ onClick, disabled = false }: Props) {
   };
 
   return (
-    <div className="container flex flex-col items-start py-4 px-[15.5px] overflow-x-hidden">
-      <div
-        className="h-[30px] w-full flex items-center justify-between cursor-pointer"
-        onClick={!disabled ? handleClick : undefined}
-      >
-        <p className="text-white font-normal text-[17px] leading-none font-noto uppercase">
-          {RequestCategory.VERTICAL}
-        </p>
-        <img
-          src="/arrow-down.svg"
-          alt="arrow"
-          className={`w-6 h-6 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
-        />
-      </div>
-
+    <RequestContainer
+      requestType={RequestCategory.VERTICAL}
+      isOpen={isOpen}
+      onToggle={handleClick}
+      disabled={disabled}
+      showSendButton={
+        !!(selectedMessage && selectedMessage.nbOfInputs === inputValues.length)
+      }
+      onSend={() => {
+        onClick();
+        defineMessageRef(selectedMessage);
+      }}
+    >
       <div className="flex items-center gap-3 mt-3">
         <div className="flex flex-row items-center gap-1.5">
-          <p className={`text-white/80 font-open ${isOpen ? "text-[16px]" : "text-[14px]"} font-normal leading-[18px] uppercase min-w-[60px]`}>
+          <p
+            className={`text-white/80 font-open ${isOpen ? "text-[16px]" : "text-[14px]"} font-normal leading-[18px] uppercase min-w-[60px]`}
+          >
             request
           </p>
-          <p className={`w-400 text-white/80 font-open text-[14px] font-normal leading-[18px] uppercase ${isOpen ? "hidden" : ""}`}>
+          <p
+            className={`w-400 text-white/80 font-open text-[14px] font-normal leading-[18px] uppercase ${isOpen ? "hidden" : ""}`}
+          >
             to climb, descend, or change flight level
           </p>
         </div>
 
         <div className="flex flex-row w-full">
-          <div className={`flex flex-col items-start gap-2 overflow-hidden transition-[max-height] duration-300 ease-in-out ${
-            isOpen ? "max-h-[1000px]" : "max-h-0"
-          }`}>
+          <div
+            className={`flex flex-col items-start gap-2 overflow-hidden transition-[max-height] duration-300 ease-in-out ${
+              isOpen ? "max-h-[1000px]" : "max-h-0"
+            }`}
+          >
             {VerticalOptionsArray.map((message, index) => (
               <VerticalOption
                 key={index}
@@ -110,8 +117,10 @@ export default function VerticalRequests({ onClick, disabled = false }: Props) {
           </div>
 
           <div className="flex flex-col relative ml-[20px] w-[175px]">
-            {isOpen && selectedMessage &&
-              (selectedMessage.content.includes("CLIMB TO") || selectedMessage.content.includes("DESCENT TO")) && (
+            {isOpen &&
+              selectedMessage &&
+              (selectedMessage.content.includes("CLIMB TO") ||
+                selectedMessage.content.includes("DESCENT TO")) && (
                 <div className="flex flex-col gap-2 pl-4 pt-2">
                   {/* TIME */}
                   <label className="flex items-center gap-2 text-white/80 text-sm">
@@ -119,7 +128,11 @@ export default function VerticalRequests({ onClick, disabled = false }: Props) {
                       disabled={disabled}
                       type="checkbox"
                       checked={selectedExtra === "time"}
-                      onChange={() => setSelectedExtra(selectedExtra === "time" ? null : "time")}
+                      onChange={() =>
+                        setSelectedExtra(
+                          selectedExtra === "time" ? null : "time",
+                        )
+                      }
                       className="w-4 h-4 rounded border border-white/20 bg-[#2B2B2C] checked:bg-white checked:border-white shadow-sm shadow-black/30 cursor-pointer"
                     />
                     <span>Time</span>
@@ -179,7 +192,11 @@ export default function VerticalRequests({ onClick, disabled = false }: Props) {
                       disabled={disabled}
                       type="checkbox"
                       checked={selectedExtra === "position"}
-                      onChange={() => setSelectedExtra(selectedExtra === "position" ? null : "position")}
+                      onChange={() =>
+                        setSelectedExtra(
+                          selectedExtra === "position" ? null : "position",
+                        )
+                      }
                       className="w-4 h-4 rounded border border-white/20 bg-[#2B2B2C] checked:bg-white checked:border-white shadow-sm shadow-black/30 cursor-pointer"
                     />
                     <span>Position</span>
@@ -189,7 +206,10 @@ export default function VerticalRequests({ onClick, disabled = false }: Props) {
                     value={request.positionSelected || ""}
                     onChange={(e) =>
                       setRequest({
-                        positionSelected: e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 6),
+                        positionSelected: e.target.value
+                          .toUpperCase()
+                          .replace(/[^A-Z0-9]/g, "")
+                          .slice(0, 6),
                       })
                     }
                     placeholder="ABC123"
@@ -202,22 +222,9 @@ export default function VerticalRequests({ onClick, disabled = false }: Props) {
                   />
                 </div>
               )}
-
-            {selectedMessage && selectedMessage.nbOfInputs === inputValues.length && (
-              <button
-                disabled={disabled}
-                onClick={() => {
-                  onClick();
-                  defineMessageRef(selectedMessage);
-                }}
-                className="absolute bottom-2 right-2 mt-4 px-4 py-2 bg-dark-blue w-[100px] text-white rounded cursor-pointer hover:bg-dark-blue-50 transition-colors shadow-sm shadow-black/30 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Send
-              </button>
-            )}
           </div>
         </div>
       </div>
-    </div>
+    </RequestContainer>
   );
 }

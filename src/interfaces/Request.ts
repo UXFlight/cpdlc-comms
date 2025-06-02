@@ -1,7 +1,7 @@
 // types/Request.ts
 export type RequestState = {
   arguments: string[] | null;
-  timeSelected?: { hh: string, mm: string } | null;
+  timeSelected?: { hh: string; mm: string } | null;
   positionSelected?: string;
   messageRef: string | null;
   timeStamp: Date | null;
@@ -9,6 +9,7 @@ export type RequestState = {
 
 export enum RequestCategory {
   VERTICAL = "Vertical Requests",
+  ROUTE_MODIFICATION = "Route Modification Requests",
   LATERAL = "Lateral Requests",
   SPEED = "Speed Requests",
   DESTINATION = "Destination Requests",

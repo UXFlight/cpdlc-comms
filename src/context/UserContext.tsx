@@ -24,7 +24,9 @@ export const UserProvider = ({ children }) => {
   const [username, setUsername] = useState<string>("");
 
   return (
-    <UserContext.Provider value={{ connectionState, setConnectionState, username, setUsername }}>
+    <UserContext.Provider
+      value={{ connectionState, setConnectionState, username, setUsername }}
+    >
       {children}
     </UserContext.Provider>
   );

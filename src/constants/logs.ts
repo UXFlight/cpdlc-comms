@@ -22,5 +22,5 @@ export const LogsArray = [
     ref: "UM169",
     state: MessageState.NEW,
     element: "[free text]",
-  }
+  },
 ];

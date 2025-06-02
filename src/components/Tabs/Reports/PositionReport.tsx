@@ -3,7 +3,9 @@ import { useState } from "react";
 export default function PositionReport() {
   return (
     <div className="flex flex-col gap-4 bg-[#1e1e1e] p-4 rounded-md border border-white/10 text-white text-sm">
-      <p className="uppercase text-white font-semibold text-sm">Position Report</p>
+      <p className="uppercase text-white font-semibold text-sm">
+        Position Report
+      </p>
 
       {/* Section 1 */}
       <div className="flex flex-col gap-2 border-b border-white/10 pb-4">
@@ -21,7 +23,12 @@ export default function PositionReport() {
 
       {/* Section 3 */}
       <div className="flex flex-col gap-2 border-b border-white/10 pb-4">
-        <ReportRow label="Cur Pos" value="N4515.4" select options={["LAT/LON"]} />
+        <ReportRow
+          label="Cur Pos"
+          value="N4515.4"
+          select
+          options={["LAT/LON"]}
+        />
         <ReportRow label="Cur UTC" value="15:43" />
         <ReportRow label="Cur ALT" value="8000" />
         <ReportRow label="Winds ALOFT" value="331/025 T/KT" />
