@@ -1,6 +1,8 @@
 // types/Request.ts
 export type RequestState = {
   arguments: string[] | null;
+  timeSelected?: { hh: string, mm: string } | null;
+  positionSelected?: string;
   messageRef: string | null;
   timeStamp: Date | null;
 };
@@ -26,26 +28,9 @@ export type VerticalRequestType =
   | "AT [time] REQUEST DESCENT TO [level]"
   | "REQUEST VMC DESCENT";
 
-  /*| "REQUEST [level]"
-  | "REQUEST BLOCK [level] TO [level]"
-  | "REQUEST CRUISE CLIMB TO [level]"
-  | "REQUEST CLIMB TO [level]"
-  | "REQUEST DESCENT TO [level]"
-  | "AT [position] REQUEST CLIMB TO [level]"
-  | "AT [position] REQUEST DESCENT TO [level]"
-  | "AT [time] REQUEST CLIMB TO [level]"
-  | "AT [time] REQUEST DESCENT TO [level]"
-  | "REQUEST VMC DESCENT";*/
-
 export interface CPDLCRequestOption {
   label: string;
   template: VerticalRequestType;
   note?: string;
   dataLinkSystems: string[];
-}
-
-export interface RequestDisplay {
-  Category: RequestCategory;
-  //template: VerticalRequestType,
-  //timeStamp: Date,
 }

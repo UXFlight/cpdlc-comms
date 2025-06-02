@@ -1,20 +1,19 @@
 import MessageContainer from "./MessageContainer";
-import { UplinkMessages } from "../../../constants/messages";
 import {
-  MessageContext,
-  MessageProvider,
+  MessageContext
 } from "../../../context/MessageContext";
 import { useContext, useState } from "react";
 import MessageDisplayTab from "./MessageDisplayTab";
 import OptionBar from "./OptionBar";
 import SelectDropdown from "../../SelectDropdown";
+import { LogsArray } from "../../../constants/logs";
 
 export default function LogsTab() {
   const { currentMessage, setCurrentMessage } = useContext(MessageContext);
   const [value, setValue] = useState("FILTER BY");
 
   const findMessageById = (id) => {
-    return UplinkMessages.find((msg) => msg.id === id);
+    return LogsArray.find((msg) => msg.id === id);
   };
 
   return (
@@ -71,7 +70,7 @@ export default function LogsTab() {
         </div> */}
           </div>
           <div className="flex-grow overflow-y-auto">
-            <MessageContainer messages={UplinkMessages} />
+            <MessageContainer messages={LogsArray} />
           </div>
         </div>
       )}

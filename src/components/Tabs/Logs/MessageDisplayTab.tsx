@@ -6,7 +6,7 @@ type Props = {
     id: string;
     state: string;
     element: string;
-    intent: string;
+    intent?: string;
   };
 };
 

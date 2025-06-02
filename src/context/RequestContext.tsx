@@ -21,7 +21,11 @@ export const RequestContext = createContext<RequestContextType>({
   resetRequest: () => {},
 });
 
-export const RequestProvider = ({ children }: { children: React.ReactNode }) => {
+export const RequestProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const [request, setRequestState] = useState<RequestState>(defaultRequest);
 
   const setRequest = (data: Partial<RequestState>) => {
