@@ -10,7 +10,7 @@ type Props = {
 export default function ResponsiveBar({ activeTab, onTabChange }: Props) {
   return (
     <header>
-      <div className="bg-nav-bar h-[80.32px] flex align-center w-full items-center">
+      <div className="bg-nav-bar h-auto flex align-center w-full items-center">
         <div className="p-[10px]">
           <img
             src="/CPDLC.svg"

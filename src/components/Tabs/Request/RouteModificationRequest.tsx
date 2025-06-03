@@ -19,14 +19,51 @@ type Props = {
   disabled?: boolean;
 };
 
-export default function RouteModificationRequest(onClick, disabled = false) {
+function CustomRadio({ label, value, selected, onChange }: {
+  label: string;
+  value: string;
+  selected: string;
+  onChange: (val: string) => void;
+}) {
+  const isChecked = value === selected;
+  return (
+    <div
+      className="flex items-center gap-2 cursor-pointer select-none"
+      onClick={() => onChange(value)}
+    >
+      <span
+        className={`w-4 h-4 rounded-full border flex items-center justify-center transition-all duration-150 ${
+          isChecked ? "border-white" : "border-white/10"
+        }`}
+      >
+        {isChecked && <div className="w-2 h-2 bg-dark-blue rounded-full" />}
+      </span>
+      <span className="text-white/80 text-sm">{label}</span>
+    </div>
+  );
+}
+
+export default function RouteModificationRequest({ onClick, disabled = false }: Props) {
   const { request, setRequest } = useContext(RequestContext);
+  const [isOpen, setIsOpen] = useState(false);
   const [selectedType, setSelectedType] = useState<string>("");
   const [heading, setHeading] = useState("");
   const [track, setTrack] = useState("");
   const [direct, setDirect] = useState("");
   const [weather, setWeather] = useState("");
   const [additionalChecked, setAdditionalChecked] = useState(false);
+
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+    if (!isOpen) {
+      setSelectedType("");
+      setHeading("");
+      setTrack("");
+      setDirect("");
+      setWeather("");
+      setAdditionalChecked(false);
+    }
+  };
 
   const handleSend = () => {
     setRequest({
@@ -36,117 +73,107 @@ export default function RouteModificationRequest(onClick, disabled = false) {
         weather,
         heading,
         track,
-        additionalChecked ? "Due to aircraft performance" : "",
+        additionalChecked ? "Due to aircraft performance" : ""
       ].filter(Boolean),
       messageRef: "RM1",
       timeStamp: new Date(),
     });
+    onClick();
   };
 
   return (
-    <div className="w-full p-4 rounded-md bg-[#1e1e1e] text-white space-y-3 border border-white/10">
-      {/* <RequestContainer
-        requestType={RequestCategory.ROUTE_MODIFICATION}
-        disabled={disabled}
-        onClick={handleClick}
-      />
-      <div className="space-y-3">
-        <div className="flex items-center justify-between">
-          <label className="flex items-center gap-2 text-white/80 text-sm">
-            <input
-              type="radio"
-              name="route-option"
-              checked={selectedType === "Request Direct to Position"}
-              onChange={() => setSelectedType("Request Direct to Position")}
-            />
-            Request Direct to Position
-          </label>
-          <SelectDropdown
-            options={directOptions}
-            value={direct}
-            onChange={setDirect}
-          />
-        </div>
+    <RequestContainer
+      requestType={RequestCategory.ROUTE_MODIFICATION}
+      isOpen={isOpen}
+      onToggle={handleToggle}
+      disabled={disabled}
+      showSendButton={!!selectedType}
+      onSend={handleSend}
+    >
+      <div className="flex items-center gap-3">
+        <p className={`w-400 text-white/80 font-open text-[14px] font-normal leading-[18px] uppercase mt-3 ${isOpen ? "hidden" : "block"}`}>
+          To request heading, track, direct-to or weather deviation
+        </p>
+      </div>
 
-        <div className="flex items-center justify-between">
-          <label className="flex items-center gap-2 text-white/80 text-sm">
-            <input
-              type="radio"
-              name="route-option"
-              checked={selectedType === "Weather Deviation to Position"}
-              onChange={() => setSelectedType("Weather Deviation to Position")}
+      <div className={`flex items-center gap-3 mt-3 ${isOpen ? "" : "hidden"}`}>
+        <div className="space-y-3 mt-3 w-full">
+          <div className="flex items-center justify-between">
+            <CustomRadio
+              label="Request Direct to Position"
+              value="Request Direct to Position"
+              selected={selectedType}
+              onChange={setSelectedType}
             />
-            Weather Deviation to Position
-          </label>
-          <SelectDropdown
-            options={weatherOptions}
-            value={weather}
-            onChange={setWeather}
-          />
-        </div>
-
-        <div className="flex items-center justify-between">
-          <label className="flex items-center gap-2 text-white/80 text-sm">
-            <input
-              type="radio"
-              name="route-option"
-              checked={selectedType === "Heading"}
-              onChange={() => setSelectedType("Heading")}
+            <SelectDropdown
+              options={directOptions}
+              value={direct}
+              onChange={setDirect}
             />
-            Heading
-          </label>
-          <input
-            type="text"
-            value={heading}
-            onChange={(e) => setHeading(e.target.value.toUpperCase())}
-            placeholder="FL450"
-            className="bg-medium-gray border border-white-30 text-white rounded px-3 py-1 w-[100px] text-sm tracking-widest text-center"
-          />
-        </div>
+          </div>
 
-        <div className="flex items-center justify-between">
-          <label className="flex items-center gap-2 text-white/80 text-sm">
-            <input
-              type="radio"
-              name="route-option"
-              checked={selectedType === "Ground Track"}
-              onChange={() => setSelectedType("Ground Track")}
+          <div className="flex items-center justify-between">
+            <CustomRadio
+              label="Weather Deviation to Position"
+              value="Weather Deviation to Position"
+              selected={selectedType}
+              onChange={setSelectedType}
             />
-            Ground Track
-          </label>
-          <input
-            type="text"
-            value={track}
-            onChange={(e) => setTrack(e.target.value.toUpperCase())}
-            placeholder="FL450"
-            className="bg-medium-gray border border-white-30 text-white rounded px-3 py-1 w-[100px] text-sm tracking-widest text-center"
-          />
-        </div>
-
-        <div className="flex flex-col text-white/80 text-sm">
-          <p className="mb-1">Additional Message:</p>
-          <label className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              checked={additionalChecked}
-              onChange={() => setAdditionalChecked(!additionalChecked)}
-              className="w-4 h-4 rounded border border-white/10 bg-[#2B2B2C] checked:bg-white checked:border-white shadow-sm shadow-black/30 cursor-pointer"
+            <SelectDropdown
+              options={weatherOptions}
+              value={weather}
+              onChange={setWeather}
             />
-            <span className="text-white font-semibold">
-              Due to aircraft performance
-            </span>
-          </label>
-        </div>
+          </div>
 
-        <div className="flex justify-end">
-          <button
-            onClick={handleSend}
-            className="px-4 py-2 bg-dark-blue text-white rounded font-semibold text-sm hover:bg-dark-blue/70 transition-colors shadow-sm shadow-black/30"
-          >
-            SEND MESSAGE
-          </button>
+          <div className="flex items-center justify-between">
+            <CustomRadio
+              label="Heading"
+              value="Heading"
+              selected={selectedType}
+              onChange={setSelectedType}
+            />
+            <input
+              type="text"
+              value={heading}
+              onChange={(e) => setHeading(e.target.value.toUpperCase())}
+              placeholder="FL450"
+              className="bg-medium-gray border border-white-30 text-white rounded px-3 py-1 w-[100px] text-sm tracking-widest text-center"
+            />
+          </div>
+
+          <div className="flex items-center justify-between">
+            <CustomRadio
+              label="Ground Track"
+              value="Ground Track"
+              selected={selectedType}
+              onChange={setSelectedType}
+            />
+            <input
+              type="text"
+              value={track}
+              onChange={(e) => setTrack(e.target.value.toUpperCase())}
+              placeholder="FL450"
+              className="bg-medium-gray border border-white-30 text-white rounded px-3 py-1 w-[100px] text-sm tracking-widest text-center"
+            />
+          </div>
+
+          <div className="flex flex-col text-white/80 text-sm">
+            <p className="mb-1">Additional Message:</p>
+            <label className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                checked={additionalChecked}
+                onChange={() => setAdditionalChecked(!additionalChecked)}
+                className="w-4 h-4 rounded border border-white/10 bg-[#2B2B2C] checked:bg-white checked:border-white shadow-sm shadow-black/30 cursor-pointer"
+              />
+              <span className="text-white font-semibold">
+                Due to aircraft performance
+              </span>
+            </label>
+          </div>
         </div>
-      </div> */}
-    </div>
+      </div>
+    </RequestContainer>
   );
 }
