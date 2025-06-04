@@ -19,7 +19,12 @@ type Props = {
   disabled?: boolean;
 };
 
-function CustomRadio({ label, value, selected, onChange }: {
+function CustomRadio({
+  label,
+  value,
+  selected,
+  onChange,
+}: {
   label: string;
   value: string;
   selected: string;
@@ -43,7 +48,10 @@ function CustomRadio({ label, value, selected, onChange }: {
   );
 }
 
-export default function RouteModificationRequest({ onClick, disabled = false }: Props) {
+export default function RouteModificationRequest({
+  onClick,
+  disabled = false,
+}: Props) {
   const { request, setRequest } = useContext(RequestContext);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedType, setSelectedType] = useState<string>("");
@@ -73,7 +81,7 @@ export default function RouteModificationRequest({ onClick, disabled = false }: 
         weather,
         heading,
         track,
-        additionalChecked ? "Due to aircraft performance" : ""
+        additionalChecked ? "Due to aircraft performance" : "",
       ].filter(Boolean),
       messageRef: "RM1",
       timeStamp: new Date(),
@@ -91,7 +99,9 @@ export default function RouteModificationRequest({ onClick, disabled = false }: 
       onSend={handleSend}
     >
       <div className="flex items-center gap-3">
-        <p className={`w-400 text-white/80 font-open text-[14px] font-normal leading-[18px] uppercase mt-3 ${isOpen ? "hidden" : "block"}`}>
+        <p
+          className={`w-400 text-white/80 font-open text-[14px] font-normal leading-[18px] uppercase mt-3 ${isOpen ? "hidden" : "block"}`}
+        >
           To request heading, track, direct-to or weather deviation
         </p>
       </div>

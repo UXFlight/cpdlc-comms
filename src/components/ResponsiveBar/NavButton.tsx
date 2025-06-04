@@ -19,7 +19,9 @@ export default function NavButton({
   const { connectionState } = useContext(UserContext);
 
   return (
-    <div className={`flex flex-row justify-center items-center w-[75px] hover:bg-white-10 transition-all duration-150 ${active ? "bg-white-10 border-b-4 border-green" : ""}`}>
+    <div
+      className={`flex flex-row justify-center items-center w-[75px] hover:bg-white-10 transition-all duration-150 ${active ? "bg-white-10 border-b-4 border-green" : ""}`}
+    >
       <button
         disabled={!connectionState}
         onClick={() => onTabChange(`${id}`)}
