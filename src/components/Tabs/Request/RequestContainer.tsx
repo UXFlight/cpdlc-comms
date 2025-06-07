@@ -44,9 +44,9 @@ export default function RequestContainer({
         <button
           disabled={disabled}
           onClick={onSend}
-          className="absolute bottom-2 right-2 mt-4 px-4 py-2 bg-dark-blue w-[150px] h-auto text-[12px] uppercase font-[550] text-white rounded cursor-pointer hover:bg-dark-blue-50 transition-colors shadow-sm shadow-black/30 disabled:opacity-50 disabled:hover:bg-dark-blue"
+          className="absolute bottom-2 right-2 mt-4 px-4 py-2 bg-dark-blue w-[125px] h-auto text-[12px] tracking-wider uppercase font-[550] text-white rounded cursor-pointer hover:bg-dark-blue-50 transition-colors shadow-sm shadow-black/30 disabled:opacity-50 disabled:hover:bg-dark-blue"
         >
-          Send Message
+          Preview
         </button>
       )}
     </div>

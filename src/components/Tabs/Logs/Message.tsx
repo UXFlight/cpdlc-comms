@@ -52,6 +52,30 @@ export default function Message({ message }: Props) {
     }
   };
 
+  const messageType = () => {
+    if (message.state === "new") {
+      return "/up-arrow.svg"
+    } else if (message.state === "opened") {
+      if(message.ref.includes("DM")) {
+        return "/white-down-arrow.svg"
+      } else {
+        return "/arrow-up-bold-box.svg"
+      }
+    } else if (message.state === "accepted") {
+      if(message.ref.includes("DM")) {
+        return "/green-down-arrow.svg"
+    } else {
+        return "/arrow-up-bold-box.svg"
+    }
+  } else {
+     if(message.ref.includes("DM")) {
+        return "/white-down-arrow.svg"
+      } else {
+        return "/arrow-up-bold-box.svg"
+      }
+    }
+  }
+
   return (
     <div
       className={`flex justify-center items-center ${message.state === "new" ? "cursor-pointer" : ""}`}
@@ -59,7 +83,7 @@ export default function Message({ message }: Props) {
     >
       <img
         src={
-          message.state === "new" ? "/up-arrow.svg" : "/arrow-up-bold-box.svg"
+          messageType()
         }
         alt="arrow"
         className="w-[22px] h-[22px] mb-[30px]"

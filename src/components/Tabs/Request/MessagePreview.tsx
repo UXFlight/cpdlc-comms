@@ -79,7 +79,7 @@ export default function MessagePreview() {
         <button
           className={`flex-1 px-4 py-2 rounded bg-white-20 ${isSent ? "" : "hover:bg-white-10 cursor-pointer"}  text-white-80 font-semibold tracking-wide uppercase`}
         >
-          Reject
+          Cancel
         </button>
 
         {!isSending && !isSent && (
@@ -90,7 +90,7 @@ export default function MessagePreview() {
             }}
             className="flex-1 px-4 py-2 rounded bg-dark-blue text-white-80 font-semibold tracking-wide hover:bg-dark-blue-50 transition-colors uppercase"
           >
-            Confirm
+            Send
           </button>
         )}
         {isSending && !isSent && (
