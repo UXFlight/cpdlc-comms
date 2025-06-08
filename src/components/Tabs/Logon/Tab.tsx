@@ -6,7 +6,6 @@ import { UserContext } from "../../../context/UserContext";
 import SelectDropdown from "../../SelectDropdown";
 
 export default function LogonTab() {
-  const { isConnectionPossible } = useContext(UserContext);
   const [value, setValue] = useState("FANS 1/A");
 
   return (

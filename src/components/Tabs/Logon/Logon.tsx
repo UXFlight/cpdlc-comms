@@ -11,11 +11,6 @@ export default function Logon({ length = 4 }: Props) {
   const { connectionState, setConnectionState, isConnectionPossible, username, setUsername } = useContext(UserContext);
   const inputRef = useRef(null);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const raw = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "");
-    setUsername(raw.slice(0, length));
-  };
-
   const validValue = () => {
     return username.length === length;
   };
@@ -35,13 +30,6 @@ export default function Logon({ length = 4 }: Props) {
     }
     return result;
   }
-
-  const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      validateEntry(inputRef.current.value);
-    }
-  };
 
   return (
     <div className="container flex items-center justify-between">
@@ -63,7 +51,7 @@ export default function Logon({ length = 4 }: Props) {
               ? setConnectionState(true)
               : setConnectionState(false);
           }}
-          className={`flex items-center justify-center gap-2 px-4 py-2 w-[149px] h-[48px] ${validValue() ? "bg-dark-blue hover:bg-dark-blue/70 cursor-pointer" : "bg-white-50"} text-white text-sm font-semibold rounded-md`}
+          className={`flex items-center justify-center gap-2 px-4 py-2 w-[149px] h-[48px] ${validValue() ? "bg-dark-blue hover:bg-dark-blue/70 cursor-pointer" : "bg-white-10"} text-white text-sm font-semibold rounded-md`}
         >
           <img src="/send.svg" alt="Send Icon" className="w-[20px] h-[20px]" />
           <span className="text-white-80 text-[14px] leading-[18px] whitespace-nowrap font-bold text-center">
