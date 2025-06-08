@@ -4,6 +4,7 @@ import DownLinks from "../../../data/DownLinks.json";
 import { LogsArray } from "../../../constants/logs";
 import { MessageState } from "../../../interfaces/MessageState";
 import { time } from "console";
+import SendButton from "../../SendButton";
 
 export default function MessagePreview() {
   const { request } = useContext(RequestContext);
@@ -82,35 +83,12 @@ export default function MessagePreview() {
           Cancel
         </button>
 
-        {!isSending && !isSent && (
-          <button
-            onClick={() => {
-              setIsSending(true);
-              addMessageLog();
-            }}
-            className="flex-1 px-4 py-2 rounded bg-dark-blue text-white-80 font-semibold tracking-wide hover:bg-dark-blue-50 transition-colors uppercase"
-          >
-            Send
-          </button>
-        )}
-        {isSending && !isSent && (
-          <button
-            disabled
-            className="flex-1 px-4 py-2 rounded bg-gray-400 text-white font-semibold tracking-wide relative uppercase"
-          >
-            Sending
-            <div className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full border-2 border-white border-t-transparent animate-spin" />
-          </button>
-        )}
-        {isSent && (
-          <button
-            disabled
-            className="flex items-center justify-center gap-2 flex-1 px-4 py-2 rounded bg-green text-white font-semibold tracking-wide"
-          >
-            <span className="uppercase">Sent</span>
-            <img src="/check.svg" alt="Check Icon" className="w-6 h-6" />
-          </button>
-        )}
+        <SendButton
+          onSend={() => {
+            setIsSending(true);
+            addMessageLog();
+          }}
+        />
       </div>
     </div>
   );

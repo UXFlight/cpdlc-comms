@@ -1,14 +1,14 @@
 import { useState, useRef, useContext } from "react";
 import users from "../../../data/users.json";
 import { UserContext } from "../../../context/UserContext";
+import CharacterInput from "../../CharacterInput";
 
 type Props = {
   length?: number;
 };
 
 export default function Logon({ length = 4 }: Props) {
-  const { connectionState, setConnectionState, username, setUsername } =
-    useContext(UserContext);
+  const { connectionState, setConnectionState, isConnectionPossible, username, setUsername } = useContext(UserContext);
   const inputRef = useRef(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,34 +45,19 @@ export default function Logon({ length = 4 }: Props) {
 
   return (
     <div className="container flex items-center justify-between">
-      <h2>Logon to</h2>
+      <h2 className={`${!isConnectionPossible ? "text-white/40" : "text-white"}`}>Logon to</h2>
       <div>
-        <div
-          onClick={() => inputRef.current?.focus()}
-          className="flex items-center gap-2 p-2 border border-[2px] border-white-10 rounded-md bg-[#1e1e1e] cursor-text mr-[155px]"
-        >
-          {Array.from({ length }).map((_, i) => (
-            <div
-              key={i}
-              className="w-4 text-white text-lg font-mono border-b border-medium-gray text-center"
-            >
-              {username[i] ?? "_"}
-            </div>
-          ))}
-          <input
-            ref={inputRef}
-            type="text"
-            value={username}
-            onChange={handleChange}
-            onKeyDown={handleEnter}
-            className="absolute opacity-0 w-0 h-0"
-            autoFocus
-          />
-        </div>
+        <CharacterInput
+          value={username}
+          length={length}
+          disabled={!isConnectionPossible}
+          onChange={(val) => setUsername(val)}
+          onEnter={(val) => validateEntry(val)}
+        />
       </div>
       {!connectionState && (
         <button
-          disabled={!validValue()}
+          disabled={!validValue() && !isConnectionPossible}
           onClick={() => {
             validateEntry(inputRef.current.value)
               ? setConnectionState(true)

@@ -45,12 +45,12 @@ export default function LogsTab() {
             <div
               onClick={() => setCurrentMessage(null)}
               className="flex gap-0 text-white rounded cursor-pointer justify-center items-center"
-              >
+            >
               <img
                 src="/arrow-back.svg"
                 alt="icon"
                 className="w-auto h-[25px]"
-                />
+              />
               <h1>message log</h1>
             </div>
           </div>
@@ -68,7 +68,8 @@ export default function LogsTab() {
   );
 }
 
-{/* <div className="relative w-[130.962px] h-[36px]">
+{
+  /* <div className="relative w-[130.962px] h-[36px]">
 <div className="absolute inset-0 flex items-center gap-2 bg-white-10 text-white px-3 py-2 rounded pointer-events-none">
 <img
   src="/filterBy.svg"
@@ -100,4 +101,5 @@ defaultValue="1"
   TIME OUT
 </option>
 </select>
-</div> */}
+</div> */
+}

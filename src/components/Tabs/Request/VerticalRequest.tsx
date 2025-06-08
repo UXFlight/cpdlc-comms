@@ -4,6 +4,8 @@ import VerticalOption from "./VerticalOption";
 import { RequestContext } from "../../../context/RequestContext";
 import { RequestCategory } from "../../../interfaces/Request";
 import RequestContainer from "./RequestContainer";
+import PositionInput from "./PositionInput";
+import TimeInput from "./TimeInput";
 
 type Props = {
   onClick: () => void;
@@ -122,103 +124,30 @@ export default function VerticalRequests({ onClick, disabled = false }: Props) {
               (selectedMessage.content.includes("CLIMB TO") ||
                 selectedMessage.content.includes("DESCENT TO")) && (
                 <div className="flex flex-col gap-2 pl-4 pt-2">
-                  {/* TIME */}
-                  <label className="flex items-center gap-2 text-white/80 text-sm">
-                    <input
-                      disabled={disabled}
-                      type="checkbox"
-                      checked={selectedExtra === "time"}
-                      onChange={() =>
-                        setSelectedExtra(
-                          selectedExtra === "time" ? null : "time",
-                        )
-                      }
-                      className="w-4 h-4 rounded border border-white/20 bg-[#2B2B2C] checked:bg-white checked:border-white shadow-sm shadow-black/30 cursor-pointer"
-                    />
-                    <span>Time</span>
-                  </label>
-
-                  <div className="flex items-center gap-1">
-                    <input
-                      type="text"
-                      inputMode="numeric"
-                      maxLength={2}
-                      placeholder="HH"
-                      pattern="^([0-1][0-9]|2[0-3])"
-                      value={request.timeSelected?.hh || ""}
-                      onChange={(e) =>
-                        setRequest({
-                          timeSelected: {
-                            hh: e.target.value,
-                            mm: request.timeSelected?.mm || "",
-                          },
-                        })
-                      }
-                      disabled={disabled || selectedExtra !== "time"}
-                      className={`w-[45px] px-2 py-1 rounded border text-center text-sm tracking-widest shadow-sm ${
-                        selectedExtra === "time"
-                          ? "bg-medium-gray border-white/30 text-white"
-                          : "bg-[#1a1a1a] border-white/10 text-white/40"
-                      }`}
-                    />
-                    <span className="text-white/70">:</span>
-                    <input
-                      type="text"
-                      inputMode="numeric"
-                      maxLength={2}
-                      placeholder="MM"
-                      pattern="^([0-5][0-9])"
-                      value={request.timeSelected?.mm || ""}
-                      onChange={(e) =>
-                        setRequest({
-                          timeSelected: {
-                            hh: request.timeSelected?.hh || "",
-                            mm: e.target.value.replace(/\\D/g, "").slice(0, 2),
-                          },
-                        })
-                      }
-                      disabled={disabled || selectedExtra !== "time"}
-                      className={`w-[45px] px-2 py-1 rounded border text-center text-sm tracking-widest shadow-sm ${
-                        selectedExtra === "time"
-                          ? "bg-medium-gray border-white/30 text-white"
-                          : "bg-[#1a1a1a] border-white/10 text-white/40"
-                      }`}
-                    />
-                  </div>
-
-                  {/* POSITION */}
-                  <label className="flex items-center gap-2 text-white/80 text-sm">
-                    <input
-                      disabled={disabled}
-                      type="checkbox"
-                      checked={selectedExtra === "position"}
-                      onChange={() =>
-                        setSelectedExtra(
-                          selectedExtra === "position" ? null : "position",
-                        )
-                      }
-                      className="w-4 h-4 rounded border border-white/20 bg-[#2B2B2C] checked:bg-white checked:border-white shadow-sm shadow-black/30 cursor-pointer"
-                    />
-                    <span>Position</span>
-                  </label>
-                  <input
-                    type="text"
-                    value={request.positionSelected || ""}
-                    onChange={(e) =>
-                      setRequest({
-                        positionSelected: e.target.value
-                          .toUpperCase()
-                          .replace(/[^A-Z0-9]/g, "")
-                          .slice(0, 6),
-                      })
+                  <TimeInput
+                    disabled={disabled}
+                    selected={selectedExtra === "time"}
+                    onToggle={() =>
+                      setSelectedExtra(selectedExtra === "time" ? null : "time")
                     }
-                    placeholder="ABC123"
-                    disabled={disabled || selectedExtra !== "position"}
-                    className={`w-[110px] px-2 py-1 rounded border text-center text-sm tracking-widest shadow-sm ${
-                      selectedExtra === "position"
-                        ? "bg-medium-gray border-white/30 text-white"
-                        : "bg-[#1a1a1a] border-white/10 text-white/40"
-                    }`}
+                    hh={request.timeSelected?.hh || ""}
+                    mm={request.timeSelected?.mm || ""}
+                    onChange={(hh, mm) =>
+                      setRequest({ timeSelected: { hh, mm } })
+                    }
+                  />
+                  <PositionInput
+                    disabled={disabled}
+                    selected={selectedExtra === "position"}
+                    onToggle={() =>
+                      setSelectedExtra(
+                        selectedExtra === "position" ? null : "position",
+                      )
+                    }
+                    value={request.positionSelected || ""}
+                    onChange={(value) =>
+                      setRequest({ positionSelected: value })
+                    }
                   />
                 </div>
               )}

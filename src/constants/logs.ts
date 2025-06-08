@@ -1,6 +1,6 @@
 import { Logs, MessageState } from "../interfaces/MessageState";
 
-export const LogsArray : Logs[] = [
+export const LogsArray: Logs[] = [
   {
     id: "123",
     ref: "UM120",

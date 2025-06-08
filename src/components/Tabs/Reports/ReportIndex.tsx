@@ -8,10 +8,11 @@ export default function ReportIndex() {
     <ReportsContainer
       label="Report Index"
       isOpen={isOpen}
-      setIsOpen={setIsOpen}>
-    <div className={`${isOpen ? "" : "hidden"}`}>
+      setIsOpen={setIsOpen}
+    >
+      <div className={`${isOpen ? "" : "hidden"}`}>
         <p>je sais pas quoi mettre</p>
-    </div>
+      </div>
     </ReportsContainer>
   );
 }

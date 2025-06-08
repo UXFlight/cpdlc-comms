@@ -9,7 +9,7 @@ export const MessageState = {
 export type Logs = {
   id: string;
   ref: string;
-  state: string; 
+  state: string;
   element: string;
-  intent?: string;   
-}
+  intent?: string;
+};

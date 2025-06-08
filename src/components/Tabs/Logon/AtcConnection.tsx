@@ -2,19 +2,18 @@ import React, { useContext } from "react";
 import { UserContext } from "../../../context/UserContext";
 
 export default function AtcConnection() {
-  const { connectionState } = useContext(UserContext);
+  const { setIsConnectionPossible } = useContext(UserContext);
 
   return (
     <div className="container flex flex-col items-start">
       <h2>Connection</h2>
       <div className="flex items-center justify-between w-full">
         <p className="secondary-text pt-[10px]">ATC Data Link</p>
-        <label className="relative inline-block w-[49px] h-[31px]">
+        <label className="relative inline-block w-[49px] h-[31px] cursor-pointer">
           <input
             type="checkbox"
             className="sr-only peer"
-            checked={connectionState ? true : false}
-            readOnly
+            onChange={(e) => setIsConnectionPossible(e.target.checked)}
           />
           <div className="absolute inset-0 bg-gray-300 peer-checked:bg-green rounded-md transition-colors duration-300"></div>
           <div

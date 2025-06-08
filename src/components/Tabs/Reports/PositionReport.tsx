@@ -33,12 +33,13 @@ export default function PositionReport() {
     <ReportsContainer
       label="Position Report"
       isOpen={isOpen}
-      setIsOpen={setIsOpen}>
-    <div className={`${isOpen ? "" : "hidden"}`}>
-      <ReportSection rows={section1} />
-      <ReportSection rows={section2} />
-      <ReportSection rows={section3} />
-    </div>
+      setIsOpen={setIsOpen}
+    >
+      <div className={`${isOpen ? "" : "hidden"}`}>
+        <ReportSection rows={section1} />
+        <ReportSection rows={section2} />
+        <ReportSection rows={section3} />
+      </div>
     </ReportsContainer>
   );
 }
