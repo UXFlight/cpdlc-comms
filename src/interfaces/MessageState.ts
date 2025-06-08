@@ -5,3 +5,11 @@ export const MessageState = {
   REJECTED: "rejected",
   TIMEOUT: "time out",
 };
+
+export type Logs = {
+  id: string;
+  ref: string;
+  state: string; 
+  element: string;
+  intent?: string;   
+}

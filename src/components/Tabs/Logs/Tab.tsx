@@ -33,39 +33,6 @@ export default function LogsTab() {
               onChange={setValue}
               icon="/fans-button.svg"
             />
-            {/* <div className="relative w-[130.962px] h-[36px]">
-          <div className="absolute inset-0 flex items-center gap-2 bg-white-10 text-white px-3 py-2 rounded pointer-events-none">
-            <img
-              src="/filterBy.svg"
-              alt="icon"
-              className="w-[23.548px] h-[20px]"
-            />
-            <span className="scroll-btn">FILTER BY</span>
-          </div>
-          <select
-            className="absolute inset-0 opacity-0 w-full h-full cursor-pointer"
-            defaultValue="1"
-          >
-            <option className="scroll-btn bg-middle-gray" value="1">
-              NEW
-            </option>
-            <option className="scroll-btn" value="2">
-              OPENED
-            </option>
-            <option className="scroll-btn" value="3">
-              ACCEPTED
-            </option>
-            <option className="scroll-btn" value="4">
-              REJECTED
-            </option>
-            <option className="scroll-btn" value="4">
-              STANDBY
-            </option>
-            <option className="scroll-btn" value="4">
-              TIME OUT
-            </option>
-          </select>
-        </div> */}
           </div>
           <div className="flex-grow overflow-y-auto">
             <MessageContainer messages={LogsArray} />
@@ -78,12 +45,12 @@ export default function LogsTab() {
             <div
               onClick={() => setCurrentMessage(null)}
               className="flex gap-0 text-white rounded cursor-pointer justify-center items-center"
-            >
+              >
               <img
                 src="/arrow-back.svg"
                 alt="icon"
                 className="w-auto h-[25px]"
-              />
+                />
               <h1>message log</h1>
             </div>
           </div>
@@ -92,7 +59,7 @@ export default function LogsTab() {
               <MessageDisplayTab message={findMessageById(currentMessage)} />
             </div>
             <div className="mt-auto mb-4">
-              <OptionBar />
+              <OptionBar message={findMessageById(currentMessage)} />
             </div>
           </div>
         </div>
@@ -100,3 +67,37 @@ export default function LogsTab() {
     </div>
   );
 }
+
+{/* <div className="relative w-[130.962px] h-[36px]">
+<div className="absolute inset-0 flex items-center gap-2 bg-white-10 text-white px-3 py-2 rounded pointer-events-none">
+<img
+  src="/filterBy.svg"
+  alt="icon"
+  className="w-[23.548px] h-[20px]"
+/>
+<span className="scroll-btn">FILTER BY</span>
+</div>
+<select
+className="absolute inset-0 opacity-0 w-full h-full cursor-pointer"
+defaultValue="1"
+>
+<option className="scroll-btn bg-middle-gray" value="1">
+  NEW
+</option>
+<option className="scroll-btn" value="2">
+  OPENED
+</option>
+<option className="scroll-btn" value="3">
+  ACCEPTED
+</option>
+<option className="scroll-btn" value="4">
+  REJECTED
+</option>
+<option className="scroll-btn" value="4">
+  STANDBY
+</option>
+<option className="scroll-btn" value="4">
+  TIME OUT
+</option>
+</select>
+</div> */}
