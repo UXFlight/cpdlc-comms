@@ -1,4 +1,4 @@
-import { useState, useRef, useContext } from "react";
+import { useState, useRef, useContext, use } from "react";
 import users from "../../../data/users.json";
 import { UserContext } from "../../../context/UserContext";
 import CharacterInput from "../../General/CharacterInput";
@@ -47,7 +47,7 @@ export default function Logon({ length = 4 }: Props) {
         <button
           disabled={!validValue() && !isConnectionPossible}
           onClick={() => {
-            validateEntry(inputRef.current.value)
+            validateEntry(username)
               ? setConnectionState(true)
               : setConnectionState(false);
           }}

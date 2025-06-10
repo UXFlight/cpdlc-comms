@@ -91,6 +91,10 @@
   .emergency-options {
     @apply flex-1 min-w-[100px] flex items-center justify-center h-[45px] py-2 px-2 border border-[2px] border-white/10 rounded-md text-[16px] text-white/80 font-[550] uppercase cursor-pointer;
   }
+
+  .request-element {
+    @apply flex flex-row items-center justify-between  ;
+  }
 }
 
 @keyframes blink {

@@ -15,7 +15,7 @@ type UserContextType = {
 export const UserContext = createContext<UserContextType>({
   connectionState: null,
   setConnectionState: () => {},
-  isConnectionPossible: null,
+  isConnectionPossible: false,
   setIsConnectionPossible: () => {},
   username: "",
   setUsername: () => {},
@@ -25,7 +25,7 @@ export const UserContext = createContext<UserContextType>({
 export const UserProvider = ({ children }) => {
   //provider = sert a injecter des vals dans le contexte
   const [connectionState, setConnectionState] = useState(null);
-  const [isConnectionPossible, setIsConnectionPossible] = useState(null);
+  const [isConnectionPossible, setIsConnectionPossible] = useState(false);
   const [username, setUsername] = useState<string>("");
 
   return (

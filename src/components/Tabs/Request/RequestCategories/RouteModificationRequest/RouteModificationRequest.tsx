@@ -4,6 +4,7 @@ import SelectDropdown from "../../../../General/SelectDropdown";
 import { RequestCategory } from "../../../../../interfaces/Request";
 import RequestContainer from "../../RequestContainer";
 import CustomRadio from "../../../../General/CustomRadio";
+import CharacterInput from "../../../../General/CharacterInput";
 
 const requestTypes = [
   "Request Direct to Position",
@@ -20,11 +21,8 @@ type Props = {
   disabled?: boolean;
 };
 
-export default function RouteModificationRequest({
-  onClick,
-  disabled = false,
-}: Props) {
-  const { request, setRequest } = useContext(RequestContext);
+export default function RouteModificationRequest({ onClick, disabled = false }: { onClick: () => void; disabled?: boolean }) {
+  const { setRequest } = useContext(RequestContext);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedType, setSelectedType] = useState<string>("");
   const [heading, setHeading] = useState("");
@@ -32,6 +30,9 @@ export default function RouteModificationRequest({
   const [direct, setDirect] = useState("");
   const [weather, setWeather] = useState("");
   const [additionalChecked, setAdditionalChecked] = useState(false);
+
+  const directOptions = ["Waypoint A", "Waypoint B", "Fix XYZ"];
+  const weatherOptions = ["Left", "Right", "Avoid"];
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -53,10 +54,10 @@ export default function RouteModificationRequest({
         weather,
         heading,
         track,
-        additionalChecked ? "Due to aircraft performance" : "",
+        additionalChecked ? "Due to aircraft performance" : ""
       ].filter(Boolean),
       messageRef: "RM1",
-      timeStamp: new Date(),
+      timeStamp: new Date()
     });
     onClick();
   };
@@ -71,16 +72,15 @@ export default function RouteModificationRequest({
       onSend={handleSend}
     >
       <div className="flex items-center gap-3">
-        <p
-          className={`w-400 text-white/80 font-open text-[14px] font-normal leading-[18px] uppercase mt-3 ${isOpen ? "hidden" : "block"}`}
-        >
+        <p className={`w-400 text-white/80 font-open text-[14px] font-normal leading-[18px] uppercase mt-3 ${isOpen ? "hidden" : "block"}`}>
           To request heading, track, direct-to or weather deviation
         </p>
       </div>
 
       <div className={`flex items-center gap-3 mt-3 ${isOpen ? "" : "hidden"}`}>
         <div className="space-y-3 mt-3 w-full">
-          <div className="flex items-center justify-between">
+          <div className="request-element">
+            <div className="flex items-center gap-2">
             <CustomRadio
               label="Request Direct to Position"
               value="Request Direct to Position"
@@ -92,9 +92,10 @@ export default function RouteModificationRequest({
               value={direct}
               onChange={setDirect}
             />
+            </div>
           </div>
 
-          <div className="flex items-center justify-between">
+          <div className="request-element">
             <CustomRadio
               label="Weather Deviation to Position"
               value="Weather Deviation to Position"
@@ -108,35 +109,35 @@ export default function RouteModificationRequest({
             />
           </div>
 
-          <div className="flex items-center justify-between">
+          <div className="request-element">
             <CustomRadio
               label="Heading"
               value="Heading"
               selected={selectedType}
               onChange={setSelectedType}
             />
-            <input
-              type="text"
+            <CharacterInput
               value={heading}
-              onChange={(e) => setHeading(e.target.value.toUpperCase())}
-              placeholder="FL450"
-              className="bg-medium-gray border border-white-30 text-white rounded px-3 py-1 w-[100px] text-sm tracking-widest text-center"
+              length={5}
+              disabled={disabled || selectedType !== "Heading"}
+              onChange={setHeading}
+              onEnter={() => {}}
             />
           </div>
 
-          <div className="flex items-center justify-between">
+          <div className="request-element">
             <CustomRadio
               label="Ground Track"
               value="Ground Track"
               selected={selectedType}
               onChange={setSelectedType}
             />
-            <input
-              type="text"
+            <CharacterInput
               value={track}
-              onChange={(e) => setTrack(e.target.value.toUpperCase())}
-              placeholder="FL450"
-              className="bg-medium-gray border border-white-30 text-white rounded px-3 py-1 w-[100px] text-sm tracking-widest text-center"
+              length={5}
+              disabled={disabled || selectedType !== "Ground Track"}
+              onChange={setTrack}
+              onEnter={() => {}}
             />
           </div>
 

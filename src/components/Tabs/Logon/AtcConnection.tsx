@@ -13,6 +13,7 @@ export default function AtcConnection() {
           <input
             type="checkbox"
             className="sr-only peer"
+            checked={isConnectionPossible}
             onChange={(e) => setIsConnectionPossible(e.target.checked)}
           />
           <div className="absolute inset-0 bg-gray-300 peer-checked:bg-green rounded-md transition-colors duration-300"></div>
