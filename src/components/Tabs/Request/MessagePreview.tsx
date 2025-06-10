@@ -3,8 +3,7 @@ import { RequestContext } from "../../../context/RequestContext";
 import DownLinks from "../../../data/DownLinks.json";
 import { LogsArray } from "../../../constants/logs";
 import { MessageState } from "../../../interfaces/MessageState";
-import { time } from "console";
-import SendButton from "../../SendButton";
+import SendButton from "../../../components/General/SendButton";
 
 export default function MessagePreview() {
   const { request } = useContext(RequestContext);

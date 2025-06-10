@@ -1,5 +1,5 @@
 import { useState } from "react";
-import SelectDropdown from "../../SelectDropdown";
+import SelectDropdown from "../../General/SelectDropdown";
 import Input from "./Input";
 import OptionBar from "./OptionBar";
 

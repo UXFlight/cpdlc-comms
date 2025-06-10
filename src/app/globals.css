@@ -27,7 +27,7 @@
 
 @layer base {
   * {
-    @apply box-border;
+    @apply box-border;  
   }
 
   ::selection {

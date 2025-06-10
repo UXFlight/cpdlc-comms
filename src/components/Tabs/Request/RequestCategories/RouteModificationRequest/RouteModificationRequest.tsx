@@ -1,8 +1,9 @@
 import { useContext, useState } from "react";
-import { RequestContext } from "../../../context/RequestContext";
-import SelectDropdown from "../../SelectDropdown";
-import { RequestCategory } from "../../../interfaces/Request";
-import RequestContainer from "./RequestContainer";
+import { RequestContext } from "../../../../../context/RequestContext";
+import SelectDropdown from "../../../../General/SelectDropdown";
+import { RequestCategory } from "../../../../../interfaces/Request";
+import RequestContainer from "../../RequestContainer";
+import CustomRadio from "../../../../General/CustomRadio";
 
 const requestTypes = [
   "Request Direct to Position",
@@ -18,35 +19,6 @@ type Props = {
   onClick: () => void;
   disabled?: boolean;
 };
-
-function CustomRadio({
-  label,
-  value,
-  selected,
-  onChange,
-}: {
-  label: string;
-  value: string;
-  selected: string;
-  onChange: (val: string) => void;
-}) {
-  const isChecked = value === selected;
-  return (
-    <div
-      className="flex items-center gap-2 cursor-pointer select-none"
-      onClick={() => onChange(value)}
-    >
-      <span
-        className={`w-4 h-4 rounded-full border flex items-center justify-center transition-all duration-150 ${
-          isChecked ? "border-white" : "border-white/10"
-        }`}
-      >
-        {isChecked && <div className="w-2 h-2 bg-dark-blue rounded-full" />}
-      </span>
-      <span className="text-white/80 text-sm">{label}</span>
-    </div>
-  );
-}
 
 export default function RouteModificationRequest({
   onClick,

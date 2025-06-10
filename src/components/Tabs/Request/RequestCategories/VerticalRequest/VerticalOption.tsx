@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
-import { RequestContext } from "../../../context/RequestContext";
-import DownLinks from "../../../data/DownLinks.json";
+import { RequestContext } from "../../../../../context/RequestContext";
+import CustomRadio from "../../../../General/CustomRadio";
 
 type Props = {
   message: { ref: string; content: string; nbOfInputs: number };
@@ -18,7 +18,7 @@ export default function VerticalOption({
   onUpdateArguments,
 }: Props) {
   const [inputValues, setInputValues] = useState<string[]>([]);
-  const { request, setRequest } = useContext(RequestContext);
+  const { setRequest } = useContext(RequestContext);
   const parts = message.content.split(/\[level\]/g);
   const levelCount = message.content.match(/\[level\]/g)?.length || 0;
 
@@ -28,42 +28,36 @@ export default function VerticalOption({
 
   const handleChange = (index: number, value: string) => {
     const newValues = [...inputValues];
-    newValues[index] = value
-      .toUpperCase()
-      .replace(/[^A-Z0-9]/g, "")
-      .slice(0, 5);
+    newValues[index] = value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 5);
     setInputValues(newValues);
     onUpdateArguments(newValues);
     identifyRef(newValues);
   };
 
   const identifyRef = (values: string[] = inputValues) => {
-    if (message.ref === null) {
-      return null;
-    }
-
+    if (!message.ref) return;
     setRequest({
       arguments: values,
       messageRef: message.ref,
       timeStamp: new Date(),
     });
-    console.log(request.arguments, request.messageRef, request.timeStamp);
   };
 
   return (
     <div
+      className={`flex items-center gap-2 flex-wrap px-3 py-2 rounded cursor-pointer transition
+        ${isActive ? "bg-white/10 text-white" : "hover:bg-white/5 text-white/80 hover:shadow-sm hover:shadow-black/30"}`}
       onClick={!disabled ? onSelect : undefined}
-      className={`flex items-center gap-1 flex-wrap px-3 py-1 rounded cursor-pointer transition
-        ${isActive ? "bg-white-10 text-white" : "hover:bg-white-5 text-white/80 hover:shadow-sm hover:shadow-black/30"}`}
     >
-      <input
-        disabled={disabled}
-        type="checkbox"
-        checked={isActive}
-        readOnly
-        className="cursor-pointer checked:bg-dark-blue-10"
-        onChange={() => identifyRef()}
+      <CustomRadio
+        label={""}
+        value={message.ref}
+        selected={isActive ? message.ref : ""}
+        onChange={() => {
+          if (!isActive) onSelect();
+        }}
       />
+
       {parts.map((text, i) => (
         <span key={i} className="flex items-center gap-1">
           {text}
@@ -73,10 +67,8 @@ export default function VerticalOption({
                 disabled={disabled}
                 type="text"
                 value={inputValues[i]}
-                onChange={(e) => {
-                  handleChange(i, e.target.value);
-                }}
-                className="w-[60px] px-1 py-1 bg-medium-gray rounded border border-white-30 text-white rounded text-center uppercase text-sm tracking-widest"
+                onChange={(e) => handleChange(i, e.target.value)}
+                className="w-[60px] px-1 py-1 bg-medium-gray rounded border border-white/30 text-white text-center uppercase text-sm tracking-widest"
                 placeholder="FLxxx"
               />
             ) : (

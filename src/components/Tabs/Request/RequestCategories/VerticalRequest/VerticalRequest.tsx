@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
-import { VerticalOptionsArray } from "../../../constants/messages";
+import { VerticalOptionsArray } from "../../../../../constants/messages";
 import VerticalOption from "./VerticalOption";
-import { RequestContext } from "../../../context/RequestContext";
-import { RequestCategory } from "../../../interfaces/Request";
-import RequestContainer from "./RequestContainer";
+import { RequestContext } from "../../../../../context/RequestContext";
+import { RequestCategory } from "../../../../../interfaces/Request";
+import RequestContainer from "./../../RequestContainer";
 import PositionInput from "./PositionInput";
 import TimeInput from "./TimeInput";
 

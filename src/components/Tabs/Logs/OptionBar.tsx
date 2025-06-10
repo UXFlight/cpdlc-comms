@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Logs } from "../../../interfaces/MessageState";
-import SendButton from "../../SendButton";
+import SendButton from "../../General/SendButton";
 
 export default function OptionBar({ message }: { message: Logs }) {
   const [option, setOption] = useState<string | null>(null);

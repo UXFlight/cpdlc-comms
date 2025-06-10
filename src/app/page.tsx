@@ -18,7 +18,7 @@ export default function CpdlcMainView() {
     console.log(`${activeTab}`);
   });
 
-  const [activeTab, setActiveTab] = useState("logon"); // default logon, switch for easier dev
+  const [activeTab, setActiveTab] = useState("request"); // default logon, switch for easier dev
 
   const TAB_COMPONENTS: Record<string, JSX.Element> = {
     logon: <LogonTab />,
@@ -45,12 +45,12 @@ export default function CpdlcMainView() {
           </div>
 
           {/* contenu de l'onglet */}
-          <div className="overflow-auto mb-4 h-full">
+          <div className="overflow-auto">
             {TAB_COMPONENTS[activeTab]}
           </div>
 
           {/* footer en bas */}
-          <div className="self-end">
+          <div className="self-end mt-2">
             <ConnectionBar />
           </div>
         </div>

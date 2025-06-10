@@ -3,7 +3,7 @@ import { MessageContext } from "../../../context/MessageContext";
 import { useContext, useState } from "react";
 import MessageDisplayTab from "./MessageDisplayTab";
 import OptionBar from "./OptionBar";
-import SelectDropdown from "../../SelectDropdown";
+import SelectDropdown from "../../General/SelectDropdown";
 import { LogsArray } from "../../../constants/logs";
 
 export default function LogsTab() {

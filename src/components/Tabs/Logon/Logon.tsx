@@ -1,7 +1,7 @@
 import { useState, useRef, useContext } from "react";
 import users from "../../../data/users.json";
 import { UserContext } from "../../../context/UserContext";
-import CharacterInput from "../../CharacterInput";
+import CharacterInput from "../../General/CharacterInput";
 
 type Props = {
   length?: number;

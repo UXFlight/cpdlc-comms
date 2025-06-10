@@ -3,7 +3,7 @@ import AtcConnection from "./AtcConnection";
 import Logon from "./Logon";
 import Connection from "./Connection";
 import { UserContext } from "../../../context/UserContext";
-import SelectDropdown from "../../SelectDropdown";
+import SelectDropdown from "../../General/SelectDropdown";
 
 export default function LogonTab() {
   const [value, setValue] = useState("FANS 1/A");

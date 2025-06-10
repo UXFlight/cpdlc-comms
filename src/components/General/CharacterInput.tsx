@@ -1,6 +1,6 @@
 // components/HiddenCharacterInput.tsx
 import { useContext, useEffect, useRef, useState } from "react";
-import { UserContext } from "../context/UserContext";
+import { UserContext } from "../../context/UserContext";
 
 type Props = {
   value: string;
