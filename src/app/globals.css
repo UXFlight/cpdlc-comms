@@ -93,7 +93,11 @@
   }
 
   .request-element {
-    @apply flex flex-row items-center justify-between  ;
+    @apply flex items-center justify-between gap-2;
+  }
+
+  .inner-request-element {
+    @apply flex flex-row justify-between items-center w-full;
   }
 }
 

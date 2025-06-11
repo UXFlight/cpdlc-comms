@@ -47,10 +47,10 @@ export default function CharacterInput({
   }, [targetInput])
 
   return (
-  <div className="flex flex-col">
+  <div className="flex w-[150px]">
     <div
       onClick={() => inputRef.current?.focus()}
-      className={`flex items-center gap-1 p-1 border border-[2px] rounded-md cursor-text mr-[155px] transition-all
+      className={`flex items-center gap-1 p-1 border border-[2px] rounded-md cursor-text transition-all
         ${disabled ? "bg-[#2b2b2b] border-white/15 opacity-50 cursor-not-allowed" : "bg-[#1e1e1e] border-white-10"}
       `}
     >

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import RequestContainer from "../../RequestContainer";
 import CustomRadio from "../../../../General/CustomRadio";
-import ExtraCheckboxes from "../../ExtraCheckBoxes";
+import ExtraCheckboxes from "../../AdditionalMessages";
+import { ADDITIONAL_MESSAGES } from "../../../../../constants/additionalMessages";
 
 type Props = {
   onClick: () => void;
@@ -52,7 +53,7 @@ export function OffsetRequest({
             />
           </div>
         </div>
-        <ExtraCheckboxes selected={extras} onChange={toggleExtra} />
+        <ExtraCheckboxes extraMessages={ADDITIONAL_MESSAGES.offset_req} selected={extras} onChange={toggleExtra} />
       </div>
     </RequestContainer>
   );

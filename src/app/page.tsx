@@ -15,10 +15,6 @@ import ConnectionBar from "../components/ConnectionBar/ConnectionBar";
 import { InputProvider } from "../context/InputContext";
 
 export default function CpdlcMainView() {
-  useEffect(() => {
-    console.log(`${activeTab}`);
-  });
-
   const [activeTab, setActiveTab] = useState("request"); // default logon, switch for easier dev
 
   const TAB_COMPONENTS: Record<string, JSX.Element> = {

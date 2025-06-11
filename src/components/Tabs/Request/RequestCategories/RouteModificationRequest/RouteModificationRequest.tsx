@@ -6,6 +6,8 @@ import RequestContainer from "../../RequestContainer";
 import CustomRadio from "../../../../General/CustomRadio";
 import CharacterInput from "../../../../General/CharacterInput";
 import { InputContext } from "../../../../../context/InputContext";
+import ExtraCheckboxes from "../../AdditionalMessages";
+import { ADDITIONAL_MESSAGES } from "../../../../../constants/additionalMessages";
 
 const directOptions = ["Waypoint A", "Waypoint B", "Fix XYZ"];
 const weatherOptions = ["Left", "Right", "Avoid"];
@@ -27,6 +29,11 @@ export default function RouteModificationRequest({
   const [direct, setDirect] = useState("");
   const [weather, setWeather] = useState("");
   const [additionalChecked, setAdditionalChecked] = useState(false);
+  const [extras, setExtras] = useState<string[]>([]);
+
+  const toggleExtra = (val: string) => {
+    setExtras(prev => prev.includes(val) ? prev.filter(m => m !== val) : [...prev, val]);
+  };
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -75,8 +82,8 @@ export default function RouteModificationRequest({
         </p>
       </div>
 
-      <div className={`flex items-center gap-3 mt-3 ${isOpen ? "" : "hidden"}`}>
-        <div className="space-y-3 mt-3 w-full">
+      <div className={`flex items-center gap-3 ${isOpen ? "" : "hidden"}`}>
+        <div className="gap-1 mt-3 w-full">
           {/* Direct to */}
           <div className="request-element">
             <CustomRadio
@@ -84,7 +91,7 @@ export default function RouteModificationRequest({
               selected={selectedType}
               onChange={setSelectedType}
               label={
-                <div className="flex items-center gap-3">
+                <div className="inner-request-element">
                   <p className="whitespace-nowrap">Request Direct to Position</p>
                   <SelectDropdown
                     options={directOptions}
@@ -103,7 +110,7 @@ export default function RouteModificationRequest({
               selected={selectedType}
               onChange={setSelectedType}
               label={
-                <div className="flex items-center gap-3">
+                <div className="inner-request-element">
                   <p className="whitespace-nowrap">Weather Deviation to Position</p>
                   <SelectDropdown
                     options={weatherOptions}
@@ -125,7 +132,7 @@ export default function RouteModificationRequest({
                 setTargetInput((prev) => !prev);
               }}
               label={
-                <div className="flex items-center gap-3">
+                <div className="inner-request-element">
                   <p className="whitespace-nowrap">Heading</p>
                   <CharacterInput
                     value={heading}
@@ -149,7 +156,7 @@ export default function RouteModificationRequest({
                 setTargetInput((prev) => !prev);
               }}
               label={
-                <div className="flex items-center gap-3">
+                <div className="inner-request-element">
                   <p className="whitespace-nowrap">Ground Track</p>
                   <CharacterInput
                     value={track}
@@ -162,22 +169,7 @@ export default function RouteModificationRequest({
               }
             />
           </div>
-
-          {/* Additional Checkbox */}
-          <div className="flex flex-col text-white/80 text-sm">
-            <p className="mb-1">Additional Message:</p>
-            <label className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                checked={additionalChecked}
-                onChange={() => setAdditionalChecked(!additionalChecked)}
-                className="w-4 h-4 rounded border border-white/10 bg-[#2B2B2C] checked:bg-white checked:border-white shadow-sm shadow-black/30 cursor-pointer"
-              />
-              <span className="text-white font-semibold">
-                Due to aircraft performance
-              </span>
-            </label>
-          </div>
+          <ExtraCheckboxes extraMessages={ADDITIONAL_MESSAGES.route_modification_req} selected={extras} onChange={toggleExtra} />
         </div>
       </div>
     </RequestContainer>

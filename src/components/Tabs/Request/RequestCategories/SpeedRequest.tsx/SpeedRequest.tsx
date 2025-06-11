@@ -1,6 +1,7 @@
 import { useState } from "react";
 import RequestContainer from "../../RequestContainer";
-import ExtraCheckboxes from "../../ExtraCheckBoxes";
+import ExtraCheckboxes from "../../AdditionalMessages";
+import { ADDITIONAL_MESSAGES } from "../../../../../constants/additionalMessages";
 
 
 export function SpeedRequest({ onClick, disabled = false }: { onClick: () => void; disabled?: boolean }) {
@@ -36,7 +37,7 @@ export function SpeedRequest({ onClick, disabled = false }: { onClick: () => voi
             className="px-2 py-1 bg-white/10 rounded text-white text-center w-[90px]"
           />
         </div>
-        <ExtraCheckboxes selected={extras} onChange={toggleExtra} />
+        <ExtraCheckboxes extraMessages={ADDITIONAL_MESSAGES.speed_req} selected={extras} onChange={toggleExtra} />
       </div>
     </RequestContainer>
   );
