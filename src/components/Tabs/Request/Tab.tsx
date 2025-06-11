@@ -38,7 +38,10 @@ export default function RequestTab() {
           />
         </div>
         <div className="flex flex-col gap-4 disable">
-          <SpeedRequest/>
+          <SpeedRequest
+            disabled={preview}
+            onClick={() => setPreview(true)}
+          />
         </div>
         <div className="flex flex-col gap-4 disable">
           <WhenCanWeRequest

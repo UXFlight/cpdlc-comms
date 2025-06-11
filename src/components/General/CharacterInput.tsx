@@ -1,6 +1,7 @@
 // components/HiddenCharacterInput.tsx
 import { useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "../../context/UserContext";
+import { InputContext } from "../../context/InputContext";
 
 type Props = {
   value: string;
@@ -19,6 +20,7 @@ export default function CharacterInput({
 }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
   const {isConnectionPossible} = useContext(UserContext);
+  const {targetInput} = useContext(InputContext);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const raw = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "");
@@ -39,6 +41,10 @@ export default function CharacterInput({
       onChange("");
     }
   }, [isConnectionPossible])
+
+    useEffect(() => {
+      inputRef.current.focus();
+  }, [targetInput])
 
   return (
   <div className="flex flex-col">

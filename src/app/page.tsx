@@ -12,13 +12,14 @@ import PrintTab from "../components/Tabs/Print/Tab";
 import FmsTable from "../components/Fms/FmsTable";
 import ResponsiveBar from "../components/ResponsiveBar/ResponsiveBar";
 import ConnectionBar from "../components/ConnectionBar/ConnectionBar";
+import { InputProvider } from "../context/InputContext";
 
 export default function CpdlcMainView() {
   useEffect(() => {
     console.log(`${activeTab}`);
   });
 
-  const [activeTab, setActiveTab] = useState("logon"); // default logon, switch for easier dev
+  const [activeTab, setActiveTab] = useState("request"); // default logon, switch for easier dev
 
   const TAB_COMPONENTS: Record<string, JSX.Element> = {
     logon: <LogonTab />,
@@ -46,7 +47,9 @@ export default function CpdlcMainView() {
 
           {/* contenu de l'onglet */}
           <div className="overflow-auto">
+            <InputProvider>
             {TAB_COMPONENTS[activeTab]}
+            </InputProvider>
           </div>
 
           {/* footer en bas */}

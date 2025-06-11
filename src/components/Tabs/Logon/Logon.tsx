@@ -9,7 +9,6 @@ type Props = {
 
 export default function Logon({ length = 4 }: Props) {
   const { connectionState, setConnectionState, isConnectionPossible, username, setUsername } = useContext(UserContext);
-  const inputRef = useRef(null);
 
   const validValue = () => {
     return username.length === length;

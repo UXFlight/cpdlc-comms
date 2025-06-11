@@ -1,7 +1,7 @@
 import { useState } from "react";
 import RequestContainer from "../../RequestContainer";
 import CustomRadio from "../../../../General/CustomRadio";
-import ExtraCheckboxes from "./ExtraCheckBoxes";
+import ExtraCheckboxes from "../../ExtraCheckBoxes";
 
 type Props = {
   onClick: () => void;

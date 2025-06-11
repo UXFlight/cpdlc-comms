@@ -44,20 +44,15 @@ export default function VerticalOption({
   };
 
   return (
-    <div
-      className={`flex items-center gap-2 flex-wrap px-3 py-2 rounded cursor-pointer transition
-        ${isActive ? "bg-white/10 text-white" : "hover:bg-white/5 text-white/80 hover:shadow-sm hover:shadow-black/30"}`}
-      onClick={!disabled ? onSelect : undefined}
-    >
-      <CustomRadio
-        label={""}
-        value={message.ref}
-        selected={isActive ? message.ref : ""}
-        onChange={() => {
-          if (!isActive) onSelect();
-        }}
-      />
-
+  <div onClick={!disabled ? onSelect : undefined}>
+  <CustomRadio
+  value={message.ref}
+  selected={isActive ? message.ref : ""}
+  onChange={() => {
+    if (!isActive) onSelect();
+  }}
+  label={
+    <div className="flex flex-wrap items-center gap-1">
       {parts.map((text, i) => (
         <span key={i} className="flex items-center gap-1">
           {text}
@@ -76,6 +71,10 @@ export default function VerticalOption({
             ))}
         </span>
       ))}
+    </div>
+  }
+/>
+
     </div>
   );
 }

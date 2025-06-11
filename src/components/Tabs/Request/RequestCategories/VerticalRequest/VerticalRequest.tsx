@@ -74,7 +74,7 @@ export default function VerticalRequests({ onClick, disabled = false }: Props) {
 
   return (
     <RequestContainer
-      requestType={RequestCategory.VERTICAL}
+      requestType={RequestCategory.ALTITUDE}
       isOpen={isOpen}
       onToggle={handleClick}
       disabled={disabled}
@@ -86,23 +86,19 @@ export default function VerticalRequests({ onClick, disabled = false }: Props) {
         defineMessageRef(selectedMessage);
       }}
     >
-      <div className="flex items-center gap-3 mt-3">
         <div className="flex flex-row items-center gap-1.5">
           <p
             className={`text-white/80 font-open ${isOpen ? "text-[16px]" : "text-[14px]"} font-normal leading-[18px] uppercase min-w-[60px]`}
           >
-            request
+            Altitude (or Block Altitude)
           </p>
-          <p
-            className={`w-400 text-white/80 font-open text-[14px] font-normal leading-[18px] uppercase ${isOpen ? "hidden" : ""}`}
-          >
-            to climb, descend, or change flight level
-          </p>
+          
         </div>
 
+      <div className={`flex items-center gap-3 mt-3 ${isOpen ? "" : "hidden"}`}>
         <div className="flex flex-row w-full">
           <div
-            className={`flex flex-col items-start gap-2 overflow-hidden transition-[max-height] duration-300 ease-in-out ${
+            className={`flex flex-col items-start gap-1 overflow-hidden transition-[max-height] duration-300 ease-in-out ${
               isOpen ? "max-h-[1000px]" : "max-h-0"
             }`}
           >

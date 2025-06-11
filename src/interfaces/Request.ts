@@ -8,7 +8,7 @@ export type RequestState = {
 };
 
 export enum RequestCategory {
-  VERTICAL = "Vertical Requests",
+  ALTITUDE = "Altitude Requests",
   ROUTE_MODIFICATION = "Route Modification Requests",
   LATERAL = "Lateral Requests",
   SPEED = "Speed Requests",

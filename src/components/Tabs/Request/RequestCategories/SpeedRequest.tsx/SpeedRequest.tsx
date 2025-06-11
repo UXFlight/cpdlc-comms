@@ -1,9 +1,9 @@
 import { useState } from "react";
 import RequestContainer from "../../RequestContainer";
-import ExtraCheckboxes from "../OffsetRequest/ExtraCheckBoxes";
+import ExtraCheckboxes from "../../ExtraCheckBoxes";
 
 
-export function SpeedRequest() {
+export function SpeedRequest({ onClick, disabled = false }: { onClick: () => void; disabled?: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
   const [range, setRange] = useState({ from: "FL350", to: "FL450" });
   const [extras, setExtras] = useState<string[]>([]);
