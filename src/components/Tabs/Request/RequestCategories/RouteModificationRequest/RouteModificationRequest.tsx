@@ -9,7 +9,7 @@ import { InputContext } from "../../../../../context/InputContext";
 import ExtraCheckboxes from "../../AdditionalMessages";
 import { ADDITIONAL_MESSAGES } from "../../../../../constants/additionalMessages";
 
-const directOptions = ["None", "Waypoint A", "Waypoint B", "Fix XYZ"];
+const directOptions = ["Waypoint A", "Waypoint B", "Fix XYZ"];
 const weatherOptions = ["Left", "Right", "Avoid"];
 
 export default function RouteModificationRequest({
@@ -110,7 +110,6 @@ export default function RouteModificationRequest({
 
       <div className={`flex items-center gap-3 ${isOpen ? "" : "hidden"}`}>
         <div className="gap-1 mt-3 w-full">
-          {/* Direct to */}
           <div className="request-element">
             <CustomRadio
               value="Request Direct to Position"
@@ -131,8 +130,6 @@ export default function RouteModificationRequest({
               }
             />
           </div>
-
-          {/* Weather */}
           <div className="request-element">
             <CustomRadio
               value="Weather Deviation to Position"
@@ -153,8 +150,6 @@ export default function RouteModificationRequest({
               }
             />
           </div>
-
-          {/* Heading */}
           <div className="request-element">
             <CustomRadio
               value="Heading"
@@ -170,6 +165,7 @@ export default function RouteModificationRequest({
                   <CharacterInput
                     value={heading}
                     length={5}
+                    style="mr-[83px]"
                     disabled={disabled || selectedType !== "Heading"}
                     onChange={setHeading}
                   />
@@ -177,8 +173,6 @@ export default function RouteModificationRequest({
               }
             />
           </div>
-
-          {/* Ground Track */}
           <div className="request-element">
             <CustomRadio
               value="Ground Track"
@@ -194,6 +188,7 @@ export default function RouteModificationRequest({
                   <CharacterInput
                     value={track}
                     length={5}
+                    style="mr-[83px]"
                     disabled={disabled || selectedType !== "Ground Track"}
                     onChange={setTrack}
                   />

@@ -24,7 +24,7 @@ export default function PositionInput({
           onChange={onToggle}
           className="w-4 h-4 rounded border border-white/20 bg-[#2B2B2C] checked:bg-white checked:border-white shadow-sm shadow-black/30 cursor-pointer"
         />
-        <span>Position</span>
+        <span className="text-[14px] text-white-80">Position</span>
       </label>
       <input
         type="text"

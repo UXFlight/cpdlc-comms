@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { RequestProvider } from "../../../context/RequestContext";
 import MessagePreview from "./MessagePreview";
-import VerticalRequests from "./RequestCategories/VerticalRequest/VerticalRequest";
 import RouteModificationRequest from "./RequestCategories/RouteModificationRequest/RouteModificationRequest";
 import { OffsetRequest } from "./RequestCategories/OffsetRequest/OffsetRequest";
 import { SpeedRequest } from "./RequestCategories/SpeedRequest.tsx/SpeedRequest";
@@ -10,6 +9,7 @@ import { ClearanceRequest } from "./RequestCategories/ClearanceRequest/Clearance
 import { VmcDescentRequest } from "./RequestCategories/VmcDescentRequest/VmcDescentRequest";
 import { VoiceContactRequest } from "./RequestCategories/VoiceContactRequest/VoiceContactRequest";
 import { FreeTextRequest } from "./RequestCategories/FreeTextRequest/FreeTextRequest";
+import AltitudeRequest from "./RequestCategories/AltitudeRequest/AltitudeRequest";
 
 export default function RequestTab() {
   const [preview, setPreview] = useState(false);
@@ -20,7 +20,7 @@ export default function RequestTab() {
           <h1>request</h1>
         </div>
         <div className="flex flex-col gap-4 disable">
-          <VerticalRequests
+          <AltitudeRequest
             disabled={preview}
             onClick={() => setPreview(true)}
           />

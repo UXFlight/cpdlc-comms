@@ -28,7 +28,7 @@ export default function TimeInput({
           onChange={onToggle}
           className="w-4 h-4 rounded border border-white/20 bg-[#2B2B2C] checked:bg-white checked:border-white shadow-sm shadow-black/30 cursor-pointer"
         />
-        <span>Time</span>
+        <span className="text-[14px] text-white-80">Time</span>
       </label>
       <div className="flex items-center gap-1">
         <input

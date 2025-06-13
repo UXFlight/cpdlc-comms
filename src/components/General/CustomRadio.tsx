@@ -9,7 +9,7 @@ export default function CustomRadio({ label, value, selected, onChange }: RadioP
   const isChecked = value === selected;
 
   const handleClick = () => {
-    onChange(isChecked ? null : value);
+    onChange(value);
   };
 
   return (
