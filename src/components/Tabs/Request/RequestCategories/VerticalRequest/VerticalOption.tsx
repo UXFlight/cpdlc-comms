@@ -27,6 +27,7 @@ export default function VerticalOption({
   }
 
   const handleChange = (index: number, value: string) => {
+    console.log("handleChange", index, value);
     const newValues = [...inputValues];
     newValues[index] = value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 5);
     setInputValues(newValues);

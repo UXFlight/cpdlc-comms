@@ -27,28 +27,19 @@ export default function MessagePreview() {
     if (!DMessage) return "";
 
     let result = DMessage.Message_Element;
+    let argIndex = 0;
 
-    let levelIndex = 0;
-    result = result.replace(/\[level\]/g, () => {
-      if (request.arguments && levelIndex < request.arguments.length) {
-        return request.arguments[levelIndex++];
+    // Remplacer tous les blocs [ ... ] dans l'ordre
+    result = result.replace(/\[.*?\]/g, () => {
+      if (request.arguments && argIndex < request.arguments.length) {
+        return request.arguments[argIndex++];
       }
-      return "[level]";
-    });
-
-    result = result.replace(/\[time\]/g, () => {
-      if (request.timeSelected?.hh && request.timeSelected?.mm) {
-        return `${request.timeSelected.hh}:${request.timeSelected.mm}`;
-      }
-      return "[time]";
-    });
-
-    result = result.replace(/\[position\]/g, () => {
-      return request.positionSelected || "[position]";
+      return "[missing]";
     });
 
     return result.trim();
   };
+
 
   const addMessageLog = () => {
     LogsArray.push({

@@ -8,7 +8,6 @@ type Props = {
   length: number;
   disabled?: boolean;
   onChange: (value: string) => void;
-  onEnter: (value: string) => void;
 };
 
 export default function CharacterInput({
@@ -16,29 +15,30 @@ export default function CharacterInput({
   length,
   disabled = false,
   onChange,
-  onEnter,
 }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
   const {isConnectionPossible} = useContext(UserContext);
   const {targetInput} = useContext(InputContext);
+  const [inputValues, setInputValues] = useState<string[]>([]);
 
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  /*const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const raw = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "");
     onChange(raw.slice(0, length));
-  };
+  };*/
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      onEnter(inputRef.current?.value ?? "");
-    }
-  };
+ const handleChange = (value: string) => {
+  const clean = value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, length);
+  const characters = clean.split("");
+  setInputValues(characters);
+  onChange(clean); 
+};
+
 
   useEffect(() => {
     if (isConnectionPossible) {
       inputRef.current.focus();
     } else {
-      onChange("");
+      handleChange("");
     }
   }, [isConnectionPossible])
 
@@ -78,8 +78,7 @@ export default function CharacterInput({
         type="text"
         value={value}
         disabled={disabled}
-        onChange={handleInput}
-        onKeyDown={handleKeyDown}
+        onChange={e => handleChange(e.target.value)}
         className="absolute opacity-0 w-0 h-0"
         autoFocus
       />

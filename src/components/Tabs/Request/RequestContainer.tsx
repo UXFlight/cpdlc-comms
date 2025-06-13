@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect } from "react";
+import { RequestContext } from "../../../context/RequestContext";
 
 type Props = {
   requestType: string;
@@ -19,6 +20,15 @@ export default function RequestContainer({
   onSend,
   children,
 }: Props) {
+
+  const {resetRequest} = useContext(RequestContext);
+
+  useEffect(() => {
+    if (!isOpen) {
+      resetRequest();
+    }
+  }, [isOpen])
+  
   return (
     <div className="container flex flex-col items-start py-4 px-[15.5px] overflow-x-hidden relative">
       {/* Header */}

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { use, useContext, useEffect, useState } from "react";
 import { RequestContext } from "../../../../../context/RequestContext";
 import SelectDropdown from "../../../../General/SelectDropdown";
 import { RequestCategory } from "../../../../../interfaces/Request";
@@ -9,7 +9,7 @@ import { InputContext } from "../../../../../context/InputContext";
 import ExtraCheckboxes from "../../AdditionalMessages";
 import { ADDITIONAL_MESSAGES } from "../../../../../constants/additionalMessages";
 
-const directOptions = ["Waypoint A", "Waypoint B", "Fix XYZ"];
+const directOptions = ["None", "Waypoint A", "Waypoint B", "Fix XYZ"];
 const weatherOptions = ["Left", "Right", "Avoid"];
 
 export default function RouteModificationRequest({
@@ -20,14 +20,13 @@ export default function RouteModificationRequest({
   disabled?: boolean;
 }) {
   const { setTargetInput } = useContext(InputContext);
-  const { setRequest } = useContext(RequestContext);
-
-  const [isOpen, setIsOpen] = useState(false);
+  const { request, setRequest } = useContext(RequestContext);
   const [selectedType, setSelectedType] = useState<string>("");
+  const [isOpen, setIsOpen] = useState(false);
+  const [direct, setDirect] = useState("Select type");
+  const [weather, setWeather] = useState("Select type");
   const [heading, setHeading] = useState("");
   const [track, setTrack] = useState("");
-  const [direct, setDirect] = useState("");
-  const [weather, setWeather] = useState("");
   const [additionalChecked, setAdditionalChecked] = useState(false);
   const [extras, setExtras] = useState<string[]>([]);
 
@@ -35,33 +34,60 @@ export default function RouteModificationRequest({
     setExtras(prev => prev.includes(val) ? prev.filter(m => m !== val) : [...prev, val]);
   };
 
-  const handleToggle = () => {
-    setIsOpen(!isOpen);
-    if (!isOpen) {
+  const resetAllInputs = () => {
       setSelectedType("");
       setHeading("");
       setTrack("");
       setDirect("");
       setWeather("");
       setAdditionalChecked(false);
+  }
+
+  const handleToggle = () => {
+    setIsOpen(prev => !prev);
+    if (!isOpen) {
+      resetAllInputs();
     }
   };
 
   const handleSend = () => {
+    const value = (() => {
+      switch (selectedType) {
+        case "Request Direct to Position": return direct;
+        case "Weather Deviation to Position": return weather;
+        case "Heading": return heading;
+        case "Ground Track": return track;
+        default: return "";
+      }
+    })();
+
+    if (!value || !request.messageRef) return;
+
+    const clean = value.toUpperCase().replace(/[^A-Z0-9]/g, "");
+
     setRequest({
-      arguments: [
-        selectedType,
-        direct,
-        weather,
-        heading,
-        track,
-        additionalChecked ? "Due to aircraft performance" : "",
-      ].filter(Boolean),
-      messageRef: "RM1",
+      arguments: [clean],
       timeStamp: new Date(),
     });
+    console.log("Request sent:", {
+      value: clean,
+      messageRef: request.messageRef,
+    });
+
     onClick();
   };
+
+  /*const addNewInput = (value: string) => {
+    const newArray = [...request.arguments];
+    newArray.push(value.toUpperCase().replace(/[^A-Z0-9]/g, ""));
+    return newArray;
+  }*/
+
+  const setDm = (value: string) => {
+    setRequest({
+      messageRef: value.toLocaleUpperCase(),
+    })
+  }
 
   return (
     <RequestContainer
@@ -69,7 +95,7 @@ export default function RouteModificationRequest({
       isOpen={isOpen}
       onToggle={handleToggle}
       disabled={disabled}
-      showSendButton={!!selectedType}
+      showSendButton={!!(request.messageRef)}
       onSend={handleSend}
     >
       <div className="flex items-center gap-3">
@@ -88,8 +114,11 @@ export default function RouteModificationRequest({
           <div className="request-element">
             <CustomRadio
               value="Request Direct to Position"
-              selected={selectedType}
-              onChange={setSelectedType}
+              selected={selectedType} // dm22
+              onChange={(value)=> {
+                setSelectedType(value);
+                setDm("dm22");
+              }}
               label={
                 <div className="inner-request-element">
                   <p className="whitespace-nowrap">Request Direct to Position</p>
@@ -107,8 +136,11 @@ export default function RouteModificationRequest({
           <div className="request-element">
             <CustomRadio
               value="Weather Deviation to Position"
-              selected={selectedType}
-              onChange={setSelectedType}
+              selected={selectedType} // dm26
+               onChange={(value)=> {
+                setSelectedType(value)
+                setDm("dm26");
+              }}
               label={
                 <div className="inner-request-element">
                   <p className="whitespace-nowrap">Weather Deviation to Position</p>
@@ -129,6 +161,7 @@ export default function RouteModificationRequest({
               selected={selectedType}
               onChange={(value) => {
                 setSelectedType(value);
+                setDm("dm70");
                 setTargetInput((prev) => !prev);
               }}
               label={
@@ -139,7 +172,6 @@ export default function RouteModificationRequest({
                     length={5}
                     disabled={disabled || selectedType !== "Heading"}
                     onChange={setHeading}
-                    onEnter={() => {}}
                   />
                 </div>
               }
@@ -153,6 +185,7 @@ export default function RouteModificationRequest({
               selected={selectedType}
               onChange={(value) => {
                 setSelectedType(value);
+                setDm("dm71");
                 setTargetInput((prev) => !prev);
               }}
               label={
@@ -163,7 +196,6 @@ export default function RouteModificationRequest({
                     length={5}
                     disabled={disabled || selectedType !== "Ground Track"}
                     onChange={setTrack}
-                    onEnter={() => {}}
                   />
                 </div>
               }
