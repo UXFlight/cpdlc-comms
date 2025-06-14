@@ -4,7 +4,6 @@ export type RequestState = {
   timeSelected?: { hh: string; mm: string } | null;
   positionSelected?: string;
   messageRef: string | null;
-  timeStamp: Date | null;
 };
 
 export enum RequestCategory {

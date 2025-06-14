@@ -13,10 +13,10 @@ const directOptions = ["Waypoint A", "Waypoint B", "Fix XYZ"];
 const weatherOptions = ["Left", "Right", "Avoid"];
 
 export default function RouteModificationRequest({
-  onClick,
+  onSend,
   disabled = false,
 }: {
-  onClick: () => void;
+  onSend: () => void;
   disabled?: boolean;
 }) {
   const { setTargetInput } = useContext(InputContext);
@@ -67,14 +67,13 @@ export default function RouteModificationRequest({
 
     setRequest({
       arguments: [clean],
-      timeStamp: new Date(),
     });
     console.log("Request sent:", {
       value: clean,
       messageRef: request.messageRef,
     });
 
-    onClick();
+    onSend();
   };
 
   /*const addNewInput = (value: string) => {

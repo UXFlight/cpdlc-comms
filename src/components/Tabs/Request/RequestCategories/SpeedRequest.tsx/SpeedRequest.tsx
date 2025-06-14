@@ -4,7 +4,7 @@ import ExtraCheckboxes from "../../AdditionalMessages";
 import { ADDITIONAL_MESSAGES } from "../../../../../constants/additionalMessages";
 
 
-export function SpeedRequest({ onClick, disabled = false }: { onClick: () => void; disabled?: boolean }) {
+export function SpeedRequest({ onSend, disabled = false }: { onSend: () => void; disabled?: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
   const [range, setRange] = useState({ from: "FL350", to: "FL450" });
   const [extras, setExtras] = useState<string[]>([]);

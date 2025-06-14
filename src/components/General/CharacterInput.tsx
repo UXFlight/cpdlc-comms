@@ -8,6 +8,7 @@ type Props = {
   style?: string;
   disabled?: boolean;
   onChange: (value: string) => void;
+  onEnter?: (value: string) => void;
 };
 
 export default function CharacterInput({
@@ -16,6 +17,7 @@ export default function CharacterInput({
   style,
   disabled = false,
   onChange,
+  onEnter,
 }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
   const { isConnectionPossible } = useContext(UserContext);
@@ -27,6 +29,9 @@ export default function CharacterInput({
     const characters = clean.split("");
     setInputValues(characters);
     onChange(clean);
+    if (onEnter) {
+      onEnter(clean);
+    }
   };
 
   useEffect(() => {

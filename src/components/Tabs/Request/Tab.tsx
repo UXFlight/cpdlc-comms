@@ -22,55 +22,55 @@ export default function RequestTab() {
         <div className="flex flex-col gap-4 disable">
           <AltitudeRequest
             disabled={preview}
-            onClick={() => setPreview(true)}
+            onSend={() => setPreview(true)}
           />
         </div>
         <div className="flex flex-col gap-4 disable">
           <RouteModificationRequest
             disabled={preview}
-            onClick={() => setPreview(true)}
+            onSend={() => setPreview(true)}
           />
         </div>
         <div className="flex flex-col gap-4 disable">
           <OffsetRequest
             disabled={preview}
-            onClick={() => setPreview(true)}
+            onSend={() => setPreview(true)}
           />
         </div>
         <div className="flex flex-col gap-4 disable">
           <SpeedRequest
             disabled={preview}
-            onClick={() => setPreview(true)}
+            onSend={() => setPreview(true)}
           />
         </div>
         <div className="flex flex-col gap-4 disable">
           <WhenCanWeRequest
             disabled={preview}
-            onClick={() => setPreview(true)}
+            onSend={() => setPreview(true)}
         />
         </div>
         <div className="flex flex-col gap-4 disable">
           <ClearanceRequest
             disabled={preview}
-            onClick={() => setPreview(true)}
+            onSend={() => setPreview(true)}
         />
         </div>
         <div className="flex flex-col gap-4 disable">
         <VmcDescentRequest
             disabled={preview}
-            onClick={() => setPreview(true)}
+            onSend={() => setPreview(true)}
         />
         </div>
         <div className="flex flex-col gap-4 disable">
         <VoiceContactRequest
             disabled={preview}
-            onClick={() => setPreview(true)}
+            onSend={() => setPreview(true)}
         />
         </div>
         <div className="flex flex-col gap-4 disable">
         <FreeTextRequest
             disabled={preview}
-            onClick={() => setPreview(true)}
+            onSend={() => setPreview(true)}
         />
         </div>
         {preview && (

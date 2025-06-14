@@ -12,7 +12,6 @@ type RequestContextType = {
 const defaultRequest: RequestState = {
   arguments: null,
   messageRef: null,
-  timeStamp: null,
 };
 
 export const RequestContext = createContext<RequestContextType>({

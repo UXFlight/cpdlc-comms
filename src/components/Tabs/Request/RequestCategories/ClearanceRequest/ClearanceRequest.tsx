@@ -2,7 +2,7 @@ import { useState } from "react";
 import CustomRadio from "../../../../General/CustomRadio";
 import RequestContainer from "../../RequestContainer";
 
-export function ClearanceRequest({ onClick, disabled = false }: { onClick: () => void; disabled?: boolean }) {
+export function ClearanceRequest({ onSend, disabled = false }: { onSend: () => void; disabled?: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
@@ -14,7 +14,7 @@ export function ClearanceRequest({ onClick, disabled = false }: { onClick: () =>
       showSendButton={false}
       disabled={disabled}
       onSend={() => {
-        onClick();
+        onSend();
         setIsOpen(false);
       }}
     >

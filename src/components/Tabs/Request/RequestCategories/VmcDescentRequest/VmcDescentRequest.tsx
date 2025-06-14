@@ -1,7 +1,7 @@
 import { useState } from "react";
 import RequestContainer from "../../RequestContainer";
 
-export function VmcDescentRequest({ onClick, disabled = false }: { onClick: () => void; disabled?: boolean }) {
+export function VmcDescentRequest({ onSend, disabled = false }: { onSend: () => void; disabled?: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -12,7 +12,7 @@ export function VmcDescentRequest({ onClick, disabled = false }: { onClick: () =
       showSendButton={false}
       disabled={disabled}
       onSend={() => {
-        onClick();
+        onSend();
         setIsOpen(false);
       }}
     >

@@ -15,7 +15,7 @@ import ConnectionBar from "../components/ConnectionBar/ConnectionBar";
 import { InputProvider } from "../context/InputContext";
 
 export default function CpdlcMainView() {
-  const [activeTab, setActiveTab] = useState("request"); // default logon, switch for easier dev
+  const [activeTab, setActiveTab] = useState("logon"); // default logon, switch for easier dev
 
   const TAB_COMPONENTS: Record<string, JSX.Element> = {
     logon: <LogonTab />,

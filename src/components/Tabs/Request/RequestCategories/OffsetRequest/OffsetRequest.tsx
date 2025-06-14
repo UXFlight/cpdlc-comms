@@ -5,12 +5,12 @@ import ExtraCheckboxes from "../../AdditionalMessages";
 import { ADDITIONAL_MESSAGES } from "../../../../../constants/additionalMessages";
 
 type Props = {
-  onClick: () => void;
+  onSend: () => void;
   disabled?: boolean;
 };
 
 export function OffsetRequest({
-  onClick,
+  onSend,
   disabled = false,
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);

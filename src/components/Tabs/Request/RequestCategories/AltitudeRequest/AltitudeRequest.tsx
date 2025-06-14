@@ -8,10 +8,10 @@ import CharacterInput from "../../../../General/CharacterInput";
 import StepAtInput from "../../../../General/StepAtInput";
 
 export default function AltitudeRequest({
-  onClick,
+  onSend,
   disabled = false,
 }: {
-  onClick: () => void;
+  onSend: () => void;
   disabled?: boolean;
 }) {
   const { setRequest } = useContext(RequestContext);
@@ -70,7 +70,7 @@ export default function AltitudeRequest({
       timeStamp: new Date(),
     });
 
-    onClick();
+    onSend();
   };
 
   return (

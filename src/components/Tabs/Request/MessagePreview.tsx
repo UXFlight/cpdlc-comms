@@ -1,14 +1,16 @@
-import { useContext, useEffect, useState } from "react";
+import { use, useContext, useEffect, useState } from "react";
 import { RequestContext } from "../../../context/RequestContext";
 import DownLinks from "../../../data/DownLinks.json";
 import { LogsArray } from "../../../constants/logs";
 import { MessageState } from "../../../interfaces/MessageState";
 import SendButton from "../../../components/General/SendButton";
+import { MessageService } from "../../../lib/communications/MessageService";
 
 export default function MessagePreview() {
   const { request } = useContext(RequestContext);
   const [isSending, setIsSending] = useState(false);
   const [isSent, setIsSent] = useState(false);
+  const [formattedMessage, setFormattedMessage] = useState("");
 
   useEffect(() => {
     //simule le delai d envoi
@@ -20,7 +22,17 @@ export default function MessagePreview() {
     }
   }, [isSending]);
 
-  const formattedMessage = () => {
+  useEffect(() => {
+     MessageService.getFormattedMessage(request)
+      .then((res) => {
+        setFormattedMessage(res.message);
+      })
+      .catch((error) => {
+        console.error("Error fetching formatted message:", error);
+      });
+  }, []);
+
+  /*const formattedMessage = () => {
     const DMessage = DownLinks.find(
       (msg) => msg.Ref_Num.replace(/\s+/g, "") === request.messageRef,
     );
@@ -38,7 +50,7 @@ export default function MessagePreview() {
     });
 
     return result.trim();
-  };
+  };*/
 
 
   const addMessageLog = () => {
@@ -46,7 +58,7 @@ export default function MessagePreview() {
       id: (Math.random() * 1000000).toFixed(0).toString(),
       ref: request.messageRef,
       state: MessageState.OPENED,
-      element: formattedMessage(),
+      element: formattedMessage,
     });
   };
 
@@ -63,7 +75,7 @@ export default function MessagePreview() {
       </p>
 
       <div className="w-full px-4 py-3 rounded border-2 border-white-10 bg-medium-gray text-white/90 text-base">
-        {formattedMessage()}
+        {formattedMessage}
       </div>
 
       <div className="flex w-full gap-4">

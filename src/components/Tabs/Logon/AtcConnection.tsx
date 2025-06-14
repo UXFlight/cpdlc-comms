@@ -1,8 +1,20 @@
 import React, { useContext, useEffect } from "react";
 import { UserContext } from "../../../context/UserContext";
+import { socketService } from "../../../lib/socketService";
 
 export default function AtcConnection() {
   const { isConnectionPossible, setIsConnectionPossible } = useContext(UserContext);
+
+  useEffect(() => {
+    if (!socketService.isSocketAlive()) {
+      socketService.connect();
+      setIsConnectionPossible(true);
+    }
+
+    return () => {
+      socketService.disconnect();
+    };
+  }, []);
 
   return (
     <div className="container flex flex-col items-start">
@@ -10,11 +22,11 @@ export default function AtcConnection() {
       <div className="flex items-center justify-between w-full">
         <p className="secondary-text pt-[10px]">ATC Data Link</p>
         <label className="relative inline-block w-[49px] h-[31px] cursor-pointer">
-          <input
+          <input readOnly
             type="checkbox"
             className="sr-only peer"
             checked={isConnectionPossible}
-            onChange={(e) => setIsConnectionPossible(e.target.checked)}
+            // onChange={(e) => setIsConnectionPossible(e.target.checked)}
           />
           <div className="absolute inset-0 bg-gray-300 peer-checked:bg-green rounded-md transition-colors duration-300"></div>
           <div
