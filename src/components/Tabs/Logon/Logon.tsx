@@ -2,12 +2,14 @@ import { useState, useRef, useContext, use } from "react";
 import users from "../../../data/users.json";
 import { UserContext } from "../../../context/UserContext";
 import CharacterInput from "../../General/CharacterInput";
+import { socketService } from "../../../lib/socketService";
 
 type Props = {
   length?: number;
+  flightDetails?: any;
 };
 
-export default function Logon({ length = 4 }: Props) {
+export default function Logon({ length = 4, flightDetails }: Props) {
   const { connectionState, setConnectionState, isConnectionPossible, username, setUsername } = useContext(UserContext);
 
   const validValue = () => {
@@ -22,12 +24,11 @@ export default function Logon({ length = 4 }: Props) {
       (user) => user.username.toUpperCase().replace(/[^A-Z0-9]/g, "") === input,
     );
     if (result) {
-      setUsername(input.toUpperCase().replace(/[^A-Z0-9]/g, ""));
-      setTimeout(() => {
+        setUsername(input.toUpperCase().replace(/[^A-Z0-9]/g, ""));
         setConnectionState(true);
-      }, 1000);
+        socketService.send("sucessfull_connection", input);
+        return result;
     }
-    return result;
   }
 
   return (
@@ -58,7 +59,7 @@ export default function Logon({ length = 4 }: Props) {
           </span>
         </button>
       )}
-      {connectionState && (
+      {(connectionState && isConnectionPossible) && (
         <button
           disabled
           className="flex items-center justify-center gap-2 px-4 py-2 w-[149px] h-[48px] bg-green text-white text-sm font-semibold rounded-md"

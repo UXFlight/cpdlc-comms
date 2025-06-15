@@ -1,24 +1,49 @@
-import React, { useContext, useState } from "react";
-import flightDetails from "../../../data/flightDetails.json";
+import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../context/UserContext";
+import { socketService } from "../../../lib/socketService";
+import { FlightDetails } from "../../../interfaces/FlightDetails";
+import { defaultFlightDetails } from "../../../constants/flightDetails";
 
 export default function Connection() {
-  const { connectionState } = useContext(UserContext);
+  const { connectionState, isConnectionPossible, username } = useContext(UserContext);
+  const [flightDetails, setFlightDetails] = useState<FlightDetails>(defaultFlightDetails);
 
-  if (connectionState === null) {
-    return null;
+  useEffect(() => {
+  const handleFlightDetails = (data) => {
+    const newDetails = {
+      dataAuthority: {
+        current: data.CDA,
+        next: data.NDA,
+      },
+      flightInfo: {
+        flightId: data.flight_id,
+        departureAirport: data.departure,
+        arrivalAirport: data.arrival,
+      },
+      status: {...data.status},
+    };
+
+    setFlightDetails(newDetails);
   }
+  socketService.listen("flight_details", handleFlightDetails);
+
+  return () => {
+    socketService.off("flight_details", handleFlightDetails);  
+  }
+  }, []);
 
   return (
     <div className="container flex items-center justify-between">
       <div className="w-full">
-        {connectionState ? (
+        {connectionState === null ? (
+          <div className="text-white/50">En attente de connexion...</div>
+        ) : connectionState && isConnectionPossible ? (
           <div className="space-y-4">
             <div className="flex justify-between border-b border-white/10 pb-2">
               <div className="text-center flex-1">
                 <div className="logon-titles">Current Data Authority</div>
                 <div className="logon-flight-details">
-                  {flightDetails.dataAuthority.current}
+                  {username}
                 </div>
               </div>
               <div className="text-center flex-1">
@@ -51,20 +76,21 @@ export default function Connection() {
             </div>
 
             <div className="space-y-1">
-              {Object.entries(flightDetails.status).map(([label, value]) => (
-                <div key={label} className="flex justify-between items-center">
-                  <span className="text-white-80">
-                    {label.replaceAll("_", " ")}
-                  </span>
-                  <span className="px-2 py-[2px] bg-[#2c3832] text-green font-mono text-xs rounded">
-                    {value}
-                  </span>
-                </div>
-              ))}
+              {flightDetails.status?.connections &&
+                Object.entries(flightDetails.status.connections).map(([label, value]) => (
+                  <div key={label} className="flex justify-between items-center">
+                    <span className="text-white-80">
+                      {label.replaceAll("_", " ")}
+                    </span>
+                    <span className="px-2 py-[2px] bg-[#2c3832] text-green font-mono text-xs rounded">
+                      {String(value)}
+                    </span>
+                  </div>
+                ))}
             </div>
           </div>
         ) : (
-          <div className="text-red-500 font-semibold">
+          <div className="text-red font-semibold">
             Échec de la connexion
           </div>
         )}

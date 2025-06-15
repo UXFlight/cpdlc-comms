@@ -13,6 +13,7 @@ import FmsTable from "../components/Fms/FmsTable";
 import ResponsiveBar from "../components/ResponsiveBar/ResponsiveBar";
 import ConnectionBar from "../components/ConnectionBar/ConnectionBar";
 import { InputProvider } from "../context/InputContext";
+import { socketService } from "../lib/socketService";
 
 export default function CpdlcMainView() {
   const [activeTab, setActiveTab] = useState("logon"); // default logon, switch for easier dev
@@ -26,6 +27,12 @@ export default function CpdlcMainView() {
     settings: <SettingsTab />,
     print: <PrintTab />,
   };
+
+  useEffect(() => {
+    if (!socketService.isSocketAlive()) {
+      socketService.connect();
+    }
+  }, []);
 
   return (
     <div className="grid lg:grid-cols-2 grid-cols-1 h-screen gap-8">

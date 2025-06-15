@@ -6,13 +6,15 @@ export default function AtcConnection() {
   const { isConnectionPossible, setIsConnectionPossible } = useContext(UserContext);
 
   useEffect(() => {
-    if (!socketService.isSocketAlive()) {
-      socketService.connect();
-      setIsConnectionPossible(true);
-    }
+    const handleConnect = () => setIsConnectionPossible(true);
+    const handleDisconnect = () => setIsConnectionPossible(false);
+
+    socketService.listen("connect", handleConnect);
+    socketService.listen("disconnect", handleDisconnect);
 
     return () => {
-      socketService.disconnect();
+      socketService.off("connect", handleConnect);
+      socketService.off("disconnect", handleDisconnect);
     };
   }, []);
 
