@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { UserContext } from "../../../context/UserContext";
-import { socketService } from "../../../lib/socketService";
+import { socketService } from "../../../api/communications/socket/socketService";
 
 export default function AtcConnection() {
   const { isConnectionPossible, setIsConnectionPossible } = useContext(UserContext);

@@ -1,19 +1,21 @@
 // types/Request.ts
 export type RequestState = {
+  messageRef: string | null;
   arguments: string[] | null;
   timeSelected?: { hh: string; mm: string } | null;
   positionSelected?: string;
-  messageRef: string | null;
+  additional?: string[];
 };
 
 export enum RequestCategory {
   ALTITUDE = "Altitude Requests",
   ROUTE_MODIFICATION = "Route Modification Requests",
-  LATERAL = "Lateral Requests",
+  OFFSET = "Offset Requests",
+  VOICE = "Voice Contact Requests",
   SPEED = "Speed Requests",
-  DESTINATION = "Destination Requests",
+  NEGOTIATION = "Negotiation Requests",
   CLEARANCE = "Clearance Requests",
-  MISC = "Miscellaneous Requests",
+  VMC = "VMC Request",
 }
 
 export type VerticalRequestType =

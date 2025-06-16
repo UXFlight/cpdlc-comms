@@ -1,5 +1,5 @@
 import { io, Socket } from 'socket.io-client';
-import { SERVER_URL } from '../constants/serverURL';
+import { SERVER_URL } from '../../../constants/serverURL';
 
 class SocketClientService {
   private socket: Socket;

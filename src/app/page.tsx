@@ -13,7 +13,7 @@ import FmsTable from "../components/Fms/FmsTable";
 import ResponsiveBar from "../components/ResponsiveBar/ResponsiveBar";
 import ConnectionBar from "../components/ConnectionBar/ConnectionBar";
 import { InputProvider } from "../context/InputContext";
-import { socketService } from "../lib/socketService";
+import { socketService } from "../api/communications/socket/socketService";
 
 export default function CpdlcMainView() {
   const [activeTab, setActiveTab] = useState("logon"); // default logon, switch for easier dev

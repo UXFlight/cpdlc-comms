@@ -2,7 +2,7 @@ import { useState, useRef, useContext, use } from "react";
 import users from "../../../data/users.json";
 import { UserContext } from "../../../context/UserContext";
 import CharacterInput from "../../General/CharacterInput";
-import { socketService } from "../../../lib/socketService";
+import { socketService } from "../../../api/communications/socket/socketService";
 
 type Props = {
   length?: number;

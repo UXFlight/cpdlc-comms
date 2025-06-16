@@ -1,6 +1,7 @@
 // lib/cpdlcService.ts
 
-import { http } from './httpClient';
+import { http } from "../../communications/http/httpClient";
+
 
 type FormatMessageResponse = {
   status: string;

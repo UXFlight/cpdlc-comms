@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../context/UserContext";
-import { socketService } from "../../../lib/socketService";
+import { socketService } from "../../../api/communications/socket/socketService";
 import { FlightDetails } from "../../../interfaces/FlightDetails";
 import { defaultFlightDetails } from "../../../constants/flightDetails";
 

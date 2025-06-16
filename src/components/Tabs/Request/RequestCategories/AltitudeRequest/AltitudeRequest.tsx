@@ -6,6 +6,9 @@ import ExtraCheckboxes from "../../AdditionalMessages";
 import { ADDITIONAL_MESSAGES } from "../../../../../constants/additionalMessages";
 import CharacterInput from "../../../../General/CharacterInput";
 import StepAtInput from "../../../../General/StepAtInput";
+import { resolve } from "path";
+import { resolveMessageRef } from "../../../../../lib/MessageIdentification";
+import { request } from "http";
 
 export default function AltitudeRequest({
   onSend,
@@ -14,7 +17,7 @@ export default function AltitudeRequest({
   onSend: () => void;
   disabled?: boolean;
 }) {
-  const { setRequest } = useContext(RequestContext);
+  const { request, setRequest } = useContext(RequestContext);
 
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
@@ -47,31 +50,24 @@ export default function AltitudeRequest({
     }
   };
 
-  const handleSend = () => {
-    if (!from || !to) return;
+ const handleSend = () => {
+  if (!from) return;
 
-    const args = [from, to];
+  const args = to ? [from, to] : [from];
 
-    if (positionSelected && position) {
-      args.push(position);
-    }
-
-    if (timeSelected && time.hh && time.mm) {
-      args.push(`${time.hh}:${time.mm}`);
-    }
-
-    const cleanArgs = [...args, ...extras].map((val) =>
-      val.toUpperCase().replace(/[^A-Z0-9:]/g, "")
-    );
-
-    setRequest({
-      arguments: cleanArgs,
-      messageRef: "DM12",
-      timeStamp: new Date(),
-    });
-
-    onSend();
+  const newRequest = {
+    ...request,
+    arguments: args,
+    ...(positionSelected && position ? { positionSelected: position } : {}),
+    ...(timeSelected && time.hh && time.mm ? { timeSelected: { hh: time.hh, mm: time.mm } } : {})
   };
+
+  const ref = resolveMessageRef(RequestCategory.ALTITUDE, newRequest);
+
+  setRequest({ ...newRequest, messageRef: ref, additional: extras });
+
+  onSend();
+};
 
   return (
     <RequestContainer
@@ -79,12 +75,11 @@ export default function AltitudeRequest({
       isOpen={isOpen}
       onToggle={handleToggle}
       disabled={disabled}
-      showSendButton={!!from || !!to}
+      showSendButton={!!(from.length === 5)}
       onSend={handleSend}
     >
       <div className="flex flex-col gap-4 mt-2">
 
-        {/* Altitude range */}
         <div className="flex flex-row items-center gap-6">
           <p className="text-white/80 text-[16px] uppercase">Altitude (or block altitude)</p>
           <div className="flex items-center gap-5">
@@ -92,44 +87,47 @@ export default function AltitudeRequest({
               value={from}
               onChange={setFrom}
               length={5}
-              disabled={disabled}
+              disabled={!isOpen || disabled}
             />
-            <span className="text-[12px] text-white/40">to</span>
+            <span className="text-[14px] text-white/40">to</span>
             <CharacterInput
               value={to}
               onChange={setTo}
               length={5}
-              disabled={disabled}
+              disabled={from.length !== 5 || disabled}
             />
           </div>
         </div>
 
         {/* Step at */}
-        <StepAtInput
-          disabled={disabled}
-          positionSelected={positionSelected}
-          onTogglePosition={() => {
-            setPositionSelected(!positionSelected);
-            if (!positionSelected) setTimeSelected(false); // désactiver Time
-          }}
-          position={position}
-          onChangePosition={setPosition}
-          timeSelected={timeSelected}
-          onToggleTime={() => {
-            setTimeSelected(!timeSelected);
-            if (!timeSelected) setPositionSelected(false); // désactiver Position
-          }}
-          time={time}
-          onChangeTime={(hh, mm) => setTime({ hh, mm })}
-        />
-
-        {/* Additional messages */}
-        <div>
-          <ExtraCheckboxes
-            extraMessages={ADDITIONAL_MESSAGES.altitude_req}
-            selected={extras}
-            onChange={toggleExtra}
+        <div className={`${isOpen ? "" : "hidden"}`}>
+          <StepAtInput
+            disabled={disabled || (from !== "" && to !== "")} 
+            positionSelected={positionSelected}
+            onTogglePosition={() => {
+              setPositionSelected(!positionSelected);
+              if (!positionSelected) setTimeSelected(false);
+            }}
+            position={position}
+            onChangePosition={setPosition}
+            timeSelected={timeSelected}
+            onToggleTime={() => {
+              setTimeSelected(!timeSelected);
+              if (!timeSelected) setPositionSelected(false);
+            }}
+            time={time}
+            onChangeTime={(hh, mm) => setTime({ hh, mm })}
           />
+
+
+          {/* Additional messages */}
+          <div>
+            <ExtraCheckboxes
+              extraMessages={ADDITIONAL_MESSAGES.altitude_req}
+              selected={extras}
+              onChange={toggleExtra}
+            />
+          </div>
         </div>
       </div>
     </RequestContainer>

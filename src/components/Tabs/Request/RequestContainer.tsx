@@ -50,7 +50,7 @@ export default function RequestContainer({
       <div className="w-full">{children}</div>
 
       {/* Send Button */}
-      {showSendButton && (
+      {(showSendButton && isOpen) && (
         <button
           disabled={disabled}
           onClick={onSend}

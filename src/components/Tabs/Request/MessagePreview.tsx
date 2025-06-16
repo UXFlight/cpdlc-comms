@@ -4,7 +4,7 @@ import DownLinks from "../../../data/DownLinks.json";
 import { LogsArray } from "../../../constants/logs";
 import { MessageState } from "../../../interfaces/MessageState";
 import SendButton from "../../../components/General/SendButton";
-import { MessageService } from "../../../lib/communications/MessageService";
+import { MessageService } from "../../../api/services/messageService/messageService";
 
 export default function MessagePreview() {
   const { request } = useContext(RequestContext);
@@ -23,6 +23,7 @@ export default function MessagePreview() {
   }, [isSending]);
 
   useEffect(() => {
+    console.log("Request in MessagePreview:", request);
      MessageService.getFormattedMessage(request)
       .then((res) => {
         setFormattedMessage(res.message);
@@ -31,27 +32,6 @@ export default function MessagePreview() {
         console.error("Error fetching formatted message:", error);
       });
   }, []);
-
-  /*const formattedMessage = () => {
-    const DMessage = DownLinks.find(
-      (msg) => msg.Ref_Num.replace(/\s+/g, "") === request.messageRef,
-    );
-    if (!DMessage) return "";
-
-    let result = DMessage.Message_Element;
-    let argIndex = 0;
-
-    // Remplacer tous les blocs [ ... ] dans l'ordre
-    result = result.replace(/\[.*?\]/g, () => {
-      if (request.arguments && argIndex < request.arguments.length) {
-        return request.arguments[argIndex++];
-      }
-      return "[missing]";
-    });
-
-    return result.trim();
-  };*/
-
 
   const addMessageLog = () => {
     LogsArray.push({
@@ -77,7 +57,20 @@ export default function MessagePreview() {
       <div className="w-full px-4 py-3 rounded border-2 border-white-10 bg-medium-gray text-white/90 text-base">
         {formattedMessage}
       </div>
-
+      {request.additional && request.additional.length > 0 && (
+        <div className="flex flex-col gap-2 w-full px-4 py-3 mt-[-18px] rounded border-2 border-white-10 bg-medium-gray text-white/90 text-base">
+          <ul className="flex flex-wrap gap-2">
+            {request.additional.map((msg, idx) => (
+              <li
+                key={idx}
+                className="bg-[#2c3832] text-green font-mono text-xs px-3 py-1 rounded shadow-sm shadow-black/20"
+              >
+                {msg}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       <div className="flex w-full gap-4">
         <button
           className={`flex-1 px-4 py-2 rounded bg-white-20 ${isSent ? "" : "hover:bg-white-10 cursor-pointer"}  text-white-80 font-semibold tracking-wide uppercase`}
