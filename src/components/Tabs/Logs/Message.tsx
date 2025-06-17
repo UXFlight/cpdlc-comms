@@ -1,12 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 import { LogsContext } from "../../../context/LogsContext";
 import { Log } from "../../../interfaces/Logs";
+import { UserContext } from "../../../context/UserContext";
 
 type Props = {
   message: Log;
 };
 export default function Message({ message }: Props) {
   const { currentLog, setCurrentLog } = useContext(LogsContext);
+  const { username } = useContext(UserContext)
 
   function getFormattedTime() {
     const now = new Date();
@@ -51,19 +53,19 @@ export default function Message({ message }: Props) {
     if (message.status === "new") {
       return "/up-arrow.svg";
     } else if (message.status === "opened") {
-      if (message.ref.includes("DM")) {
+      if (message.direction === "DOWN") {
         return "/white-down-arrow.svg";
       } else {
         return "/arrow-up-bold-box.svg";
       }
     } else if (message.status === "accepted") {
-      if (message.ref.includes("DM")) {
+      if (message.direction === "DOWN") {
         return "/green-down-arrow.svg";
       } else {
         return "/arrow-up-bold-box.svg";
       }
     } else {
-      if (message.ref.includes("DM")) {
+      if (message.direction === "DOWN")  {
         return "/white-down-arrow.svg";
       } else {
         return "/arrow-up-bold-box.svg";
@@ -71,9 +73,15 @@ export default function Message({ message }: Props) {
     }
   };
 
+  const handleFromTo = () => {
+    return (message.direction === "DOWN") ? "To" : "From";  
+  }
+
   return (
+    <>
+    {message ? (
     <div
-      className={`flex justify-center items-center ${message.status === "new" ? "cursor-pointer" : ""}`}
+      className={`flex justify-center items-center ${message.status === "NEW" ? "cursor-pointer" : ""}`}
       onClick={() => handleClick()}
     >
       <img
@@ -85,10 +93,10 @@ export default function Message({ message }: Props) {
         <div className="flex items-center w-full h-auto justify-between align-baseline">
           <div>
             <span className="uppercase text-white-40 font-medium tetx-[14px]">
-              from
+              {handleFromTo()}
             </span>{" "}
             {/*source a voir selon le format de la reception*/}
-            <span className="ml-1 font-medium tetx-[14px]">CYUL</span>
+            <span className="ml-1 font-medium tetx-[14px]">{username}</span>
           </div>
           <div className="h-[17px] bg-white-10 rounded flex items-center justify-center">
             <span
@@ -105,10 +113,16 @@ export default function Message({ message }: Props) {
             {message.element}
           </span>
           <div className="text-white-40 text-right font-medium text-[15px] not-italic leading-normal font-sans flex-shrink-0">
-            {time}
+            {message.timeStamp}
           </div>
         </div>
       </div>
     </div>
+    ) : (
+    <div className="flex items-center justify-center w-full h-full">
+      <p className="text-white-40">An error occurred</p>
+    </div>
+    )}
+    </>
   );
 }

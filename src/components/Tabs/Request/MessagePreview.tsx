@@ -5,9 +5,12 @@ import { LogsArray } from "../../../constants/logs";
 import { MessageState } from "../../../interfaces/MessageState";
 import SendButton from "../../../components/General/SendButton";
 import { MessageService } from "../../../api/services/messageService/messageService";
+import { socketService } from "../../../api/communications/socket/socketService";
+import { UserContext } from "../../../context/UserContext";
 
 export default function MessagePreview() {
   const { request, setRequest } = useContext(RequestContext);
+  const { flightDetails } = useContext(UserContext);
   const [isSending, setIsSending] = useState(false);
   const [isSent, setIsSent] = useState(false);
 
@@ -32,27 +35,22 @@ export default function MessagePreview() {
   }, []);
 
   const addMessageLog = () => {
-    LogsArray.push({
-      id: (Math.random() * 1000000).toFixed(0).toString(),
-      ref: request.messageRef,
-      state: MessageState.OPENED,
-      element: request.formattedMessage,
-    });
+    socketService.send("add_log", {flight_id : flightDetails.flightInfo.flightId, request: request});
   };
 
   return (
     <div
       className="flex flex-col w-full p-4 gap-4 
-                 border-[3px] border-[#539fd3]/50 
+                 border-[3px] border-[#539fda]
                  rounded-lg 
                  bg-gradient-to-b from-[#1e1e1e] to-[#1a1a1a] 
                  text-white shadow-sm"
     >
-      <p className="text-white font-noto text-base not-italic font-normal leading-none uppercase">
+      <p className="text-white-500 font-noto text-base not-italic font-normal leading-none uppercase">
         Preview
       </p>
 
-      <div className="w-full px-4 py-3 rounded border-2 border-white-10 bg-medium-gray text-white/90 text-base">
+      <div className="w-full px-4 py-3 rounded border-2 border-white-10 bg-medium-gray text-white-100 text-base">
         {request.formattedMessage}
       </div>
       {request.additional && request.additional.length > 0 && (

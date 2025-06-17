@@ -4,7 +4,7 @@ import Time from "../Time/Time";
 import { UserContext } from "../../context/UserContext";
 
 export default function ConnectionBar() {
-  const { connectionState } = useContext(UserContext);
+  const { connectionState, username } = useContext(UserContext);
 
   return (
     <footer
@@ -18,7 +18,7 @@ export default function ConnectionBar() {
           className="w-4 h-4"
         />
         <p className="text-white-100 text-[12px] uppercase">
-          {connectionState ? "Connected" : "Not Connected"}
+          {connectionState ? `Connected to ${username}` : "Not Connected"}
         </p>
       </div>
       <div>

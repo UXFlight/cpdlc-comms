@@ -25,6 +25,16 @@ export interface FlightInfo {
   arrivalAirport: string;
 }
 
+export interface RouteFix {
+  fix: string;
+  heading: string;
+  distance: string;
+  altitude: string;
+  mach: string;
+  duration: string;
+  fuel: string;
+}
+
 export interface FlightDetails {
   dataAuthority: {
     current: string;
@@ -32,4 +42,6 @@ export interface FlightDetails {
   };
   flightInfo: FlightInfo;
   status: FlightStatus;
+  route: RouteFix[];
 }
+

@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../context/UserContext";
 import { socketService } from "../../../api/communications/socket/socketService";
+import { LogsContext } from "../../../context/LogsContext";
 
 export default function Connection() {
   const { connectionState, isConnectionPossible, username, flightDetails, setFlightDetails   } = useContext(UserContext);
+  const {setLogs} = useContext(LogsContext);
 
   useEffect(() => {
     const handleFlightDetails = (data) => {
@@ -18,13 +20,22 @@ export default function Connection() {
           arrivalAirport: data.arrival,
         },
         status: { ...data.status },
+        route: data.route || []
       };
       setFlightDetails(newDetails);
     };
 
+    const handleLoadLogs = (data) => {
+      setLogs(data);
+    }
+
     socketService.listen("flight_details", handleFlightDetails);
+    socketService.listen(`load_logs`, handleLoadLogs);
+
     return () => {
       socketService.off("flight_details", handleFlightDetails);
+      socketService.off(`load_logs`, handleLoadLogs);
+
     };
   }, []);
 
@@ -32,17 +43,8 @@ export default function Connection() {
     <div className={`${(connectionState && isConnectionPossible) ? "container" : "" } flex items-center justify-between`}>
       <div className="w-full">
         {connectionState === null ? (
-          <div className="flex flex-col items-center justify-center py-6 text-white/70 gap-2 animate-pulse">
-            <div className="w-6 h-6 border-4 border-white/20 rounded-full flex items-center justify-center">
-              <div className="w-2 h-2 bg-white/40 rounded-full animate-ping" />
-            </div>
-            <p className="text-sm font-medium tracking-wide uppercase">
-              En attente de connexion
-            </p>
-            <p className="text-xs text-white/40">
-              Initialisation du datalink...
-            </p>
-          </div>
+          <> 
+          </>
         ) : connectionState && isConnectionPossible ? (
           <div className="space-y-4">
             <div className="flex justify-between border-b border-white/10 pb-2">

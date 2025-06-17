@@ -1,5 +1,5 @@
 import MessageContainer from "./MessageContainer";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import MessageDisplayTab from "./MessageDisplayTab";
 import OptionBar from "./OptionBar";
 import SelectDropdown from "../../General/SelectDropdown";
@@ -13,6 +13,11 @@ export default function LogsTab() {
   const findMessageById = (id) => {
     return LogsArray.find((msg) => msg.id === id);
   };
+  
+  useEffect(() => {
+    console.log("current logs:", logs);
+    
+  }, []);
 
   return (
     <div className="flex flex-col h-full">
@@ -60,7 +65,7 @@ export default function LogsTab() {
           </div>
           <div className="flex flex-col h-full gap-4">
             <div className="rounded w-full">
-              <MessageDisplayTab message={findMessageById(currentLog)} />
+              <MessageDisplayTab message={currentLog} />
             </div>
             <div className="mt-auto mb-4">
               <OptionBar message={findMessageById(currentLog)} />

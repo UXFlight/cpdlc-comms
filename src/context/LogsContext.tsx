@@ -7,8 +7,10 @@ import { MessageService } from "../api/services/messageService/messageService";
 
 type LogsContextType = {
     logs: Log[];
+    setLogs: React.Dispatch<React.SetStateAction<Log[]>>;
     filterBy: string;
-    currentLog: string | null;
+    setFilter: React.Dispatch<React.SetStateAction<string | null>>;
+    currentLog: Log;
     setCurrentLog: React.Dispatch<React.SetStateAction<string | null>>;
     addLog: (log: Log) => void;
     clearLogs: () => void;
@@ -17,7 +19,9 @@ type LogsContextType = {
 
 export const LogsContext = createContext<LogsContextType>({
   logs: [],
+  setLogs: () => {},
   filterBy: "",
+  setFilter: () => {},
   currentLog: null,
   setCurrentLog: () => {},
   addLog: () => {},
@@ -32,13 +36,14 @@ export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     const handleNewLog = (log: Log) => {
+      console.log("New log received:", log);
         addLog(log);
     };
 
-    socketService.listen("new_log", handleNewLog);
+    socketService.listen("log_added", handleNewLog);
 
     return () => {
-        socketService.off("new_log", handleNewLog);
+        socketService.off("log_added", handleNewLog);
     };
   }, []);
 
@@ -68,7 +73,7 @@ export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <LogsContext.Provider value={{ logs, filterBy, currentLog, setCurrentLog, addLog, clearLogs, setFilterBy }}>
+    <LogsContext.Provider value={{ logs, setLogs, filterBy, setFilter, currentLog, setCurrentLog, addLog, clearLogs, setFilterBy }}>
       {children}
     </LogsContext.Provider>
   );

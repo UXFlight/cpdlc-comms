@@ -9,6 +9,8 @@ import StepAtInput from "../../../../General/StepAtInput";
 import { resolve } from "path";
 import { resolveMessageRef } from "../../../../../utils/MessageIdentification";
 import { request } from "http";
+import { socketService } from "../../../../../api/communications/socket/socketService";
+import { UserContext } from "../../../../../context/UserContext";
 
 export default function AltitudeRequest({
   onSend,
@@ -18,6 +20,7 @@ export default function AltitudeRequest({
   disabled?: boolean;
 }) {
   const { request, setRequest } = useContext(RequestContext);
+  const {flightDetails} = useContext(UserContext);
 
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");

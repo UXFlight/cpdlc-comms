@@ -23,6 +23,8 @@ export default function CharacterInput({
   const { isConnectionPossible } = useContext(UserContext);
   const { targetInput } = useContext(InputContext);
   const [inputValues, setInputValues] = useState<string[]>([]);
+  const [isFocused, setIsFocused] = useState(false);
+
 
   const handleChange = (value: string) => {
     const clean = value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, length);
@@ -63,7 +65,7 @@ export default function CharacterInput({
             `}
           >
             {value[i] ?? (
-              i === value.length && !disabled ? (
+              i === value.length && isFocused && !disabled ? (
                 <span className="text-white animate-blink absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
                   |
                 </span>
@@ -79,8 +81,10 @@ export default function CharacterInput({
           value={value}
           disabled={disabled}
           onChange={(e) => handleChange(e.target.value)}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
           className="absolute opacity-0 w-0 h-0"
-          autoFocus
+          autoFocus={false}
         />
       </div>
     </div>

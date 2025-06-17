@@ -8,7 +8,7 @@ export type Log = {
     ref: string;
     direction: string;
     status: string;
-    timeStamp: Date;
+    timeStamp: string;
     element: string;
     intent?: string;
     position?: string;

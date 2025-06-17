@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { RequestContext } from "../../../context/RequestContext";
+import { InputContext } from "../../../context/InputContext";
 
 type Props = {
   requestType: string;
@@ -22,10 +23,13 @@ export default function RequestContainer({
 }: Props) {
 
   const {resetRequest} = useContext(RequestContext);
-
+  const {setTargetInput} = useContext(InputContext);
+  
   useEffect(() => {
     if (!isOpen) {
       resetRequest();
+    } else {
+      setTargetInput((prev) => !prev);
     }
   }, [isOpen])
   
@@ -62,3 +66,7 @@ export default function RequestContainer({
     </div>
   );
 }
+function setTargetInput(arg0: (prev: any) => boolean) {
+  throw new Error("Function not implemented.");
+}
+

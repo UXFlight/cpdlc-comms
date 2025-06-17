@@ -1,0 +1,117 @@
+{
+  "flight_id": "AF448",
+  "departure": "CYUL",
+  "arrival": "KFLL",
+  "route": [
+    {
+      "fix": "PTD",
+      "heading": "228\u00b0",
+      "distance": "69nm",
+      "altitude": "FL390",
+      "mach": "M0.78",
+      "duration": "9m11s",
+      "fuel": "11113kg"
+    },
+    {
+      "fix": "ART",
+      "heading": "187\u00b0",
+      "distance": "48nm",
+      "altitude": "FL390",
+      "mach": "M0.78",
+      "duration": "6m24s",
+      "fuel": "10662kg"
+    },
+    {
+      "fix": "SYR",
+      "heading": "211\u00b0",
+      "distance": "66nm",
+      "altitude": "FL390",
+      "mach": "M0.78",
+      "duration": "8m48s",
+      "fuel": "10348kg"
+    },
+    {
+      "fix": "CNTER",
+      "heading": "211\u00b0",
+      "distance": "59nm",
+      "altitude": "FL390",
+      "mach": "M0.78",
+      "duration": "7m53s",
+      "fuel": "9916kg"
+    },
+    {
+      "fix": "ZUCCS",
+      "heading": "210\u00b0",
+      "distance": "32nm",
+      "altitude": "FL390",
+      "mach": "M0.78",
+      "duration": "4m14s",
+      "fuel": "9529kg"
+    },
+    {
+      "fix": "PSB",
+      "heading": "219\u00b0",
+      "distance": "67nm",
+      "altitude": "FL390",
+      "mach": "M0.78",
+      "duration": "8m54s",
+      "fuel": "9321kg"
+    },
+    {
+      "fix": "GARDN",
+      "heading": "212\u00b0",
+      "distance": "124nm",
+      "altitude": "FL390",
+      "mach": "M0.78",
+      "duration": "16m32s",
+      "fuel": "8884kg"
+    },
+    {
+      "fix": "PERRI",
+      "heading": "195\u00b0",
+      "distance": "11nm",
+      "altitude": "FL390",
+      "mach": "M0.78",
+      "duration": "1m28s",
+      "fuel": "8072kg"
+    },
+    {
+      "fix": "OAKLE",
+      "heading": "195\u00b0",
+      "distance": "18nm",
+      "altitude": "FL390",
+      "mach": "M0.78",
+      "duration": "2m28s",
+      "fuel": "8000kg"
+    },
+    {
+      "fix": "ASBUR",
+      "heading": "204\u00b0",
+      "distance": "102nm",
+      "altitude": "FL390",
+      "mach": "M0.78",
+      "duration": "13m37s",
+      "fuel": "7879kg"
+    },
+    {
+      "fix": "MULBE",
+      "heading": "207\u00b0",
+      "distance": "97nm",
+      "altitude": "FL390",
+      "mach": "M0.78",
+      "duration": "12m56s",
+      "fuel": "7210kg"
+    },
+    {
+      "fix": "TIRCO",
+      "heading": "156\u00b0",
+      "distance": "74nm",
+      "altitude": "FL390",
+      "mach": "M0.78",
+      "duration": "9m55s",
+      "fuel": "3538kg"
+    }
+  ],
+  "final_fuel": "3388kg",
+  "final_duration": "3:06:45"
+}

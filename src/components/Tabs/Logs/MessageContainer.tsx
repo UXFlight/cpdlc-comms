@@ -3,14 +3,14 @@ import Message from "./Message";
 import { Log } from "../../../interfaces/Logs";
 
 type Props = {
-  messages: Log[] | null;
+  messages: Log[];
 };
 
 export default function MessageContainer({ messages }: Props) {
   const noMessages = !messages || messages.length === 0;
 
   return (
-    <div className="flex flex-col items-center justify-center h-full min-h-[500px] px-4 mt-[-40px]">
+    <div className="flex flex-col items-center justify-start h-full">
       {noMessages ? (
         <div className="text-center text-white/70 flex flex-col items-center gap-4 animate-fade-in">
           <div className="w-20 h-20 rounded-full border-4 border-white/20 flex items-center justify-center">

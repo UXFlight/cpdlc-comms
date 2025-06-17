@@ -1,13 +1,8 @@
+import { Log } from "../../../interfaces/Logs";
 import Message from "./Message";
 
 type Props = {
-  message: {
-    ref: string;
-    id: string;
-    state: string;
-    element: string;
-    intent?: string;
-  };
+  message: Log
 };
 
 export default function MessageDisplayTab({ message }: Props) {

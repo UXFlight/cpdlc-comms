@@ -15,9 +15,11 @@ import ConnectionBar from "../components/ConnectionBar/ConnectionBar";
 import { InputProvider } from "../context/InputContext";
 import { socketService } from "../api/communications/socket/socketService";
 import { LogsProvider } from "../context/LogsContext";
+import { UserContext } from "../context/UserContext";
 
 export default function CpdlcMainView() {
   const [activeTab, setActiveTab] = useState("logon"); // default logon, switch for easier dev
+  const { flightDetails, setFlightDetails } = useContext(UserContext);
 
   const TAB_COMPONENTS: Record<string, JSX.Element> = {
     logon: <LogonTab />,
@@ -39,7 +41,7 @@ export default function CpdlcMainView() {
     <div className="grid lg:grid-cols-2 grid-cols-1 h-screen gap-8">
       <div className="flex justify-center items-center">
         <div className="w-[600px] h-[800px] relative bg-black overflow-hidden lg:block hidden">
-          <FmsTable />
+          <FmsTable route={flightDetails.route || []}/>
         </div>
       </div>
       <div className="flex justify-center items-center mx-auto">
