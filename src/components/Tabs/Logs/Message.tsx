@@ -1,17 +1,12 @@
 import { useContext, useEffect, useState } from "react";
-import { MessageContext } from "../../../context/MessageContext";
+import { LogsContext } from "../../../context/LogsContext";
+import { Log } from "../../../interfaces/Logs";
 
 type Props = {
-  message: {
-    ref: string;
-    id: string;
-    state: string;
-    element: string;
-    intent?: string;
-  };
+  message: Log;
 };
 export default function Message({ message }: Props) {
-  const { currentMessage, setCurrentMessage } = useContext(MessageContext);
+  const { currentLog, setCurrentLog } = useContext(LogsContext);
 
   function getFormattedTime() {
     const now = new Date();
@@ -26,19 +21,19 @@ export default function Message({ message }: Props) {
 
   const [time] = useState(getFormattedTime());
   useEffect(() => {
-    console.log("Updated currentMessage:", currentMessage);
-  }, [currentMessage]);
+    console.log("Updated currentMessage:", currentLog);
+  }, [currentLog]);
 
   const handleClick = () => {
     //eventuellement devient un reducer
-    setCurrentMessage(message.id);
-    if (message.state === "new") {
-      message.state = "opened";
+    setCurrentLog(message.id);
+    if (message.status === "new") {
+      message.status = "opened";
     }
   };
 
   const colorState = () => {
-    switch (message.state) {
+    switch (message.status) {
       case "opened":
         return "text-white-80";
       case "accepted":
@@ -53,15 +48,15 @@ export default function Message({ message }: Props) {
   };
 
   const messageType = () => {
-    if (message.state === "new") {
+    if (message.status === "new") {
       return "/up-arrow.svg";
-    } else if (message.state === "opened") {
+    } else if (message.status === "opened") {
       if (message.ref.includes("DM")) {
         return "/white-down-arrow.svg";
       } else {
         return "/arrow-up-bold-box.svg";
       }
-    } else if (message.state === "accepted") {
+    } else if (message.status === "accepted") {
       if (message.ref.includes("DM")) {
         return "/green-down-arrow.svg";
       } else {
@@ -78,7 +73,7 @@ export default function Message({ message }: Props) {
 
   return (
     <div
-      className={`flex justify-center items-center ${message.state === "new" ? "cursor-pointer" : ""}`}
+      className={`flex justify-center items-center ${message.status === "new" ? "cursor-pointer" : ""}`}
       onClick={() => handleClick()}
     >
       <img
@@ -99,7 +94,7 @@ export default function Message({ message }: Props) {
             <span
               className={`uppercase text-[14px] ${colorState()} font-semibold`}
             >
-              {message.state}
+              {message.status}
             </span>
           </div>
         </div>

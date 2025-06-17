@@ -7,13 +7,12 @@ import SendButton from "../../../components/General/SendButton";
 import { MessageService } from "../../../api/services/messageService/messageService";
 
 export default function MessagePreview() {
-  const { request } = useContext(RequestContext);
+  const { request, setRequest } = useContext(RequestContext);
   const [isSending, setIsSending] = useState(false);
   const [isSent, setIsSent] = useState(false);
-  const [formattedMessage, setFormattedMessage] = useState("");
 
   useEffect(() => {
-    //simule le delai d envoi
+    //simule le delai d envoi a changer avec un ack des sockets
     if (isSending) {
       setTimeout(() => {
         setIsSent(true);
@@ -23,10 +22,9 @@ export default function MessagePreview() {
   }, [isSending]);
 
   useEffect(() => {
-    console.log("Request in MessagePreview:", request);
      MessageService.getFormattedMessage(request)
       .then((res) => {
-        setFormattedMessage(res.message);
+        setRequest({formattedMessage: res.message});
       })
       .catch((error) => {
         console.error("Error fetching formatted message:", error);
@@ -38,7 +36,7 @@ export default function MessagePreview() {
       id: (Math.random() * 1000000).toFixed(0).toString(),
       ref: request.messageRef,
       state: MessageState.OPENED,
-      element: formattedMessage,
+      element: request.formattedMessage,
     });
   };
 
@@ -55,7 +53,7 @@ export default function MessagePreview() {
       </p>
 
       <div className="w-full px-4 py-3 rounded border-2 border-white-10 bg-medium-gray text-white/90 text-base">
-        {formattedMessage}
+        {request.formattedMessage}
       </div>
       {request.additional && request.additional.length > 0 && (
         <div className="flex flex-col gap-2 w-full px-4 py-3 mt-[-18px] rounded border-2 border-white-10 bg-medium-gray text-white/90 text-base">

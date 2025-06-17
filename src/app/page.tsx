@@ -14,6 +14,7 @@ import ResponsiveBar from "../components/ResponsiveBar/ResponsiveBar";
 import ConnectionBar from "../components/ConnectionBar/ConnectionBar";
 import { InputProvider } from "../context/InputContext";
 import { socketService } from "../api/communications/socket/socketService";
+import { LogsProvider } from "../context/LogsContext";
 
 export default function CpdlcMainView() {
   const [activeTab, setActiveTab] = useState("logon"); // default logon, switch for easier dev
@@ -51,7 +52,9 @@ export default function CpdlcMainView() {
           {/* contenu de l'onglet */}
           <div className="overflow-auto">
             <InputProvider>
+            <LogsProvider>
             {TAB_COMPONENTS[activeTab]}
+            </LogsProvider>
             </InputProvider>
           </div>
 

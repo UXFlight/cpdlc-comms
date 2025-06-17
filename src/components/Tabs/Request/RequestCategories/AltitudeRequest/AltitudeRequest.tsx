@@ -7,7 +7,7 @@ import { ADDITIONAL_MESSAGES } from "../../../../../constants/additionalMessages
 import CharacterInput from "../../../../General/CharacterInput";
 import StepAtInput from "../../../../General/StepAtInput";
 import { resolve } from "path";
-import { resolveMessageRef } from "../../../../../lib/MessageIdentification";
+import { resolveMessageRef } from "../../../../../utils/MessageIdentification";
 import { request } from "http";
 
 export default function AltitudeRequest({

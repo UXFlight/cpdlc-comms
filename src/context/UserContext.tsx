@@ -1,7 +1,9 @@
 "use client";
 import React, { createContext, useContext, useState } from "react";
+import type { FlightDetails } from "../interfaces/FlightDetails";
+import { defaultFlightDetails } from "../constants/flightDetails";
 
-// structure du contexte
+// Structure du contexte
 type UserContextType = {
   connectionState: boolean;
   setConnectionState: React.Dispatch<React.SetStateAction<boolean>>;
@@ -9,9 +11,11 @@ type UserContextType = {
   setIsConnectionPossible: React.Dispatch<React.SetStateAction<boolean>>;
   username: string | null;
   setUsername: React.Dispatch<React.SetStateAction<string | null>>;
+  flightDetails: FlightDetails;
+  setFlightDetails: React.Dispatch<React.SetStateAction<FlightDetails>>;
 };
 
-// Initialise le contexte avec une valeur par défaut appropriée
+// Valeur par défaut
 export const UserContext = createContext<UserContextType>({
   connectionState: null,
   setConnectionState: () => {},
@@ -19,24 +23,28 @@ export const UserContext = createContext<UserContextType>({
   setIsConnectionPossible: () => {},
   username: "",
   setUsername: () => {},
+  flightDetails: defaultFlightDetails,
+  setFlightDetails: () => {},
 });
 
-// Create a provider component
-export const UserProvider = ({ children }) => {
-  //provider = sert a injecter des vals dans le contexte
-  const [connectionState, setConnectionState] = useState(null);
-  const [isConnectionPossible, setIsConnectionPossible] = useState(false);
+// Provider
+export const UserProvider = ({ children }: { children: React.ReactNode }) => {
+  const [connectionState, setConnectionState] = useState<boolean>(null);
+  const [isConnectionPossible, setIsConnectionPossible] = useState<boolean>(false);
   const [username, setUsername] = useState<string>("");
+  const [flightDetails, setFlightDetails] = useState<FlightDetails>(defaultFlightDetails);
 
   return (
     <UserContext.Provider
       value={{
-        isConnectionPossible,
-        setIsConnectionPossible,
         connectionState,
         setConnectionState,
+        isConnectionPossible,
+        setIsConnectionPossible,
         username,
         setUsername,
+        flightDetails,
+        setFlightDetails,
       }}
     >
       {children}

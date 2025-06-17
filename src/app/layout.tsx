@@ -1,4 +1,3 @@
-import { MessageProvider } from "../context/MessageContext";
 import { UserProvider } from "../context/UserContext";
 import "./globals.css";
 
@@ -17,7 +16,7 @@ export default function RootLayout({
       <body /*className="bg-[url('/bg-cockpit4.jpg')] bg-cover bg-center h-screen w-screen"*/
       >
         <UserProvider>
-          <MessageProvider>{children}</MessageProvider>
+          {children}
         </UserProvider>
       </body>
     </html>

@@ -1,5 +1,6 @@
 // lib/cpdlcService.ts
 
+import { Log } from "../../../interfaces/Logs";
 import { http } from "../../communications/http/httpClient";
 
 
@@ -12,5 +13,7 @@ export const MessageService = {
   getFormattedMessage: (data) => http.post<FormatMessageResponse>('formattedMessage', data),
 
   validateAtcLogon: (data) => http.post<boolean>('validateAtcLogon', data),
+
+  filterLogsArray: (data) => http.post<{ logs: Log[] }>('filterLogsArray', data),
  
 };
