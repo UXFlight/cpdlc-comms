@@ -68,7 +68,7 @@ export default function LogsTab() {
               <MessageDisplayTab message={currentLog} />
             </div>
             <div className="mt-auto mb-4">
-              <OptionBar message={findMessageById(currentLog)} />
+              <OptionBar message={currentLog} />
             </div>
           </div>
         </div>

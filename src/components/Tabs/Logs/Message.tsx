@@ -2,35 +2,23 @@ import { useContext, useEffect, useState } from "react";
 import { LogsContext } from "../../../context/LogsContext";
 import { Log } from "../../../interfaces/Logs";
 import { UserContext } from "../../../context/UserContext";
+import { socketService } from "../../../api/communications/socket/socketService";
 
 type Props = {
   message: Log;
 };
 export default function Message({ message }: Props) {
-  const { currentLog, setCurrentLog } = useContext(LogsContext);
+  const { currentLog, setCurrentLog, changeStatus } = useContext(LogsContext);
   const { username } = useContext(UserContext)
 
-  function getFormattedTime() {
-    const now = new Date();
-
-    return now.toLocaleTimeString("en-US", {
-      hour: "2-digit",
-      minute: "2-digit",
-      //hour12: false,
-      timeZone: "America/New_York",
-    });
-  }
-
-  const [time] = useState(getFormattedTime());
   useEffect(() => {
     console.log("Updated currentMessage:", currentLog);
   }, [currentLog]);
 
   const handleClick = () => {
-    //eventuellement devient un reducer
-    setCurrentLog(message.id);
-    if (message.status === "new") {
-      message.status = "opened";
+    setCurrentLog(message);
+    if( message.status === "new" || message.status === "NEW") {
+      changeStatus(message.id, "opened");
     }
   };
 
@@ -53,19 +41,23 @@ export default function Message({ message }: Props) {
     if (message.status === "new") {
       return "/up-arrow.svg";
     } else if (message.status === "opened") {
-      if (message.direction === "DOWN") {
+      if (message.direction === "downlink") {
         return "/white-down-arrow.svg";
       } else {
         return "/arrow-up-bold-box.svg";
       }
     } else if (message.status === "accepted") {
-      if (message.direction === "DOWN") {
+      if (message.direction === "downlink") {
         return "/green-down-arrow.svg";
       } else {
         return "/arrow-up-bold-box.svg";
       }
+    } else if (message.status === "rejected") {
+      if (message.direction === "downlink") {
+        return "/down-rejected.svg";   
+      }
     } else {
-      if (message.direction === "DOWN")  {
+      if (message.direction === "downlink")  {
         return "/white-down-arrow.svg";
       } else {
         return "/arrow-up-bold-box.svg";
@@ -74,14 +66,14 @@ export default function Message({ message }: Props) {
   };
 
   const handleFromTo = () => {
-    return (message.direction === "DOWN") ? "To" : "From";  
+    return (message.direction === "downlink") ? "To" : "From";  
   }
 
   return (
     <>
     {message ? (
     <div
-      className={`flex justify-center items-center ${message.status === "NEW" ? "cursor-pointer" : ""}`}
+      className={`flex justify-center items-center cursor-pointer`}
       onClick={() => handleClick()}
     >
       <img

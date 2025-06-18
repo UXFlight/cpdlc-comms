@@ -11,8 +11,9 @@ type LogsContextType = {
     filterBy: string;
     setFilter: React.Dispatch<React.SetStateAction<string | null>>;
     currentLog: Log;
-    setCurrentLog: React.Dispatch<React.SetStateAction<string | null>>;
+    setCurrentLog: React.Dispatch<React.SetStateAction<Log | null>>;
     addLog: (log: Log) => void;
+    changeStatus: (logId: string, newState: string) => void;
     clearLogs: () => void;
     setFilterBy: (filter: string) => void;
 };
@@ -25,6 +26,7 @@ export const LogsContext = createContext<LogsContextType>({
   currentLog: null,
   setCurrentLog: () => {},
   addLog: () => {},
+  changeStatus: () => {},
   clearLogs: () => {},
   setFilterBy: () => {},
 });
@@ -64,6 +66,15 @@ export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
     setLogs((prev) => [log, ...prev]);
   };
 
+  const changeStatus = (logId: string, newState: string) => {
+    setLogs((prevLogs) =>
+      prevLogs.map((log) =>
+        log.id === logId ? { ...log, status: newState } : log
+      )
+    );
+    socketService.send("change_status", {logId: logId, status: newState});
+  };
+
   const clearLogs = () => {
     setLogs([]);
   };
@@ -73,7 +84,7 @@ export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <LogsContext.Provider value={{ logs, setLogs, filterBy, setFilter, currentLog, setCurrentLog, addLog, clearLogs, setFilterBy }}>
+    <LogsContext.Provider value={{ logs, setLogs, filterBy, setFilter, currentLog, setCurrentLog, addLog, changeStatus, clearLogs, setFilterBy }}>
       {children}
     </LogsContext.Provider>
   );

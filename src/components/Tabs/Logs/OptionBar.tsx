@@ -1,29 +1,28 @@
-import { useState } from "react";
-import { Logs } from "../../../interfaces/MessageState";
+import { useContext, useState } from "react";
+import { Log} from "../../../interfaces/Logs";
 import SendButton from "../../General/SendButton";
+import { socketService } from "../../../api/communications/socket/socketService";
+import { LogsContext } from "../../../context/LogsContext";
 
-export default function OptionBar({ message }: { message: Logs }) {
-  const [option, setOption] = useState<string | null>(null);
+export default function OptionBar({ message }: { message: Log }) {
   const [isSending, setIsSending] = useState(false);
   const [isSent, setIsSent] = useState(false);
+  const [action, setAction] = useState<string | null>(null);
+  const {changeStatus} = useContext(LogsContext);
 
-  const handleRequest = (action: string) => {
-    setOption(action);
+  const handleRequest = () => {
     switch (action) {
       case "standby":
-        message.state = "standby";
-        console.log("Standby action triggered");
+        changeStatus(message.id, "standby");
         break;
       case "accept":
-        message.state = "accepted";
-        console.log("Accept action triggered");
+        changeStatus(message.id, "accepted");
         break;
       case "reject":
-        message.state = "rejected";
-        console.log("Reject action triggered");
+        changeStatus(message.id, "rejected");
         break;
       case "load":
-        message.state = "loaded";
+        message.status = "loaded";
         console.log("Load action triggered");
         break;
       default:
@@ -46,22 +45,23 @@ export default function OptionBar({ message }: { message: Logs }) {
             <div
               key={item}
               className={`logs-options bg-white-10 px-4 py-2 rounded cursor-pointer ${
-                option === item
+                action === item
                   ? "border-2 border-dark-blue"
                   : "border border-transparent"
               }`}
-              onClick={() => handleRequest(item)}
+              onClick={() => setAction(item)}
             >
               {item}
             </div>
           ))}
         </div>
 
-        {option === "accept" && (
+        {action === "accept" && (
           <>
             <SendButton
               onSend={() => {
                 setIsSending(true);
+                handleRequest();
                 addMessageLog();
               }}
             />
