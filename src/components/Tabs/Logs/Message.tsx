@@ -17,7 +17,7 @@ export default function Message({ message }: Props) {
 
   const handleClick = () => {
     setCurrentLog(message);
-    if( message.status === "new" || message.status === "NEW") {
+    if( message.status === "new") {
       changeStatus(message.id, "opened");
     }
   };
@@ -27,9 +27,9 @@ export default function Message({ message }: Props) {
       case "opened":
         return "text-white-80";
       case "accepted":
-        return "text-green-500";
+        return "text-green";
       case "rejected":
-        return "text-red-500";
+        return "text-white-40";
       case "time out":
         return "text-gray-500";
       default:
