@@ -78,6 +78,7 @@ export default function MessagePreview() {
           onSend={() => {
             setIsSending(true);
             addMessageLog();
+            
           }}
         />
       </div>

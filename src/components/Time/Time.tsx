@@ -10,9 +10,9 @@ export default function Time() {
     return now.toLocaleTimeString("en-US", {
       hour: "2-digit",
       minute: "2-digit",
-      //hour12: false,
+      hour12: false,
       timeZone: "America/New_York",
-    });
+    }) + " UTC";
   }
 
   useEffect(() => {
