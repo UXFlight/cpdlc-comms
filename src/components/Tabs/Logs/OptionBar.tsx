@@ -4,7 +4,6 @@ import SendButton from "../../General/SendButton";
 import { socketService } from "../../../api/communications/socket/socketService";
 import { LogsContext } from "../../../context/LogsContext";
 import ProgressSteps from "./ProgressSteps";
-import { handleClientScriptLoad } from "next/script";
 
 export default function OptionBar({ message }: { message: Log }) {
   const [isSending, setIsSending] = useState(false);
@@ -72,10 +71,11 @@ export default function OptionBar({ message }: { message: Log }) {
               }`}
               onClick={() => {
                 setAction(item);
-                socketService.send("load_message", { logId: message.id });
                 if (item !== "load") {
                   setShowProgress(false);
                   setConfirmAction(true);
+                } else {
+                  socketService.send("load_message", { logId: message.id });
                 }
               }}
             >
