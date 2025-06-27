@@ -1,17 +1,6 @@
-type Props = {
-  fix: {
-    fix: string;
-    heading: string;
-    distance: string;
-    altitude: string;
-    mach: string;
-    duration: string;
-    fuel: string;
-  };
-  delay?: number;
-};
+import {FmsRowProps} from "@/interface/props/Fms";
 
-export default function FmsRow({ fix, delay = 0 }: Props) {
+export default function FmsRow({ fix, delay = 0 }: FmsRowProps) {
   return (
     <div
       className="grid grid-cols-5 gap-2 border-b border-white/10 py-1 opacity-0 animate-fade-in-up"

@@ -1,9 +1,4 @@
-type RadioProps = {
-  label: string | React.ReactNode;
-  value: string;
-  selected: string;
-  onChange: (val: string | null) => void;
-};
+import { RadioProps } from "@/interface/props/General";
 
 export default function CustomRadio({ label, value, selected, onChange }: RadioProps) {
   const isChecked = value === selected;
@@ -19,7 +14,6 @@ export default function CustomRadio({ label, value, selected, onChange }: RadioP
         ${isChecked ? "bg-white/10 border-white/20 text-white" : "bg-transparent text-white/70 hover:bg-white/5 hover:text-white"}
       `}
     >
-      {/* Radio circle */}
       <div className="flex-shrink-0">
         <div
           className={`w-4 h-4 rounded-full border flex items-center justify-center transition
@@ -29,7 +23,6 @@ export default function CustomRadio({ label, value, selected, onChange }: RadioP
         </div>
       </div>
 
-      {/* Label content */}
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full gap-2">
         {label}
       </div>

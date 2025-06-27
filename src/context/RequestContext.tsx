@@ -1,7 +1,7 @@
 // context/RequestContext.tsx
 "use client";
 import React, { createContext, useContext, useState } from "react";
-import type { RequestState } from "../interfaces/Request";
+import type { RequestState } from "../interface/Request";
 
 type RequestContextType = {
   request: RequestState;

@@ -1,9 +1,5 @@
-// components/SendButton.tsx
+import { SendButtonProps } from "@/interface/props/General";
 import { useState, useEffect } from "react";
-
-interface SendButtonProps {
-  onSend: () => void;
-}
 
 export default function SendButton({ onSend }: SendButtonProps) {
   const [isSending, setIsSending] = useState(false);

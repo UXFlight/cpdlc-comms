@@ -1,18 +1,12 @@
+import { SelectDropdownProps } from "@/interface/props/General";
 import { useState, useRef, useEffect } from "react";
-
-type Props = {
-  options: string[];
-  value: string;
-  onChange: (value: string) => void;
-  icon?: string;
-};
 
 export default function SelectDropdown({
   options,
   value,
   onChange,
   icon,
-}: Props) {
+}: SelectDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 

@@ -1,5 +1,5 @@
-import { MessageState } from "../interfaces/MessageState";
-import { CPDLCRequestOption } from "../interfaces/Request";
+import { MessageState } from "../interface/MessageState";
+import { CPDLCRequestOption } from "../interface/Request";
 
 export const UplinkMessages = [
   {

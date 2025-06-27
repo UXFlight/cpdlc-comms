@@ -1,25 +1,24 @@
 "use client";
-import { act, JSX, useContext, useEffect, useState } from "react";
+import { JSX, useContext, useEffect, useState } from "react";
 
-// Import all tab components
-import LogonTab from "../components/Tabs/Logon/Tab";
-import LogsTab from "../components/Tabs/Logs/Tab";
-import RequestTab from "../components/Tabs/Request/Tab";
-import ReportsTab from "../components/Tabs/Reports/Tab";
-import EmergencyTab from "../components/Tabs/Emergency/Tab";
-import SettingsTab from "../components/Tabs/Settings/Tab";
-import PrintTab from "../components/Tabs/Print/Tab";
-import FmsTable from "../components/Fms/FmsTable";
-import ResponsiveBar from "../components/ResponsiveBar/ResponsiveBar";
-import ConnectionBar from "../components/ConnectionBar/ConnectionBar";
-import { InputProvider } from "../context/InputContext";
-import { socketService } from "../api/communications/socket/socketService";
-import { LogsProvider } from "../context/LogsContext";
-import { UserContext } from "../context/UserContext";
+import LogonTab from "@/components/Tabs/Logon/Tab";
+import LogsTab from "@/components/Tabs/Logs/Tab";
+import RequestTab from "@/components/Tabs/Request/Tab";
+import ReportsTab from "@/components/Tabs/Reports/Tab";
+import EmergencyTab from "@/components/Tabs/Emergency/Tab";
+import SettingsTab from "@/components/Tabs/Settings/Tab";
+import PrintTab from "@/components/Tabs/Print/Tab";
+import FmsTable from "@/components/Fms/FmsTable";
+import ResponsiveBar from "@/components/ResponsiveBar/ResponsiveBar";
+import ConnectionBar from "@/components/ConnectionBar/ConnectionBar";
+import { InputProvider } from "@/context/InputContext";
+import { socketService } from "@/api/communications/socket/socketService";
+import { LogsProvider } from "@/context/LogsContext";
+import { UserContext } from "@/context/UserContext";
 
 export default function CpdlcMainView() {
-  const [activeTab, setActiveTab] = useState("logon"); // default logon, switch for easier dev
-  const { flightDetails, setFlightDetails } = useContext(UserContext);
+  const [activeTab, setActiveTab] = useState("logon");
+  const { flightDetails } = useContext(UserContext);
 
   const TAB_COMPONENTS: Record<string, JSX.Element> = {
     logon: <LogonTab />,
@@ -41,7 +40,7 @@ export default function CpdlcMainView() {
     <div className="grid lg:grid-cols-2 grid-cols-1 h-screen gap-8">
       <div className="flex justify-center items-center">
         <div className="w-[600px] h-[800px] relative bg-black overflow-hidden lg:block hidden">
-          <FmsTable route={flightDetails.route || []}/>
+          <FmsTable route={flightDetails.route}/>
         </div>
       </div>
       <div className="flex justify-center items-center mx-auto">

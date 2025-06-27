@@ -1,7 +1,7 @@
 "use client";
 import { useContext } from "react";
-import Time from "../Time/Time";
-import { UserContext } from "../../context/UserContext";
+import Time from "@/components/Time/Time";
+import { UserContext } from "@/context/UserContext";
 
 export default function ConnectionBar() {
   const { connectionState, username } = useContext(UserContext);

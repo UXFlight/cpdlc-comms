@@ -1,4 +1,4 @@
-import { Log } from "../../../interfaces/Logs";
+import { Log } from "../../../interface/Logs";
 import Message from "./Message";
 
 type Props = {

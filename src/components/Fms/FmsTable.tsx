@@ -1,36 +1,24 @@
-import FmsHeader from "./FmsHeader";
-import FmsTableHeader from "./FmsTableHeader";
-import FmsRow from "./FmsRow";
+import FmsHeader from "@/components/Fms/FmsHeader";
+import FmsTableHeader from "@/components/Fms/FmsTableHeader";
+import FmsRow from "@/components/Fms/FmsRow";
+import {FmsTableProps} from "@/interface/props/Fms";
 import { useContext, useEffect } from "react";
-import { UserContext } from "../../context/UserContext";
-import { socketService } from "../../api/communications/socket/socketService";
+import { UserContext } from "@/context/UserContext";
+import { socketService } from "@/api/communications/socket/socketService";
+import { RouteFix } from "@/interface/FlightDetails";
 
-type RouteFix = {
-  fix: string;
-  heading: string;
-  distance: string;
-  altitude: string;
-  mach: string;
-  duration: string;
-  fuel: string;
-};
 
-type Props = {
-  route: RouteFix[];
-};
-
-export default function FmsTable({ route }: Props) {
+export default function FmsTable({ route }: FmsTableProps) {
   const noRoute = route.length === 0;
-  const {flightDetails, setFlightDetails} = useContext(UserContext);
+  const { setFlightDetails } = useContext(UserContext);
 
   useEffect(() => {
-    const handleRequest = (route) => {
+    const handleRequest = (route: RouteFix[]) => {
       setFlightDetails((prevDetails) => ({
         ...prevDetails,
         route: route || [],
       }));
     }
-
     socketService.listen("route_loaded", handleRequest);
 
     return () => {
@@ -49,7 +37,7 @@ export default function FmsTable({ route }: Props) {
             No flight plan available. Please Logon...
           </div>
         ) : (
-          route.map((fix, i) => (
+          route.map((fix: RouteFix, i:number) => (
             <FmsRow key={`${fix.fix}-${i}`} fix={fix} delay={i * 0.07} />
           ))
         )}

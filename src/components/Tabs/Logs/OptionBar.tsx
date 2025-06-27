@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Log} from "../../../interfaces/Logs";
+import { Log} from "../../../interface/Logs";
 import SendButton from "../../General/SendButton";
 import { socketService } from "../../../api/communications/socket/socketService";
 import { LogsContext } from "../../../context/LogsContext";

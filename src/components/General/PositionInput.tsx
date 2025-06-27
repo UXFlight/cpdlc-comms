@@ -1,11 +1,4 @@
-// components/PositionInput.tsx
-interface Props {
-  disabled: boolean;
-  selected: boolean;
-  onToggle: () => void;
-  value: string;
-  onChange: (value: string) => void;
-}
+import { PositionInputProps } from "@/interface/props/General";
 
 export default function PositionInput({
   disabled,
@@ -13,7 +6,7 @@ export default function PositionInput({
   onToggle,
   value,
   onChange,
-}: Props) {
+}: PositionInputProps) {
   return (
     <>
       <label className="flex items-center gap-2 text-white/80 text-sm">

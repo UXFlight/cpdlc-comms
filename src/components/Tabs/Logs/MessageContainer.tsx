@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import Message from "./Message";
-import { Log } from "../../../interfaces/Logs";
+import { Log } from "../../../interface/Logs";
 
 type Props = {
   messages: Log[];

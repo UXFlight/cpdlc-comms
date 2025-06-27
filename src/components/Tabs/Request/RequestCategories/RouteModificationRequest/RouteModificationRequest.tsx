@@ -1,7 +1,7 @@
 import { use, useContext, useEffect, useState } from "react";
 import { RequestContext } from "../../../../../context/RequestContext";
 import SelectDropdown from "../../../../General/SelectDropdown";
-import { RequestCategory } from "../../../../../interfaces/Request";
+import { RequestCategory } from "../../../../../interface/Request";
 import RequestContainer from "../../RequestContainer";
 import CustomRadio from "../../../../General/CustomRadio";
 import CharacterInput from "../../../../General/CharacterInput";

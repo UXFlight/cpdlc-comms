@@ -1,4 +1,4 @@
-import { Logs, MessageState } from "../interfaces/MessageState";
+import { Logs, MessageState } from "../interface/MessageState";
 
 export const LogsArray: Logs[] = [
   {

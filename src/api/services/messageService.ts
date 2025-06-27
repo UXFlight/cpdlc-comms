@@ -1,7 +1,7 @@
 // lib/cpdlcService.ts
 
-import { Log } from "../../../interfaces/Logs";
-import { http } from "../../communications/http/httpClient";
+import { Log } from "../../interface/Logs";
+import { http } from "../communications/http/httpClient";
 
 
 type FormatMessageResponse = {

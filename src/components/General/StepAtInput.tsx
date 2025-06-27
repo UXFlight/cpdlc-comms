@@ -1,17 +1,6 @@
-import PositionInput from "./PositionInput";
-import TimeInput from "./TimeInput";
-
-type Props = {
-  disabled?: boolean;
-  positionSelected: boolean;
-  onTogglePosition: () => void;
-  position: string;
-  onChangePosition: (val: string) => void;
-  timeSelected: boolean;
-  onToggleTime: () => void;
-  time: { hh: string; mm: string };
-  onChangeTime: (hh: string, mm: string) => void;
-};
+import { SendAtInputProps } from "@/interface/props/General";
+import PositionInput from "@/components/General/PositionInput";
+import TimeInput from "@/components/General/TimeInput";
 
 export default function StepAtInput({
   disabled = false,
@@ -23,7 +12,7 @@ export default function StepAtInput({
   onToggleTime,
   time,
   onChangeTime,
-}: Props) {
+}: SendAtInputProps) {
     
   return (
     <div className="flex flex-row gap-6 mt-2">

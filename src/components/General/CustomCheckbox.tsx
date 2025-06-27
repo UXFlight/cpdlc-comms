@@ -1,12 +1,7 @@
+import { CustomCheckboxProps } from "@/interface/props/General";
 import { useState } from "react";
 
-type Props = {
-  label: string;
-  checked?: boolean;
-  onChange?: (checked: boolean) => void;
-};
-
-export default function CustomCheckbox({ label, checked = false, onChange }: Props) {
+export default function CustomCheckbox({ label, checked = false, onChange }: CustomCheckboxProps) {
   const [isChecked, setIsChecked] = useState(checked);
 
   const handleToggle = () => {

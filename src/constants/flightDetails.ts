@@ -1,6 +1,6 @@
-import { FlightDetails } from "../interfaces/FlightDetails";
+import { FlightDetails } from "../interface/FlightDetails.js";
 
-export const defaultFlightDetails: FlightDetails = {
+export const DEFAULT_FLIGHT_DETAILS: FlightDetails = {
   dataAuthority: { current: "", next: "" },
   flightInfo: { flightId: "", departureAirport: "", arrivalAirport: "" },
   status: {
@@ -19,5 +19,16 @@ export const defaultFlightDetails: FlightDetails = {
       AFN_CONNECTING: "",
       ATN_AVAILABILITY: ""
     }
-  }
+  },
+  route: [
+    {
+      fix: "",
+      heading: "",
+      distance: "",
+      altitude: "",
+      mach: "",
+      duration: "",
+      fuel: "",
+    }
+  ]
 };

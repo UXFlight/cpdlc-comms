@@ -1,15 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { UserContext } from "../../context/UserContext";
-import { InputContext } from "../../context/InputContext";
-
-type Props = {
-  value: string;
-  length: number;
-  style?: string;
-  disabled?: boolean;
-  onChange: (value: string) => void;
-  onEnter?: (value: string) => void;
-};
+import { UserContext } from "@/context/UserContext";
+import { InputContext } from "@/context/InputContext";
+import { CharacterInputProps } from "@/interface/props/General";
 
 export default function CharacterInput({
   value,
@@ -18,18 +10,15 @@ export default function CharacterInput({
   disabled = false,
   onChange,
   onEnter,
-}: Props) {
+}: CharacterInputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const { isConnectionPossible } = useContext(UserContext);
   const { targetInput } = useContext(InputContext);
-  const [inputValues, setInputValues] = useState<string[]>([]);
   const [isFocused, setIsFocused] = useState(false);
 
 
   const handleChange = (value: string) => {
     const clean = value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, length);
-    const characters = clean.split("");
-    setInputValues(characters);
     onChange(clean);
     if (onEnter) {
       onEnter(clean);

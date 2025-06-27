@@ -2,9 +2,9 @@ import { use, useContext, useEffect, useState } from "react";
 import { RequestContext } from "../../../context/RequestContext";
 import DownLinks from "../../../data/DownLinks.json";
 import { LogsArray } from "../../../constants/logs";
-import { MessageState } from "../../../interfaces/MessageState";
+import { MessageState } from "../../../interface/MessageState";
 import SendButton from "../../../components/General/SendButton";
-import { MessageService } from "../../../api/services/messageService/messageService";
+import { MessageService } from "../../../api/services/messageService";
 import { socketService } from "../../../api/communications/socket/socketService";
 import { UserContext } from "../../../context/UserContext";
 

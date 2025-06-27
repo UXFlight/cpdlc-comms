@@ -1,14 +1,4 @@
-// components/TimeInput.tsx
-import { Dispatch, SetStateAction } from "react";
-
-interface Props {
-  disabled: boolean;
-  selected: boolean;
-  onToggle: () => void;
-  hh: string;
-  mm: string;
-  onChange: (hh: string, mm: string) => void;
-}
+import { TimeInputProps } from "@/interface/props/General";
 
 export default function TimeInput({
   disabled,
@@ -17,7 +7,7 @@ export default function TimeInput({
   hh,
   mm,
   onChange,
-}: Props) {
+}: TimeInputProps) {
   return (
     <>
       <label className="flex items-center gap-2 text-white/80 text-sm">

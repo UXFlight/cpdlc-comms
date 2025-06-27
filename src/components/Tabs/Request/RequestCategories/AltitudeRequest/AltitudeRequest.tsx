@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { RequestContext } from "../../../../../context/RequestContext";
-import { RequestCategory } from "../../../../../interfaces/Request";
+import { RequestCategory } from "../../../../../interface/Request";
 import RequestContainer from "../../RequestContainer";
 import ExtraCheckboxes from "../../AdditionalMessages";
 import { ADDITIONAL_MESSAGES } from "../../../../../constants/additionalMessages";

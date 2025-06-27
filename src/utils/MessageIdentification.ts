@@ -1,5 +1,5 @@
 import { use, useContext } from "react";
-import { RequestCategory, RequestState } from "../interfaces/Request";
+import { RequestCategory, RequestState } from "../interface/Request";
 import { RequestContext } from "../context/RequestContext";
 
 export function resolveMessageRef(category: RequestCategory, request: RequestState): string | null {

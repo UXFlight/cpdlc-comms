@@ -1,9 +1,9 @@
 // context/LogsContext.tsx
 "use client";
 import React, { createContext, useState, useContext, useEffect } from "react";
-import type { Log } from "../interfaces/Logs";
+import type { Log } from "../interface/Logs";
 import { socketService } from "../api/communications/socket/socketService";
-import { MessageService } from "../api/services/messageService/messageService";
+import { MessageService } from "../api/services/messageService";
 
 type LogsContextType = {
     logs: Log[];
