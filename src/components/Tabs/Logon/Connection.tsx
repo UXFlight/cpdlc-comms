@@ -1,43 +1,40 @@
 import React, { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../../context/UserContext";
-import { socketService } from "../../../api/communications/socket/socketService";
-import { LogsContext } from "../../../context/LogsContext";
+import { UserContext } from "@/context/UserContext";
+import { LogsContext } from "@/context/LogsContext";
+import { useSocketListeners } from "@/hooks/useSocketListeners";
 
 export default function Connection() {
-  const { connectionState, isConnectionPossible, username, flightDetails, setFlightDetails   } = useContext(UserContext);
+  const { connectionState, isConnectionPossible, username, flightDetails, setFlightDetails } = useContext(UserContext);
   const {setLogs} = useContext(LogsContext);
 
-  useEffect(() => {
-    const handleFlightDetails = (data) => {
-      const newDetails = {
-        dataAuthority: {
-          current: data.CDA,
-          next: data.NDA,
-        },
-        flightInfo: {
-          flightId: data.flight_id,
-          departureAirport: data.departure,
-          arrivalAirport: data.arrival,
-        },
-        status: { ...data.status },
-        route: data.route || []
-      };
-      setFlightDetails(newDetails);
-    };
+  useSocketListeners([
+    {
+      event: "flight_details",
+      callback: (data) => {
+        const newDetails = {
+          dataAuthority: {
+            current: data.CDA,
+            next: data.NDA,
+          },
+          flightInfo: {
+            flightId: data.flight_id,
+            departureAirport: data.departure,
+            arrivalAirport: data.arrival,
+          },
+          status: { ...data.status },
+          route: data.route || [],
+        };
+        setFlightDetails(newDetails);
+      },
+    },
+    {
+      event: "load_logs",
+      callback: (data) => {
+        setLogs(data);
+      },
+    },
+  ]);
 
-    const handleLoadLogs = (data) => {
-      setLogs(data);
-    }
-
-    socketService.listen("flight_details", handleFlightDetails);
-    socketService.listen(`load_logs`, handleLoadLogs);
-
-    return () => {
-      socketService.off("flight_details", handleFlightDetails);
-      socketService.off(`load_logs`, handleLoadLogs);
-
-    };
-  }, []);
 
   return (
     <div className={`${(connectionState && isConnectionPossible) ? "container" : "" } flex items-center justify-between`}>

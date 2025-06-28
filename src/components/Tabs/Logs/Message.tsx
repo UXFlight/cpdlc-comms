@@ -1,19 +1,11 @@
-import { useContext, useEffect, useState } from "react";
-import { LogsContext } from "../../../context/LogsContext";
-import { Log } from "../../../interface/Logs";
-import { UserContext } from "../../../context/UserContext";
-import { socketService } from "../../../api/communications/socket/socketService";
+import { useContext } from "react";
+import { LogsContext } from "@/context/LogsContext";
+import { UserContext } from "@/context/UserContext";
+import { MessageProps } from "@/interface/props/Logs";
 
-type Props = {
-  message: Log;
-};
-export default function Message({ message }: Props) {
-  const { currentLog, setCurrentLog, changeStatus } = useContext(LogsContext);
+export default function Message({ message }: MessageProps) {
+  const { setCurrentLog, changeStatus } = useContext(LogsContext);
   const { username } = useContext(UserContext)
-
-  useEffect(() => {
-    console.log("Updated currentMessage:", currentLog);
-  }, [currentLog]);
 
   const handleClick = () => {
     setCurrentLog(message);

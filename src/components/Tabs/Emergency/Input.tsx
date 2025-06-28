@@ -1,5 +1,3 @@
-import BuildTable from "./BuildTable";
-
 export default function Input() {
   return (
     <div className="flex justify-center w-full">

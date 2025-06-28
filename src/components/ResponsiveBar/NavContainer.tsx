@@ -1,13 +1,9 @@
 import React from "react";
-import NavButton from "./NavButton";
-import { TABS } from "../../constants/NavBarConst";
+import NavButton from "@/components/ResponsiveBar/NavButton";
+import { TABS } from "@/constants/NavBarConst";
+import { NavContainerProps } from "@/interface/props/ResponsiveBar";
 
-type Props = {
-  activeTab: string;
-  onTabChange: (tab: string) => void;
-};
-
-export default function NavContainer({ onTabChange, activeTab }: Props) {
+export default function NavContainer({ onTabChange, activeTab }: NavContainerProps) {
   return (
     <nav className="flex flex-nowrap justify-between">
       {TABS.map((page) => (

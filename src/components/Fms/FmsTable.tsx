@@ -2,29 +2,27 @@ import FmsHeader from "@/components/Fms/FmsHeader";
 import FmsTableHeader from "@/components/Fms/FmsTableHeader";
 import FmsRow from "@/components/Fms/FmsRow";
 import {FmsTableProps} from "@/interface/props/Fms";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { UserContext } from "@/context/UserContext";
-import { socketService } from "@/api/communications/socket/socketService";
 import { RouteFix } from "@/interface/FlightDetails";
+import { useSocketListeners } from "@/hooks/useSocketListeners";
 
 
 export default function FmsTable({ route }: FmsTableProps) {
   const noRoute = route.length === 0;
   const { setFlightDetails } = useContext(UserContext);
 
-  useEffect(() => {
-    const handleRequest = (route: RouteFix[]) => {
-      setFlightDetails((prevDetails) => ({
-        ...prevDetails,
-        route: route || [],
-      }));
-    }
-    socketService.listen("route_loaded", handleRequest);
-
-    return () => {
-      socketService.off("route_loaded", handleRequest);
-    };
-  }, []);
+  useSocketListeners([
+    {
+      event: "route_loaded",
+      callback: (route: RouteFix[]) => {
+        setFlightDetails((prevDetails) => ({
+          ...prevDetails,
+          route: route || [],
+        }));
+      },
+    },
+  ]);
 
   return (
     <div className="bg-black text-white font-mono w-full h-full flex flex-col p-4">

@@ -1,15 +1,11 @@
-import { useState, useRef, useContext, use } from "react";
-import users from "../../../data/users.json";
-import { UserContext } from "../../../context/UserContext";
-import CharacterInput from "../../General/CharacterInput";
-import { socketService } from "../../../api/communications/socket/socketService";
+import { useContext } from "react";
+import users from "@/data/users.json";
+import { UserContext } from "@/context/UserContext";
+import CharacterInput from "@/components/General/CharacterInput";
+import { socketService } from "@/api/communications/socket/socketService";
 
-type Props = {
-  length?: number;
-  flightDetails?: any;
-};
-
-export default function Logon({ length = 4, flightDetails }: Props) {
+export default function Logon() {
+  const length = 4;
   const { connectionState, setConnectionState, isConnectionPossible, username, setUsername } = useContext(UserContext);
 
   const validValue = () => {

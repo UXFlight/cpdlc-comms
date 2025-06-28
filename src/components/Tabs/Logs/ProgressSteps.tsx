@@ -1,6 +1,5 @@
+import { STEPS } from "@/constants/Tabs/Logs";
 import { useEffect, useState } from "react";
-
-const steps = ["Loaded", "Executed", "Responded", "Sent"];
 
 export default function ProgressSteps() {
   const [currentStep, setCurrentStep] = useState(0);
@@ -8,7 +7,7 @@ export default function ProgressSteps() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentStep((prev) => {
-        if (prev < steps.length - 1) return prev + 1;
+        if (prev < STEPS.length - 1) return prev + 1;
         clearInterval(interval);
         return prev;
       });
@@ -19,7 +18,7 @@ export default function ProgressSteps() {
 
   return (
     <div className="flex items-center justify-between w-full my-4">
-      {steps.map((step, i) => (
+      {STEPS.map((step, i) => (
         <div key={i} className="flex flex-col items-center flex-1 relative">
           <div
             className={`w-5 h-5 rounded-full z-10 ${
@@ -27,7 +26,7 @@ export default function ProgressSteps() {
             }`}
           />
           <span className="text-xs text-white mt-1">{step}</span>
-          {i < steps.length - 1 && (
+          {i < STEPS.length - 1 && (
             <div className="absolute top-2 left-1/2 right-[-50%] h-[2px] bg-white/20 z-0" />
           )}
         </div>

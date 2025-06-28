@@ -1,12 +1,7 @@
-import { useEffect } from "react";
-import Message from "./Message";
-import { Log } from "../../../interface/Logs";
+import Message from "@/components/Tabs/Logs/Message";
+import { MessageContainerProps } from "@/interface/props/Logs";
 
-type Props = {
-  messages: Log[];
-};
-
-export default function MessageContainer({ messages }: Props) {
+export default function MessageContainer({ messages }: MessageContainerProps) {
   const noMessages = !messages || messages.length === 0;
 
   return (

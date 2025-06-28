@@ -1,9 +1,9 @@
-export type LogsArray = {
+export interface LogsArray {
     logs: Log[];
     filterBy : string;
 }
 
-export type Log = {
+export interface Log {
     id: string;
     ref: string;
     direction: string;

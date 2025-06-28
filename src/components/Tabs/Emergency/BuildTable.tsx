@@ -1,7 +1,7 @@
 import { useState } from "react";
-import SelectDropdown from "../../General/SelectDropdown";
-import Input from "./Input";
-import OptionBar from "./OptionBar";
+import Input from "@/components/Tabs/Emergency/Input";
+import OptionBar from "@/components/Tabs/Emergency/OptionBar";
+import SelectDropdown from "@/components/General/SelectDropdown";
 
 export default function BuildTable() {
   const [emergency, setEmergency] = useState("MAYDAY");

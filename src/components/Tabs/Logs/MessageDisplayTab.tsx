@@ -1,11 +1,7 @@
-import { Log } from "../../../interface/Logs";
+import { MessageProps } from "@/interface/props/Logs";
 import Message from "./Message";
 
-type Props = {
-  message: Log
-};
-
-export default function MessageDisplayTab({ message }: Props) {
+export default function MessageDisplayTab({ message }: MessageProps) {
   return (
     <div>
       <Message message={message} />

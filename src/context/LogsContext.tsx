@@ -1,22 +1,11 @@
 // context/LogsContext.tsx
 "use client";
-import React, { createContext, useState, useContext, useEffect } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import type { Log } from "../interface/Logs";
 import { socketService } from "../api/communications/socket/socketService";
 import { MessageService } from "../api/services/messageService";
-
-type LogsContextType = {
-    logs: Log[];
-    setLogs: React.Dispatch<React.SetStateAction<Log[]>>;
-    filterBy: string;
-    setFilter: React.Dispatch<React.SetStateAction<string | null>>;
-    currentLog: Log;
-    setCurrentLog: React.Dispatch<React.SetStateAction<Log | null>>;
-    addLog: (log: Log) => void;
-    changeStatus: (logId: string, newState: string) => void;
-    clearLogs: () => void;
-    setFilterBy: (filter: string) => void;
-};
+import { LogsContextType } from "@/interface/LogContext";
+import { useSocketListeners } from "@/hooks/useSocketListeners";
 
 export const LogsContext = createContext<LogsContextType>({
   logs: [],
@@ -34,20 +23,17 @@ export const LogsContext = createContext<LogsContextType>({
 export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
   const [logs, setLogs] = useState<Log[]>([]);
   const [filterBy, setFilter] = useState<string>("");
-  const [currentLog, setCurrentLog] = useState(null);
+  const [currentLog, setCurrentLog] = useState<Log | null>(null);
 
-  useEffect(() => {
-    const handleNewLog = (log: Log) => {
-      console.log("New log received:", log);
+  useSocketListeners([
+    {
+      event: "log_added",
+      callback: (log: Log) => {
+        console.log("New log received:", log);
         addLog(log);
-    };
-
-    socketService.listen("log_added", handleNewLog);
-
-    return () => {
-        socketService.off("log_added", handleNewLog);
-    };
-  }, []);
+      },
+    }
+  ]);
 
   useEffect(() => {
     if (!filterBy) return;

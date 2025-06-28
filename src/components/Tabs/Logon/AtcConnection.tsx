@@ -1,22 +1,15 @@
-import React, { useContext, useEffect } from "react";
-import { UserContext } from "../../../context/UserContext";
-import { socketService } from "../../../api/communications/socket/socketService";
+import React, { useContext } from "react";
+import { UserContext } from "@/context/UserContext";
+import { useSocketListeners } from "@/hooks/useSocketListeners";
 
 export default function AtcConnection() {
   const { isConnectionPossible, setIsConnectionPossible } = useContext(UserContext);
 
-  useEffect(() => {
-    const handleConnect = () => setIsConnectionPossible(true);
-    const handleDisconnect = () => setIsConnectionPossible(false);
-
-    socketService.listen("connect", handleConnect);
-    socketService.listen("disconnect", handleDisconnect);
-
-    return () => {
-      socketService.off("connect", handleConnect);
-      socketService.off("disconnect", handleDisconnect);
-    };
-  }, []);
+  useSocketListeners(
+    [{event: "connect", callback: () => setIsConnectionPossible(true)},
+     {event: "disconnect", callback: () => setIsConnectionPossible(false)}
+    ]
+  );
 
   return (
     <div className="container flex flex-col items-start">

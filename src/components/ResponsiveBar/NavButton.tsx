@@ -1,13 +1,6 @@
 import React, { useContext } from "react";
-import { UserContext } from "../../context/UserContext";
-
-type Props = {
-  icon: string;
-  label: string;
-  id: string;
-  active: boolean;
-  onTabChange: (tab: string) => void;
-};
+import { UserContext } from "@/context/UserContext";
+import { NavButtonProps } from "@/interface/props/ResponsiveBar";
 
 export default function NavButton({
   icon,
@@ -15,7 +8,7 @@ export default function NavButton({
   id,
   active,
   onTabChange,
-}: Props) {
+}: NavButtonProps) {
   const { connectionState } = useContext(UserContext);
 
   return (

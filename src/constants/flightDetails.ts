@@ -1,4 +1,4 @@
-import { FlightDetails } from "../interface/FlightDetails.js";
+import { FlightDetails } from "@/interface/FlightDetails.js";
 
 export const DEFAULT_FLIGHT_DETAILS: FlightDetails = {
   dataAuthority: { current: "", next: "" },

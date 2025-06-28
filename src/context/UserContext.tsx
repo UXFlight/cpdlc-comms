@@ -1,7 +1,8 @@
 "use client";
-import React, { createContext, useContext, useState } from "react";
-import type { FlightDetails } from "../interface/FlightDetails.js";
-import { DEFAULT_FLIGHT_DETAILS } from "../constants/FlightDetails.js";
+import React, { createContext, useState } from "react";
+import type { FlightDetails } from "@/interface/FlightDetails";
+import { DEFAULT_FLIGHT_DETAILS } from "@/constants/FlightDetails";
+
 
 // Structure du contexte
 type UserContextType = {
@@ -9,13 +10,13 @@ type UserContextType = {
   setConnectionState: React.Dispatch<React.SetStateAction<boolean>>;
   isConnectionPossible: boolean;
   setIsConnectionPossible: React.Dispatch<React.SetStateAction<boolean>>;
-  username: string | null;
+  username: string;
   setUsername: React.Dispatch<React.SetStateAction<string>>;
   flightDetails: FlightDetails;
   setFlightDetails: React.Dispatch<React.SetStateAction<FlightDetails>>;
 };
 
-// Valeur par défaut
+// Valeur par défaut  
 export const UserContext = createContext<UserContextType>({
   connectionState: false,
   setConnectionState: () => {},

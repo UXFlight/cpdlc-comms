@@ -1,8 +1,6 @@
 export default function OptionBar() {
   const handleRequest = (requestType: string) => {
-    // Handle the request based on the type
     console.log(`Request type: ${requestType}`);
-    // Here you can add logic to handle the request, e.g., send it to a server or update state
   };
 
   return (
