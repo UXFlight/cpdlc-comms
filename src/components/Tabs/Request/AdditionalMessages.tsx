@@ -1,14 +1,11 @@
-import CustomCheckbox from "../../General/CustomCheckbox";
+import { AdditionalMessagesProps } from "@/interface/props/Request";
+import CustomCheckbox from "@/components/General/CustomCheckbox";
 
 export default function AdditionalMessages({
   extraMessages,
   selected,
   onChange,
-}: {
-  extraMessages: string[];
-  selected: string[];
-  onChange: (val: string) => void;
-}) {
+}: AdditionalMessagesProps) {
   return (
     <div className="mt-2">
       <p className="text-white/60 font-open text-[14px] font-normal leading-[18px] tracking-wider mb-2">

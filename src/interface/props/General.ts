@@ -17,7 +17,7 @@ export interface RadioProps {
   label: string | React.ReactNode;
   value: string;
   selected: string;
-  onChange: (val: string | null) => void;
+  onChange: (val: string) => void;
 }
 
 export interface PositionInputProps {

@@ -1,15 +1,13 @@
 import { useState } from "react";
-import RequestContainer from "../../RequestContainer";
-import ExtraCheckboxes from "../../AdditionalMessages";
-import { ADDITIONAL_MESSAGES } from "../../../../../constants/additionalMessages";
+import AdditionalMessages from "@/components/Tabs/Request/AdditionalMessages";
+import RequestContainer from "@/components/Tabs/Request/RequestContainer";
+import { RequestProps } from "@/interface/props/Request";
+import { ADDITIONAL_MESSAGES } from "@/constants/tabs/Request";
 
 export function SpeedRequest({
   onSend,
   disabled = false,
-}: {
-  onSend: () => void;
-  disabled?: boolean;
-}) {
+}: RequestProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [range, setRange] = useState({ from: "FL350", to: "FL450" });
   const [extras, setExtras] = useState<string[]>([]);
@@ -46,7 +44,7 @@ export function SpeedRequest({
             className="px-2 py-1 bg-white/10 rounded text-white text-center w-[90px]"
           />
         </div>
-        <ExtraCheckboxes
+        <AdditionalMessages
           extraMessages={ADDITIONAL_MESSAGES.speed_req}
           selected={extras}
           onChange={toggleExtra}

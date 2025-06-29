@@ -1,9 +1,9 @@
 // context/LogsContext.tsx
 "use client";
 import React, { createContext, useState, useEffect } from "react";
-import type { Log } from "../interface/Logs";
-import { socketService } from "../api/communications/socket/socketService";
-import { MessageService } from "../api/services/messageService";
+import type { Log } from "@/interface/Logs";
+import { socketService } from "@/api/communications/socket/socketService";
+import { MessageService } from "@/api/services/messageService";
 import { LogsContextType } from "@/interface/LogContext";
 import { useSocketListeners } from "@/hooks/useSocketListeners";
 
@@ -38,7 +38,7 @@ export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     if (!filterBy) return;
 
-    MessageService.filterLogsArray({ logs })
+    MessageService.filterLogsArray( logs )
       .then((res) => {
         console.log("Filtered message received:", res.logs);
         setLogs(res.logs);

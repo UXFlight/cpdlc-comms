@@ -1,16 +1,7 @@
 import React, { useContext, useEffect } from "react";
-import { RequestContext } from "../../../context/RequestContext";
-import { InputContext } from "../../../context/InputContext";
-
-type Props = {
-  requestType: string;
-  isOpen: boolean;
-  onToggle: () => void;
-  disabled?: boolean;
-  showSendButton?: boolean;
-  onSend?: () => void;
-  children: React.ReactNode;
-};
+import { RequestContext } from "@/context/RequestContext";
+import { InputContext } from "@/context/InputContext";
+import { RequestContainerProps } from "@/interface/props/Request";
 
 export default function RequestContainer({
   requestType,
@@ -20,7 +11,7 @@ export default function RequestContainer({
   showSendButton = false,
   onSend,
   children,
-}: Props) {
+}: RequestContainerProps) {
   const { resetRequest } = useContext(RequestContext);
   const { setTargetInput } = useContext(InputContext);
 
@@ -34,7 +25,6 @@ export default function RequestContainer({
 
   return (
     <div className="container flex flex-col items-start py-4 px-[15.5px] overflow-x-hidden relative">
-      {/* Header */}
       <div
         className="h-[30px] w-full flex items-center justify-between cursor-pointer"
         onClick={!disabled ? onToggle : undefined}
@@ -49,10 +39,8 @@ export default function RequestContainer({
         />
       </div>
 
-      {/* Content */}
       <div className="w-full">{children}</div>
 
-      {/* Send Button */}
       {showSendButton && isOpen && (
         <button
           disabled={disabled}
@@ -64,7 +52,4 @@ export default function RequestContainer({
       )}
     </div>
   );
-}
-function setTargetInput(arg0: (prev: any) => boolean) {
-  throw new Error("Function not implemented.");
 }

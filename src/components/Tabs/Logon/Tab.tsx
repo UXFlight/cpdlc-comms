@@ -1,8 +1,8 @@
-import { useContext, useState } from "react";
-import AtcConnection from "./AtcConnection";
-import Logon from "./Logon";
-import Connection from "./Connection";
-import SelectDropdown from "../../General/SelectDropdown";
+import { useState } from "react";
+import AtcConnection from "@/components/Tabs/Logon/AtcConnection";
+import Logon from "@/components/Tabs/Logon/Logon";
+import Connection from "@/components/Tabs/Logon/Connection";
+import SelectDropdown from "@/components/General/SelectDropdown";
 
 export default function LogonTab() {
   const [value, setValue] = useState("FANS 1/A");

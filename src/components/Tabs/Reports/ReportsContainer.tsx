@@ -1,4 +1,4 @@
-import { REPORT_OPTIONS } from "@/constants/Tabs/Reports";
+import { REPORT_OPTIONS } from "@/constants/tabs/Reports";
 import { ReportsContainerProps } from "@/interface/props/Reports";
 
 export default function ReportsContainer({

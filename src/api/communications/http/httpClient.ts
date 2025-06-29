@@ -1,4 +1,4 @@
-import { SERVER_URL } from "../../../constants/serverURL";
+import { SERVER_URL } from "@/constants/serverURL";
 
 const baseUrl = SERVER_URL;
 
@@ -11,7 +11,6 @@ const handleResponse = async <T>(response: Response): Promise<T> => {
 };
 
 const getHeaders = (): HeadersInit => {
-  // Ajoute ici un token si nécessaire
   return {
     "Content-Type": "application/json",
   };

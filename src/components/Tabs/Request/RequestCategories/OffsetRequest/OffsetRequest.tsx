@@ -1,15 +1,11 @@
 import { useState } from "react";
-import RequestContainer from "../../RequestContainer";
-import CustomRadio from "../../../../General/CustomRadio";
-import ExtraCheckboxes from "../../AdditionalMessages";
-import { ADDITIONAL_MESSAGES } from "../../../../../constants/additionalMessages";
+import RequestContainer from "@/components/Tabs/Request/RequestContainer";
+import CustomRadio from "@/components/General/CustomRadio";
+import AdditionalMessages from "@/components/Tabs/Request/AdditionalMessages";
+import { RequestProps } from "@/interface/props/Request";
+import { ADDITIONAL_MESSAGES } from "@/constants/tabs/Request";
 
-type Props = {
-  onSend: () => void;
-  disabled?: boolean;
-};
-
-export function OffsetRequest({ onSend, disabled = false }: Props) {
+export function OffsetRequest({ onSend, disabled = false }: RequestProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [offset, setOffset] = useState("FL350");
   const [step, setStep] = useState<"position" | "time" | null>(null);
@@ -64,7 +60,7 @@ export function OffsetRequest({ onSend, disabled = false }: Props) {
             />
           </div>
         </div>
-        <ExtraCheckboxes
+        <AdditionalMessages
           extraMessages={ADDITIONAL_MESSAGES.offset_req}
           selected={extras}
           onChange={toggleExtra}

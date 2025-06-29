@@ -1,10 +1,9 @@
-import { use, useContext } from "react";
-import { RequestCategory, RequestState } from "../interface/Request";
-import { RequestContext } from "../context/RequestContext";
+import { Request } from "@/interface/Request";
+import { RequestCategory } from "@/constants/tabs/Request";
 
 export function resolveMessageRef(
   category: RequestCategory,
-  request: RequestState,
+  request: Request,
 ): string | null {
   const argCount = request.arguments?.length || 0;
   const hasTime = !!request.timeSelected;

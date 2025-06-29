@@ -1,4 +1,4 @@
-import { STEPS } from "@/constants/Tabs/Logs";
+import { STEPS } from "@/constants/tabs/Logs";
 import { useEffect, useState } from "react";
 
 export default function ProgressSteps() {

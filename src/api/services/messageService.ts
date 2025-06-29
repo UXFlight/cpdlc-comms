@@ -1,7 +1,6 @@
-// lib/cpdlcService.ts
-
-import { Log } from "../../interface/Logs";
-import { http } from "../communications/http/httpClient";
+import { Log } from "@/interface/Logs";
+import { http } from "@/api/communications/http/httpClient";
+import { Request } from "@/interface/Request";
 
 type FormatMessageResponse = {
   status: string;
@@ -9,11 +8,11 @@ type FormatMessageResponse = {
 };
 
 export const MessageService = {
-  getFormattedMessage: (data) =>
+  getFormattedMessage: (data: Request) =>
     http.post<FormatMessageResponse>("formattedMessage", data),
 
-  validateAtcLogon: (data) => http.post<boolean>("validateAtcLogon", data),
+  //validateAtcLogon: (data) => http.post<boolean>("validateAtcLogon", data),
 
-  filterLogsArray: (data) =>
+  filterLogsArray: (data : Log[]) =>
     http.post<{ logs: Log[] }>("filterLogsArray", data),
 };

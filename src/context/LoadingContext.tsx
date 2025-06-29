@@ -1,7 +1,7 @@
 // "use client";
 // import React, { createContext, useContext, useState } from "react";
-// import type { FlightDetails } from "../interfaces/FlightDetails";
-// import { defaultFlightDetails } from "../constants/flightDetails";
+// import type { FlightDetails } from "@/interfaces/FlightDetails";
+// import { defaultFlightDetails } from "@/constants/flightDetails";
 
 // // Structure du contexte
 // type LoadingContextType = {

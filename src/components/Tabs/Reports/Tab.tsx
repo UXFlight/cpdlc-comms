@@ -1,7 +1,7 @@
-import CpdlcAds from "./CpdlcAds";
-import Monitoring from "./Monitoring";
-import PositionReport from "./PositionReport";
-import ReportIndex from "./ReportIndex";
+import CpdlcAds from "@/components/Tabs/Reports/CpdlcAds";
+import Monitoring from "@/components/Tabs/Reports/Monitoring";
+import PositionReport from "@/components/Tabs/Reports/PositionReport";
+import ReportIndex from "@/components/Tabs/Reports/ReportIndex";
 
 export default function ReportsTab() {
   return (

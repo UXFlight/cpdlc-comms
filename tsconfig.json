@@ -26,6 +26,6 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, "src/components/Tabs/Request/RequestCategories/SpeedRequest"  ],
   "exclude": ["node_modules"]
 }

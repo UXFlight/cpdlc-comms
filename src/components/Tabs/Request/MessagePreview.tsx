@@ -1,26 +1,21 @@
-import { use, useContext, useEffect, useState } from "react";
-import { RequestContext } from "../../../context/RequestContext";
-import DownLinks from "../../../data/DownLinks.json";
-import { LogsArray } from "../../../constants/logs";
-import { MessageState } from "../../../interface/MessageState";
-import SendButton from "../../../components/General/SendButton";
-import { MessageService } from "../../../api/services/messageService";
-import { socketService } from "../../../api/communications/socket/socketService";
-import { UserContext } from "../../../context/UserContext";
+import { useContext, useEffect, useState } from "react";
+import { RequestContext } from "@/context/RequestContext";
+import SendButton from "@/components/General/SendButton";
+import { MessageService } from "@/api/services/messageService";
+import { socketService } from "@/api/communications/socket/socketService";
+import { UserContext } from "@/context/UserContext";
+import { useDelay } from "@/hooks/useDelay";
 
 export default function MessagePreview() {
   const { request, setRequest } = useContext(RequestContext);
   const { flightDetails } = useContext(UserContext);
   const [isSending, setIsSending] = useState(false);
   const [isSent, setIsSent] = useState(false);
+  const { delay } = useDelay();
 
   useEffect(() => {
-    //simule le delai d envoi a changer avec un ack des sockets
     if (isSending) {
-      setTimeout(() => {
-        setIsSent(true);
-        setIsSending(false);
-      }, 2000);
+      simulateDelay()
     }
   }, [isSending]);
 
@@ -33,6 +28,12 @@ export default function MessagePreview() {
         console.error("Error fetching formatted message:", error);
       });
   }, []);
+
+  const simulateDelay = async () => {
+    await delay(2000);
+    setIsSent(true);
+    setIsSending(false);
+  }
 
   const addMessageLog = () => {
     socketService.send("add_log", {

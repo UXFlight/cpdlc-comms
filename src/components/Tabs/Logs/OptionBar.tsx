@@ -6,7 +6,7 @@ import ProgressSteps from "./ProgressSteps";
 import { useSocketListeners } from "@/hooks/useSocketListeners";
 import { MessageProps } from "@/interface/props/Logs";
 import { useDelay } from "@/hooks/useDelay";
-import { ActionType } from "@/constants/Tabs/Logs";
+import { ActionType } from "@/constants/tabs/Logs";
 
 export default function OptionBar({ message }: MessageProps) {
   const [action, setAction] = useState<ActionType | null>(null);

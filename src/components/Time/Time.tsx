@@ -6,7 +6,6 @@ export default function Time() {
   function getFormattedTime() {
     const now = new Date();
 
-    // Format 24h + UTC
     return (
       now.toLocaleTimeString("en-US", {
         hour: "2-digit",

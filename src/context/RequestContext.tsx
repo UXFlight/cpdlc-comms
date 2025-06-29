@@ -1,21 +1,11 @@
 // context/RequestContext.tsx
 "use client";
-import React, { createContext, useContext, useState } from "react";
-import type { RequestState } from "../interface/Request";
-
-type RequestContextType = {
-  request: RequestState;
-  setRequest: (data: Partial<RequestState>) => void;
-  resetRequest: () => void;
-};
-
-const defaultRequest: RequestState = {
-  arguments: null,
-  messageRef: null,
-};
+import React, { createContext, useState } from "react";
+import type { Request, RequestContextType } from "@/interface/Request";
+import { DEFAULT_REQUEST } from "@/constants/context/DefaultRequest";
 
 export const RequestContext = createContext<RequestContextType>({
-  request: defaultRequest,
+  request: DEFAULT_REQUEST,
   setRequest: () => {},
   resetRequest: () => {},
 });
@@ -25,14 +15,14 @@ export const RequestProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [request, setRequestState] = useState<RequestState>(defaultRequest);
+  const [request, setRequestState] = useState<Request>(DEFAULT_REQUEST);
 
-  const setRequest = (data: Partial<RequestState>) => {
+  const setRequest = (data: Partial<Request>) => {
     setRequestState((prev) => ({ ...prev, ...data }));
   };
 
   const resetRequest = () => {
-    setRequestState(defaultRequest);
+    setRequestState(DEFAULT_REQUEST);
   };
 
   return (

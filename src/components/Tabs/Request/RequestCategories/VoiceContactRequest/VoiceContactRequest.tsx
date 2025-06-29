@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
-import RequestContainer from "../../RequestContainer";
-import { RequestContext } from "../../../../../context/RequestContext";
+import RequestContainer from "@/components/Tabs/Request/RequestContainer";
+import { RequestContext } from "@/context/RequestContext";
 
 export function VoiceContactRequest({
   onSend,
@@ -18,7 +18,6 @@ export function VoiceContactRequest({
     setRequest({
       arguments: ["voice_contact", atFrequency ? frequency : ""],
       messageRef: "VOICE_CONTACT",
-      timeStamp: new Date(),
     });
     setIsOpen(false);
     onSend();

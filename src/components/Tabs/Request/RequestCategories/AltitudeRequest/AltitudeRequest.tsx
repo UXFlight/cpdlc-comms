@@ -1,20 +1,17 @@
 import { useContext, useState } from "react";
 import { RequestContext } from "@/context/RequestContext";
-import { RequestCategory } from "@/interface/Request";
 import RequestContainer from "@/components/Tabs/Request/RequestContainer";
-import ExtraCheckboxes from "../../AdditionalMessages";
-import { ADDITIONAL_MESSAGES } from "../../../../../constants/additionalMessages";
-import CharacterInput from "../../../../General/CharacterInput";
-import StepAtInput from "../../../../General/StepAtInput";
-import { resolveMessageRef } from "../../../../../utils/MessageIdentification";
+import AdditionalMessages from "@/components/Tabs/Request/AdditionalMessages";
+import CharacterInput from "@/components/General/CharacterInput";
+import StepAtInput from "@/components/General/StepAtInput";
+import { resolveMessageRef } from "@/utils/MessageIdentification";
+import { RequestProps } from "@/interface/props/Request";
+import { ADDITIONAL_MESSAGES, RequestCategory } from "@/constants/tabs/Request";
 
 export default function AltitudeRequest({
   onSend,
   disabled = false,
-}: {
-  onSend: () => void;
-  disabled?: boolean;
-}) {
+}: RequestProps) {
   const { request, setRequest } = useContext(RequestContext);
 
   const [from, setFrom] = useState("");
@@ -120,7 +117,7 @@ export default function AltitudeRequest({
           />
 
           <div>
-            <ExtraCheckboxes
+            <AdditionalMessages
               extraMessages={ADDITIONAL_MESSAGES.altitude_req}
               selected={extras}
               onChange={toggleExtra}

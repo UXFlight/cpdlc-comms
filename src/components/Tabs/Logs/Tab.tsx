@@ -4,7 +4,7 @@ import MessageDisplayTab from "./MessageDisplayTab";
 import OptionBar from "./OptionBar";
 import SelectDropdown from "@/components/General/SelectDropdown";
 import { LogsContext } from "@/context/LogsContext";
-import { DROPDOWN_OPTIONS } from "@/constants/Tabs/Logs";
+import { DROPDOWN_OPTIONS } from "@/constants/tabs/Logs";
 
 export default function LogsTab() {
   const [value, setValue] = useState("FILTER BY");

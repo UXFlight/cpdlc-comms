@@ -1,5 +1,5 @@
 import { useState } from "react";
-import RequestContainer from "../../RequestContainer";
+import RequestContainer from "@/components/Tabs/Request/RequestContainer";
 
 export function VmcDescentRequest({
   onSend,

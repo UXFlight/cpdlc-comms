@@ -1,6 +1,6 @@
 import React from "react";
 import NavButton from "@/components/ResponsiveBar/NavButton";
-import { TABS } from "@/constants/NavBarConst";
+import { TABS } from "@/constants/tabs/NavBar";
 import { NavContainerProps } from "@/interface/props/ResponsiveBar";
 
 export default function NavContainer({

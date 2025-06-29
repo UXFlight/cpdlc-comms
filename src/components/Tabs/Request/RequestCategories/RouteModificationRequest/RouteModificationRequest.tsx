@@ -1,13 +1,13 @@
-import { use, useContext, useEffect, useState } from "react";
-import { RequestContext } from "../../../../../context/RequestContext";
-import SelectDropdown from "../../../../General/SelectDropdown";
-import { RequestCategory } from "../../../../../interface/Request";
-import RequestContainer from "../../RequestContainer";
-import CustomRadio from "../../../../General/CustomRadio";
-import CharacterInput from "../../../../General/CharacterInput";
-import { InputContext } from "../../../../../context/InputContext";
-import ExtraCheckboxes from "../../AdditionalMessages";
-import { ADDITIONAL_MESSAGES } from "../../../../../constants/additionalMessages";
+import { useContext, useState } from "react";
+import { RequestContext } from "@/context/RequestContext";
+import { InputContext } from "@/context/InputContext";
+import { RequestProps } from "@/interface/props/Request";
+import CharacterInput from "@/components/General/CharacterInput";
+import CustomRadio from "@/components/General/CustomRadio";
+import SelectDropdown from "@/components/General/SelectDropdown";
+import RequestContainer from "@/components/Tabs/Request/RequestContainer";
+import AdditionalMessages from "@/components/Tabs/Request/AdditionalMessages";
+import { ADDITIONAL_MESSAGES, RequestCategory } from "@/constants/tabs/Request";
 
 const directOptions = ["Waypoint A", "Waypoint B", "Fix XYZ"];
 const weatherOptions = ["Left", "Right", "Avoid"];
@@ -15,10 +15,7 @@ const weatherOptions = ["Left", "Right", "Avoid"];
 export default function RouteModificationRequest({
   onSend,
   disabled = false,
-}: {
-  onSend: () => void;
-  disabled?: boolean;
-}) {
+}: RequestProps) {
   const { setTargetInput } = useContext(InputContext);
   const { request, setRequest } = useContext(RequestContext);
   const [selectedType, setSelectedType] = useState<string>("");
@@ -27,7 +24,6 @@ export default function RouteModificationRequest({
   const [weather, setWeather] = useState("Select type");
   const [heading, setHeading] = useState("");
   const [track, setTrack] = useState("");
-  const [additionalChecked, setAdditionalChecked] = useState(false);
   const [extras, setExtras] = useState<string[]>([]);
 
   const toggleExtra = (val: string) => {
@@ -42,7 +38,6 @@ export default function RouteModificationRequest({
     setTrack("");
     setDirect("");
     setWeather("");
-    setAdditionalChecked(false);
   };
 
   const handleToggle = () => {
@@ -82,12 +77,6 @@ export default function RouteModificationRequest({
 
     onSend();
   };
-
-  /*const addNewInput = (value: string) => {
-    const newArray = [...request.arguments];
-    newArray.push(value.toUpperCase().replace(/[^A-Z0-9]/g, ""));
-    return newArray;
-  }*/
 
   const setDm = (value: string) => {
     setRequest({
@@ -206,7 +195,7 @@ export default function RouteModificationRequest({
               }
             />
           </div>
-          <ExtraCheckboxes
+          <AdditionalMessages
             extraMessages={ADDITIONAL_MESSAGES.route_modification_req}
             selected={extras}
             onChange={toggleExtra}

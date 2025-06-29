@@ -15,3 +15,11 @@ export const DROPDOWN_OPTIONS = [
   "STANDBY",
   "TIME OUT",
 ];
+
+export const MESSAGE_STATE = {
+  NEW: "new",
+  OPENED: "opened",
+  ACCEPTED: "accepted",
+  REJECTED: "rejected",
+  TIMEOUT: "time out",
+};
