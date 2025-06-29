@@ -3,7 +3,6 @@ import React, { createContext, useState } from "react";
 import type { FlightDetails } from "@/interface/FlightDetails";
 import { DEFAULT_FLIGHT_DETAILS } from "@/constants/FlightDetails";
 
-
 // Structure du contexte
 type UserContextType = {
   connectionState: boolean;
@@ -16,7 +15,7 @@ type UserContextType = {
   setFlightDetails: React.Dispatch<React.SetStateAction<FlightDetails>>;
 };
 
-// Valeur par défaut  
+// Valeur par défaut
 export const UserContext = createContext<UserContextType>({
   connectionState: false,
   setConnectionState: () => {},
@@ -31,9 +30,12 @@ export const UserContext = createContext<UserContextType>({
 // Provider
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [connectionState, setConnectionState] = useState<boolean>(false);
-  const [isConnectionPossible, setIsConnectionPossible] = useState<boolean>(false);
+  const [isConnectionPossible, setIsConnectionPossible] =
+    useState<boolean>(false);
   const [username, setUsername] = useState<string>("");
-  const [flightDetails, setFlightDetails] = useState<FlightDetails>(DEFAULT_FLIGHT_DETAILS);
+  const [flightDetails, setFlightDetails] = useState<FlightDetails>(
+    DEFAULT_FLIGHT_DETAILS,
+  );
 
   return (
     <UserContext.Provider

@@ -15,7 +15,8 @@ export default function MessageContainer({ messages }: MessageContainerProps) {
             No New Messages
           </h2>
           <p className="text-base text-white/40 max-w-md">
-            All communications are up to date. You’ll be notified when a new message arrives.
+            All communications are up to date. You’ll be notified when a new
+            message arrives.
           </p>
         </div>
       ) : (

@@ -32,21 +32,21 @@ export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
         console.log("New log received:", log);
         addLog(log);
       },
-    }
+    },
   ]);
 
   useEffect(() => {
     if (!filterBy) return;
 
     MessageService.filterLogsArray({ logs })
-        .then((res) => {
-            console.log("Filtered message received:", res.logs);
-            setLogs(res.logs);
-        })
-        .catch((error) => {
-            console.error("Error fetching filtered message:", error);
-        });
-    }, [filterBy]);
+      .then((res) => {
+        console.log("Filtered message received:", res.logs);
+        setLogs(res.logs);
+      })
+      .catch((error) => {
+        console.error("Error fetching filtered message:", error);
+      });
+  }, [filterBy]);
 
   const addLog = (log: Log) => {
     setLogs((prev) => [log, ...prev]);
@@ -55,10 +55,10 @@ export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
   const changeStatus = (logId: string, newState: string) => {
     setLogs((prevLogs) =>
       prevLogs.map((log) =>
-        log.id === logId ? { ...log, status: newState } : log
-      )
+        log.id === logId ? { ...log, status: newState } : log,
+      ),
     );
-    socketService.send("change_status", {logId: logId, status: newState});
+    socketService.send("change_status", { logId: logId, status: newState });
   };
 
   const clearLogs = () => {
@@ -70,7 +70,20 @@ export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <LogsContext.Provider value={{ logs, setLogs, filterBy, setFilter, currentLog, setCurrentLog, addLog, changeStatus, clearLogs, setFilterBy }}>
+    <LogsContext.Provider
+      value={{
+        logs,
+        setLogs,
+        filterBy,
+        setFilter,
+        currentLog,
+        setCurrentLog,
+        addLog,
+        changeStatus,
+        clearLogs,
+        setFilterBy,
+      }}
+    >
       {children}
     </LogsContext.Provider>
   );

@@ -21,18 +21,17 @@ export default function RequestContainer({
   onSend,
   children,
 }: Props) {
+  const { resetRequest } = useContext(RequestContext);
+  const { setTargetInput } = useContext(InputContext);
 
-  const {resetRequest} = useContext(RequestContext);
-  const {setTargetInput} = useContext(InputContext);
-  
   useEffect(() => {
     if (!isOpen) {
       resetRequest();
     } else {
       setTargetInput((prev) => !prev);
     }
-  }, [isOpen])
-  
+  }, [isOpen]);
+
   return (
     <div className="container flex flex-col items-start py-4 px-[15.5px] overflow-x-hidden relative">
       {/* Header */}
@@ -54,7 +53,7 @@ export default function RequestContainer({
       <div className="w-full">{children}</div>
 
       {/* Send Button */}
-      {(showSendButton && isOpen) && (
+      {showSendButton && isOpen && (
         <button
           disabled={disabled}
           onClick={onSend}
@@ -69,4 +68,3 @@ export default function RequestContainer({
 function setTargetInput(arg0: (prev: any) => boolean) {
   throw new Error("Function not implemented.");
 }
-

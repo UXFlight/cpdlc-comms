@@ -3,7 +3,7 @@ import React, { createContext, useState } from "react";
 
 // structure du contexte
 type InputContextType = {
-  targetInput: boolean; 
+  targetInput: boolean;
   setTargetInput: React.Dispatch<React.SetStateAction<boolean>>;
 };
 

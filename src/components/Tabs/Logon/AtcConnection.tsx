@@ -3,13 +3,13 @@ import { UserContext } from "@/context/UserContext";
 import { useSocketListeners } from "@/hooks/useSocketListeners";
 
 export default function AtcConnection() {
-  const { isConnectionPossible, setIsConnectionPossible } = useContext(UserContext);
+  const { isConnectionPossible, setIsConnectionPossible } =
+    useContext(UserContext);
 
-  useSocketListeners(
-    [{event: "connect", callback: () => setIsConnectionPossible(true)},
-     {event: "disconnect", callback: () => setIsConnectionPossible(false)}
-    ]
-  );
+  useSocketListeners([
+    { event: "connect", callback: () => setIsConnectionPossible(true) },
+    { event: "disconnect", callback: () => setIsConnectionPossible(false) },
+  ]);
 
   return (
     <div className="container flex flex-col items-start">
@@ -17,7 +17,8 @@ export default function AtcConnection() {
       <div className="flex items-center justify-between w-full">
         <p className="secondary-text pt-[10px]">ATC Data Link</p>
         <label className="relative inline-block w-[49px] h-[31px] cursor-pointer">
-          <input readOnly
+          <input
+            readOnly
             type="checkbox"
             className="sr-only peer"
             checked={isConnectionPossible}

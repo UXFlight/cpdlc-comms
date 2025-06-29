@@ -7,12 +7,14 @@ export default function Time() {
     const now = new Date();
 
     // Format 24h + UTC
-    return now.toLocaleTimeString("en-US", {
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: false,
-      timeZone: "America/New_York",
-    }) + " UTC";
+    return (
+      now.toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+        timeZone: "America/New_York",
+      }) + " UTC"
+    );
   }
 
   useEffect(() => {

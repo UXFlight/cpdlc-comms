@@ -1,12 +1,7 @@
-import ReportRow from "./ReportRow";
-import { type RowProps } from "./ReportRow";
+import ReportRow from "@/components/Tabs/Reports/ReportRow";
+import { ReportSectionProps } from "@/interface/props/Reports";
 
-type SectionProps = {
-  title?: string;
-  rows: RowProps[];
-};
-
-export default function ReportSection({ title, rows }: SectionProps) {
+export default function ReportSection({ title, rows }: ReportSectionProps) {
   return (
     <div className="flex flex-col gap-2 border-b border-white/10 pb-4 pt-4">
       {title && (

@@ -1,24 +1,24 @@
 export interface CharacterInputProps {
-    value: string;
-    length: number;
-    style?: string;
-    disabled?: boolean;
-    onChange: (value: string) => void;
-    onEnter?: (value: string) => void;
-};
+  value: string;
+  length: number;
+  style?: string;
+  disabled?: boolean;
+  onChange: (value: string) => void;
+  onEnter?: (value: string) => void;
+}
 
 export interface CustomCheckboxProps {
-    label: string;
-    checked?: boolean;
-    onChange?: (checked: boolean) => void;
-};
+  label: string;
+  checked?: boolean;
+  onChange?: (checked: boolean) => void;
+}
 
 export interface RadioProps {
   label: string | React.ReactNode;
   value: string;
   selected: string;
   onChange: (val: string | null) => void;
-};
+}
 
 export interface PositionInputProps {
   disabled: boolean;
@@ -33,7 +33,7 @@ export interface SelectDropdownProps {
   value: string;
   onChange: (value: string) => void;
   icon?: string;
-};
+}
 
 export interface SendButtonProps {
   onSend: () => void;
@@ -49,7 +49,7 @@ export interface SendAtInputProps {
   onToggleTime: () => void;
   time: { hh: string; mm: string };
   onChangeTime: (hh: string, mm: string) => void;
-};
+}
 
 export interface TimeInputProps {
   disabled: boolean;

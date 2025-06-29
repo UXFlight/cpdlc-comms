@@ -1,18 +1,18 @@
-import { io, Socket } from 'socket.io-client';
-import { SERVER_URL } from '../../../constants/serverURL';
+import { io, Socket } from "socket.io-client";
+import { SERVER_URL } from "../../../constants/serverURL";
 
 class SocketClientService {
   private socket: Socket;
 
   constructor() {
     this.socket = io(SERVER_URL, {
-      transports: ['websocket'],
+      transports: ["websocket"],
       autoConnect: false,
     });
   }
 
   connect() {
-    console.log('Connecting to socket server...');
+    console.log("Connecting to socket server...");
     if (!this.isSocketAlive()) {
       this.socket.connect();
     }
@@ -27,7 +27,7 @@ class SocketClientService {
   }
 
   getSocketId(): string {
-    return this.socket.id ?? '';
+    return this.socket.id ?? "";
   }
 
   listen<T>(event: string, callback: (data: T) => void): void {
@@ -48,4 +48,3 @@ class SocketClientService {
 }
 
 export const socketService = new SocketClientService();
-

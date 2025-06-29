@@ -1,23 +1,15 @@
 import MessageContainer from "./MessageContainer";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import MessageDisplayTab from "./MessageDisplayTab";
 import OptionBar from "./OptionBar";
-import SelectDropdown from "../../General/SelectDropdown";
-import { LogsArray } from "../../../constants/logs";
-import { LogsContext } from "../../../context/LogsContext";
+import SelectDropdown from "@/components/General/SelectDropdown";
+import { LogsContext } from "@/context/LogsContext";
+import { DROPDOWN_OPTIONS } from "@/constants/Tabs/Logs";
 
 export default function LogsTab() {
   const [value, setValue] = useState("FILTER BY");
-  const { logs, setFilterBy, currentLog, setCurrentLog } = useContext(LogsContext);
-
-  const findMessageById = (id) => {
-    return LogsArray.find((msg) => msg.id === id);
-  };
-  
-  useEffect(() => {
-    console.log("current logs:", logs);
-    
-  }, []);
+  const { logs, setFilterBy, currentLog, setCurrentLog } =
+    useContext(LogsContext);
 
   return (
     <div className="flex flex-col h-full">
@@ -26,20 +18,12 @@ export default function LogsTab() {
           <div className="flex flex-row items-center justify-between">
             <h1>message log</h1>
             <SelectDropdown
-              options={[
-                "NEW",
-                "OPENED",
-                "ACCEPTED",
-                "REJECTED",
-                "STANDBY",
-                "TIME OUT",
-              ]}
+              options={DROPDOWN_OPTIONS}
               value={value}
               onChange={() => {
                 setValue(value);
                 setFilterBy(value);
-                }
-              }
+              }}
               icon="/fans-button.svg"
             />
           </div>

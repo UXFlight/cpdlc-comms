@@ -6,3 +6,12 @@ export enum ActionType {
 }
 
 export const STEPS = ["Loaded", "Executed", "Responded", "Sent"];
+
+export const DROPDOWN_OPTIONS = [
+  "NEW",
+  "OPENED",
+  "ACCEPTED",
+  "REJECTED",
+  "STANDBY",
+  "TIME OUT",
+];

@@ -2,7 +2,13 @@ import { useContext, useState } from "react";
 import RequestContainer from "../../RequestContainer";
 import { RequestContext } from "../../../../../context/RequestContext";
 
-export function FreeTextRequest({ onSend, disabled = false }: { onSend: () => void; disabled?: boolean }) {
+export function FreeTextRequest({
+  onSend,
+  disabled = false,
+}: {
+  onSend: () => void;
+  disabled?: boolean;
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const [text, setText] = useState("");
   const { setRequest } = useContext(RequestContext);
@@ -11,7 +17,7 @@ export function FreeTextRequest({ onSend, disabled = false }: { onSend: () => vo
     setRequest({
       arguments: [text],
       messageRef: "FREE_TEXT",
-      timeStamp: new Date()
+      timeStamp: new Date(),
     });
     setIsOpen(false);
     onSend();

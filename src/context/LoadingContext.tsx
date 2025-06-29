@@ -11,7 +11,7 @@
 
 // // Valeur par défaut
 // export const UserContext = createContext<LoadingContextType>({
-  
+
 // });
 
 // // Provider

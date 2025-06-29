@@ -10,7 +10,6 @@ export default function ReportsTab() {
         <h1>reports</h1>
       </div>
 
-      {/* Scrollable area */}
       <div className="flex flex-col gap-2 overflow-y-auto max-h-[calc(100vh-120px)] pr-1">
         <CpdlcAds />
         <ReportIndex />

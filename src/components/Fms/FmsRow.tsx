@@ -1,4 +1,4 @@
-import {FmsRowProps} from "@/interface/props/Fms";
+import { FmsRowProps } from "@/interface/props/Fms";
 
 export default function FmsRow({ fix, delay = 0 }: FmsRowProps) {
   return (

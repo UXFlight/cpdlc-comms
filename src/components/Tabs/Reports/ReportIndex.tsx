@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ReportsContainer from "./ReportsContainer";
+import ReportsContainer from "@/components/Tabs/Reports/ReportsContainer";
 
 export default function ReportIndex() {
   const [isOpen, setIsOpen] = useState(false);

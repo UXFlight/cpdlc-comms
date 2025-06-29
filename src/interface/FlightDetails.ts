@@ -44,4 +44,3 @@ export interface FlightDetails {
   status: FlightStatus;
   route: RouteFix[];
 }
-

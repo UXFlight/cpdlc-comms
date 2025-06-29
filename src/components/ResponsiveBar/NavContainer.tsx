@@ -3,7 +3,10 @@ import NavButton from "@/components/ResponsiveBar/NavButton";
 import { TABS } from "@/constants/NavBarConst";
 import { NavContainerProps } from "@/interface/props/ResponsiveBar";
 
-export default function NavContainer({ onTabChange, activeTab }: NavContainerProps) {
+export default function NavContainer({
+  onTabChange,
+  activeTab,
+}: NavContainerProps) {
   return (
     <nav className="flex flex-nowrap justify-between">
       {TABS.map((page) => (

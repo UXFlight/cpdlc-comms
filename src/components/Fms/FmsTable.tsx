@@ -1,12 +1,11 @@
 import FmsHeader from "@/components/Fms/FmsHeader";
 import FmsTableHeader from "@/components/Fms/FmsTableHeader";
 import FmsRow from "@/components/Fms/FmsRow";
-import {FmsTableProps} from "@/interface/props/Fms";
+import { FmsTableProps } from "@/interface/props/Fms";
 import { useContext } from "react";
 import { UserContext } from "@/context/UserContext";
 import { RouteFix } from "@/interface/FlightDetails";
 import { useSocketListeners } from "@/hooks/useSocketListeners";
-
 
 export default function FmsTable({ route }: FmsTableProps) {
   const noRoute = route.length === 0;
@@ -35,7 +34,7 @@ export default function FmsTable({ route }: FmsTableProps) {
             No flight plan available. Please Logon...
           </div>
         ) : (
-          route.map((fix: RouteFix, i:number) => (
+          route.map((fix: RouteFix, i: number) => (
             <FmsRow key={`${fix.fix}-${i}`} fix={fix} delay={i * 0.07} />
           ))
         )}

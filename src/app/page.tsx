@@ -40,7 +40,7 @@ export default function CpdlcMainView() {
     <div className="grid lg:grid-cols-2 grid-cols-1 h-screen gap-8">
       <div className="flex justify-center items-center">
         <div className="w-[600px] h-[800px] relative bg-black overflow-hidden lg:block hidden">
-          <FmsTable route={flightDetails.route}/>
+          <FmsTable route={flightDetails.route} />
         </div>
       </div>
       <div className="flex justify-center items-center mx-auto">
@@ -53,9 +53,7 @@ export default function CpdlcMainView() {
           {/* contenu de l'onglet */}
           <div className="overflow-auto">
             <InputProvider>
-            <LogsProvider>
-            {TAB_COMPONENTS[activeTab]}
-            </LogsProvider>
+              <LogsProvider>{TAB_COMPONENTS[activeTab]}</LogsProvider>
             </InputProvider>
           </div>
 

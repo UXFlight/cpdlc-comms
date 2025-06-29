@@ -17,8 +17,8 @@ export const DEFAULT_FLIGHT_DETAILS: FlightDetails = {
       CPDLC: "",
       COMMUNICATION: "",
       AFN_CONNECTING: "",
-      ATN_AVAILABILITY: ""
-    }
+      ATN_AVAILABILITY: "",
+    },
   },
   route: [
     {
@@ -29,6 +29,6 @@ export const DEFAULT_FLIGHT_DETAILS: FlightDetails = {
       mach: "",
       duration: "",
       fuel: "",
-    }
-  ]
+    },
+  ],
 };

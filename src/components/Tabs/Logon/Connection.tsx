@@ -4,8 +4,14 @@ import { LogsContext } from "@/context/LogsContext";
 import { useSocketListeners } from "@/hooks/useSocketListeners";
 
 export default function Connection() {
-  const { connectionState, isConnectionPossible, username, flightDetails, setFlightDetails } = useContext(UserContext);
-  const {setLogs} = useContext(LogsContext);
+  const {
+    connectionState,
+    isConnectionPossible,
+    username,
+    flightDetails,
+    setFlightDetails,
+  } = useContext(UserContext);
+  const { setLogs } = useContext(LogsContext);
 
   useSocketListeners([
     {
@@ -35,21 +41,19 @@ export default function Connection() {
     },
   ]);
 
-
   return (
-    <div className={`${(connectionState && isConnectionPossible) ? "container" : "" } flex items-center justify-between`}>
+    <div
+      className={`${connectionState && isConnectionPossible ? "container" : ""} flex items-center justify-between`}
+    >
       <div className="w-full">
         {connectionState === null ? (
-          <> 
-          </>
+          <></>
         ) : connectionState && isConnectionPossible ? (
           <div className="space-y-4">
             <div className="flex justify-between border-b border-white/10 pb-2">
               <div className="text-center flex-1">
                 <div className="logon-titles">Current Data Authority</div>
-                <div className="logon-flight-details">
-                  {username}
-                </div>
+                <div className="logon-flight-details">{username}</div>
               </div>
               <div className="text-center flex-1">
                 <div className="logon-titles">Next Data Authority</div>
@@ -82,16 +86,21 @@ export default function Connection() {
 
             <div className="space-y-1">
               {flightDetails.status?.connections &&
-                Object.entries(flightDetails.status.connections).map(([label, value]) => (
-                  <div key={label} className="flex justify-between items-center">
-                    <span className="text-white-80">
-                      {label.replaceAll("_", " ")}
-                    </span>
-                    <span className="px-2 py-[2px] bg-[#2c3832] text-green font-mono text-xs rounded">
-                      {String(value)}
-                    </span>
-                  </div>
-                ))}
+                Object.entries(flightDetails.status.connections).map(
+                  ([label, value]) => (
+                    <div
+                      key={label}
+                      className="flex justify-between items-center"
+                    >
+                      <span className="text-white-80">
+                        {label.replaceAll("_", " ")}
+                      </span>
+                      <span className="px-2 py-[2px] bg-[#2c3832] text-green font-mono text-xs rounded">
+                        {String(value)}
+                      </span>
+                    </div>
+                  ),
+                )}
             </div>
           </div>
         ) : (

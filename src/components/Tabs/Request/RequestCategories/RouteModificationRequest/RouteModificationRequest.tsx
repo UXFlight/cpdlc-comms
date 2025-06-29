@@ -31,20 +31,22 @@ export default function RouteModificationRequest({
   const [extras, setExtras] = useState<string[]>([]);
 
   const toggleExtra = (val: string) => {
-    setExtras(prev => prev.includes(val) ? prev.filter(m => m !== val) : [...prev, val]);
+    setExtras((prev) =>
+      prev.includes(val) ? prev.filter((m) => m !== val) : [...prev, val],
+    );
   };
 
   const resetAllInputs = () => {
-      setSelectedType("");
-      setHeading("");
-      setTrack("");
-      setDirect("");
-      setWeather("");
-      setAdditionalChecked(false);
-  }
+    setSelectedType("");
+    setHeading("");
+    setTrack("");
+    setDirect("");
+    setWeather("");
+    setAdditionalChecked(false);
+  };
 
   const handleToggle = () => {
-    setIsOpen(prev => !prev);
+    setIsOpen((prev) => !prev);
     if (!isOpen) {
       resetAllInputs();
     }
@@ -53,11 +55,16 @@ export default function RouteModificationRequest({
   const handleSend = () => {
     const value = (() => {
       switch (selectedType) {
-        case "Request Direct to Position": return direct;
-        case "Weather Deviation to Position": return weather;
-        case "Heading": return heading;
-        case "Ground Track": return track;
-        default: return "";
+        case "Request Direct to Position":
+          return direct;
+        case "Weather Deviation to Position":
+          return weather;
+        case "Heading":
+          return heading;
+        case "Ground Track":
+          return track;
+        default:
+          return "";
       }
     })();
 
@@ -85,8 +92,8 @@ export default function RouteModificationRequest({
   const setDm = (value: string) => {
     setRequest({
       messageRef: value.toLocaleUpperCase(),
-    })
-  }
+    });
+  };
 
   return (
     <RequestContainer
@@ -94,7 +101,7 @@ export default function RouteModificationRequest({
       isOpen={isOpen}
       onToggle={handleToggle}
       disabled={disabled}
-      showSendButton={!!(request.messageRef)}
+      showSendButton={!!request.messageRef}
       onSend={handleSend}
     >
       <div className="flex items-center gap-3">
@@ -113,13 +120,15 @@ export default function RouteModificationRequest({
             <CustomRadio
               value="Request Direct to Position"
               selected={selectedType} // dm22
-              onChange={(value)=> {
+              onChange={(value) => {
                 setSelectedType(value);
                 setDm("dm22");
               }}
               label={
                 <div className="inner-request-element">
-                  <p className="whitespace-nowrap">Request Direct to Position</p>
+                  <p className="whitespace-nowrap">
+                    Request Direct to Position
+                  </p>
                   <SelectDropdown
                     options={directOptions}
                     value={direct}
@@ -133,13 +142,15 @@ export default function RouteModificationRequest({
             <CustomRadio
               value="Weather Deviation to Position"
               selected={selectedType} // dm26
-               onChange={(value)=> {
-                setSelectedType(value)
+              onChange={(value) => {
+                setSelectedType(value);
                 setDm("dm26");
               }}
               label={
                 <div className="inner-request-element">
-                  <p className="whitespace-nowrap">Weather Deviation to Position</p>
+                  <p className="whitespace-nowrap">
+                    Weather Deviation to Position
+                  </p>
                   <SelectDropdown
                     options={weatherOptions}
                     value={weather}
@@ -195,7 +206,11 @@ export default function RouteModificationRequest({
               }
             />
           </div>
-          <ExtraCheckboxes extraMessages={ADDITIONAL_MESSAGES.route_modification_req} selected={extras} onChange={toggleExtra} />
+          <ExtraCheckboxes
+            extraMessages={ADDITIONAL_MESSAGES.route_modification_req}
+            selected={extras}
+            onChange={toggleExtra}
+          />
         </div>
       </div>
     </RequestContainer>

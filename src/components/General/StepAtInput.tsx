@@ -13,7 +13,6 @@ export default function StepAtInput({
   time,
   onChangeTime,
 }: SendAtInputProps) {
-    
   return (
     <div className="flex flex-row gap-6 mt-2">
       <p className="text-white/80 text-[16px] w-[264.865px] pl-[185px] uppercase">

@@ -1,16 +1,12 @@
-type Props = {
-  children: React.ReactNode;
-  label: string;
-  isOpen: boolean;
-  setIsOpen: (open: boolean) => void;
-};
+import { REPORT_OPTIONS } from "@/constants/Tabs/Reports";
+import { ReportsContainerProps } from "@/interface/props/Reports";
 
 export default function ReportsContainer({
   children,
   label,
   isOpen,
   setIsOpen,
-}: Props) {
+}: ReportsContainerProps) {
   return (
     <div className="flex flex-col gap-4 bg-[#1e1e1e] p-4 rounded-md border border-white/10 text-white text-sm">
       <div
@@ -29,7 +25,7 @@ export default function ReportsContainer({
       {children}
       <div className={`flex flex-col gap-4 ${isOpen ? "" : "hidden"}`}>
         <div className="flex justify-between mt-1 gap-2">
-          {["CLEAR", "SET", "SEND", "CANCEL"].map((label) => (
+          {REPORT_OPTIONS.map((label) => (
             <button
               key={label}
               className="flex-1 py-2 rounded border border-white/20 bg-[#2b2b2c] text-white/80 hover:bg-white/10 transition text-sm"

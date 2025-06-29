@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ReportsContainer from "./ReportsContainer";
+import ReportsContainer from "@/components/Tabs/Reports/ReportsContainer";
 
 export default function Monitoring() {
   const [isOpen, setIsOpen] = useState(false);
@@ -7,7 +7,7 @@ export default function Monitoring() {
   return (
     <ReportsContainer label="Monitoring" isOpen={isOpen} setIsOpen={setIsOpen}>
       <div className={`${isOpen ? "" : "hidden"}`}>
-        <p>je sais pas quoi mettre</p>
+        <p>...</p>
       </div>
     </ReportsContainer>
   );

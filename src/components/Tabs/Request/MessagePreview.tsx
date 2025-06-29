@@ -25,9 +25,9 @@ export default function MessagePreview() {
   }, [isSending]);
 
   useEffect(() => {
-     MessageService.getFormattedMessage(request)
+    MessageService.getFormattedMessage(request)
       .then((res) => {
-        setRequest({formattedMessage: res.message});
+        setRequest({ formattedMessage: res.message });
       })
       .catch((error) => {
         console.error("Error fetching formatted message:", error);
@@ -35,7 +35,10 @@ export default function MessagePreview() {
   }, []);
 
   const addMessageLog = () => {
-    socketService.send("add_log", {flight_id : flightDetails.flightInfo.flightId, request: request});
+    socketService.send("add_log", {
+      flight_id: flightDetails.flightInfo.flightId,
+      request: request,
+    });
   };
 
   return (
@@ -78,7 +81,6 @@ export default function MessagePreview() {
           onSend={() => {
             setIsSending(true);
             addMessageLog();
-            
           }}
         />
       </div>

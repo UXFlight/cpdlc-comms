@@ -1,6 +1,11 @@
 import { RadioProps } from "@/interface/props/General";
 
-export default function CustomRadio({ label, value, selected, onChange }: RadioProps) {
+export default function CustomRadio({
+  label,
+  value,
+  selected,
+  onChange,
+}: RadioProps) {
   const isChecked = value === selected;
 
   const handleClick = () => {

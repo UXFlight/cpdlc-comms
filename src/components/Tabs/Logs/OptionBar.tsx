@@ -21,8 +21,8 @@ export default function OptionBar({ message }: MessageProps) {
       callback: () => {
         setConfirmAction(true);
         setShowProgress(true);
-      }
-    }
+      },
+    },
   ]);
 
   const handleRequest = () => {
@@ -53,12 +53,16 @@ export default function OptionBar({ message }: MessageProps) {
   return (
     <div>
       {action === "load" && showProgress && <ProgressSteps />}
-      
+
       <div className="flex justify-center w-full overflow-x-hidden">
         <div className="flex flex-col items-center justify-center w-full h-auto bg-nav-bar border border-[2px] border-white-10 rounded-md py-[16px] px-[15.5px] gap-2">
-          
           <div className="flex flex-row gap-[31px] border border-[2px] border-white-10 rounded-md items-center justify-around w-[538px] h-[74px] py-[16px] px-[15.5px] bg-nav-bar">
-            {[ActionType.Load, ActionType.Standby, ActionType.Reject, ActionType.Accept].map((item) => (
+            {[
+              ActionType.Load,
+              ActionType.Standby,
+              ActionType.Reject,
+              ActionType.Accept,
+            ].map((item) => (
               <div
                 key={item}
                 className={`logs-options bg-white-10 px-4 py-2 rounded cursor-pointer ${
@@ -83,9 +87,7 @@ export default function OptionBar({ message }: MessageProps) {
             ))}
           </div>
 
-          {action && confirmAction && (
-            <SendButton onSend={handleSend} />
-          )}
+          {action && confirmAction && <SendButton onSend={handleSend} />}
         </div>
       </div>
     </div>

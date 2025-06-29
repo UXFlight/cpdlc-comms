@@ -16,9 +16,11 @@ export default function CharacterInput({
   const { targetInput } = useContext(InputContext);
   const [isFocused, setIsFocused] = useState(false);
 
-
   const handleChange = (value: string) => {
-    const clean = value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, length);
+    const clean = value
+      .toUpperCase()
+      .replace(/[^A-Z0-9]/g, "")
+      .slice(0, length);
     onChange(clean);
     if (onEnter) {
       onEnter(clean);
@@ -53,15 +55,14 @@ export default function CharacterInput({
               ${value[i] || disabled ? "border-b border-medium-gray" : "border-b border-[#1e1e1e]"}
             `}
           >
-            {value[i] ?? (
-              i === value.length && isFocused && !disabled ? (
+            {value[i] ??
+              (i === value.length && isFocused && !disabled ? (
                 <span className="text-white animate-blink absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
                   |
                 </span>
               ) : (
                 "_"
-              )
-            )}
+              ))}
           </div>
         ))}
         <input

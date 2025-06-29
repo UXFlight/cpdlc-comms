@@ -1,16 +1,11 @@
-export type RowProps = {
-  label: string;
-  value: string;
-  select?: boolean;
-  options?: string[];
-};
+import { ReportRowProps } from "@/interface/props/Reports";
 
 export default function ReportRow({
   label,
   value,
   select = false,
   options = [],
-}: RowProps) {
+}: ReportRowProps) {
   return (
     <div className="flex items-center justify-between gap-4">
       <span className="text-white/70 w-[120px]">{label}</span>

@@ -2,7 +2,13 @@ import { useContext, useState } from "react";
 import RequestContainer from "../../RequestContainer";
 import { RequestContext } from "../../../../../context/RequestContext";
 
-export function VoiceContactRequest({ onSend, disabled = false }: { onSend: () => void; disabled?: boolean }) {
+export function VoiceContactRequest({
+  onSend,
+  disabled = false,
+}: {
+  onSend: () => void;
+  disabled?: boolean;
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const [atFrequency, setAtFrequency] = useState(true);
   const [frequency, setFrequency] = useState("120 Hz");
@@ -12,7 +18,7 @@ export function VoiceContactRequest({ onSend, disabled = false }: { onSend: () =
     setRequest({
       arguments: ["voice_contact", atFrequency ? frequency : ""],
       messageRef: "VOICE_CONTACT",
-      timeStamp: new Date()
+      timeStamp: new Date(),
     });
     setIsOpen(false);
     onSend();

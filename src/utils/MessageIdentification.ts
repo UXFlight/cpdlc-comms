@@ -2,7 +2,10 @@ import { use, useContext } from "react";
 import { RequestCategory, RequestState } from "../interface/Request";
 import { RequestContext } from "../context/RequestContext";
 
-export function resolveMessageRef(category: RequestCategory, request: RequestState): string | null {
+export function resolveMessageRef(
+  category: RequestCategory,
+  request: RequestState,
+): string | null {
   const argCount = request.arguments?.length || 0;
   const hasTime = !!request.timeSelected;
   const hasPosition = !!request.positionSelected;
@@ -37,4 +40,3 @@ export function resolveMessageRef(category: RequestCategory, request: RequestSta
 
   return null; // si aucun cas ne matche
 }
-  

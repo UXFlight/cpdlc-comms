@@ -6,7 +6,13 @@ import { socketService } from "@/api/communications/socket/socketService";
 
 export default function Logon() {
   const length = 4;
-  const { connectionState, setConnectionState, isConnectionPossible, username, setUsername } = useContext(UserContext);
+  const {
+    connectionState,
+    setConnectionState,
+    isConnectionPossible,
+    username,
+    setUsername,
+  } = useContext(UserContext);
 
   const validValue = () => {
     return username.length === length;
@@ -20,16 +26,20 @@ export default function Logon() {
       (user) => user.username.toUpperCase().replace(/[^A-Z0-9]/g, "") === input,
     );
     if (result) {
-        setUsername(input.toUpperCase().replace(/[^A-Z0-9]/g, ""));
-        setConnectionState(true);
-        socketService.send("sucessfull_connection", input);
-        return result;
+      setUsername(input.toUpperCase().replace(/[^A-Z0-9]/g, ""));
+      setConnectionState(true);
+      socketService.send("sucessfull_connection", input);
+      return result;
     }
   }
 
   return (
     <div className="container flex items-center justify-between">
-      <h2 className={`${!isConnectionPossible ? "text-white/40" : "text-white"}`}>Logon to</h2>
+      <h2
+        className={`${!isConnectionPossible ? "text-white/40" : "text-white"}`}
+      >
+        Logon to
+      </h2>
       <div>
         <CharacterInput
           value={username}
@@ -55,7 +65,7 @@ export default function Logon() {
           </span>
         </button>
       )}
-      {(connectionState && isConnectionPossible) && (
+      {connectionState && isConnectionPossible && (
         <button
           disabled
           className="flex items-center justify-center gap-2 px-4 py-2 w-[149px] h-[48px] bg-green text-white text-sm font-semibold rounded-md"

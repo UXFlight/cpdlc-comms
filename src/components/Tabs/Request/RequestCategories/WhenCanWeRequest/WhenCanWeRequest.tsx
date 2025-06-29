@@ -2,7 +2,13 @@ import { useState } from "react";
 import CustomRadio from "../../../../General/CustomRadio";
 import RequestContainer from "../../RequestContainer";
 
-export function WhenCanWeRequest({ onSend, disabled = false }: { onSend: () => void; disabled?: boolean }) {
+export function WhenCanWeRequest({
+  onSend,
+  disabled = false,
+}: {
+  onSend: () => void;
+  disabled?: boolean;
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 

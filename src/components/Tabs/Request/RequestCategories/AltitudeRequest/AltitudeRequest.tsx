@@ -1,16 +1,12 @@
 import { useContext, useState } from "react";
-import { RequestContext } from "../../../../../context/RequestContext";
-import { RequestCategory } from "../../../../../interface/Request";
-import RequestContainer from "../../RequestContainer";
+import { RequestContext } from "@/context/RequestContext";
+import { RequestCategory } from "@/interface/Request";
+import RequestContainer from "@/components/Tabs/Request/RequestContainer";
 import ExtraCheckboxes from "../../AdditionalMessages";
 import { ADDITIONAL_MESSAGES } from "../../../../../constants/additionalMessages";
 import CharacterInput from "../../../../General/CharacterInput";
 import StepAtInput from "../../../../General/StepAtInput";
-import { resolve } from "path";
 import { resolveMessageRef } from "../../../../../utils/MessageIdentification";
-import { request } from "http";
-import { socketService } from "../../../../../api/communications/socket/socketService";
-import { UserContext } from "../../../../../context/UserContext";
 
 export default function AltitudeRequest({
   onSend,
@@ -20,7 +16,6 @@ export default function AltitudeRequest({
   disabled?: boolean;
 }) {
   const { request, setRequest } = useContext(RequestContext);
-  const {flightDetails} = useContext(UserContext);
 
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
@@ -35,13 +30,13 @@ export default function AltitudeRequest({
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleExtra = (val: string) => {
-    setExtras(prev =>
-      prev.includes(val) ? prev.filter((m) => m !== val) : [...prev, val]
+    setExtras((prev) =>
+      prev.includes(val) ? prev.filter((m) => m !== val) : [...prev, val],
     );
   };
 
   const handleToggle = () => {
-    setIsOpen(prev => !prev);
+    setIsOpen((prev) => !prev);
     if (!isOpen) {
       setFrom("");
       setTo("");
@@ -53,24 +48,26 @@ export default function AltitudeRequest({
     }
   };
 
- const handleSend = () => {
-  if (!from) return;
+  const handleSend = () => {
+    if (!from) return;
 
-  const args = to ? [from, to] : [from];
+    const args = to ? [from, to] : [from];
 
-  const newRequest = {
-    ...request,
-    arguments: args,
-    ...(positionSelected && position ? { positionSelected: position } : {}),
-    ...(timeSelected && time.hh && time.mm ? { timeSelected: { hh: time.hh, mm: time.mm } } : {})
+    const newRequest = {
+      ...request,
+      arguments: args,
+      ...(positionSelected && position ? { positionSelected: position } : {}),
+      ...(timeSelected && time.hh && time.mm
+        ? { timeSelected: { hh: time.hh, mm: time.mm } }
+        : {}),
+    };
+
+    const ref = resolveMessageRef(RequestCategory.ALTITUDE, newRequest);
+
+    setRequest({ ...newRequest, messageRef: ref, additional: extras });
+
+    onSend();
   };
-
-  const ref = resolveMessageRef(RequestCategory.ALTITUDE, newRequest);
-
-  setRequest({ ...newRequest, messageRef: ref, additional: extras });
-
-  onSend();
-};
 
   return (
     <RequestContainer
@@ -82,9 +79,10 @@ export default function AltitudeRequest({
       onSend={handleSend}
     >
       <div className="flex flex-col gap-4 mt-2">
-
         <div className="flex flex-row items-center gap-6">
-          <p className="text-white/80 text-[16px] uppercase">Altitude (or block altitude)</p>
+          <p className="text-white/80 text-[16px] uppercase">
+            Altitude (or block altitude)
+          </p>
           <div className="flex items-center gap-5">
             <CharacterInput
               value={from}
@@ -102,10 +100,9 @@ export default function AltitudeRequest({
           </div>
         </div>
 
-        {/* Step at */}
         <div className={`${isOpen ? "" : "hidden"}`}>
           <StepAtInput
-            disabled={disabled || (from !== "" && to !== "")} 
+            disabled={disabled || (from !== "" && to !== "")}
             positionSelected={positionSelected}
             onTogglePosition={() => {
               setPositionSelected(!positionSelected);
@@ -122,8 +119,6 @@ export default function AltitudeRequest({
             onChangeTime={(hh, mm) => setTime({ hh, mm })}
           />
 
-
-          {/* Additional messages */}
           <div>
             <ExtraCheckboxes
               extraMessages={ADDITIONAL_MESSAGES.altitude_req}
