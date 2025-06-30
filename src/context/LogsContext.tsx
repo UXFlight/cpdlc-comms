@@ -38,9 +38,8 @@ export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     if (!filterBy) return;
 
-    MessageService.filterLogsArray( logs )
+    MessageService.filterLogsArray(logs)
       .then((res) => {
-        console.log("Filtered message received:", res.logs);
         setLogs(res.logs);
       })
       .catch((error) => {
@@ -49,7 +48,7 @@ export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
   }, [filterBy]);
 
   const addLog = (log: Log) => {
-    setLogs((prev) => [log, ...prev]);
+    setLogs((prev) => [...prev, log]);
   };
 
   const changeStatus = (logId: string, newState: string) => {

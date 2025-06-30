@@ -2,9 +2,9 @@
 import React, { createContext, useState } from "react";
 import type { FlightDetails } from "@/interface/FlightDetails";
 import { DEFAULT_FLIGHT_DETAILS } from "@/constants/context/FlightDetails";
-import { UserContextType } from "@/interface/UserContext";
+import type { GlobalContextType } from "@/interface/GlobalContext";
 
-export const UserContext = createContext<UserContextType>({
+export const GlobalContext = createContext<GlobalContextType>({
   connectionState: null,
   setConnectionState: () => {},
   isConnectionPossible: false,
@@ -15,8 +15,8 @@ export const UserContext = createContext<UserContextType>({
   setFlightDetails: () => {},
 });
 
-export const UserProvider = ({ children }: { children: React.ReactNode }) => {
-  const [connectionState, setConnectionState] = useState<boolean|null>(null);
+export const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
+  const [connectionState, setConnectionState] = useState<boolean | null>(null);
   const [isConnectionPossible, setIsConnectionPossible] =
     useState<boolean>(false);
   const [username, setUsername] = useState<string>("");
@@ -25,7 +25,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   );
 
   return (
-    <UserContext.Provider
+    <GlobalContext.Provider
       value={{
         connectionState,
         setConnectionState,
@@ -38,6 +38,6 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
       }}
     >
       {children}
-    </UserContext.Provider>
+    </GlobalContext.Provider>
   );
 };

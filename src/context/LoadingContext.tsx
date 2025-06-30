@@ -10,7 +10,7 @@
 // };
 
 // // Valeur par défaut
-// export const UserContext = createContext<LoadingContextType>({
+// export const GlobalContext = createContext<LoadingContextType>({
 
 // });
 
@@ -22,7 +22,7 @@
 //   const [flightDetails, setFlightDetails] = useState<FlightDetails>(defaultFlightDetails);
 
 //   return (
-//     <UserContext.Provider
+//     <GlobalContext.Provider
 //       value={{
 //         connectionState,
 //         setConnectionState,
@@ -35,6 +35,6 @@
 //       }}
 //     >
 //       {children}
-//     </UserContext.Provider>
+//     </GlobalContext.Provider>
 //   );
 // };

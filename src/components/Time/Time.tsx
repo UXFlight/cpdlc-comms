@@ -28,7 +28,7 @@ export default function Time() {
 
   return (
     <div className="flex items-baseline gap-1">
-      <span className="text-[12px] font-bold text-white/80 leading-none font-sans">
+      <span className="font-bold text-white/80 leading-none font-sans">
         {time}
       </span>
     </div>

@@ -4,10 +4,7 @@ import RequestContainer from "@/components/Tabs/Request/RequestContainer";
 import { RequestProps } from "@/interface/props/Request";
 import { ADDITIONAL_MESSAGES } from "@/constants/tabs/Request";
 
-export function SpeedRequest({
-  onSend,
-  disabled = false,
-}: RequestProps) {
+export function SpeedRequest({ onSend, disabled = false }: RequestProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [range, setRange] = useState({ from: "FL350", to: "FL450" });
   const [extras, setExtras] = useState<string[]>([]);

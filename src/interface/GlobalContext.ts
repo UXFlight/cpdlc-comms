@@ -1,6 +1,6 @@
 import { FlightDetails } from "@/interface/FlightDetails";
 
-export interface UserContextType {
+export interface GlobalContextType {
   connectionState: boolean | null;
   setConnectionState: React.Dispatch<React.SetStateAction<boolean | null>>;
   isConnectionPossible: boolean;
@@ -9,4 +9,4 @@ export interface UserContextType {
   setUsername: React.Dispatch<React.SetStateAction<string>>;
   flightDetails: FlightDetails;
   setFlightDetails: React.Dispatch<React.SetStateAction<FlightDetails>>;
-};
+}

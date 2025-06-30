@@ -11,4 +11,4 @@ export interface RequestContextType {
   request: Request;
   setRequest: (data: Partial<Request>) => void;
   resetRequest: () => void;
-};
+}

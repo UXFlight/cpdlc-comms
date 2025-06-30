@@ -14,11 +14,11 @@ import ConnectionBar from "@/components/ConnectionBar/ConnectionBar";
 import { InputProvider } from "@/context/InputContext";
 import { socketService } from "@/api/communications/socket/socketService";
 import { LogsProvider } from "@/context/LogsContext";
-import { UserContext } from "@/context/UserContext";
+import { GlobalContext } from "@/context/GlobalContext";
 
 export default function CpdlcMainView() {
   const [activeTab, setActiveTab] = useState("logon");
-  const { flightDetails } = useContext(UserContext);
+  const { flightDetails } = useContext(GlobalContext);
 
   const TAB_COMPONENTS: Record<string, JSX.Element> = {
     logon: <LogonTab />,
@@ -51,14 +51,14 @@ export default function CpdlcMainView() {
           </div>
 
           {/* contenu de l'onglet */}
-          <div className="overflow-auto">
+          <div className="h-full w-full overflow-auto">
             <InputProvider>
               <LogsProvider>{TAB_COMPONENTS[activeTab]}</LogsProvider>
             </InputProvider>
           </div>
 
           {/* footer en bas */}
-          <div className="self-end mt-2">
+          <div className="mt-2">
             <ConnectionBar />
           </div>
         </div>

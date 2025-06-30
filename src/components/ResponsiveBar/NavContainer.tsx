@@ -8,7 +8,7 @@ export default function NavContainer({
   activeTab,
 }: NavContainerProps) {
   return (
-    <nav className="flex flex-nowrap justify-between">
+    <nav className="flex w-full justify-between">
       {TABS.map((page) => (
         <NavButton
           key={page.page}

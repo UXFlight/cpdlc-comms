@@ -13,6 +13,6 @@ export const MessageService = {
 
   //validateAtcLogon: (data) => http.post<boolean>("validateAtcLogon", data),
 
-  filterLogsArray: (data : Log[]) =>
+  filterLogsArray: (data: Log[]) =>
     http.post<{ logs: Log[] }>("filterLogsArray", data),
 };

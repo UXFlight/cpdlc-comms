@@ -1,4 +1,4 @@
-import {Request} from "@/interface/Request";
+import { Request } from "@/interface/Request";
 
 export const DEFAULT_REQUEST: Request = {
   arguments: null,

@@ -17,4 +17,4 @@ export interface RequestContainerProps {
   showSendButton?: boolean;
   onSend?: () => void;
   children: React.ReactNode;
-};
+}

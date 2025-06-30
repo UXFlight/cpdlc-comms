@@ -1,18 +1,17 @@
+import { useDelay } from "@/hooks/useDelay";
 import { SendButtonProps } from "@/interface/props/General";
 import { useState, useEffect } from "react";
 
 export default function SendButton({ onSend }: SendButtonProps) {
   const [isSending, setIsSending] = useState(false);
   const [isSent, setIsSent] = useState(false);
+  const { delay } = useDelay();
 
   useEffect(() => {
     if (isSending) {
-      const timeout = setTimeout(() => {
-        setIsSent(true);
-        setIsSending(false);
-      }, 2000);
-
-      return () => clearTimeout(timeout);
+      delay(2000);
+      setIsSent(true);
+      setIsSending(false);
     }
   }, [isSending]);
 

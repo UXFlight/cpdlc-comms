@@ -9,7 +9,7 @@ export const STEPS = ["Loaded", "Executed", "Responded", "Sent"];
 
 export const DROPDOWN_OPTIONS = [
   "NEW",
-  "OPENED",
+  "OPEN",
   "ACCEPTED",
   "REJECTED",
   "STANDBY",
@@ -18,7 +18,7 @@ export const DROPDOWN_OPTIONS = [
 
 export const MESSAGE_STATE = {
   NEW: "new",
-  OPENED: "opened",
+  OPEN: "open",
   ACCEPTED: "accepted",
   REJECTED: "rejected",
   TIMEOUT: "time out",

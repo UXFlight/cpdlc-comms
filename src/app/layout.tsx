@@ -1,4 +1,4 @@
-import { UserProvider } from "@/context/UserContext";
+import { GlobalProvider } from "@/context/GlobalContext";
 import "./globals.css";
 
 export const metadata = {
@@ -13,9 +13,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body /*className="bg-[url('/bg-cockpit4.jpg')] bg-cover bg-center h-screen w-screen"*/
-      >
-        <UserProvider>{children}</UserProvider>
+      <body className="overflow-hidden">
+        <GlobalProvider>{children}</GlobalProvider>
       </body>
     </html>
   );

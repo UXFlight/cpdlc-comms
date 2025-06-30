@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { UserContext } from "@/context/UserContext";
+import { GlobalContext } from "@/context/GlobalContext";
 import { InputContext } from "@/context/InputContext";
 import { CharacterInputProps } from "@/interface/props/General";
 
@@ -12,7 +12,7 @@ export default function CharacterInput({
   onEnter,
 }: CharacterInputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
-  const { isConnectionPossible } = useContext(UserContext);
+  const { isConnectionPossible } = useContext(GlobalContext);
   const { targetInput } = useContext(InputContext);
   const [isFocused, setIsFocused] = useState(false);
 

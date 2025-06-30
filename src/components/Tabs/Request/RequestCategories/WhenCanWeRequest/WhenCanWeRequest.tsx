@@ -3,10 +3,7 @@ import CustomRadio from "@/components/General/CustomRadio";
 import RequestContainer from "@/components/Tabs/Request/RequestContainer";
 import { RequestProps } from "@/interface/props/Request";
 
-export function WhenCanWeRequest({
-  onSend,
-  disabled = false,
-}: RequestProps) {
+export function WhenCanWeRequest({ onSend, disabled = false }: RequestProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 

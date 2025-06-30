@@ -14,17 +14,20 @@ import AltitudeRequest from "@/components/Tabs/Request/RequestCategories/Altitud
 export default function RequestTab() {
   const [preview, setPreview] = useState(false);
   const REQUEST_CATEGORIES: JSX.Element[] = [
-  <AltitudeRequest  disabled={preview} onSend={() => setPreview(true)} />,
-  <RouteModificationRequest  disabled={preview} onSend={() => setPreview(true)} />,
-  <OffsetRequest disabled={preview} onSend={() => setPreview(true)}/>,
-  <SpeedRequest disabled={preview} onSend={() => setPreview(true)}/>,
-  <WhenCanWeRequest disabled={preview} onSend={() => setPreview(true)}/>,
-  <ClearanceRequest disabled={preview} onSend={() => setPreview(true)}/>,
-  <VmcDescentRequest disabled={preview} onSend={() => setPreview(true)}/>,
-  <VoiceContactRequest disabled={preview} onSend={() => setPreview(true)}/>,
-  <FreeTextRequest disabled={preview} onSend={() => setPreview(true)}/>,
+    <AltitudeRequest disabled={preview} onSend={() => setPreview(true)} />,
+    <SpeedRequest disabled={preview} onSend={() => setPreview(true)} />,
+    <OffsetRequest disabled={preview} onSend={() => setPreview(true)} />,
+    <RouteModificationRequest
+      disabled={preview}
+      onSend={() => setPreview(true)}
+    />,
+    <WhenCanWeRequest disabled={preview} onSend={() => setPreview(true)} />,
+    <ClearanceRequest disabled={preview} onSend={() => setPreview(true)} />,
+    <VmcDescentRequest disabled={preview} onSend={() => setPreview(true)} />,
+    <VoiceContactRequest disabled={preview} onSend={() => setPreview(true)} />,
+    <FreeTextRequest disabled={preview} onSend={() => setPreview(true)} />,
   ];
-  
+
   return (
     <RequestProvider>
       <div
@@ -36,7 +39,7 @@ export default function RequestTab() {
         {REQUEST_CATEGORIES.map((Component, index) => (
           <div key={index} className="flex flex-col gap-4">
             {Component}
-          </div>  
+          </div>
         ))}
         {preview && (
           <div className="absolute bottom-[0px] left-0 w-full px-2 z-50">

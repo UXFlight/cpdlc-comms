@@ -1,110 +1,72 @@
 import { useContext } from "react";
 import { LogsContext } from "@/context/LogsContext";
-import { UserContext } from "@/context/UserContext";
+import { GlobalContext } from "@/context/GlobalContext";
 import { MessageProps } from "@/interface/props/Logs";
 
 export default function Message({ message }: MessageProps) {
   const { setCurrentLog, changeStatus } = useContext(LogsContext);
-  const { username } = useContext(UserContext);
+  const { username } = useContext(GlobalContext);
 
   const handleClick = () => {
     setCurrentLog(message);
     if (message.status === "new") {
-      changeStatus(message.id, "opened");
+      changeStatus(message.id, "open");
     }
   };
 
-  const colorState = () => {
+  const getStatusClass = () => {
     switch (message.status) {
-      case "opened":
-        return "text-white-80";
+      case "open":
+        return "status-open";
       case "accepted":
-        return "text-green";
+        return "status-accepted";
       case "rejected":
-        return "text-white-40";
+        return "status-rejected";
       case "time out":
-        return "text-gray-500";
+        return "status-timeout";
       default:
-        return "text-light-blue";
+        return "status-new";
     }
   };
 
-  const messageType = () => {
-    if (message.status === "new") {
-      return "/up-arrow.svg";
-    } else if (message.status === "opened") {
-      if (message.direction === "downlink") {
-        return "/white-down-arrow.svg";
-      } else {
-        return "/arrow-up-bold-box.svg";
-      }
-    } else if (message.status === "accepted") {
-      if (message.direction === "downlink") {
-        return "/green-down-arrow.svg";
-      } else {
-        return "/arrow-up-bold-box.svg";
-      }
-    } else if (message.status === "rejected") {
-      if (message.direction === "downlink") {
-        return "/down-rejected.svg";
-      }
-    } else {
-      if (message.direction === "downlink") {
-        return "/white-down-arrow.svg";
-      } else {
-        return "/arrow-up-bold-box.svg";
-      }
-    }
-  };
-
-  const handleFromTo = () => {
-    return message.direction === "downlink" ? "To" : "From";
-  };
+  const isDownlink = message.direction === "downlink";
+  const containerClass = isDownlink ? "message-downlink" : "message-uplink";
+  const bubbleClass = isDownlink
+    ? "message-downlink-bubble"
+    : "message-uplink-bubble";
+  const directionLine = isDownlink
+    ? "direction-line-downlink"
+    : "direction-line-uplink";
+  const textAlign = isDownlink ? "text-left" : "text-right";
 
   return (
     <>
       {message ? (
-        <div
-          className={`flex justify-center items-center cursor-pointer`}
-          onClick={() => handleClick()}
-        >
-          <img
-            src={messageType()}
-            alt="arrow"
-            className="w-[22px] h-[22px] mb-[30px]"
-          ></img>
-          <div className="container flex flex-col items-start w-[516px] h-[87px] p-[8px]">
-            <div className="flex items-center w-full h-auto justify-between align-baseline">
-              <div>
-                <span className="uppercase text-white-40 font-medium tetx-[14px]">
-                  {handleFromTo()}
-                </span>{" "}
-                {/*source a voir selon le format de la reception*/}
-                <span className="ml-1 font-medium tetx-[14px]">{username}</span>
-              </div>
-              <div className="h-[17px] bg-white-10 rounded flex items-center justify-center">
-                <span
-                  className={`uppercase text-[14px] ${colorState()} font-semibold`}
-                >
-                  {message.status}
+        <div className={`message-container ${containerClass}`}>
+          <div className={`${bubbleClass}`} onClick={handleClick}>
+            <div className={`message-header ${textAlign}`}>
+              <div className="flex items-center gap-2">
+                <span className="message-from">
+                  {message.direction === "uplink" ? "FROM" : "TO"}
                 </span>
+                <span className="message-username">{username}</span>
+              </div>
+              <div className={`message-status ${getStatusClass()}`}>
+                {message.status.toUpperCase()}
               </div>
             </div>
-            <div className="-mt-1 flex items-center w-full h-auto justify-between align-baseline">
-              <span
-                className={`font-semibold text-[16px] not-italic leading-norm ${colorState()} self-stretch tracking-wider`}
-              >
-                {message.element}
-              </span>
-              <div className="text-white-40 text-right font-medium text-[15px] not-italic leading-normal font-sans flex-shrink-0">
-                {message.timeStamp}
-              </div>
+
+            <div className={textAlign}>
+              <div className="message-content">{message.element}</div>
+              <div className="message-timestamp">{message.timeStamp}</div>
             </div>
+
+            <div className={directionLine}></div>
           </div>
         </div>
       ) : (
         <div className="flex items-center justify-center w-full h-full">
-          <p className="text-white-40">An error occurred</p>
+          <p className="text-white/40">An error occurred</p>
         </div>
       )}
     </>

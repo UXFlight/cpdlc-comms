@@ -3,19 +3,19 @@ import { RequestContext } from "@/context/RequestContext";
 import SendButton from "@/components/General/SendButton";
 import { MessageService } from "@/api/services/messageService";
 import { socketService } from "@/api/communications/socket/socketService";
-import { UserContext } from "@/context/UserContext";
+import { GlobalContext } from "@/context/GlobalContext";
 import { useDelay } from "@/hooks/useDelay";
 
 export default function MessagePreview() {
   const { request, setRequest } = useContext(RequestContext);
-  const { flightDetails } = useContext(UserContext);
+  const { flightDetails } = useContext(GlobalContext);
   const [isSending, setIsSending] = useState(false);
   const [isSent, setIsSent] = useState(false);
   const { delay } = useDelay();
 
   useEffect(() => {
     if (isSending) {
-      simulateDelay()
+      simulateDelay();
     }
   }, [isSending]);
 
@@ -33,7 +33,7 @@ export default function MessagePreview() {
     await delay(2000);
     setIsSent(true);
     setIsSending(false);
-  }
+  };
 
   const addMessageLog = () => {
     socketService.send("add_log", {

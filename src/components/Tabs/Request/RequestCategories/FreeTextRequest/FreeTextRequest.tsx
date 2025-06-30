@@ -3,10 +3,7 @@ import RequestContainer from "@/components/Tabs/Request/RequestContainer";
 import { RequestContext } from "@/context/RequestContext";
 import { RequestProps } from "@/interface/props/Request";
 
-export function FreeTextRequest({
-  onSend,
-  disabled = false,
-}: RequestProps) {
+export function FreeTextRequest({ onSend, disabled = false }: RequestProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [text, setText] = useState("");
   const { setRequest } = useContext(RequestContext);

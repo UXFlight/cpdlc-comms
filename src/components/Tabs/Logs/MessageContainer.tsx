@@ -5,25 +5,48 @@ export default function MessageContainer({ messages }: MessageContainerProps) {
   const noMessages = !messages || messages.length === 0;
 
   return (
-    <div className="flex flex-col items-center justify-start h-full">
+    <div className="message-wrapper">
       {noMessages ? (
-        <div className="text-center text-white/70 flex flex-col items-center gap-4 animate-fade-in">
-          <div className="w-20 h-20 rounded-full border-4 border-white/20 flex items-center justify-center">
-            <div className="w-4 h-4 bg-white/40 rounded-full animate-ping" />
+        <div className="message-empty-wrapper">
+          <div className="message-empty-content">
+            <div className="message-empty-icon">
+              <div className="message-empty-ping" />
+            </div>
+            <h2 className="message-empty-title">No New Messages</h2>
+            <p className="message-empty-subtitle">
+              All communications are up to date. You'll be notified when a new
+              message arrives.
+            </p>
           </div>
-          <h2 className="text-2xl font-bold tracking-wide uppercase text-white">
-            No New Messages
-          </h2>
-          <p className="text-base text-white/40 max-w-md">
-            All communications are up to date. You’ll be notified when a new
-            message arrives.
-          </p>
         </div>
       ) : (
-        <div className="flex flex-col w-full gap-4">
-          {messages.map((msg) => (
-            <Message key={msg.id} message={msg} />
-          ))}
+        <div className="message-scroll-area">
+          <div className="message-scroll-inner">
+            {messages.map((msg) => {
+              return (
+                <div key={msg.id}>
+                  <Message message={msg} />
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="message-footer">
+            <div className="message-footer-meta">
+              <div className="message-dot-group">
+                <div className="message-dot bg-green-500/60" />
+                <span>Uplink</span>
+              </div>
+              <div className="message-divider" />
+              <div className="message-dot-group">
+                <div className="message-dot bg-blue-500/60" />
+                <span>Downlink</span>
+              </div>
+              <div className="message-footer-count">
+                {messages.length} message{messages.length !== 1 ? "s" : ""}
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </div>

@@ -1,28 +1,31 @@
 "use client";
 import { useContext } from "react";
 import Time from "@/components/Time/Time";
-import { UserContext } from "@/context/UserContext";
+import { GlobalContext } from "@/context/GlobalContext";
 
 export default function ConnectionBar() {
-  const { connectionState, username } = useContext(UserContext);
+  const { connectionState, username } = useContext(GlobalContext);
 
   return (
     <footer
-      className={`h-[24px] flex justify-between items-center px-4 w-full
+      className={`h-[30px] flex justify-between items-center px-4 w-full
         ${connectionState ? "bg-green" : "bg-nav-bar"}`}
     >
       <div className="flex items-center gap-2">
         <img
           src={connectionState ? "/connected.svg" : "/disconnected.svg"}
           alt={connectionState ? "Connected" : "Not Connected"}
-          className="w-4 h-4"
+          className="w-5 h-5"
         />
-        <p className="text-white-100 text-[12px] uppercase">
-          {connectionState ? `Connected to ${username}` : "Not Connected"}
+        <p className="text-white-80 text-[16px] uppercase">
+          Connected to{" "}
+          <span className="font-bold tracking-wider text-white">
+            {connectionState ? username : ""}
+          </span>
         </p>
       </div>
       <div>
-        <div className="text-white-100 text-[12px] uppercase">
+        <div className="text-white-100 text-[16px] uppercase">
           <Time />
         </div>
       </div>

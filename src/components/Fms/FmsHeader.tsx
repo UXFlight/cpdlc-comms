@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { UserContext } from "@/context/UserContext";
+import { GlobalContext } from "@/context/GlobalContext";
 
 export default function FmsHeader() {
-  const { flightDetails } = useContext(UserContext);
+  const { flightDetails } = useContext(GlobalContext);
   return (
     <div className="flex justify-between items-center mb-2">
       <h2 className="text-xl font-semibold">FMS</h2>

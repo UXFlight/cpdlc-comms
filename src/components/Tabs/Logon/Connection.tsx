@@ -1,38 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
-import { UserContext } from "@/context/UserContext";
+import { GlobalContext } from "@/context/GlobalContext";
 import { LogsContext } from "@/context/LogsContext";
 import { useSocketListeners } from "@/hooks/useSocketListeners";
 
 export default function Connection() {
-  const {
-    connectionState,
-    isConnectionPossible,
-    username,
-    flightDetails,
-    setFlightDetails,
-  } = useContext(UserContext);
+  const { connectionState, isConnectionPossible, username, flightDetails } =
+    useContext(GlobalContext);
   const { setLogs } = useContext(LogsContext);
 
   useSocketListeners([
-    {
-      event: "flight_details",
-      callback: (data) => {
-        const newDetails = {
-          dataAuthority: {
-            current: data.CDA,
-            next: data.NDA,
-          },
-          flightInfo: {
-            flightId: data.flight_id,
-            departureAirport: data.departure,
-            arrivalAirport: data.arrival,
-          },
-          status: { ...data.status },
-          route: data.route || [],
-        };
-        setFlightDetails(newDetails);
-      },
-    },
     {
       event: "load_logs",
       callback: (data) => {
@@ -103,7 +79,7 @@ export default function Connection() {
                 )}
             </div>
           </div>
-        ) : (
+        ) : username.length === 4 ? (
           <div className="flex flex-col items-center justify-center py-8 text-yellow-200 bg-[#2b2b2b]/50 rounded-lg gap-2 border border-yellow-300/20">
             <p className="text-sm font-bold tracking-wide uppercase">
               Connexion non établie
@@ -112,6 +88,8 @@ export default function Connection() {
               ATC {username} n’est disponible pour le moment.
             </p>
           </div>
+        ) : (
+          <></>
         )}
       </div>
     </div>
