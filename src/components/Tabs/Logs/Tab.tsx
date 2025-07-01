@@ -52,6 +52,13 @@ export default function LogsTab() {
               <MessageDisplayTab message={currentLog} />
             </div>
             <div className="mt-auto mb-4">
+            <div className="flex items-center justify-center py-2">
+              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+                <div className="px-4 text-white/40 text-xs uppercase tracking-wider">
+                Actions Available 
+                </div>
+              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+            </div>
               <OptionBar message={currentLog} />
             </div>
           </div>

@@ -34,12 +34,12 @@ export default function MessageContainer({ messages }: MessageContainerProps) {
           <div className="message-footer">
             <div className="message-footer-meta">
               <div className="message-dot-group">
-                <div className="message-dot bg-green-500/60" />
+                <div className="message-dot bg-green/60" />
                 <span>Uplink</span>
               </div>
               <div className="message-divider" />
               <div className="message-dot-group">
-                <div className="message-dot bg-blue-500/60" />
+                <div className="message-dot bg-dark-blue/60" />
                 <span>Downlink</span>
               </div>
               <div className="message-footer-count">
