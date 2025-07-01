@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { LogsContext } from "@/context/LogsContext";
 import { GlobalContext } from "@/context/GlobalContext";
 import { MessageProps } from "@/interface/props/Logs";
+import { getStatusClass } from "@/utils/getStatus";
 
 export default function Message({ message }: MessageProps) {
   const { setCurrentLog, changeStatus } = useContext(LogsContext);
@@ -11,21 +12,6 @@ export default function Message({ message }: MessageProps) {
     setCurrentLog(message);
     if (message.status === "new") {
       changeStatus(message.id, "open");
-    }
-  };
-
-  const getStatusClass = () => {
-    switch (message.status) {
-      case "open":
-        return "status-open";
-      case "accepted":
-        return "status-accepted";
-      case "rejected":
-        return "status-rejected";
-      case "time out":
-        return "status-timeout";
-      default:
-        return "status-new";
     }
   };
 
@@ -51,7 +37,7 @@ export default function Message({ message }: MessageProps) {
                 </span>
                 <span className="message-username">{username}</span>
               </div>
-              <div className={`message-status ${getStatusClass()}`}>
+              <div className={`message-status ${getStatusClass(message)}`}>
                 {message.status.toUpperCase()}
               </div>
             </div>

@@ -4,7 +4,7 @@ import RequestContainer from "@/components/Tabs/Request/RequestContainer";
 import AdditionalMessages from "@/components/Tabs/Request/AdditionalMessages";
 import CharacterInput from "@/components/General/CharacterInput";
 import StepAtInput from "@/components/General/StepAtInput";
-import { resolveMessageRef } from "@/utils/MessageIdentification";
+import { resolveMessageRef } from "@/utils/messageIdentification";
 import { RequestProps } from "@/interface/props/Request";
 import { ADDITIONAL_MESSAGES, RequestCategory } from "@/constants/tabs/Request";
 

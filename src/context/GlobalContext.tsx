@@ -2,7 +2,7 @@
 import React, { createContext, useState } from "react";
 import type { FlightDetails } from "@/interface/FlightDetails";
 import { DEFAULT_FLIGHT_DETAILS } from "@/constants/context/FlightDetails";
-import type { GlobalContextType } from "@/interface/GlobalContext";
+import type { GlobalContextType } from "@/interface/context/GlobalContext";
 
 export const GlobalContext = createContext<GlobalContextType>({
   connectionState: null,

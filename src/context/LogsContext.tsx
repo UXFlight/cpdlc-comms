@@ -4,7 +4,7 @@ import React, { createContext, useState, useEffect } from "react";
 import type { Log } from "@/interface/Logs";
 import { socketService } from "@/api/communications/socket/socketService";
 import { MessageService } from "@/api/services/messageService";
-import { LogsContextType } from "@/interface/LogContext";
+import { LogsContextType } from "@/interface/context/LogContext";
 import { useSocketListeners } from "@/hooks/useSocketListeners";
 
 export const LogsContext = createContext<LogsContextType>({
