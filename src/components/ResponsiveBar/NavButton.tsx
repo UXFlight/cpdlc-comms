@@ -13,7 +13,9 @@ export default function NavButton({
   const isHome = id === "logon";
 
   return (
-    <div
+    <div onClick={() => {
+            if (connectionState) onTabChange(id);
+          }}
       className={`button-base ${connectionState ? "btn-3d" : ""} ${
         active
           ? "bg-white-10 border-b-4 border-green"
@@ -33,8 +35,6 @@ export default function NavButton({
         </button>
       ) : (
         <button
-          disabled={!connectionState}
-          onClick={() => onTabChange(id)}
           className={`w-[65px] h-[73px] flex flex-col items-center justify-center font-bold text-xs ${
             label === "print"
               ? "border border-green rounded-full px-1 py-1"

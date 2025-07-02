@@ -1,22 +1,22 @@
 "use client";
 import React, { createContext, useState } from "react";
 
-// structure du contexte
 type InputContextType = {
-  targetInput: boolean;
-  setTargetInput: React.Dispatch<React.SetStateAction<boolean>>;
+  targetInput: string;
+  setTargetInput: React.Dispatch<React.SetStateAction<string>>;
 };
 
-// Initialise le contexte avec une valeur par défaut appropriée
 export const InputContext = createContext<InputContextType>({
-  targetInput: false,
+  targetInput: "",
   setTargetInput: () => {},
 });
 
-// Create a provider component
-export const InputProvider = ({ children }) => {
-  //provider = sert a injecter des vals dans le contexte
-  const [targetInput, setTargetInput] = useState(false);
+export const InputProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  const [targetInput, setTargetInput] = useState("");
 
   return (
     <InputContext.Provider value={{ targetInput, setTargetInput }}>

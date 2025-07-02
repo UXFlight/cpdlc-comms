@@ -35,12 +35,12 @@ export default function MessageContainer({ messages }: MessageContainerProps) {
             <div className="message-footer-meta">
               <div className="message-dot-group">
                 <div className="message-dot bg-green/60" />
-                <span>Uplink</span>
+                <span>Incoming Message</span>
               </div>
               <div className="message-divider" />
               <div className="message-dot-group">
                 <div className="message-dot bg-dark-blue/60" />
-                <span>Downlink</span>
+                <span>Outgoing Message</span>
               </div>
               <div className="message-footer-count">
                 {messages.length} message{messages.length !== 1 ? "s" : ""}

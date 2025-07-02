@@ -4,6 +4,7 @@ import { InputContext } from "@/context/InputContext";
 import { CharacterInputProps } from "@/interface/props/General";
 
 export default function CharacterInput({
+  name,
   value,
   length,
   style,
@@ -36,8 +37,10 @@ export default function CharacterInput({
   }, [isConnectionPossible]);
 
   useEffect(() => {
-    inputRef.current?.focus();
-  }, [targetInput]);
+      if (targetInput === name && isConnectionPossible) {
+      inputRef.current?.focus();
+    }
+  }, [targetInput, isConnectionPossible]);
 
   return (
     <div className={`flex w-[65px] ${style}`}>

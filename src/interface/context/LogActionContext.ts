@@ -9,7 +9,7 @@ export interface LogActionContextType {
   setCancelledAction?: (cancelled: boolean) => void;
   rejet?: boolean;
   setRejet?: (rejet: boolean) => void;
-};
+}
 
 export enum LogActionState {
   LOADED = "loaded",

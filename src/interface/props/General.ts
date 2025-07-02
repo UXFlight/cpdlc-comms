@@ -1,4 +1,5 @@
 export interface CharacterInputProps {
+  name?: string;
   value: string;
   length: number;
   style?: string;

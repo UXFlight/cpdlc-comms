@@ -17,6 +17,10 @@ export default function Connection() {
     },
   ]);
 
+  useEffect(() => {
+    console.log({ flightDetails });
+  }, [flightDetails]);
+
   return (
     <div
       className={`${connectionState && isConnectionPossible ? "container" : ""} flex items-center justify-between`}
@@ -71,7 +75,9 @@ export default function Connection() {
                       <span className="text-white-80">
                         {label.replaceAll("_", " ")}
                       </span>
-                      <span className="px-2 py-[2px] bg-[#2c3832] text-green font-mono text-xs rounded">
+                      <span
+                        className={`px-2 py-[2px] ${value === "CONNECTED" ? "text-green bg-green/10" : "text-white bg-white-10"} font-mono text-xs rounded`}
+                      >
                         {String(value)}
                       </span>
                     </div>

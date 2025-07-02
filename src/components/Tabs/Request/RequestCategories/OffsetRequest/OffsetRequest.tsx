@@ -1,15 +1,27 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import RequestContainer from "@/components/Tabs/Request/RequestContainer";
-import CustomRadio from "@/components/General/CustomRadio";
 import AdditionalMessages from "@/components/Tabs/Request/AdditionalMessages";
 import { RequestProps } from "@/interface/props/Request";
-import { ADDITIONAL_MESSAGES } from "@/constants/tabs/Request";
+import { ADDITIONAL_MESSAGES, DIRECTIONS_OPTIONS, RequestCategory } from "@/constants/tabs/Request";
+import StepAtInput from "@/components/General/StepAtInput";
+import CharacterInput from "@/components/General/CharacterInput";
+import { RequestContext } from "@/context/RequestContext";
+import { resolveMessageRef } from "@/utils/messageIdentification";
+import { InputContext } from "@/context/InputContext";
+import SelectDropdown from "@/components/General/SelectDropdown";
 
 export function OffsetRequest({ onSend, disabled = false }: RequestProps) {
+  const { request, setRequest } = useContext(RequestContext);
+  const { setTargetInput } = useContext(InputContext);
   const [isOpen, setIsOpen] = useState(false);
-  const [offset, setOffset] = useState("FL350");
-  const [step, setStep] = useState<"position" | "time" | null>(null);
-  const [stepValue, setStepValue] = useState("FL450");
+  const [distance, setDistance] = useState("");
+  const [direction, setDirection] = useState("");
+
+  const [positionSelected, setPositionSelected] = useState(false);
+  const [position, setPosition] = useState("");
+
+  const [timeSelected, setTimeSelected] = useState(false);
+  const [time, setTime] = useState({ hh: "", mm: "" });
   const [extras, setExtras] = useState<string[]>([]);
 
   const toggleExtra = (val: string) => {
@@ -18,48 +30,82 @@ export function OffsetRequest({ onSend, disabled = false }: RequestProps) {
     );
   };
 
+  const handleToggle = () => {
+    setIsOpen((prev) => !prev);
+    if (!isOpen) {
+      setDirection("");
+      setDistance("");
+      setPosition("");
+      setPositionSelected(false);
+      setTime({ hh: "", mm: "" });
+      setTimeSelected(false);
+      setExtras([]);
+    }
+
+    setTargetInput("offset-distance");
+  };
+
+  const handleSend = () => {
+    if (!distance || !direction) return;
+
+    const newRequest = {
+      ...request,
+      arguments: [distance, direction],
+      ...(positionSelected && position ? { positionSelected: position } : {}),
+      ...(timeSelected && time.hh && time.mm
+        ? { timeSelected: { hh: time.hh, mm: time.mm } }
+        : {}),
+    };
+
+    const ref = resolveMessageRef(RequestCategory.OFFSET, newRequest);
+    setRequest({ ...newRequest, messageRef: ref, additional: extras });
+    onSend();
+  };
+
   return (
     <RequestContainer
       requestType="OFFSET REQUEST"
       isOpen={isOpen}
-      onToggle={() => setIsOpen(!isOpen)}
-      showSendButton={false}
+      onToggle={handleToggle}
+      disabled={disabled}
+      showSendButton={!!(distance.length === 5 && direction.length === 5)}
+      onSend={handleSend}
     >
       <div className={`flex flex-col gap-4 mt-3 ${isOpen ? "" : "hidden"}`}>
-        <div className="flex items-center gap-4">
-          <span className="text-white/80 text-sm min-w-[190px]">
-            Offset distance and direction
-          </span>
-          <input
-            type="text"
-            value={offset}
-            onChange={(e) => setOffset(e.target.value)}
-            className="px-2 py-1 bg-white/10 rounded text-white text-center w-[100px]"
+        <div className="flex flex-row gap-6 items-center text-white/80 text-[15px] uppercase">
+          <span>Offset distance</span>
+          <CharacterInput
+            name="offset-distance"
+            value={distance}
+            length={5}
+            disabled={disabled}
+            onChange={setDistance}
+          />
+          <span>and direction</span>
+          <SelectDropdown
+            options={DIRECTIONS_OPTIONS}
+            value={direction}
+            onChange={setDirection}
           />
         </div>
-        <div className="flex flex-col gap-2">
-          <p className="text-white/80 text-sm font-medium">Step at</p>
-          <div className="flex gap-8">
-            <CustomRadio
-              label="Position"
-              value="position"
-              selected={step || ""}
-              onChange={() => setStep("position")}
-            />
-            <CustomRadio
-              label="Time"
-              value="time"
-              selected={step || ""}
-              onChange={() => setStep("time")}
-            />
-            <input
-              type="text"
-              value={stepValue}
-              onChange={(e) => setStepValue(e.target.value)}
-              className="px-2 py-1 bg-white/10 rounded text-white text-center w-[100px] ml-4"
-            />
-          </div>
-        </div>
+
+        <StepAtInput
+          disabled={disabled}
+          positionSelected={positionSelected}
+          onTogglePosition={() => {
+            setPositionSelected(!positionSelected);
+            if (!positionSelected) setTimeSelected(false);
+          }}
+          position={position}
+          onChangePosition={setPosition}
+          timeSelected={timeSelected}
+          onToggleTime={() => {
+            setTimeSelected(!timeSelected);
+            if (!timeSelected) setPositionSelected(false);
+          }}
+          time={time}
+          onChangeTime={(hh, mm) => setTime({ hh, mm })}
+        />
         <AdditionalMessages
           extraMessages={ADDITIONAL_MESSAGES.offset_req}
           selected={extras}

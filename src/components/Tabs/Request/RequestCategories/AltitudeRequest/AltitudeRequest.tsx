@@ -2,11 +2,11 @@ import { useContext, useState } from "react";
 import { RequestContext } from "@/context/RequestContext";
 import RequestContainer from "@/components/Tabs/Request/RequestContainer";
 import AdditionalMessages from "@/components/Tabs/Request/AdditionalMessages";
-import CharacterInput from "@/components/General/CharacterInput";
 import StepAtInput from "@/components/General/StepAtInput";
 import { resolveMessageRef } from "@/utils/messageIdentification";
 import { RequestProps } from "@/interface/props/Request";
 import { ADDITIONAL_MESSAGES, RequestCategory } from "@/constants/tabs/Request";
+import BlockData from "@/components/Tabs/Request/BlockData";
 
 export default function AltitudeRequest({
   onSend,
@@ -76,26 +76,15 @@ export default function AltitudeRequest({
       onSend={handleSend}
     >
       <div className="flex flex-col gap-4 mt-2">
-        <div className="flex flex-row items-center gap-6">
-          <p className="text-white/80 text-[16px] uppercase">
-            Altitude (or block altitude)
-          </p>
-          <div className="flex items-center gap-5">
-            <CharacterInput
-              value={from}
-              onChange={setFrom}
-              length={5}
-              disabled={!isOpen || disabled}
-            />
-            <span className="text-[14px] text-white/40">to</span>
-            <CharacterInput
-              value={to}
-              onChange={setTo}
-              length={5}
-              disabled={from.length !== 5 || disabled}
-            />
-          </div>
-        </div>
+        <BlockData
+          label="Altitude (or block altitude)"
+          from={from}
+          setFrom={setFrom}
+          to={to}
+          setTo={setTo}
+          isOpen={isOpen}
+          disabled={disabled}
+        />
 
         <div className={`${isOpen ? "" : "hidden"}`}>
           <StepAtInput

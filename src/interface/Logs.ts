@@ -12,4 +12,5 @@ export interface Log {
   element: string;
   intent?: string;
   position?: string;
+  additional?: string[];
 }

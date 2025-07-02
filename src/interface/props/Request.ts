@@ -18,3 +18,13 @@ export interface RequestContainerProps {
   onSend?: () => void;
   children: React.ReactNode;
 }
+
+export interface BlockDataProps {
+  label: string;
+  from: string;
+  setFrom: (value: string) => void;
+  to: string;
+  setTo: (value: string) => void;
+  isOpen: boolean;
+  disabled: boolean;
+}

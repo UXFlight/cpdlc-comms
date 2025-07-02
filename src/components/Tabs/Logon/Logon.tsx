@@ -47,7 +47,7 @@ export default function Logon() {
   };
 
   return (
-    <div className="container flex items-center justify-between">
+    <div className="container flex items-center justify-start gap-4">
       <h2
         className={`${!isConnectionPossible ? "text-white/40" : "text-white"}`}
       >
@@ -59,44 +59,49 @@ export default function Logon() {
           length={length}
           disabled={!isConnectionPossible}
           onChange={(val) => setUsername(val)}
-          //onEnter={(val) => validateEntry(val)}
         />
       </div>
-      {isLoading ? (
-        <button
-          disabled
-          className="btn-3d flex items-center justify-center gap-2 px-4 py-2 w-[149px] h-[48px] bg-gray-400 text-white text-sm font-semibold rounded-md"
-        >
-          <span className="text-white-80 text-[14px] leading-[18px] font-bold text-center tracking-wide uppercase">
-            Connecting...
-          </span>
-          <div className="w-4 h-4 ml-2 rounded-full border-2 border-white border-t-transparent animate-spin" />
-        </button>
-      ) : connectionState && isConnectionPossible ? (
-        <button
-          disabled
-          className="btn-3d flex items-center justify-center gap-2 px-4 py-2 w-[149px] h-[48px] bg-green text-white text-sm font-semibold rounded-md"
-        >
-          <span className="text-white-80 text-[16px] leading-[18px] whitespace-nowrap font-bold text-center tracking-wide uppercase">
-            Connected
-          </span>
-        </button>
-      ) : (
-        <button
-          disabled={!validValue() || !isConnectionPossible}
-          onClick={handleLogon}
-          className={`flex items-center justify-center gap-2 px-4 py-2 w-[149px] h-[48px] ${
-            validValue()
-              ? "bg-dark-blue hover:bg-dark-blue/70 cursor-pointer btn-3d"
-              : "bg-white-10"
-          } text-white text-sm font-semibold rounded-md`}
-        >
-          <img src="/send.svg" alt="Send Icon" className="w-[20px] h-[20px]" />
-          <span className="text-white-80 text-[14px] leading-[18px] whitespace-nowrap font-bold text-center">
-            SEND LOGON
-          </span>
-        </button>
-      )}
+      <div className="ml-52">
+        {isLoading ? (
+          <button
+            disabled
+            className="btn-3d flex items-center justify-center gap-2 px-4 py-2 w-[149px] h-[48px] bg-gray-400 text-white text-sm font-semibold rounded-md"
+          >
+            <span className="text-white-80 text-[14px] leading-[18px] font-bold text-center tracking-wide uppercase">
+              Connecting...
+            </span>
+            <div className="w-4 h-4 ml-2 rounded-full border-2 border-white border-t-transparent animate-spin" />
+          </button>
+        ) : connectionState && isConnectionPossible ? (
+          <button
+            disabled
+            className="btn-3d flex items-center justify-center gap-2 px-4 py-2 w-[149px] h-[48px] bg-green text-white text-sm font-semibold rounded-md"
+          >
+            <span className="text-white-80 text-[16px] leading-[18px] whitespace-nowrap font-bold text-center tracking-wide uppercase">
+              Connected
+            </span>
+          </button>
+        ) : (
+          <button
+            disabled={!validValue() || !isConnectionPossible}
+            onClick={handleLogon}
+            className={`flex items-center justify-center gap-2 px-4 py-2 w-[149px] h-[48px] ${
+              validValue()
+                ? "bg-dark-blue hover:bg-dark-blue/70 cursor-pointer btn-3d"
+                : "bg-white-10"
+            } text-white text-sm font-semibold rounded-md`}
+          >
+            <img
+              src="/send.svg"
+              alt="Send Icon"
+              className="w-[20px] h-[20px]"
+            />
+            <span className="text-white-80 text-[14px] leading-[18px] whitespace-nowrap font-bold text-center">
+              SEND LOGON
+            </span>
+          </button>
+        )}
+      </div>
     </div>
   );
 }

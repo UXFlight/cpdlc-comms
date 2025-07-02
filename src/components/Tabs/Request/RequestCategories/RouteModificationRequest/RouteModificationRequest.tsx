@@ -156,12 +156,13 @@ export default function RouteModificationRequest({
               onChange={(value) => {
                 setSelectedType(value);
                 setDm("dm70");
-                setTargetInput((prev) => !prev);
+                setTargetInput("heading");
               }}
               label={
                 <div className="inner-request-element">
                   <p className="whitespace-nowrap">Heading</p>
                   <CharacterInput
+                    name="heading"
                     value={heading}
                     length={5}
                     style="mr-[83px]"
@@ -179,12 +180,13 @@ export default function RouteModificationRequest({
               onChange={(value) => {
                 setSelectedType(value);
                 setDm("dm71");
-                setTargetInput((prev) => !prev);
+                setTargetInput("ground-track");
               }}
               label={
                 <div className="inner-request-element">
                   <p className="whitespace-nowrap">Ground Track</p>
                   <CharacterInput
+                    name="ground-track"
                     value={track}
                     length={5}
                     style="mr-[83px]"

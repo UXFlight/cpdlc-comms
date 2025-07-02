@@ -1,5 +1,8 @@
 "use client";
-import { LogActionContextType, LogActionState } from "@/interface/context/LogActionContext";
+import {
+  LogActionContextType,
+  LogActionState,
+} from "@/interface/context/LogActionContext";
 import React, { createContext, useState } from "react";
 
 export const LogActionContext = createContext<LogActionContextType>({
@@ -15,7 +18,11 @@ export const LogActionContext = createContext<LogActionContextType>({
   setRejet: () => {},
 });
 
-export const LogActionProvider = ({ children }: { children: React.ReactNode }) => {
+export const LogActionProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const [action, setAction] = useState<string>("");
   const [state, setState] = useState<LogActionState | undefined>(undefined);
   const [confirmed, setConfirmed] = useState<boolean>(false);

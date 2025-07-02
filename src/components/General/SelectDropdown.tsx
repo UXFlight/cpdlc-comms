@@ -33,7 +33,7 @@ export default function SelectDropdown({
     >
       <div className="relative w-full">
         <button
-          className="w-full min-w-[150px] flex items-center justify-between bg-zinc-800 text-white px-4 py-2 text-sm rounded-md border border-zinc-700 hover:bg-zinc-700 transition"
+          className="w-full min-w-[100px] flex items-center justify-between bg-[#1e1e1e] text-white p-[5px] border border-[2px] border-white-10 rounded-md cursor-text transition-all"
           onClick={() => setIsOpen(!isOpen)}
         >
           <div className="flex items-center gap-2">
@@ -49,7 +49,7 @@ export default function SelectDropdown({
           />
         </button>
         {isOpen && (
-          <ul className="absolute z-10 w-full min-w-[150px] mt-1 bg-zinc-800 border border-zinc-700 rounded-md shadow-md overflow-y-auto overflow-x-hidden max-h-40">
+          <ul className="absolute z-10 w-full min-w-[100px] mt-1 bg-[#1e1e1e] p-[5px] border border-[2px] border-white-10 rounded-md cursor-text overflow-y-auto overflow-x-hidden max-h-40">
             {options.map((option) => (
               <li
                 key={option}
@@ -57,7 +57,7 @@ export default function SelectDropdown({
                   onChange(option);
                   setIsOpen(false);
                 }}
-                className="flex justify-center px-4 py-2 hover:bg-zinc-700 cursor-pointer text-sm text-white border-t border-b border-zinc-700 first:border-t-0 last:border-b-0"
+                className="flex justify-center px-4 py-2 hover:bg-zinc-800 cursor-pointer text-sm text-white border-t border-b border-zinc-700 first:border-t-0 last:border-b-0"
               >
                 {option}
               </li>

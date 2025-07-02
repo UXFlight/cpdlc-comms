@@ -27,3 +27,5 @@ export enum RequestCategory {
   CLEARANCE = "Clearance Requests",
   VMC = "VMC Request",
 }
+
+export const DIRECTIONS_OPTIONS = ["Left", "Right", "Avoid"];

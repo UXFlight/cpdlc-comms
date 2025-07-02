@@ -18,9 +18,9 @@ export function resolveMessageRef(
       break;
 
     case RequestCategory.OFFSET:
-      if (argCount === 1 && !hasTime && !hasPosition) return "DM15";
-      if (argCount === 1 && hasTime && !hasPosition) return "DM17";
-      if (argCount === 1 && hasPosition && !hasTime) return "DM16";
+      if (argCount === 2 && !hasTime && !hasPosition) return "DM15";
+      if (argCount === 2 && hasTime && !hasPosition) return "DM17";
+      if (argCount === 2 && hasPosition && !hasTime) return "DM16";
       break;
 
     case RequestCategory.SPEED:

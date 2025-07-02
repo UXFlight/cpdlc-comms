@@ -20,8 +20,10 @@ export default function MessagePreview() {
   }, [isSending]);
 
   useEffect(() => {
+    console.log("Fetching formatted message for request:", request);
     MessageService.getFormattedMessage(request)
       .then((res) => {
+        console.log("Formatted message:", res.message);
         setRequest({ formattedMessage: res.message });
       })
       .catch((error) => {

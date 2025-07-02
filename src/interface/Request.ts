@@ -6,9 +6,3 @@ export type Request = {
   positionSelected?: string;
   additional?: string[];
 };
-
-export interface RequestContextType {
-  request: Request;
-  setRequest: (data: Partial<Request>) => void;
-  resetRequest: () => void;
-}

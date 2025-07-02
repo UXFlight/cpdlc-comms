@@ -19,7 +19,7 @@ export default function RequestContainer({
     if (!isOpen) {
       resetRequest();
     } else {
-      setTargetInput((prev) => !prev);
+      setTargetInput("");
     }
   }, [isOpen]);
 
