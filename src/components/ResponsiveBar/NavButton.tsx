@@ -13,9 +13,10 @@ export default function NavButton({
   const isHome = id === "logon";
 
   return (
-    <div onClick={() => {
-            if (connectionState) onTabChange(id);
-          }}
+    <div
+      onClick={() => {
+        if (connectionState) onTabChange(id);
+      }}
       className={`button-base ${connectionState ? "btn-3d" : ""} ${
         active
           ? "bg-white-10 border-b-4 border-green"

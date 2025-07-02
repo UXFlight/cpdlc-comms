@@ -37,7 +37,7 @@ export default function CharacterInput({
   }, [isConnectionPossible]);
 
   useEffect(() => {
-      if (targetInput === name && isConnectionPossible) {
+    if (targetInput === name && isConnectionPossible) {
       inputRef.current?.focus();
     }
   }, [targetInput, isConnectionPossible]);

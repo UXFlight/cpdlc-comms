@@ -11,11 +11,7 @@ export const InputContext = createContext<InputContextType>({
   setTargetInput: () => {},
 });
 
-export const InputProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+export const InputProvider = ({ children }: { children: React.ReactNode }) => {
   const [targetInput, setTargetInput] = useState("");
 
   return (

@@ -34,6 +34,8 @@ export interface SelectDropdownProps {
   value: string;
   onChange: (value: string) => void;
   icon?: string;
+  style?: string;
+  defaultValue?: string;
 }
 
 export interface SendButtonProps {

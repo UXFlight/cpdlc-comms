@@ -1,6 +1,8 @@
 import { useContext, useState } from "react";
 import RequestContainer from "@/components/Tabs/Request/RequestContainer";
 import { RequestContext } from "@/context/RequestContext";
+import AdditionalMessages from "../../AdditionalMessages";
+import { ADDITIONAL_MESSAGES } from "@/constants/tabs/Request";
 
 export function VoiceContactRequest({
   onSend,
@@ -50,6 +52,13 @@ export function VoiceContactRequest({
             className="px-2 py-1 bg-white/10 rounded text-white text-center w-[100px]"
             disabled={!atFrequency}
           />
+        </div>
+        <div>
+          {/* <AdditionalMessages
+            extraMessages={ADDITIONAL_MESSAGES.voice_contact_req}
+            selected={extras}
+            onChange={toggleExtra}
+          /> */}
         </div>
       </div>
     </RequestContainer>

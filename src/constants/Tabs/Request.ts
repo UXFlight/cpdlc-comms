@@ -15,6 +15,7 @@ export const ADDITIONAL_MESSAGES = {
   speed_req: ["Due to weather", "Due to aircraft performance"],
   route_modification_req: ["Due to aircraft performance"],
   response_additional: ["Due to weather", "Due to aircraft performance"],
+  voice_contact_req: ["At frequency"]
 };
 
 export enum RequestCategory {
@@ -28,4 +29,6 @@ export enum RequestCategory {
   VMC = "VMC Request",
 }
 
-export const DIRECTIONS_OPTIONS = ["Left", "Right", "Avoid"];
+export const DIRECTIONS_OPTIONS = ["LEFT", "RIGHT", "AVOID"];
+export const LEVEL_ALTITUDE_OPTIONS = ["LOWER", "HIGHER"];
+export const CLIMB_DESCEND_OPTIONS = ["CLIMB", "DESCEND"];

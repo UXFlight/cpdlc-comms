@@ -2,7 +2,11 @@ import { useContext, useState } from "react";
 import RequestContainer from "@/components/Tabs/Request/RequestContainer";
 import AdditionalMessages from "@/components/Tabs/Request/AdditionalMessages";
 import { RequestProps } from "@/interface/props/Request";
-import { ADDITIONAL_MESSAGES, DIRECTIONS_OPTIONS, RequestCategory } from "@/constants/tabs/Request";
+import {
+  ADDITIONAL_MESSAGES,
+  DIRECTIONS_OPTIONS,
+  RequestCategory,
+} from "@/constants/tabs/Request";
 import StepAtInput from "@/components/General/StepAtInput";
 import CharacterInput from "@/components/General/CharacterInput";
 import { RequestContext } from "@/context/RequestContext";
@@ -71,8 +75,8 @@ export function OffsetRequest({ onSend, disabled = false }: RequestProps) {
       showSendButton={!!(distance.length === 5 && direction.length === 5)}
       onSend={handleSend}
     >
-      <div className={`flex flex-col gap-4 mt-3 ${isOpen ? "" : "hidden"}`}>
-        <div className="flex flex-row gap-6 items-center text-white/80 text-[15px] uppercase">
+      <div className={`flex flex-col gap-2 mt-3 ${isOpen ? "" : "hidden"}`}>
+        <div className="flex flex-row gap-4 items-center text-white/80 text-[15px] uppercase">
           <span>Offset distance</span>
           <CharacterInput
             name="offset-distance"

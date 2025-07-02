@@ -104,7 +104,7 @@ export default function RouteModificationRequest({
       </div>
 
       <div className={`flex items-center gap-3 ${isOpen ? "" : "hidden"}`}>
-        <div className="gap-1 mt-3 w-full">
+        <div className="gap-1 w-full">
           <div className="request-element">
             <CustomRadio
               value="Request Direct to Position"
@@ -165,7 +165,7 @@ export default function RouteModificationRequest({
                     name="heading"
                     value={heading}
                     length={5}
-                    style="mr-[83px]"
+                    style="mr-[62px]"
                     disabled={disabled || selectedType !== "Heading"}
                     onChange={setHeading}
                   />
@@ -189,7 +189,7 @@ export default function RouteModificationRequest({
                     name="ground-track"
                     value={track}
                     length={5}
-                    style="mr-[83px]"
+                    style="mr-[62px]"
                     disabled={disabled || selectedType !== "Ground Track"}
                     onChange={setTrack}
                   />
