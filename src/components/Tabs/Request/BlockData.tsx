@@ -15,6 +15,7 @@ export default function BlockData({
       <p className="text-white/80 text-[16px] uppercase">{label}</p>
       <div className="flex items-center gap-5">
         <CharacterInput
+          name="block-data-from"
           value={from}
           onChange={setFrom}
           length={5}

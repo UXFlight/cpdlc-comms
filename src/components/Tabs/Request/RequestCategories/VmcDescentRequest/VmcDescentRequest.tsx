@@ -1,14 +1,15 @@
 import { useContext, useState } from "react";
 import RequestContainer from "@/components/Tabs/Request/RequestContainer";
 import { RequestContext } from "@/context/RequestContext";
+import { RequestProps } from "@/interface/props/Request";
 
 export function VmcDescentRequest({
   onSend,
+  onOpen,
   disabled = false,
-}: {
-  onSend: () => void;
-  disabled?: boolean;
-}) {
+}:
+  RequestProps
+) {
   const [isOpen, setIsOpen] = useState(false);
   const {setRequest} = useContext(RequestContext);
 
@@ -17,11 +18,21 @@ export function VmcDescentRequest({
     onSend();
   };
 
+   const handleToggle = () => {
+    const newState = !isOpen;
+    setIsOpen(newState);
+    onOpen(newState)
+    if (!newState) {
+     //a suivre;
+    }
+    //setTargetInput("offset-distance");
+  };
+
   return (
     <RequestContainer
       requestType="REQUEST VMC DESCENT"
       isOpen={isOpen}
-      onToggle={() => setIsOpen(!isOpen)}
+      onToggle={handleToggle}
       showSendButton={true}
       disabled={disabled}
       onSend={handleSend}

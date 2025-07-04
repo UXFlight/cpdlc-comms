@@ -3,14 +3,13 @@ import RequestContainer from "@/components/Tabs/Request/RequestContainer";
 import { RequestContext } from "@/context/RequestContext";
 import AdditionalMessages from "../../AdditionalMessages";
 import { ADDITIONAL_MESSAGES } from "@/constants/tabs/Request";
+import { RequestProps } from "@/interface/props/Request";
 
 export function VoiceContactRequest({
   onSend,
+  onOpen,
   disabled = false,
-}: {
-  onSend: () => void;
-  disabled?: boolean;
-}) {
+}: RequestProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [atFrequency, setAtFrequency] = useState(true);
   const [frequency, setFrequency] = useState("120 Hz");
@@ -25,11 +24,21 @@ export function VoiceContactRequest({
     onSend();
   };
 
+   const handleToggle = () => {
+    const newState = !isOpen;
+    setIsOpen(newState);
+    onOpen(newState)
+    if (!newState) {
+      setFrequency("");
+    }
+    //setTargetInput("offset-distance");
+  };
+
   return (
     <RequestContainer
       requestType="REQUEST VOICE CONTACT"
       isOpen={isOpen}
-      onToggle={() => setIsOpen(!isOpen)}
+      onToggle={handleToggle}
       showSendButton={false}
       disabled={disabled}
       onSend={handleSend}

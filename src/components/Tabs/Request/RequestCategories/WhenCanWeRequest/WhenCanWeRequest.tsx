@@ -10,9 +10,11 @@ import {
 import CharacterInput from "@/components/General/CharacterInput";
 import BlockData from "../../BlockData";
 import { RequestContext } from "@/context/RequestContext";
+import { InputContext } from "@/context/InputContext";
 
-export function WhenCanWeRequest({ onSend, disabled = false }: RequestProps) {
+export function WhenCanWeRequest({ onSend, onOpen, disabled = false }: RequestProps) {
   const {request, setRequest} = useContext(RequestContext);
+    const { setTargetInput } = useContext(InputContext);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [level, setLevel] = useState<string>("");
@@ -43,11 +45,25 @@ export function WhenCanWeRequest({ onSend, disabled = false }: RequestProps) {
     onSend();
   };
 
+  const handleToggle = () => {
+    const newState = !isOpen;
+    setIsOpen(newState);
+    onOpen(newState);
+    if (!newState) {
+      setSelectedOption("");
+      setLevel("");
+      setClimbDescend("CLIMB/DESCENT");
+      setClimbDescendLevel("");
+      setFrom("");
+      setTo("");
+    }
+  };
+
   return (
     <RequestContainer
       requestType="WHEN CAN WE EXPECT"
       isOpen={isOpen}
-      onToggle={() => setIsOpen(!isOpen)}
+      onToggle={handleToggle}
       showSendButton={selectedOption !== null && selectedOption !== ""}
       disabled={disabled}
       onSend={handleSend}
@@ -86,6 +102,7 @@ export function WhenCanWeRequest({ onSend, disabled = false }: RequestProps) {
                   value={climbDescend}
                   onChange={(value) => {
                     setClimbDescend(value);
+                    setTargetInput("climb_descend");
                     value === "CLIMB" ? setRequest({messageRef:"DM87"}) : setRequest({messageRef:"DM88"});
                   }}
                 />
@@ -108,7 +125,10 @@ export function WhenCanWeRequest({ onSend, disabled = false }: RequestProps) {
           <CustomRadio
             value="speed_range"
             selected={selectedOption || ""}
-            onChange={setSelectedOption}
+            onChange={(value)=> {
+              setSelectedOption(value);
+              setTargetInput("block-data-from");
+            }}
             label={
               <BlockData
                 label="Speed or range of speed"

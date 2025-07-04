@@ -1,5 +1,6 @@
 export interface RequestProps {
   onSend: () => void;
+  onOpen: (isOpen: boolean) => void;
   disabled?: boolean;
 }
 

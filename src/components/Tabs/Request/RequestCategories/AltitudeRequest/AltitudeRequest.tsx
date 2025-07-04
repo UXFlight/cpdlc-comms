@@ -7,12 +7,15 @@ import { resolveMessageRef } from "@/utils/messageIdentification";
 import { RequestProps } from "@/interface/props/Request";
 import { ADDITIONAL_MESSAGES, RequestCategory } from "@/constants/tabs/Request";
 import BlockData from "@/components/Tabs/Request/BlockData";
+import { InputContext } from "@/context/InputContext";
 
 export default function AltitudeRequest({
   onSend,
+  onOpen,
   disabled = false,
 }: RequestProps) {
   const { request, setRequest } = useContext(RequestContext);
+  const { setTargetInput } = useContext(InputContext);
 
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
@@ -33,8 +36,10 @@ export default function AltitudeRequest({
   };
 
   const handleToggle = () => {
-    setIsOpen((prev) => !prev);
-    if (!isOpen) {
+    const nextOpen = !isOpen;
+    setIsOpen(nextOpen);
+    onOpen(nextOpen);
+    if (!nextOpen) {
       setFrom("");
       setTo("");
       setPosition("");
@@ -42,6 +47,9 @@ export default function AltitudeRequest({
       setTime({ hh: "", mm: "" });
       setTimeSelected(false);
       setExtras([]);
+      setTargetInput("");
+    } else {
+      setTargetInput("block-data-from");
     }
   };
 

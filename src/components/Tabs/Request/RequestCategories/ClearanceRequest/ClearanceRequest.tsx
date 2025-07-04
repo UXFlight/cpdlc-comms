@@ -1,17 +1,30 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import CustomRadio from "@/components/General/CustomRadio";
 import RequestContainer from "@/components/Tabs/Request/RequestContainer";
 import { RequestProps } from "@/interface/props/Request";
+import { InputContext } from "@/context/InputContext";
 
-export function ClearanceRequest({ onSend, disabled = false }: RequestProps) {
+export function ClearanceRequest({ onSend, onOpen, disabled = false }: RequestProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const { setTargetInput } = useContext(InputContext);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
+
+  const handleToggle = () => {
+    const nextOpen = !isOpen;
+    setIsOpen(nextOpen);
+    onOpen(nextOpen);
+    if (!nextOpen) {
+      console.log("Closing Clearance Request");
+    } else {
+      //setTargetInput("block-data-from");
+    }
+  };
 
   return (
     <RequestContainer
       requestType="CLEARANCE REQUEST"
       isOpen={isOpen}
-      onToggle={() => setIsOpen(!isOpen)}
+      onToggle={handleToggle}
       showSendButton={false}
       disabled={disabled}
       onSend={() => {

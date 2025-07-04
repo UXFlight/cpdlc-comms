@@ -70,11 +70,6 @@ export default function RouteModificationRequest({
     setRequest({
       arguments: [clean],
     });
-    console.log("Request sent:", {
-      value: clean,
-      messageRef: request.messageRef,
-    });
-
     onSend();
   };
 

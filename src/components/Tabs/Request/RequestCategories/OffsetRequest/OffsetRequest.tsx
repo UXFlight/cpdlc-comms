@@ -14,7 +14,7 @@ import { resolveMessageRef } from "@/utils/messageIdentification";
 import { InputContext } from "@/context/InputContext";
 import SelectDropdown from "@/components/General/SelectDropdown";
 
-export function OffsetRequest({ onSend, disabled = false }: RequestProps) {
+export function OffsetRequest({ onSend, onOpen, disabled = false }: RequestProps) {
   const { request, setRequest } = useContext(RequestContext);
   const { setTargetInput } = useContext(InputContext);
   const [isOpen, setIsOpen] = useState(false);
@@ -35,8 +35,10 @@ export function OffsetRequest({ onSend, disabled = false }: RequestProps) {
   };
 
   const handleToggle = () => {
-    setIsOpen((prev) => !prev);
-    if (!isOpen) {
+    const newState = !isOpen;
+    setIsOpen(newState);
+    onOpen(newState)
+    if (!newState) {
       setDirection("");
       setDistance("");
       setPosition("");
