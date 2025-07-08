@@ -23,7 +23,7 @@ export default function Logon() {
 
   async function validateEntry(input: string) {
     setIsLoading(true);
-    await delay(2000);
+    await delay(500);
     setIsLoading(false);
     if (input.length !== length) {
       return false;
