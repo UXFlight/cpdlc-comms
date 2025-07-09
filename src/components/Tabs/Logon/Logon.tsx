@@ -1,5 +1,4 @@
 import { useContext, useState } from "react";
-import users from "@/data/users.json";
 import { GlobalContext } from "@/context/GlobalContext";
 import CharacterInput from "@/components/General/CharacterInput";
 import { socketService } from "@/api/communications/socket/socketService";
@@ -22,28 +21,9 @@ export default function Logon() {
     return username.length === length;
   };
 
-  // async function validateEntry(input: string) {
-  //   setIsLoading(true);
-  //   await delay(500);
-  //   setIsLoading(false);
-  //   if (input.length !== length) {
-  //     return false;
-  //   }
-  //   const result = users.some(
-  //     (user) => user.username.toUpperCase().replace(/[^A-Z0-9]/g, "") === input,
-  //   );
-  //   if (result) {
-  //     setUsername(input.toUpperCase().replace(/[^A-Z0-9]/g, ""));
-  //     setConnectionState(true);
-  //     socketService.send("sucessfull_connection", input);
-  //     return result;
-  //   }
-  // }
-
   const handleLogon = () => {
     socketService.send("logon", {username: username});
     setIsLoading(true);
-
   }
 
   useSocketListeners([
@@ -62,13 +42,6 @@ export default function Logon() {
       },
     },
   ]);
-
-  // const handleLogon = async () => {
-  //   const success = await validateEntry(username);
-  //   if (success) {
-  //     setConnectionState(success);
-  //   }
-  // };
 
   return (
     <div className="container flex items-center justify-start gap-4">
