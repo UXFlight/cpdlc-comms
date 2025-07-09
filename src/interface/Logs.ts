@@ -8,6 +8,7 @@ export interface Log {
   ref: string;
   direction: string;
   status: string;
+  urgency: string;
   timeStamp: string;
   element: string;
   intent?: string;

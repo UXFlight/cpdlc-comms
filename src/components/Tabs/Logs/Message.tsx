@@ -17,7 +17,7 @@ export default function Message({ message }: MessageProps) {
   };
 
   const handleToggleAdditional = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Évite de déclencher handleClick
+    e.stopPropagation();
     setShowAdditional(!showAdditional);
   };
 

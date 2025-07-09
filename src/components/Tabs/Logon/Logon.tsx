@@ -4,6 +4,7 @@ import { GlobalContext } from "@/context/GlobalContext";
 import CharacterInput from "@/components/General/CharacterInput";
 import { socketService } from "@/api/communications/socket/socketService";
 import { useDelay } from "@/hooks/useDelay";
+import { useSocketListeners } from "@/hooks/useSocketListeners";
 
 export default function Logon() {
   const length = 4;
@@ -21,30 +22,53 @@ export default function Logon() {
     return username.length === length;
   };
 
-  async function validateEntry(input: string) {
+  // async function validateEntry(input: string) {
+  //   setIsLoading(true);
+  //   await delay(500);
+  //   setIsLoading(false);
+  //   if (input.length !== length) {
+  //     return false;
+  //   }
+  //   const result = users.some(
+  //     (user) => user.username.toUpperCase().replace(/[^A-Z0-9]/g, "") === input,
+  //   );
+  //   if (result) {
+  //     setUsername(input.toUpperCase().replace(/[^A-Z0-9]/g, ""));
+  //     setConnectionState(true);
+  //     socketService.send("sucessfull_connection", input);
+  //     return result;
+  //   }
+  // }
+
+  const handleLogon = () => {
+    socketService.send("logon", {username: username});
     setIsLoading(true);
-    await delay(500);
-    setIsLoading(false);
-    if (input.length !== length) {
-      return false;
-    }
-    const result = users.some(
-      (user) => user.username.toUpperCase().replace(/[^A-Z0-9]/g, "") === input,
-    );
-    if (result) {
-      setUsername(input.toUpperCase().replace(/[^A-Z0-9]/g, ""));
-      setConnectionState(true);
-      socketService.send("sucessfull_connection", input);
-      return result;
-    }
+
   }
 
-  const handleLogon = async () => {
-    const success = await validateEntry(username);
-    if (success) {
-      setConnectionState(success);
-    }
-  };
+  useSocketListeners([
+    {
+      event: "logon_success",
+      callback: () => {
+        setIsLoading(false);
+        setConnectionState(true);
+      },
+    },
+    {
+      event: "logon_failure",
+      callback: () => {
+        setIsLoading(false);
+        setConnectionState(false);
+      },
+    },
+  ]);
+
+  // const handleLogon = async () => {
+  //   const success = await validateEntry(username);
+  //   if (success) {
+  //     setConnectionState(success);
+  //   }
+  // };
 
   return (
     <div className="container flex items-center justify-start gap-4">
