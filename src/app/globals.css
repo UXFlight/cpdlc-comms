@@ -171,7 +171,7 @@
   }
 
   .status-new {
-    @apply bg-cyan-500/20 border-cyan-500/40 text-cyan-300;
+    @apply bg-blue-500/20 border-blue-500/40 text-blue-300;
   }
 
   .status-open {

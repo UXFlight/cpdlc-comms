@@ -77,24 +77,25 @@ export function OffsetRequest({ onSend, onOpen, disabled = false }: RequestProps
       showSendButton={!!(distance.length === 5 && direction.length === 5)}
       onSend={handleSend}
     >
-      <div className={`flex flex-col gap-2 mt-3 ${isOpen ? "" : "hidden"}`}>
+      <div>
         <div className="flex flex-row gap-4 items-center text-white/80 text-[15px] uppercase">
           <span>Offset distance</span>
           <CharacterInput
             name="offset-distance"
             value={distance}
             length={5}
-            disabled={disabled}
+            disabled={disabled || !isOpen}
             onChange={setDistance}
           />
           <span>and direction</span>
           <SelectDropdown
             options={DIRECTIONS_OPTIONS}
             value={direction}
+            disabled={!isOpen}
             onChange={setDirection}
           />
         </div>
-
+      <div className={`flex flex-col gap-2 mt-3 ${isOpen ? "" : "hidden"}`}>
         <StepAtInput
           disabled={disabled}
           positionSelected={positionSelected}
@@ -117,6 +118,7 @@ export function OffsetRequest({ onSend, onOpen, disabled = false }: RequestProps
           selected={extras}
           onChange={toggleExtra}
         />
+      </div>
       </div>
     </RequestContainer>
   );

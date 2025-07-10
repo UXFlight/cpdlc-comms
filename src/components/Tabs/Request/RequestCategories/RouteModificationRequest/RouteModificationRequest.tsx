@@ -20,7 +20,7 @@ export default function RouteModificationRequest({
   const { request, setRequest } = useContext(RequestContext);
   const [selectedType, setSelectedType] = useState<string>("");
   const [isOpen, setIsOpen] = useState(false);
-  const [direct, setDirect] = useState("Select type");
+  const [direct, setDirect] = useState("");
   const [weather, setWeather] = useState("Select type");
   const [heading, setHeading] = useState("");
   const [track, setTrack] = useState("");
@@ -89,13 +89,25 @@ export default function RouteModificationRequest({
       onSend={handleSend}
     >
       <div className="flex items-center gap-3">
-        <p
-          className={`w-400 text-white/80 font-open text-[14px] font-normal leading-[18px] uppercase mt-3 ${
+        <div
+          className={`w-400 text-white/80 font-open text-[16px] font-normal leading-[18px] uppercase ${
             isOpen ? "hidden" : "block"
           }`}
         >
-          To request heading, track, direct-to or weather deviation
-        </p>
+          <div className="request-element">
+          <div className="inner-request-element mr-35">
+                  <p className="whitespace-nowrap">
+                    Request Direct to Position
+                  </p>
+                  <SelectDropdown
+                    options={directOptions}
+                    value={direct}
+                    disabled={!isOpen}
+                    onChange={setDirect}
+                  />
+                </div>
+                </div>
+        </div>
       </div>
 
       <div className={`flex items-center gap-3 ${isOpen ? "" : "hidden"}`}>

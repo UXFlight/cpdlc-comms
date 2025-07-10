@@ -54,7 +54,6 @@ export function SpeedRequest({ onSend, onOpen, disabled = false }: RequestProps)
       onSend={handleSend}
       disabled={disabled}
     >
-      <div className={`flex flex-col gap-4 mt-3  ${isOpen ? "" : "hidden"}`}>
         <BlockData
           label="Speed or range of speed"
           from={from}
@@ -64,6 +63,7 @@ export function SpeedRequest({ onSend, onOpen, disabled = false }: RequestProps)
           isOpen={isOpen}
           disabled={disabled}
         />
+      <div className={`flex flex-col gap-4 mt-3  ${isOpen ? "" : "hidden"}`}>
         <AdditionalMessages
           extraMessages={ADDITIONAL_MESSAGES.speed_req}
           selected={extras}

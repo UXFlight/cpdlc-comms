@@ -68,6 +68,29 @@ export function WhenCanWeRequest({ onSend, onOpen, disabled = false }: RequestPr
       disabled={disabled}
       onSend={handleSend}
     >
+      <div className="flex items-center gap-3">
+              <div
+                className={`w-400 text-white/80 font-open text-[16px] font-normal leading-[18px] uppercase ${
+                  isOpen ? "hidden" : "block"
+                }`}
+              >
+            <div className="request-element">
+              <div className="inner-request-element mr-48">
+                <p className="whitespace-nowrap uppercase">Change Altitude/Level</p>
+                <SelectDropdown
+                  options={LEVEL_ALTITUDE_OPTIONS}
+                  value={level}
+                  disabled={!isOpen}
+                  onChange={(value) => {
+                    setLevel(value);
+                    value === "LOWER" ? setRequest({messageRef:"DM52"}) : setRequest({messageRef:"DM53"});
+                  }}
+                />
+              </div>
+        </div>
+              </div>
+            </div>
+
       <div className={`flex flex-col gap-2 mt-1 ${!isOpen ? "hidden" : ""}`}>
         <div className="request-element">
           <CustomRadio

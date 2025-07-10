@@ -33,6 +33,13 @@ export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
         addLog(log);
       },
     },
+    {
+      event: "status_changed",
+      callback: (log: Log) => {
+        addLog(log);
+      },
+
+    }
   ]);
 
   useEffect(() => {
@@ -48,8 +55,12 @@ export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
   }, [filterBy]);
 
   const addLog = (log: Log) => {
-    setLogs((prev) => [...prev, log]);
+    setLogs((prev) => [log, ...prev]);
   };
+
+  // const replaceLog = (log: Log) => {
+  //   logs.find((logs) => logs.id === log.id)
+
 
   const changeStatus = (logId: string, newState: string) => {
     setLogs((prevLogs) =>

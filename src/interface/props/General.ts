@@ -35,6 +35,7 @@ export interface SelectDropdownProps {
   onChange: (value: string) => void;
   icon?: string;
   style?: string;
+  disabled?: boolean;
   defaultValue?: string;
 }
 

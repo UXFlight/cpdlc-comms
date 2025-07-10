@@ -28,7 +28,7 @@ export default function MessageDisplayTab({ message }: MessageProps) {
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-4">
             <div
-              className={`w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold ${style.bgColor} ${style.borderColor} border-2 ${style.accentColor}`}
+              className={`w-12 h-12 pb-1 rounded-full flex items-center justify-center text-[40px] font-black ${style.bgColor} ${style.borderColor} border-2 ${style.accentColor}`}
             >
               {style.icon}
             </div>
