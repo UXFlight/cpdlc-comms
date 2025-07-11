@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AdditionalMessages from "@/components/Tabs/Request/AdditionalMessages";
 import RequestContainer from "@/components/Tabs/Request/RequestContainer";
 import { RequestProps } from "@/interface/props/Request";
@@ -8,13 +8,18 @@ import { RequestContext } from "@/context/RequestContext";
 import { resolveMessageRef } from "@/utils/messageIdentification";
 import { InputContext } from "@/context/InputContext";
 
-export function SpeedRequest({ onSend, onOpen, disabled = false }: RequestProps) {
+export function SpeedRequest({
+  onSend,
+  onOpen,
+  disabled = false,
+  cancelSign,
+}: RequestProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [extras, setExtras] = useState<string[]>([]);
   const { request, setRequest } = useContext(RequestContext);
-  const {setTargetInput} = useContext(InputContext);
+  const { setTargetInput } = useContext(InputContext);
 
   const toggleExtra = (val: string) => {
     setExtras((prev) =>
@@ -31,6 +36,12 @@ export function SpeedRequest({ onSend, onOpen, disabled = false }: RequestProps)
     onSend();
   };
 
+  useEffect(() => {
+    if (isOpen) {
+      handleToggle();
+    }
+  }, [cancelSign]);
+
   const handleToggle = () => {
     const newState = !isOpen;
     setIsOpen(newState);
@@ -39,7 +50,7 @@ export function SpeedRequest({ onSend, onOpen, disabled = false }: RequestProps)
       setFrom("");
       setTo("");
       setExtras([]);
-      setTargetInput("")
+      setTargetInput("");
     } else {
       setTargetInput("block-data-from");
     }
@@ -54,15 +65,15 @@ export function SpeedRequest({ onSend, onOpen, disabled = false }: RequestProps)
       onSend={handleSend}
       disabled={disabled}
     >
-        <BlockData
-          label="Speed or range of speed"
-          from={from}
-          setFrom={setFrom}
-          to={to}
-          setTo={setTo}
-          isOpen={isOpen}
-          disabled={disabled}
-        />
+      <BlockData
+        label="Speed or range of speed"
+        from={from}
+        setFrom={setFrom}
+        to={to}
+        setTo={setTo}
+        isOpen={isOpen}
+        disabled={disabled}
+      />
       <div className={`flex flex-col gap-4 mt-3  ${isOpen ? "" : "hidden"}`}>
         <AdditionalMessages
           extraMessages={ADDITIONAL_MESSAGES.speed_req}

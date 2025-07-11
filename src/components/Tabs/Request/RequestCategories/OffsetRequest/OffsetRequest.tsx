@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import RequestContainer from "@/components/Tabs/Request/RequestContainer";
 import AdditionalMessages from "@/components/Tabs/Request/AdditionalMessages";
 import { RequestProps } from "@/interface/props/Request";
@@ -14,7 +14,12 @@ import { resolveMessageRef } from "@/utils/messageIdentification";
 import { InputContext } from "@/context/InputContext";
 import SelectDropdown from "@/components/General/SelectDropdown";
 
-export function OffsetRequest({ onSend, onOpen, disabled = false }: RequestProps) {
+export function OffsetRequest({
+  onSend,
+  onOpen,
+  disabled = false,
+  cancelSign,
+}: RequestProps) {
   const { request, setRequest } = useContext(RequestContext);
   const { setTargetInput } = useContext(InputContext);
   const [isOpen, setIsOpen] = useState(false);
@@ -34,10 +39,16 @@ export function OffsetRequest({ onSend, onOpen, disabled = false }: RequestProps
     );
   };
 
+  useEffect(() => {
+    if (isOpen) {
+      handleToggle();
+    }
+  }, [cancelSign]);
+
   const handleToggle = () => {
     const newState = !isOpen;
     setIsOpen(newState);
-    onOpen(newState)
+    onOpen(newState);
     if (!newState) {
       setDirection("");
       setDistance("");
@@ -95,30 +106,30 @@ export function OffsetRequest({ onSend, onOpen, disabled = false }: RequestProps
             onChange={setDirection}
           />
         </div>
-      <div className={`flex flex-col gap-2 mt-3 ${isOpen ? "" : "hidden"}`}>
-        <StepAtInput
-          disabled={disabled}
-          positionSelected={positionSelected}
-          onTogglePosition={() => {
-            setPositionSelected(!positionSelected);
-            if (!positionSelected) setTimeSelected(false);
-          }}
-          position={position}
-          onChangePosition={setPosition}
-          timeSelected={timeSelected}
-          onToggleTime={() => {
-            setTimeSelected(!timeSelected);
-            if (!timeSelected) setPositionSelected(false);
-          }}
-          time={time}
-          onChangeTime={(hh, mm) => setTime({ hh, mm })}
-        />
-        <AdditionalMessages
-          extraMessages={ADDITIONAL_MESSAGES.offset_req}
-          selected={extras}
-          onChange={toggleExtra}
-        />
-      </div>
+        <div className={`flex flex-col gap-2 mt-3 ${isOpen ? "" : "hidden"}`}>
+          <StepAtInput
+            disabled={disabled}
+            positionSelected={positionSelected}
+            onTogglePosition={() => {
+              setPositionSelected(!positionSelected);
+              if (!positionSelected) setTimeSelected(false);
+            }}
+            position={position}
+            onChangePosition={setPosition}
+            timeSelected={timeSelected}
+            onToggleTime={() => {
+              setTimeSelected(!timeSelected);
+              if (!timeSelected) setPositionSelected(false);
+            }}
+            time={time}
+            onChangeTime={(hh, mm) => setTime({ hh, mm })}
+          />
+          <AdditionalMessages
+            extraMessages={ADDITIONAL_MESSAGES.offset_req}
+            selected={extras}
+            onChange={toggleExtra}
+          />
+        </div>
       </div>
     </RequestContainer>
   );

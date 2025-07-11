@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { RequestContext } from "@/context/RequestContext";
 import { InputContext } from "@/context/InputContext";
 import { RequestProps } from "@/interface/props/Request";
@@ -15,6 +15,7 @@ const weatherOptions = ["Left", "Right", "Avoid"];
 export default function RouteModificationRequest({
   onSend,
   disabled = false,
+  cancelSign,
 }: RequestProps) {
   const { setTargetInput } = useContext(InputContext);
   const { request, setRequest } = useContext(RequestContext);
@@ -46,6 +47,12 @@ export default function RouteModificationRequest({
       resetAllInputs();
     }
   };
+
+  useEffect(() => {
+    if (isOpen) {
+      handleToggle();
+    }
+  }, [cancelSign]);
 
   const handleSend = () => {
     const value = (() => {
@@ -95,18 +102,16 @@ export default function RouteModificationRequest({
           }`}
         >
           <div className="request-element">
-          <div className="inner-request-element mr-35">
-                  <p className="whitespace-nowrap">
-                    Request Direct to Position
-                  </p>
-                  <SelectDropdown
-                    options={directOptions}
-                    value={direct}
-                    disabled={!isOpen}
-                    onChange={setDirect}
-                  />
-                </div>
-                </div>
+            <div className="inner-request-element mr-35">
+              <p className="whitespace-nowrap">Request Direct to Position</p>
+              <SelectDropdown
+                options={directOptions}
+                value={direct}
+                disabled={!isOpen}
+                onChange={setDirect}
+              />
+            </div>
+          </div>
         </div>
       </div>
 

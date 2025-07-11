@@ -5,9 +5,10 @@ import { MessageService } from "@/api/services/messageService";
 import { socketService } from "@/api/communications/socket/socketService";
 import { GlobalContext } from "@/context/GlobalContext";
 import { useDelay } from "@/hooks/useDelay";
+import { MessagePreviewProps } from "@/interface/props/Request";
 
-export default function MessagePreview() {
-  const { request, setRequest } = useContext(RequestContext);
+export default function MessagePreview({ onCancel }: MessagePreviewProps) {
+  const { request, setRequest, resetRequest } = useContext(RequestContext);
   const { flightDetails } = useContext(GlobalContext);
   const [isSending, setIsSending] = useState(false);
   const [isSent, setIsSent] = useState(false);
@@ -44,6 +45,13 @@ export default function MessagePreview() {
     });
   };
 
+  const handleCancel = () => {
+    onCancel();
+    setIsSending(false);
+    setIsSent(false);
+    resetRequest();
+  };
+
   return (
     <div
       className="flex flex-col w-full p-4 gap-4 
@@ -76,6 +84,7 @@ export default function MessagePreview() {
       <div className="flex w-full gap-4">
         <button
           className={`flex-1 px-4 py-2 rounded bg-white-20 ${isSent ? "" : "hover:bg-white-10 cursor-pointer"}  text-white-80 font-semibold tracking-wide uppercase`}
+          onClick={handleCancel}
         >
           Cancel
         </button>

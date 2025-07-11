@@ -22,9 +22,9 @@ export default function Logon() {
   };
 
   const handleLogon = () => {
-    socketService.send("logon", {username: username});
+    socketService.send("logon", { username: username });
     setIsLoading(true);
-  }
+  };
 
   useSocketListeners([
     {

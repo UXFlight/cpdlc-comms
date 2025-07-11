@@ -15,7 +15,7 @@ export const ADDITIONAL_MESSAGES = {
   speed_req: ["Due to weather", "Due to aircraft performance"],
   route_modification_req: ["Due to aircraft performance"],
   response_additional: ["Due to weather", "Due to aircraft performance"],
-  voice_contact_req: ["At frequency"]
+  voice_contact_req: ["At frequency"],
 };
 
 export enum RequestCategory {

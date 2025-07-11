@@ -38,8 +38,7 @@ export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
       callback: (log: Log) => {
         addLog(log);
       },
-
-    }
+    },
   ]);
 
   useEffect(() => {
@@ -60,7 +59,6 @@ export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
 
   // const replaceLog = (log: Log) => {
   //   logs.find((logs) => logs.id === log.id)
-
 
   const changeStatus = (logId: string, newState: string) => {
     setLogs((prevLogs) =>

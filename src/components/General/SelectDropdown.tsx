@@ -36,7 +36,7 @@ export default function SelectDropdown({
     >
       <div className="relative w-full">
         <button
-          className={`w-full min-w-[100px] max-w-[180px] ${style} flex items-center justify-between ${disabled ? "": "bg-[#1e1e1e]"} ${value === defaultValue ? "text-white-20" : "text-white"} p-[5px] border border-[2px] border-white-10 rounded-md cursor-pointer transition-all`}
+          className={`w-full min-w-[100px] max-w-[180px] ${style} flex items-center justify-between ${disabled ? "" : "bg-[#1e1e1e]"} ${value === defaultValue ? "text-white-20" : "text-white"} p-[5px] border border-[2px] border-white-10 rounded-md cursor-pointer transition-all`}
           onClick={() => setIsOpen(!isOpen)}
           disabled={disabled}
         >

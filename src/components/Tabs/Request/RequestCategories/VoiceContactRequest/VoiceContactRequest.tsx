@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import RequestContainer from "@/components/Tabs/Request/RequestContainer";
 import { RequestContext } from "@/context/RequestContext";
 import AdditionalMessages from "../../AdditionalMessages";
@@ -9,6 +9,7 @@ export function VoiceContactRequest({
   onSend,
   onOpen,
   disabled = false,
+  cancelSign,
 }: RequestProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [atFrequency, setAtFrequency] = useState(true);
@@ -24,10 +25,16 @@ export function VoiceContactRequest({
     onSend();
   };
 
-   const handleToggle = () => {
+  useEffect(() => {
+    if (isOpen) {
+      handleToggle();
+    }
+  }, [cancelSign]);
+
+  const handleToggle = () => {
     const newState = !isOpen;
     setIsOpen(newState);
-    onOpen(newState)
+    onOpen(newState);
     if (!newState) {
       setFrequency("");
     }

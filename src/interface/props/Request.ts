@@ -2,6 +2,7 @@ export interface RequestProps {
   onSend: () => void;
   onOpen: (isOpen: boolean) => void;
   disabled?: boolean;
+  cancelSign?: number;
 }
 
 export interface AdditionalMessagesProps {
@@ -28,4 +29,8 @@ export interface BlockDataProps {
   setTo: (value: string) => void;
   isOpen: boolean;
   disabled: boolean;
+}
+
+export interface MessagePreviewProps {
+  onCancel: () => void;
 }

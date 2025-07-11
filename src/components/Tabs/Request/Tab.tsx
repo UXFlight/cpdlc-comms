@@ -14,6 +14,7 @@ import AltitudeRequest from "@/components/Tabs/Request/RequestCategories/Altitud
 export default function RequestTab() {
   const [preview, setPreview] = useState(false);
   const [category, setCategory] = useState<string | null>(null);
+  const [cancelSignal, setCancelSignal] = useState<number>(0);
 
   const categories = [
     { key: "altitude", Component: AltitudeRequest },
@@ -27,6 +28,12 @@ export default function RequestTab() {
     { key: "free", Component: FreeTextRequest },
   ];
 
+  const handleOnCancel = () => {
+    setPreview(false);
+    setCategory(null);
+    setCancelSignal((prev) => prev + 1);
+  };
+
   return (
     <RequestProvider>
       <div
@@ -39,25 +46,26 @@ export default function RequestTab() {
         </div>
 
         <div className="flex flex-col gap-4">
-        {categories.map(({ key, Component }) => {
-          if (category === null || category === key) {
-            return (
-              <Component
-                key={key}
-                disabled={preview}
-                onSend={() => setPreview(true)}
-                onOpen={(isOpen: boolean) => setCategory(isOpen ? key : null)}
-              />
-            );
-          }
-          return null;
-        })}
+          {categories.map(({ key, Component }) => {
+            if (category === null || category === key) {
+              return (
+                <Component
+                  key={key}
+                  disabled={preview}
+                  onSend={() => setPreview(true)}
+                  onOpen={(isOpen: boolean) => setCategory(isOpen ? key : null)}
+                  cancelSign={cancelSignal}
+                />
+              );
+            }
+            return null;
+          })}
         </div>
 
         {preview && (
           <div className="absolute bottom-0 left-0 w-full px-2 z-50">
             <div className="bg-[#1e1e1e]/95 backdrop-blur-sm shadow-[0_-10px_10000px_rgba(43,43,43,1)] rounded-t-md border-t border-white/10">
-              <MessagePreview />
+              <MessagePreview onCancel={handleOnCancel} />
             </div>
           </div>
         )}

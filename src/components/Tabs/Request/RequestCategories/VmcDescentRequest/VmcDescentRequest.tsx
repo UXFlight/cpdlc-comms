@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import RequestContainer from "@/components/Tabs/Request/RequestContainer";
 import { RequestContext } from "@/context/RequestContext";
 import { RequestProps } from "@/interface/props/Request";
@@ -7,23 +7,28 @@ export function VmcDescentRequest({
   onSend,
   onOpen,
   disabled = false,
-}:
-  RequestProps
-) {
+  cancelSign,
+}: RequestProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const {setRequest} = useContext(RequestContext);
+  const { setRequest } = useContext(RequestContext);
 
   const handleSend = () => {
-    setRequest({messageRef: "DM69"});
+    setRequest({ messageRef: "DM69" });
     onSend();
   };
 
-   const handleToggle = () => {
+  useEffect(() => {
+    if (isOpen) {
+      handleToggle();
+    }
+  }, [cancelSign]);
+
+  const handleToggle = () => {
     const newState = !isOpen;
     setIsOpen(newState);
-    onOpen(newState)
+    onOpen(newState);
     if (!newState) {
-     //a suivre;
+      //a suivre;
     }
     //setTargetInput("offset-distance");
   };
@@ -38,7 +43,9 @@ export function VmcDescentRequest({
       onSend={handleSend}
     >
       <div className={`flex flex-col gap-4 mt-3 ${!isOpen ? "hidden" : ""}`}>
-        <span className="text-white/80 text-[16px] uppercase">Request VMC Descent</span>
+        <span className="text-white/80 text-[16px] uppercase">
+          Request VMC Descent
+        </span>
       </div>
     </RequestContainer>
   );

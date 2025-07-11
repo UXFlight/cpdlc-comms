@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import CustomRadio from "@/components/General/CustomRadio";
 import RequestContainer from "@/components/Tabs/Request/RequestContainer";
 import { RequestProps } from "@/interface/props/Request";
@@ -12,9 +12,14 @@ import BlockData from "../../BlockData";
 import { RequestContext } from "@/context/RequestContext";
 import { InputContext } from "@/context/InputContext";
 
-export function WhenCanWeRequest({ onSend, onOpen, disabled = false }: RequestProps) {
-  const {request, setRequest} = useContext(RequestContext);
-    const { setTargetInput } = useContext(InputContext);
+export function WhenCanWeRequest({
+  onSend,
+  onOpen,
+  disabled = false,
+  cancelSign,
+}: RequestProps) {
+  const { request, setRequest } = useContext(RequestContext);
+  const { setTargetInput } = useContext(InputContext);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [level, setLevel] = useState<string>("");
@@ -22,6 +27,12 @@ export function WhenCanWeRequest({ onSend, onOpen, disabled = false }: RequestPr
   const [climbDescendLevel, setClimbDescendLevel] = useState<string>("");
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
+
+  useEffect(() => {
+    if (isOpen) {
+      handleToggle();
+    }
+  }, [cancelSign]);
 
   const handleSend = () => {
     let args: string[] = [];
@@ -41,7 +52,7 @@ export function WhenCanWeRequest({ onSend, onOpen, disabled = false }: RequestPr
       default:
         return;
     }
-    setRequest({ arguments: args});
+    setRequest({ arguments: args });
     onSend();
   };
 
@@ -69,27 +80,31 @@ export function WhenCanWeRequest({ onSend, onOpen, disabled = false }: RequestPr
       onSend={handleSend}
     >
       <div className="flex items-center gap-3">
-              <div
-                className={`w-400 text-white/80 font-open text-[16px] font-normal leading-[18px] uppercase ${
-                  isOpen ? "hidden" : "block"
-                }`}
-              >
-            <div className="request-element">
-              <div className="inner-request-element mr-48">
-                <p className="whitespace-nowrap uppercase">Change Altitude/Level</p>
-                <SelectDropdown
-                  options={LEVEL_ALTITUDE_OPTIONS}
-                  value={level}
-                  disabled={!isOpen}
-                  onChange={(value) => {
-                    setLevel(value);
-                    value === "LOWER" ? setRequest({messageRef:"DM52"}) : setRequest({messageRef:"DM53"});
-                  }}
-                />
-              </div>
-        </div>
-              </div>
+        <div
+          className={`w-400 text-white/80 font-open text-[16px] font-normal leading-[18px] uppercase ${
+            isOpen ? "hidden" : "block"
+          }`}
+        >
+          <div className="request-element">
+            <div className="inner-request-element mr-48">
+              <p className="whitespace-nowrap uppercase">
+                Change Altitude/Level
+              </p>
+              <SelectDropdown
+                options={LEVEL_ALTITUDE_OPTIONS}
+                value={level}
+                disabled={!isOpen}
+                onChange={(value) => {
+                  setLevel(value);
+                  value === "LOWER"
+                    ? setRequest({ messageRef: "DM52" })
+                    : setRequest({ messageRef: "DM53" });
+                }}
+              />
             </div>
+          </div>
+        </div>
+      </div>
 
       <div className={`flex flex-col gap-2 mt-1 ${!isOpen ? "hidden" : ""}`}>
         <div className="request-element">
@@ -99,13 +114,17 @@ export function WhenCanWeRequest({ onSend, onOpen, disabled = false }: RequestPr
             onChange={setSelectedOption}
             label={
               <div className="inner-request-element mr-25">
-                <p className="whitespace-nowrap uppercase">Change Altitude/Level</p>
+                <p className="whitespace-nowrap uppercase">
+                  Change Altitude/Level
+                </p>
                 <SelectDropdown
                   options={LEVEL_ALTITUDE_OPTIONS}
                   value={level}
                   onChange={(value) => {
                     setLevel(value);
-                    value === "LOWER" ? setRequest({messageRef:"DM52"}) : setRequest({messageRef:"DM53"});
+                    value === "LOWER"
+                      ? setRequest({ messageRef: "DM52" })
+                      : setRequest({ messageRef: "DM53" });
                   }}
                 />
               </div>
@@ -126,7 +145,9 @@ export function WhenCanWeRequest({ onSend, onOpen, disabled = false }: RequestPr
                   onChange={(value) => {
                     setClimbDescend(value);
                     setTargetInput("climb_descend");
-                    value === "CLIMB" ? setRequest({messageRef:"DM87"}) : setRequest({messageRef:"DM88"});
+                    value === "CLIMB"
+                      ? setRequest({ messageRef: "DM87" })
+                      : setRequest({ messageRef: "DM88" });
                   }}
                 />
                 <p className="whitespace-nowrap uppercase text-white/80 font-open text-[16px]">
@@ -148,7 +169,7 @@ export function WhenCanWeRequest({ onSend, onOpen, disabled = false }: RequestPr
           <CustomRadio
             value="speed_range"
             selected={selectedOption || ""}
-            onChange={(value)=> {
+            onChange={(value) => {
               setSelectedOption(value);
               setTargetInput("block-data-from");
             }}
@@ -168,13 +189,11 @@ export function WhenCanWeRequest({ onSend, onOpen, disabled = false }: RequestPr
         <CustomRadio
           value="back_on_route"
           selected={selectedOption || ""}
-          onChange={(value)=> {
+          onChange={(value) => {
             setSelectedOption(value);
-            setRequest({messageRef:"DM51"});
+            setRequest({ messageRef: "DM51" });
           }}
-          label={
-            <p className="uppercase">Back on Route</p>
-          }
+          label={<p className="uppercase">Back on Route</p>}
         />
       </div>
     </RequestContainer>

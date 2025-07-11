@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { use, useContext, useEffect, useState } from "react";
 import { RequestContext } from "@/context/RequestContext";
 import RequestContainer from "@/components/Tabs/Request/RequestContainer";
 import AdditionalMessages from "@/components/Tabs/Request/AdditionalMessages";
@@ -13,6 +13,7 @@ export default function AltitudeRequest({
   onSend,
   onOpen,
   disabled = false,
+  cancelSign,
 }: RequestProps) {
   const { request, setRequest } = useContext(RequestContext);
   const { setTargetInput } = useContext(InputContext);
@@ -34,6 +35,12 @@ export default function AltitudeRequest({
       prev.includes(val) ? prev.filter((m) => m !== val) : [...prev, val],
     );
   };
+
+  useEffect(() => {
+    if (isOpen) {
+      handleToggle();
+    }
+  }, [cancelSign]);
 
   const handleToggle = () => {
     const nextOpen = !isOpen;

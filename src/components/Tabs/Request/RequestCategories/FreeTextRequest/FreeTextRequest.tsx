@@ -1,9 +1,14 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import RequestContainer from "@/components/Tabs/Request/RequestContainer";
 import { RequestContext } from "@/context/RequestContext";
 import { RequestProps } from "@/interface/props/Request";
 
-export function FreeTextRequest({ onSend, onOpen, disabled = false }: RequestProps) {
+export function FreeTextRequest({
+  onSend,
+  onOpen,
+  disabled = false,
+  cancelSign,
+}: RequestProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [text, setText] = useState("");
   const { setRequest } = useContext(RequestContext);
@@ -17,7 +22,13 @@ export function FreeTextRequest({ onSend, onOpen, disabled = false }: RequestPro
     console.log("Free Text Request sent:", { value: text });
   };
 
-   const handleToggle = () => {
+  useEffect(() => {
+    if (isOpen) {
+      handleToggle();
+    }
+  }, [cancelSign]);
+
+  const handleToggle = () => {
     const nextOpen = !isOpen;
     setIsOpen(nextOpen);
     onOpen(nextOpen);
@@ -27,7 +38,6 @@ export function FreeTextRequest({ onSend, onOpen, disabled = false }: RequestPro
       //setTargetInput("block-data-from");
     }
   };
-
 
   return (
     <RequestContainer

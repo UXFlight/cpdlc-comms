@@ -1,10 +1,15 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import CustomRadio from "@/components/General/CustomRadio";
 import RequestContainer from "@/components/Tabs/Request/RequestContainer";
 import { RequestProps } from "@/interface/props/Request";
 import { InputContext } from "@/context/InputContext";
 
-export function ClearanceRequest({ onSend, onOpen, disabled = false }: RequestProps) {
+export function ClearanceRequest({
+  onSend,
+  onOpen,
+  disabled = false,
+  cancelSign,
+}: RequestProps) {
   const [isOpen, setIsOpen] = useState(false);
   const { setTargetInput } = useContext(InputContext);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
@@ -19,6 +24,12 @@ export function ClearanceRequest({ onSend, onOpen, disabled = false }: RequestPr
       //setTargetInput("block-data-from");
     }
   };
+
+  useEffect(() => {
+    if (isOpen) {
+      handleToggle();
+    }
+  }, [cancelSign]);
 
   return (
     <RequestContainer
