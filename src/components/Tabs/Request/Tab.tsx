@@ -22,10 +22,10 @@ export default function RequestTab() {
     { key: "offset", Component: OffsetRequest },
     { key: "route", Component: RouteModificationRequest },
     { key: "when", Component: WhenCanWeRequest },
-    { key: "clearance", Component: ClearanceRequest },
     { key: "vmc", Component: VmcDescentRequest },
     { key: "voice", Component: VoiceContactRequest },
     { key: "free", Component: FreeTextRequest },
+    { key: "clearance", Component: ClearanceRequest },
   ];
 
   const handleOnCancel = () => {
@@ -45,7 +45,7 @@ export default function RequestTab() {
           <h1>request</h1>
         </div>
 
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-3">
           {categories.map(({ key, Component }) => {
             if (category === null || category === key) {
               return (

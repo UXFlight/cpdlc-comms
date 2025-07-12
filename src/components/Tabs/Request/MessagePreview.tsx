@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { use, useContext, useEffect, useState } from "react";
 import { RequestContext } from "@/context/RequestContext";
 import SendButton from "@/components/General/SendButton";
 import { MessageService } from "@/api/services/messageService";
@@ -45,6 +45,10 @@ export default function MessagePreview({ onCancel }: MessagePreviewProps) {
       request: request,
     });
   };
+
+  useEffect(() => {
+    console.log("Sending message:", request);
+  0}, [request]);
 
   const handleCancel = () => {
     onCancel();

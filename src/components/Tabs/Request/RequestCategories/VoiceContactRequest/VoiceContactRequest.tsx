@@ -4,6 +4,7 @@ import { RequestContext } from "@/context/RequestContext";
 import AdditionalMessages from "../../AdditionalMessages";
 import { ADDITIONAL_MESSAGES } from "@/constants/tabs/Request";
 import { RequestProps } from "@/interface/props/Request";
+import CharacterInput from "@/components/General/CharacterInput";
 
 export function VoiceContactRequest({
   onSend,
@@ -12,16 +13,16 @@ export function VoiceContactRequest({
   cancelSign,
 }: RequestProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [atFrequency, setAtFrequency] = useState(true);
-  const [frequency, setFrequency] = useState("120 Hz");
+  const [frequency, setFrequency] = useState<string>("");
   const { setRequest } = useContext(RequestContext);
 
   const handleSend = () => {
+    const args =  frequency ? [frequency] : [];
+    const ref = args.length > 0 ? "DM21" : "DM20";
     setRequest({
-      arguments: ["voice_contact", atFrequency ? frequency : ""],
-      messageRef: "VOICE_CONTACT",
+      messageRef: ref,
+      arguments: args,
     });
-    setIsOpen(false);
     onSend();
   };
 
@@ -46,37 +47,28 @@ export function VoiceContactRequest({
       requestType="REQUEST VOICE CONTACT"
       isOpen={isOpen}
       onToggle={handleToggle}
-      showSendButton={false}
+      showSendButton={isOpen}
       disabled={disabled}
       onSend={handleSend}
     >
-      <div className={`flex flex-col gap-4 mt-3 ${!isOpen ? "hidden" : ""}`}>
-        <span className="text-white/80 text-sm">Request voice contact</span>
-        <div className="flex items-center gap-3">
-          <label className="flex items-center gap-2 cursor-pointer select-none text-white/80 text-sm">
-            <input
-              type="checkbox"
-              checked={atFrequency}
-              onChange={() => setAtFrequency(!atFrequency)}
+      <div>
+        <div className={`flex flex-row gap-1.5 ${isOpen ? "pb-8" : ""}`}>
+        <span className="flex items-center h-[35px] text-white/80 text-[16px] uppercase">Request voice contact</span>
+          <div className={`flex flex-row items-center gap-1 ${frequency.length>0 ? "" : "text-white/30"}`}>
+            <p className="uppercase text-[16px]">At frequency :</p>
+            <CharacterInput
+              name="voice-contact-frequency"
+              value={frequency}
+              onChange={setFrequency}
+              style="w-[48px]"
+              length={3}
+              disabled={!isOpen || disabled}
             />
-            <span className="font-semibold">At frequency</span>
-          </label>
-          <input
-            type="text"
-            value={frequency}
-            onChange={(e) => setFrequency(e.target.value)}
-            className="px-2 py-1 bg-white/10 rounded text-white text-center w-[100px]"
-            disabled={!atFrequency}
-          />
+          </div>
+          </div>
         </div>
         <div>
-          {/* <AdditionalMessages
-            extraMessages={ADDITIONAL_MESSAGES.voice_contact_req}
-            selected={extras}
-            onChange={toggleExtra}
-          /> */}
         </div>
-      </div>
     </RequestContainer>
   );
 }

@@ -38,15 +38,13 @@ export function VmcDescentRequest({
       requestType="REQUEST VMC DESCENT"
       isOpen={isOpen}
       onToggle={handleToggle}
-      showSendButton={true}
+      showSendButton={isOpen}
       disabled={disabled}
       onSend={handleSend}
     >
-      <div className={`flex flex-col gap-4 mt-3 ${!isOpen ? "hidden" : ""}`}>
-        <span className="text-white/80 text-[16px] uppercase">
+        <div className={`flex items-center text-white/80 text-[16px] h-[35px] uppercase ${isOpen ? "mb-4" : ""}`}>
           Request VMC Descent
-        </span>
-      </div>
+        </div>
     </RequestContainer>
   );
 }

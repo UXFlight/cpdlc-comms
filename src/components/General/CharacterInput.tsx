@@ -7,7 +7,7 @@ export default function CharacterInput({
   name,
   value,
   length,
-  style,
+  style="w-[65px]",
   disabled = false,
   onChange,
   onEnter,
@@ -43,7 +43,7 @@ export default function CharacterInput({
   }, [targetInput, isConnectionPossible]);
 
   return (
-    <div className={`flex w-[65px] ${style}`}>
+    <div className={`flex ${style}`}>
       <div
         onClick={() => inputRef.current?.focus()}
         className={`flex items-center gap-[1px] p-[3px] border border-[2px] rounded-md cursor-text transition-all

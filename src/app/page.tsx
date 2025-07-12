@@ -16,6 +16,7 @@ import { socketService } from "@/api/communications/socket/socketService";
 import { LogsProvider } from "@/context/LogsContext";
 import { GlobalContext } from "@/context/GlobalContext";
 import { FlightContext } from "@/context/FlightContext";
+import ErrorPopup from "@/components/General/ErrorPopup";
 
 export default function CpdlcMainView() {
   const [activeTab, setActiveTab] = useState("logon");
@@ -63,6 +64,7 @@ export default function CpdlcMainView() {
             <ConnectionBar />
           </div>
         </div>
+        <ErrorPopup />
       </div>
     </div>
   );

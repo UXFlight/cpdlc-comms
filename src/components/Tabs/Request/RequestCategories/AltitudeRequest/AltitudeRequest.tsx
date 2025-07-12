@@ -92,7 +92,7 @@ export default function AltitudeRequest({
       showSendButton={!!(from.length === 5)}
       onSend={handleSend}
     >
-      <div className="flex flex-col gap-4 mt-2">
+      <div className="flex flex-col gap-4">
         <BlockData
           label="Altitude (or block altitude)"
           from={from}
@@ -102,7 +102,6 @@ export default function AltitudeRequest({
           isOpen={isOpen}
           disabled={disabled}
         />
-
         <div className={`${isOpen ? "" : "hidden"}`}>
           <StepAtInput
             disabled={disabled || (from !== "" && to !== "")}

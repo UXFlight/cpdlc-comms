@@ -89,7 +89,7 @@ export function OffsetRequest({
       onSend={handleSend}
     >
       <div>
-        <div className="flex flex-row gap-4 items-center text-white/80 text-[15px] uppercase">
+        <div className="flex flex-row gap-4 items-center text-white/80 text-[15px] h-[35px] uppercase">
           <span>Offset distance</span>
           <CharacterInput
             name="offset-distance"
