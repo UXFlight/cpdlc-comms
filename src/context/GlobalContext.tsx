@@ -25,7 +25,7 @@ export const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
         isConnectionPossible,
         setIsConnectionPossible,
         username,
-        setUsername
+        setUsername,
       }}
     >
       {children}

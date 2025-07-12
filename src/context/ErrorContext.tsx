@@ -32,7 +32,9 @@ export const ErrorProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <ErrorContext.Provider value={{ currentError, errors, throwError, clearCurrentError }}>
+    <ErrorContext.Provider
+      value={{ currentError, errors, throwError, clearCurrentError }}
+    >
       {children}
     </ErrorContext.Provider>
   );

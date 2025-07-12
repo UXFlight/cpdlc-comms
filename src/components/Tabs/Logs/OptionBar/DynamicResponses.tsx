@@ -2,8 +2,21 @@ import { useState } from "react";
 import { AcceptableResponse } from "@/interface/Logs";
 
 export const IGNORED_RESPONSES = [
-  "UM0", "UM1", "UM2", "UM3", "UM4", "UM5",
-  "UM159", "UM183", "UM162", "DM0", "DM1", "DM2", "DM3", "DM4", "DM5",
+  "UM0",
+  "UM1",
+  "UM2",
+  "UM3",
+  "UM4",
+  "UM5",
+  "UM159",
+  "UM183",
+  "UM162",
+  "DM0",
+  "DM1",
+  "DM2",
+  "DM3",
+  "DM4",
+  "DM5",
 ];
 
 const VISIBLE_COUNT = 3;
@@ -22,7 +35,9 @@ export default function DynamicResponses({
     (response) => !IGNORED_RESPONSES.includes(response.ref),
   );
 
-  const visibleResponses = showAll ? shownOptions : shownOptions.slice(0, VISIBLE_COUNT);
+  const visibleResponses = showAll
+    ? shownOptions
+    : shownOptions.slice(0, VISIBLE_COUNT);
 
   return (
     <div className="flex flex-col gap-2 w-full">

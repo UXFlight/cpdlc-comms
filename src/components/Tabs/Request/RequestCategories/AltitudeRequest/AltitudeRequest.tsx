@@ -18,7 +18,7 @@ export default function AltitudeRequest({
 }: RequestProps) {
   const { request, setRequest } = useContext(RequestContext);
   const { setTargetInput } = useContext(InputContext);
-  const {flightDetails} = useContext(FlightContext);
+  const { flightDetails } = useContext(FlightContext);
 
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
@@ -76,7 +76,11 @@ export default function AltitudeRequest({
         : {}),
     };
 
-    const ref = resolveMessageRef(RequestCategory.ALTITUDE, newRequest, flightDetails);
+    const ref = resolveMessageRef(
+      RequestCategory.ALTITUDE,
+      newRequest,
+      flightDetails,
+    );
 
     setRequest({ ...newRequest, messageRef: ref, additional: extras });
 

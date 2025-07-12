@@ -99,22 +99,27 @@ export default function OptionBar({ message }: MessageProps) {
         {/* Étape de sélection */}
         {!action && !isSending && !done && (
           <div className="flex flex-row gap-6 border border-white-10 rounded-md items-center justify-around w-[538px] h-[74px] py-4 px-4 bg-nav-bar">
-            {[ActionType.Load, ActionType.Standby, ActionType.Reject, ActionType.Accept].map(
-              (item) => (
-                <div
-                  key={item}
-                  className={`logs-options bg-white-10 px-4 py-2 rounded cursor-pointer border ${
-                    item === action ? "border-2 border-dark-blue" : "border-transparent"
-                  }`}
-                  onClick={() => {
-                    if (item === "load" && !isLoadable) return;
-                    setAction(item);
-                  }}
-                >
-                  {item}
-                </div>
-              )
-            )}
+            {[
+              ActionType.Load,
+              ActionType.Standby,
+              ActionType.Reject,
+              ActionType.Accept,
+            ].map((item) => (
+              <div
+                key={item}
+                className={`logs-options bg-white-10 px-4 py-2 rounded cursor-pointer border ${
+                  item === action
+                    ? "border-2 border-dark-blue"
+                    : "border-transparent"
+                }`}
+                onClick={() => {
+                  if (item === "load" && !isLoadable) return;
+                  setAction(item);
+                }}
+              >
+                {item}
+              </div>
+            ))}
           </div>
         )}
 
@@ -123,8 +128,14 @@ export default function OptionBar({ message }: MessageProps) {
           <div className="flex flex-col items-center gap-2">
             <p className="text-white font-semibold text-lg text-center uppercase tracking-wide">
               Are you sure you want to{" "}
-              <span className="capitalize text-light-blue font-semibold">{action}</span>{" "}
-              the message <span className="text-green font-semibold">{message.element}</span>?
+              <span className="capitalize text-light-blue font-semibold">
+                {action}
+              </span>{" "}
+              the message{" "}
+              <span className="text-green font-semibold">
+                {message.element}
+              </span>
+              ?
             </p>
             <div className="flex gap-6">
               <button
@@ -143,26 +154,32 @@ export default function OptionBar({ message }: MessageProps) {
           </div>
         )}
 
-   {isSending && (
-  <div className="flex items-center justify-center h-[80px] w-full">
-    <p className="text-white text-lg font-semibold uppercase tracking-wide text-center">
-      Sending{" "}
-      <span className="capitalize font-semibold text-light-blue">{action}</span> request for{" "}
-      <span className="text-green font-semibold">{message.element}</span>...
-    </p>
-  </div>
-)}
+        {isSending && (
+          <div className="flex items-center justify-center h-[80px] w-full">
+            <p className="text-white text-lg font-semibold uppercase tracking-wide text-center">
+              Sending{" "}
+              <span className="capitalize font-semibold text-light-blue">
+                {action}
+              </span>{" "}
+              request for{" "}
+              <span className="text-green font-semibold">
+                {message.element}
+              </span>
+              ...
+            </p>
+          </div>
+        )}
 
         {/* Envoi terminé */}
-       {done && (
-  <button
-    onClick={() => setCurrentLog(null)}
-    className="flex items-center gap-2 text-light-blue hover:text-light-blue/60 text-[20px] font-medium transition"
-  >
-    <img src="/arrow-back.svg" alt="Back arrow" className="w-5 h-5" />
-    Message sent. Go back to message logs
-  </button>
-)}
+        {done && (
+          <button
+            onClick={() => setCurrentLog(null)}
+            className="flex items-center gap-2 text-light-blue hover:text-light-blue/60 text-[20px] font-medium transition"
+          >
+            <img src="/arrow-back.svg" alt="Back arrow" className="w-5 h-5" />
+            Message sent. Go back to message logs
+          </button>
+        )}
       </div>
     </div>
   );

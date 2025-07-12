@@ -17,11 +17,9 @@ export default function RootLayout({
     <html lang="en">
       <body className="overflow-hidden">
         <GlobalProvider>
-        <FlightProvider>
-        <ErrorProvider>
-          {children}
-        </ErrorProvider>
-        </FlightProvider>
+          <FlightProvider>
+            <ErrorProvider>{children}</ErrorProvider>
+          </FlightProvider>
         </GlobalProvider>
       </body>
     </html>

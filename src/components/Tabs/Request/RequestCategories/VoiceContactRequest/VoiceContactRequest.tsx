@@ -17,7 +17,7 @@ export function VoiceContactRequest({
   const { setRequest } = useContext(RequestContext);
 
   const handleSend = () => {
-    const args =  frequency ? [frequency] : [];
+    const args = frequency ? [frequency] : [];
     const ref = args.length > 0 ? "DM21" : "DM20";
     setRequest({
       messageRef: ref,
@@ -53,8 +53,12 @@ export function VoiceContactRequest({
     >
       <div>
         <div className={`flex flex-row gap-1.5 ${isOpen ? "pb-8" : ""}`}>
-        <span className="flex items-center h-[35px] text-white/80 text-[16px] uppercase">Request voice contact</span>
-          <div className={`flex flex-row items-center gap-1 ${frequency.length>0 ? "" : "text-white/30"}`}>
+          <span className="flex items-center h-[35px] text-white/80 text-[16px] uppercase">
+            Request voice contact
+          </span>
+          <div
+            className={`flex flex-row items-center gap-1 ${frequency.length > 0 ? "" : "text-white/30"}`}
+          >
             <p className="uppercase text-[16px]">At frequency :</p>
             <CharacterInput
               name="voice-contact-frequency"
@@ -65,10 +69,9 @@ export function VoiceContactRequest({
               disabled={!isOpen || disabled}
             />
           </div>
-          </div>
         </div>
-        <div>
-        </div>
+      </div>
+      <div></div>
     </RequestContainer>
   );
 }

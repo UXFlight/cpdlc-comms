@@ -48,7 +48,8 @@ export default function MessagePreview({ onCancel }: MessagePreviewProps) {
 
   useEffect(() => {
     console.log("Sending message:", request);
-  0}, [request]);
+    0;
+  }, [request]);
 
   const handleCancel = () => {
     onCancel();

@@ -35,7 +35,10 @@ export default function ErrorPopup() {
     >
       <div className="flex justify-between items-center">
         <p className="text-sm font-medium">{currentError.message}</p>
-        <button onClick={clearCurrentError} className="ml-4 text-white/80 hover:text-white">
+        <button
+          onClick={clearCurrentError}
+          className="ml-4 text-white/80 hover:text-white"
+        >
           ✕
         </button>
       </div>

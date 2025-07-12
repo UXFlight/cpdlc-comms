@@ -5,7 +5,7 @@ import { FlightDetails } from "@/interface/FlightDetails";
 export function resolveMessageRef(
   category: RequestCategory,
   request: Request,
-  flightDetails?: FlightDetails 
+  flightDetails?: FlightDetails,
 ): string | null {
   const argCount = request.arguments?.length || 0;
   const hasTime = !!request.timeSelected;
@@ -13,7 +13,11 @@ export function resolveMessageRef(
 
   switch (category) {
     case RequestCategory.ALTITUDE:
-      if (argCount === 1 && !hasTime && !hasPosition) return climbOrDescend(request.arguments[0], flightDetails?.status.altitude || 0);
+      if (argCount === 1 && !hasTime && !hasPosition)
+        return climbOrDescend(
+          request.arguments[0],
+          flightDetails?.status.altitude || 0,
+        );
       if (argCount === 2 && !hasTime && !hasPosition) return "DM7";
       if (argCount === 1 && hasPosition && !hasTime) return "DM11";
       if (argCount === 1 && hasTime && !hasPosition) return "DM13";
@@ -42,11 +46,16 @@ export function resolveMessageRef(
   return null;
 }
 
-export function climbOrDescend(input: string, current: number): "DM9" | "DM10" | "DM37" {
-  const match = input.match(/fl(\d{3})/i);  //aller chercher la fct isValidFlightLevel dans inputValidation.ts
+export function climbOrDescend(
+  input: string,
+  current: number,
+): "DM9" | "DM10" | "DM37" {
+  const match = input.match(/fl(\d{3})/i); //aller chercher la fct isValidFlightLevel dans inputValidation.ts
 
   if (!match) {
-    throw new Error("Invalid altitude format. Expected something like 'FL220'.");
+    throw new Error(
+      "Invalid altitude format. Expected something like 'FL220'.",
+    );
   }
 
   const flightLevel = parseInt(match[1], 10) * 100; // fl220 => 22000

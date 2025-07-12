@@ -42,9 +42,11 @@ export function VmcDescentRequest({
       disabled={disabled}
       onSend={handleSend}
     >
-        <div className={`flex items-center text-white/80 text-[16px] h-[35px] uppercase ${isOpen ? "mb-4" : ""}`}>
-          Request VMC Descent
-        </div>
+      <div
+        className={`flex items-center text-white/80 text-[16px] h-[35px] uppercase ${isOpen ? "mb-4" : ""}`}
+      >
+        Request VMC Descent
+      </div>
     </RequestContainer>
   );
 }

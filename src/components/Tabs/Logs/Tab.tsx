@@ -12,11 +12,9 @@ export default function LogsTab() {
   const { logs, setFilterBy, currentLog, setCurrentLog } =
     useContext(LogsContext);
 
-  
   useEffect(() => {
     console.log("current log", currentLog);
   }, [currentLog]);
-
 
   return (
     <div className="flex flex-col h-full">
@@ -66,12 +64,11 @@ export default function LogsTab() {
                 </div>
                 <div className="flex-1 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
               </div>
-           {currentLog.acceptable_responses.length > 0 && (
-          <DynamicResponses responses={currentLog.acceptable_responses} />
-        )}
+              {currentLog.acceptable_responses.length > 0 && (
+                <DynamicResponses responses={currentLog.acceptable_responses} />
+              )}
             </div>
             <div className="mt-auto mb-4">
-
               <OptionBar message={currentLog} />
             </div>
           </div>

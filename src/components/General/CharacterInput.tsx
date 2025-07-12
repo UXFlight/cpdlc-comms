@@ -7,7 +7,7 @@ export default function CharacterInput({
   name,
   value,
   length,
-  style="w-[65px]",
+  style = "w-[65px]",
   disabled = false,
   onChange,
   onEnter,
