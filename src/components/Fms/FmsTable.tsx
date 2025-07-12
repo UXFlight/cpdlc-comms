@@ -3,13 +3,13 @@ import FmsTableHeader from "@/components/Fms/FmsTableHeader";
 import FmsRow from "@/components/Fms/FmsRow";
 import { FmsTableProps } from "@/interface/props/Fms";
 import { useContext } from "react";
-import { GlobalContext } from "@/context/GlobalContext";
 import { RouteFix } from "@/interface/FlightDetails";
 import { useSocketListeners } from "@/hooks/useSocketListeners";
+import { FlightContext } from "@/context/FlightContext";
 
 export default function FmsTable({ route }: FmsTableProps) {
   const noRoute = route.length === 0;
-  const { setFlightDetails } = useContext(GlobalContext);
+  const { setFlightDetails } = useContext(FlightContext);
 
   useSocketListeners([
     {

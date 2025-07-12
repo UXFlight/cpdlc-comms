@@ -6,10 +6,11 @@ import { socketService } from "@/api/communications/socket/socketService";
 import { GlobalContext } from "@/context/GlobalContext";
 import { useDelay } from "@/hooks/useDelay";
 import { MessagePreviewProps } from "@/interface/props/Request";
+import { FlightContext } from "@/context/FlightContext";
 
 export default function MessagePreview({ onCancel }: MessagePreviewProps) {
   const { request, setRequest, resetRequest } = useContext(RequestContext);
-  const { flightDetails } = useContext(GlobalContext);
+  const { flightDetails } = useContext(FlightContext);
   const [isSending, setIsSending] = useState(false);
   const [isSent, setIsSent] = useState(false);
   const { delay } = useDelay();

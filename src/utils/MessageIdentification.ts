@@ -1,9 +1,11 @@
 import { Request } from "@/interface/Request";
 import { RequestCategory } from "@/constants/tabs/Request";
+import { FlightDetails } from "@/interface/FlightDetails";
 
 export function resolveMessageRef(
   category: RequestCategory,
   request: Request,
+  flightDetails?: FlightDetails 
 ): string | null {
   const argCount = request.arguments?.length || 0;
   const hasTime = !!request.timeSelected;
@@ -11,7 +13,7 @@ export function resolveMessageRef(
 
   switch (category) {
     case RequestCategory.ALTITUDE:
-      if (argCount === 1 && !hasTime && !hasPosition) return "DM9";
+      if (argCount === 1 && !hasTime && !hasPosition) return climbOrDescend(request.arguments[0], flightDetails?.status.altitude || 0);
       if (argCount === 2 && !hasTime && !hasPosition) return "DM7";
       if (argCount === 1 && hasPosition && !hasTime) return "DM11";
       if (argCount === 1 && hasTime && !hasPosition) return "DM13";
@@ -37,5 +39,19 @@ export function resolveMessageRef(
       return null;
   }
 
-  return null; // si aucun cas ne matche
+  return null;
+}
+
+export function climbOrDescend(input: string, current: number): "DM9" | "DM10" | "DM37" {
+  const match = input.match(/fl(\d{3})/i);
+
+  if (!match) {
+    throw new Error("Invalid altitude format. Expected something like 'FL220'.");
+  }
+
+  const flightLevel = parseInt(match[1], 10) * 100; // fl220 => 22000
+
+  if (flightLevel > current) return "DM9";
+  if (flightLevel < current) return "DM10";
+  return "DM37";
 }

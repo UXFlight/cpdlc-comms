@@ -14,4 +14,12 @@ export interface Log {
   intent?: string;
   position?: string;
   additional?: string[];
+  response_required: boolean;
+  acceptable_responses: AcceptableResponse[];
+  communication_thread: string[];
+}
+
+export interface AcceptableResponse {
+  ref: string;
+  text: string;
 }

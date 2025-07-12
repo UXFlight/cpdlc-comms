@@ -1,15 +1,22 @@
 import MessageContainer from "./MessageContainer";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import MessageDisplayTab from "./MessageDisplayTab";
-import OptionBar from "./OptionBar";
+import OptionBar from "./OptionBar/OptionBar";
 import SelectDropdown from "@/components/General/SelectDropdown";
 import { LogsContext } from "@/context/LogsContext";
 import { DROPDOWN_OPTIONS } from "@/constants/tabs/Logs";
+import DynamicResponses from "./OptionBar/DynamicResponses";
 
 export default function LogsTab() {
   const [value, setValue] = useState("FILTER BY");
   const { logs, setFilterBy, currentLog, setCurrentLog } =
     useContext(LogsContext);
+
+  
+  useEffect(() => {
+    console.log("current log", currentLog);
+  }, [currentLog]);
+
 
   return (
     <div className="flex flex-col h-full">
@@ -51,7 +58,7 @@ export default function LogsTab() {
             <div className="rounded w-full">
               <MessageDisplayTab message={currentLog} />
             </div>
-            <div className="mt-auto mb-4">
+            <div className="h-full">
               <div className="flex items-center justify-center py-2">
                 <div className="flex-1 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
                 <div className="px-4 text-white/40 text-xs uppercase tracking-wider">
@@ -59,6 +66,12 @@ export default function LogsTab() {
                 </div>
                 <div className="flex-1 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
               </div>
+           {currentLog.acceptable_responses.length > 0 && (
+          <DynamicResponses responses={currentLog.acceptable_responses} />
+        )}
+            </div>
+            <div className="mt-auto mb-4">
+
               <OptionBar message={currentLog} />
             </div>
           </div>

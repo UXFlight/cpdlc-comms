@@ -1,19 +1,21 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { LogsContext } from "@/context/LogsContext";
 import { GlobalContext } from "@/context/GlobalContext";
 import { MessageProps } from "@/interface/props/Logs";
 import { getStatusClass } from "@/utils/getStatus";
 
 export default function Message({ message }: MessageProps) {
-  const { setCurrentLog, changeStatus } = useContext(LogsContext);
+  const { currentLog, setCurrentLog, changeStatus } = useContext(LogsContext);
   const { username } = useContext(GlobalContext);
   const [showAdditional, setShowAdditional] = useState(false);
 
   const handleClick = () => {
-    setCurrentLog(message);
-    if (message.status === "new") {
-      changeStatus(message.id, "opened");
+    if (message.response_required) {
+      setCurrentLog(message);
     }
+    // if (message.status === "new") {
+    //   changeStatus(message.id, "opened");
+    // }
   };
 
   const handleToggleAdditional = (e: React.MouseEvent) => {

@@ -22,7 +22,7 @@ export interface RadioProps {
 }
 
 export interface PositionInputProps {
-  disabled: boolean;
+  disabled?: boolean;
   selected: boolean;
   onToggle: () => void;
   value: string;
@@ -56,7 +56,7 @@ export interface SendAtInputProps {
 }
 
 export interface TimeInputProps {
-  disabled: boolean;
+  disabled?: boolean;
   selected: boolean;
   onToggle: () => void;
   hh: string;

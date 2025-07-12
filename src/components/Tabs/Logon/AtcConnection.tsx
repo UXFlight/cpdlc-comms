@@ -2,10 +2,12 @@ import React, { useContext } from "react";
 import { GlobalContext } from "@/context/GlobalContext";
 import { useSocketListeners } from "@/hooks/useSocketListeners";
 import { startingSetUp } from "@/utils/startingSetUp";
+import { FlightContext } from "@/context/FlightContext";
 
 export default function AtcConnection() {
-  const { isConnectionPossible, setIsConnectionPossible, setFlightDetails } =
+  const { isConnectionPossible, setIsConnectionPossible } =
     useContext(GlobalContext);
+  const { setFlightDetails } = useContext(FlightContext);
 
   useSocketListeners([
     { event: "connect", callback: () => setIsConnectionPossible(true) },

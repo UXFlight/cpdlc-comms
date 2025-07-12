@@ -1,0 +1,1 @@
+export const DEFAULT_RESPONSES = ["STANDBY", "ACCEPT", "REJECT", "LOAD"];

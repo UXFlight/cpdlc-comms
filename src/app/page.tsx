@@ -15,10 +15,11 @@ import { InputProvider } from "@/context/InputContext";
 import { socketService } from "@/api/communications/socket/socketService";
 import { LogsProvider } from "@/context/LogsContext";
 import { GlobalContext } from "@/context/GlobalContext";
+import { FlightContext } from "@/context/FlightContext";
 
 export default function CpdlcMainView() {
   const [activeTab, setActiveTab] = useState("logon");
-  const { flightDetails } = useContext(GlobalContext);
+  const { flightDetails } = useContext(FlightContext);
 
   const TAB_COMPONENTS: Record<string, JSX.Element> = {
     logon: <LogonTab />,

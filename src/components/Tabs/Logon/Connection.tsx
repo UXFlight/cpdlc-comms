@@ -2,11 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "@/context/GlobalContext";
 import { LogsContext } from "@/context/LogsContext";
 import { useSocketListeners } from "@/hooks/useSocketListeners";
+import { FlightContext } from "@/context/FlightContext";
 
 export default function Connection() {
-  const { connectionState, isConnectionPossible, username, flightDetails } =
+  const { connectionState, isConnectionPossible, username } =
     useContext(GlobalContext);
   const { setLogs } = useContext(LogsContext);
+  const { flightDetails } = useContext(FlightContext);
 
   useSocketListeners([
     {

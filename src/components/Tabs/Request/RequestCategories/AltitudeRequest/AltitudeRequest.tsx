@@ -8,6 +8,7 @@ import { RequestProps } from "@/interface/props/Request";
 import { ADDITIONAL_MESSAGES, RequestCategory } from "@/constants/tabs/Request";
 import BlockData from "@/components/Tabs/Request/BlockData";
 import { InputContext } from "@/context/InputContext";
+import { FlightContext } from "@/context/FlightContext";
 
 export default function AltitudeRequest({
   onSend,
@@ -17,6 +18,7 @@ export default function AltitudeRequest({
 }: RequestProps) {
   const { request, setRequest } = useContext(RequestContext);
   const { setTargetInput } = useContext(InputContext);
+  const {flightDetails} = useContext(FlightContext);
 
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
@@ -74,7 +76,7 @@ export default function AltitudeRequest({
         : {}),
     };
 
-    const ref = resolveMessageRef(RequestCategory.ALTITUDE, newRequest);
+    const ref = resolveMessageRef(RequestCategory.ALTITUDE, newRequest, flightDetails);
 
     setRequest({ ...newRequest, messageRef: ref, additional: extras });
 

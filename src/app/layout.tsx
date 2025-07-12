@@ -1,5 +1,6 @@
 import { GlobalProvider } from "@/context/GlobalContext";
 import "./globals.css";
+import { FlightProvider } from "@/context/FlightContext";
 
 export const metadata = {
   title: "Next.js",
@@ -14,7 +15,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="overflow-hidden">
-        <GlobalProvider>{children}</GlobalProvider>
+        <GlobalProvider>
+        <FlightProvider>
+          {children}
+        </FlightProvider>
+        </GlobalProvider>
       </body>
     </html>
   );
