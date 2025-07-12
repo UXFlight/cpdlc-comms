@@ -37,6 +37,7 @@ export interface SelectDropdownProps {
   style?: string;
   disabled?: boolean;
   defaultValue?: string;
+  disabledOptions?: string[];
 }
 
 export interface SendButtonProps {

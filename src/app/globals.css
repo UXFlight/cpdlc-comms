@@ -39,15 +39,15 @@
     @apply tracking-wide;
   }
   h3 {
-    @apply text-white-80 text-center font-sans text-[11px] font-bold leading-[18px] uppercase whitespace-nowrap;
+    @apply text-white-80 text-center text-[13px] font-bold leading-[18px] uppercase whitespace-nowrap tracking-normal;
   }
 
   h1 {
-    @apply text-white font-sans text-[20px] not-italic font-normal leading-normal uppercase;
+    @apply text-white text-[22px] not-italic font-normal leading-normal uppercase;
   }
 
   h2 {
-    @apply text-white font-sans text-[16px] not-italic font-medium leading-normal uppercase whitespace-nowrap;
+    @apply text-white text-[18px] not-italic font-medium leading-normal uppercase whitespace-nowrap;
   }
 }
 
@@ -57,11 +57,11 @@
   }
 
   .scroll-btn {
-    @apply text-white-80 font-sans text-base not-italic font-semibold leading-normal;
+    @apply text-white-80 text-base not-italic font-semibold leading-normal;
   }
 
   .secondary-text {
-    @apply text-white-80 font-sans text-base not-italic font-normal leading-[18px];
+    @apply text-white-80 text-base not-italic font-normal leading-[18px];
   }
 
   .container {
@@ -77,7 +77,7 @@
   }
 
   .logon-titles {
-    @apply text-white-80 text-[16px] font-sans font-semibold leading-[18px] tracking-wide;
+    @apply text-white-80 text-[16px] font-semibold leading-[18px] tracking-wide;
   }
 
   .logon-flight-details {
@@ -301,7 +301,8 @@
 }
 
 body {
-  font-family: sans-serif;
+  /*font-family: sans-serif;*/
+  font-family: 'VT323', monospace;
   -webkit-font-smoothing: auto;
   -moz-font-smoothing: auto;
   -moz-osx-font-smoothing: grayscale;

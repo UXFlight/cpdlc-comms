@@ -9,6 +9,8 @@ import { ADDITIONAL_MESSAGES, RequestCategory } from "@/constants/tabs/Request";
 import BlockData from "@/components/Tabs/Request/BlockData";
 import { InputContext } from "@/context/InputContext";
 import { FlightContext } from "@/context/FlightContext";
+import { useError } from "@/context/ErrorContext";
+import { isValidFlightLevel } from "@/utils/inputValidation";
 
 export default function AltitudeRequest({
   onSend,
@@ -19,6 +21,7 @@ export default function AltitudeRequest({
   const { request, setRequest } = useContext(RequestContext);
   const { setTargetInput } = useContext(InputContext);
   const { flightDetails } = useContext(FlightContext);
+  const { throwError } = useError();
 
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
@@ -64,9 +67,10 @@ export default function AltitudeRequest({
 
   const handleSend = () => {
     if (!from) return;
+    if (!isValidFlightLevel(from, throwError)) return;
+    if (to && !isValidFlightLevel(to, throwError)) return;
 
     const args = to ? [from, to] : [from];
-
     const newRequest = {
       ...request,
       arguments: args,

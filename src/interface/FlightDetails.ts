@@ -6,7 +6,10 @@ export interface FlightStatus {
   };
   remaining_fuel: number | null;
   temperature: number | null;
-  wind: string | null;
+  wind: {
+    direction: number | null;
+    speed: number | null;
+  } | null;
   turbulence: string | null;
   speed: number | null;
   icing: string | null;

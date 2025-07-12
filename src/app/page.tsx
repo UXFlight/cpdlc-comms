@@ -17,6 +17,7 @@ import { LogsProvider } from "@/context/LogsContext";
 import { GlobalContext } from "@/context/GlobalContext";
 import { FlightContext } from "@/context/FlightContext";
 import ErrorPopup from "@/components/General/ErrorPopup";
+import FlightStatusPanel from "@/components/FlightStatusPanel/FlightStatusPanel";
 
 export default function CpdlcMainView() {
   const [activeTab, setActiveTab] = useState("logon");
@@ -39,6 +40,8 @@ export default function CpdlcMainView() {
   }, []);
 
   return (
+    <div>
+    <FlightStatusPanel />
     <div className="grid lg:grid-cols-2 grid-cols-1 h-screen gap-8">
       <div className="flex justify-center items-center">
         <div className="w-[600px] h-[800px] relative bg-black overflow-hidden lg:block hidden">
@@ -66,6 +69,7 @@ export default function CpdlcMainView() {
         </div>
         <ErrorPopup />
       </div>
+    </div>
     </div>
   );
 }

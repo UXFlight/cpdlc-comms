@@ -19,7 +19,7 @@ export default function LogsTab() {
   return (
     <div className="flex flex-col h-full">
       {!currentLog && (
-        <div className="flex flex-col h-full px-4 pt-4 gap-4 text-white">
+        <div className="flex flex-col h-full px-4 pt-4 gap-1 text-white">
           <div className="flex flex-row items-center justify-between">
             <h1>message log</h1>
             <SelectDropdown

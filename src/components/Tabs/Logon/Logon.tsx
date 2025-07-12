@@ -55,7 +55,12 @@ export default function Logon() {
           value={username}
           length={length}
           disabled={!isConnectionPossible}
-          onChange={(val) => setUsername(val)}
+          onChange={(val) => {
+            if(val.length < 3) {
+              setConnectionState(null);
+            }
+            setUsername(val)
+          }}
         />
       </div>
       <div className="ml-52">

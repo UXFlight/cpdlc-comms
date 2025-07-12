@@ -35,7 +35,7 @@ export default function OptionBar({ message }: MessageProps) {
   const handleRequest = () => {
     if (!action) return;
     const statusMap: Record<ActionType, string> = {
-      load: "accepted",
+      load: "loaded",
       standby: "standby",
       reject: "rejected",
       accept: "accepted",

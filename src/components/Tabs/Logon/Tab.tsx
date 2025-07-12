@@ -6,7 +6,8 @@ import SelectDropdown from "@/components/General/SelectDropdown";
 
 export default function LogonTab() {
   const [value, setValue] = useState("FANS 1/A");
-
+  const disabledOptions = ["FANS 2/B", "FANS 3/C", "LINK 2000+"];
+  
   return (
     <div className="flex flex-col h-full p-4 gap-4 text-white">
       <div className="flex flex-row items-center justify-between">
@@ -16,6 +17,7 @@ export default function LogonTab() {
           value={value}
           onChange={setValue}
           icon="/fans-button.svg"
+          disabledOptions={disabledOptions}
         />
       </div>
       <div className="flex flex-col gap-4">

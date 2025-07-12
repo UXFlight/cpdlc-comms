@@ -16,7 +16,7 @@ export interface Log {
   additional?: string[];
   response_required: boolean;
   acceptable_responses: AcceptableResponse[];
-  communication_thread: string[];
+  communication_thread: Log[];
 }
 
 export interface AcceptableResponse {

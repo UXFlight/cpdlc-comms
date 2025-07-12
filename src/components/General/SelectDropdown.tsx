@@ -9,6 +9,7 @@ export default function SelectDropdown({
   disabled = false,
   style,
   defaultValue,
+  disabledOptions = [],
 }: SelectDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -36,7 +37,9 @@ export default function SelectDropdown({
     >
       <div className="relative w-full">
         <button
-          className={`w-full min-w-[100px] max-w-[180px] ${style} flex items-center justify-between ${disabled ? "" : "bg-[#1e1e1e]"} ${value === defaultValue ? "text-white-20" : "text-white"} p-[5px] border border-[2px] border-white-10 rounded-md cursor-pointer transition-all`}
+          className={`w-full min-w-[100px] max-w-[180px] ${style} flex items-center justify-between ${
+            disabled ? "" : "bg-[#1e1e1e]"
+          } ${value === defaultValue ? "text-white-20" : "text-white"} p-[5px] border border-[2px] border-white-10 rounded-md cursor-pointer transition-all`}
           onClick={() => setIsOpen(!isOpen)}
           disabled={disabled}
         >
@@ -59,20 +62,31 @@ export default function SelectDropdown({
 
         {isOpen && (
           <ul className="absolute z-10 w-full mt-1 bg-[#1e1e1e] p-[5px] border border-[2px] border-white-10 rounded-md overflow-y-auto max-h-40">
-            {options.map((option) => (
-              <li
-                key={option}
-                onClick={() => {
-                  onChange(option);
-                  setIsOpen(false);
-                }}
-                className="flex justify-center items-center px-4 py-2 hover:bg-zinc-800 text-white border-t border-b border-zinc-700 first:border-t-0 last:border-b-0"
-              >
-                <span className="whitespace-nowrap text-[clamp(10px,3vw,14px)] leading-tight">
-                  {option}
-                </span>
-              </li>
-            ))}
+            {options.map((option) => {
+              const isOptionDisabled = disabledOptions.includes(option);
+
+              return (
+                <li
+                  key={option}
+                  onClick={() => {
+                    if (!isOptionDisabled) {
+                      onChange(option);
+                      setIsOpen(false);
+                    }
+                  }}
+                  className={`flex justify-center items-center px-4 py-2 border-t border-b border-zinc-700 first:border-t-0 last:border-b-0
+                    ${
+                      isOptionDisabled
+                        ? "text-white/30 cursor-not-allowed"
+                        : "text-white hover:bg-zinc-800 cursor-pointer"
+                    }`}
+                >
+                  <span className="whitespace-nowrap text-[clamp(10px,3vw,14px)] leading-tight">
+                    {option}
+                  </span>
+                </li>
+              );
+            })}
           </ul>
         )}
       </div>

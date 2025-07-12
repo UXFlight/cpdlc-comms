@@ -81,7 +81,25 @@ export default function Message({ message }: MessageProps) {
 
             <div className={directionLine}></div>
           </div>
+          {message.communication_thread && message.communication_thread.length > 0 && (
+  <div className="mt-2 flex flex-col gap-2 pl-4 border-l border-white/10">
+    {message.communication_thread.map((reply) => (
+      <div
+        key={reply.id}
+        className={`p-2 rounded-md bg-white/5 border border-white/10 ${isDownlink ? "self-end" : "self-start"} max-w-[85%]`}
+      >
+        <div className="text-xs text-white/60 flex justify-between">
+          <span>{reply.direction === "uplink" ? "FROM" : "TO"} {username}</span>
+          <span>{reply.status.toUpperCase()}</span>
         </div>
+        <div className="text-white/80 text-sm font-medium mt-1">{reply.element}</div>
+        <div className="text-white/40 text-xs mt-1">{reply.timeStamp}</div>
+      </div>
+    ))}
+  </div>
+)}
+        </div>
+        
       ) : (
         <div className="flex items-center justify-center w-full h-full">
           <p className="text-white/40">An error occurred</p>

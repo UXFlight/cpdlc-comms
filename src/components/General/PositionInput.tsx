@@ -1,4 +1,7 @@
+import { FlightContext } from "@/context/FlightContext";
 import { PositionInputProps } from "@/interface/props/General";
+import { useContext } from "react";
+import SelectDropdown from "./SelectDropdown";
 
 export default function PositionInput({
   disabled,
@@ -7,6 +10,9 @@ export default function PositionInput({
   value,
   onChange,
 }: PositionInputProps) {
+  const { flightDetails } = useContext(FlightContext);
+  const routeFix = flightDetails.route.map(position => position.fix);
+
   return (
     <>
       <label className="flex items-center gap-2 text-white/80 text-sm">
@@ -19,24 +25,12 @@ export default function PositionInput({
         />
         <span className="text-[14px] text-white-80">Position</span>
       </label>
-      <input
-        type="text"
-        value={value}
-        onChange={(e) =>
-          onChange(
-            e.target.value
-              .toUpperCase()
-              .replace(/[^A-Z0-9]/g, "")
-              .slice(0, 6),
-          )
-        }
-        placeholder="ABC123"
+
+      <SelectDropdown
         disabled={disabled || !selected}
-        className={`w-[110px] px-2 py-1 rounded border text-center text-sm tracking-widest shadow-sm ${
-          selected
-            ? "bg-medium-gray border-white/30 text-white"
-            : "bg-[#1a1a1a] border-white/10 text-white/40"
-        }`}
+        value={value || "Select position"}
+        onChange={onChange}
+        options={routeFix}
       />
     </>
   );

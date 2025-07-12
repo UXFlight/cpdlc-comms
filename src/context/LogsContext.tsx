@@ -61,11 +61,13 @@ export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
   //   logs.find((logs) => logs.id === log.id)
 
   const changeStatus = (logId: string, newState: string) => {
-    setLogs((prevLogs) =>
-      prevLogs.map((log) =>
-        log.id === logId ? { ...log, status: newState } : log,
-      ),
-    );
+    // setLogs((prevLogs) =>
+    //   prevLogs.map((log) =>
+    //     log.id === logId ? { ...log, status: newState } : log,
+    //   ),
+    // );
+    console.log("Changing status for log:", logId, "to", newState);
+    // Emit the change
     socketService.send("change_status", { logId: logId, status: newState });
   };
 

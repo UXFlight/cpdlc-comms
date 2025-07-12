@@ -8,7 +8,7 @@ export default function ConnectionBar() {
 
   return (
     <footer
-      className={`h-[30px] flex justify-between items-center px-4 w-full
+      className={`h-[25px] flex justify-between items-center px-4 w-full
         ${connectionState ? "bg-green" : "bg-nav-bar"}`}
     >
       <div className="flex items-center gap-2">
