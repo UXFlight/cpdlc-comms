@@ -50,8 +50,8 @@ export function climbOrDescend(
   input: string,
   current: number,
 ): "DM9" | "DM10" | "DM37" {
-  const match = input.match(/fl(\d{3})/i); 
-  
+  const match = input.match(/fl(\d{3})/i);
+
   if (!match) {
     throw new Error(
       "Invalid altitude format. Expected something like 'FL220'.",

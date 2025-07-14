@@ -14,11 +14,11 @@ export default function FlightStatusPanel() {
       <div className="fixed bottom-6 left-4 z-50 flex flex-col items-start gap-2">
         {/* Panel visible si ouvert */}
         {isOpen && (
-          <div
-            className="bg-medium-gray border border-white/10 rounded-lg shadow-xl p-4 w-[250px] animate-fade-in-up"
-          >
+          <div className="bg-medium-gray border border-white/10 rounded-lg shadow-xl p-4 w-[250px] animate-fade-in-up">
             <div className="flex justify-between items-center mb-2">
-              <h2 className="text-white/70 text-sm font-semibold uppercase">Flight Status</h2>
+              <h2 className="text-white/70 text-sm font-semibold uppercase">
+                Flight Status
+              </h2>
               <button
                 onClick={() => setIsOpen(false)}
                 className="w-6 h-6 text-white text-sm bg-white/10 rounded-full hover:bg-white/20 transition"
@@ -36,7 +36,7 @@ export default function FlightStatusPanel() {
                 Wind:{" "}
                 {typeof status.wind === "object"
                   ? `${status.wind?.direction ?? "?"}° @ ${status.wind?.speed ?? "?"} kt`
-                  : status.wind ?? "N/A"}
+                  : (status.wind ?? "N/A")}
               </p>
               <p>Turbulence: {status.turbulence ?? "N/A"}</p>
               <p>Icing: {status.icing ?? "N/A"}</p>
@@ -46,14 +46,13 @@ export default function FlightStatusPanel() {
           </div>
         )}
 
-      <button
-  className="w-10 h-10 rounded-full bg-[#2b2b2b] text-white shadow-xl flex items-center justify-center hover:bg-[#3a3a3a] transition"
-  onClick={() => setIsOpen(!isOpen)}
-  title="Flight Status"
->
-  <BsAirplaneEngines className="text-xl text-white" />
-</button>
-
+        <button
+          className="w-10 h-10 rounded-full bg-[#2b2b2b] text-white shadow-xl flex items-center justify-center hover:bg-[#3a3a3a] transition"
+          onClick={() => setIsOpen(!isOpen)}
+          title="Flight Status"
+        >
+          <BsAirplaneEngines className="text-xl text-white" />
+        </button>
       </div>
     </>
   );

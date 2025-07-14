@@ -4,8 +4,9 @@ import MessageDisplayTab from "./MessageDisplayTab";
 import OptionBar from "./OptionBar/OptionBar";
 import SelectDropdown from "@/components/General/SelectDropdown";
 import { LogsContext } from "@/context/LogsContext";
-import { DROPDOWN_OPTIONS } from "@/constants/tabs/Logs";
+import { ActionType, DROPDOWN_OPTIONS } from "@/constants/tabs/Logs";
 import DynamicResponses from "./OptionBar/DynamicResponses";
+import { socketService } from "@/api/communications/socket/socketService";
 
 export default function LogsTab() {
   const [value, setValue] = useState("FILTER BY");
@@ -14,6 +15,10 @@ export default function LogsTab() {
 
   useEffect(() => {
     console.log("current log", currentLog);
+    if (!currentLog) return;
+    socketService.send("get_available_actions", {
+      message_id: currentLog.id,
+    });
   }, [currentLog]);
 
   return (
@@ -55,18 +60,6 @@ export default function LogsTab() {
           <div className="flex flex-col h-full gap-4">
             <div className="rounded w-full">
               <MessageDisplayTab message={currentLog} />
-            </div>
-            <div className="h-full">
-              <div className="flex items-center justify-center py-2">
-                <div className="flex-1 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-                <div className="px-4 text-white/40 text-xs uppercase tracking-wider">
-                  Actions Available
-                </div>
-                <div className="flex-1 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-              </div>
-              {currentLog.acceptable_responses.length > 0 && (
-                <DynamicResponses responses={currentLog.acceptable_responses} />
-              )}
             </div>
             <div className="mt-auto mb-4">
               <OptionBar message={currentLog} />

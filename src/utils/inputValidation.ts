@@ -1,5 +1,8 @@
 // validationUtils.ts
-export function isValidFlightLevel(input: string, throwError?: (msg: string) => void): boolean {
+export function isValidFlightLevel(
+  input: string,
+  throwError?: (msg: string) => void,
+): boolean {
   const match = input.match(/^fl(\d{3})$/i);
 
   if (!match) {

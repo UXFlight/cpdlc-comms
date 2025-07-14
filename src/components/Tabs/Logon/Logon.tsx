@@ -56,10 +56,10 @@ export default function Logon() {
           length={length}
           disabled={!isConnectionPossible}
           onChange={(val) => {
-            if(val.length < 3) {
+            if (val.length < 3) {
               setConnectionState(null);
             }
-            setUsername(val)
+            setUsername(val);
           }}
         />
       </div>

@@ -11,7 +11,7 @@ export default function PositionInput({
   onChange,
 }: PositionInputProps) {
   const { flightDetails } = useContext(FlightContext);
-  const routeFix = flightDetails.route.map(position => position.fix);
+  const routeFix = flightDetails.route.map((position) => position.fix);
 
   return (
     <>
