@@ -8,7 +8,7 @@ import { useDelay } from "@/hooks/useDelay";
 import { ActionType } from "@/constants/tabs/Logs";
 import DynamicResponses from "./DynamicResponses";
 
-export const LOADABLE_MESSAGE = "UM74";
+//export const LOADABLE_MESSAGE = "UM74";
 
 export default function OptionBar({ message }: MessageProps) {
   const { currentLog } = useContext(LogsContext);
@@ -16,40 +16,20 @@ export default function OptionBar({ message }: MessageProps) {
   const [isSending, setIsSending] = useState(false);
   const [sendingProgress, setSendingProgress] = useState(0);
   const [done, setDone] = useState(false);
-  const [availableActions, setAvailableActions] = useState<ActionType[]>([]);
 
-  const { changeStatus, setCurrentLog } = useContext(LogsContext);
+  const { requestChangeStatus, setCurrentLog } = useContext(LogsContext);
   const { delay } = useDelay();
 
-  const isLoadable = message.element === LOADABLE_MESSAGE;
+  let isLoadable: boolean = false;
 
   useSocketListeners([
     {
       event: "message_loadable",
       callback: () => {
+        isLoadable = true;
         if (action === "load") {
           startSending();
         }
-      },
-    },
-    {
-      event: "available_actions",
-      callback: (data) => {
-        let available_actions: ActionType[] = [];
-        if (data === "datalinks") {
-          available_actions = [ActionType.Accept, ActionType.Reject];
-        } else if (data === "basic") {
-          console.log("Basic actions received");
-          available_actions = [
-            ActionType.Load,
-            ActionType.Standby,
-            ActionType.Reject,
-            ActionType.Accept,
-          ];
-        } else {
-          available_actions = [];
-        }
-        setAvailableActions(available_actions);
       },
     },
   ]);
@@ -58,11 +38,11 @@ export default function OptionBar({ message }: MessageProps) {
     if (!action) return;
     const statusMap: Record<ActionType, string> = {
       load: "loaded",
-      standby: "standby",
-      reject: "rejected",
-      accept: "accepted",
+      standby: "DM2",
+      reject: "DM1",
+      accept: "DM0",
     };
-    changeStatus(message.id, statusMap[action]);
+    requestChangeStatus(message.id, statusMap[action]);
   };
 
   const handleConfirm = () => {
@@ -134,7 +114,12 @@ export default function OptionBar({ message }: MessageProps) {
           {/* Étape de sélection */}
           {!action && !isSending && !done && (
             <div className="flex flex-row gap-6 border border-white-10 rounded-md items-center justify-around w-[538px] h-[74px] py-4 px-4 bg-nav-bar">
-              {availableActions.map((item) => (
+              {[
+                ActionType.Load,
+                ActionType.Standby,
+                ActionType.Reject,
+                ActionType.Accept,
+              ].map((item) => (
                 <div
                   key={item}
                   className={`logs-options bg-white-10 px-4 py-2 rounded cursor-pointer border ${

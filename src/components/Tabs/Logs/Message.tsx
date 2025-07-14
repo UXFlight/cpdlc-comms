@@ -5,7 +5,7 @@ import { MessageProps } from "@/interface/props/Logs";
 import { getStatusClass } from "@/utils/getStatus";
 
 export default function Message({ message }: MessageProps) {
-  const { currentLog, setCurrentLog, changeStatus } = useContext(LogsContext);
+  const { currentLog, setCurrentLog } = useContext(LogsContext);
   const { username } = useContext(GlobalContext);
   const [showAdditional, setShowAdditional] = useState(false);
 

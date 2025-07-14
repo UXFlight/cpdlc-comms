@@ -15,7 +15,7 @@ export const LogsContext = createContext<LogsContextType>({
   currentLog: null,
   setCurrentLog: () => {},
   addLog: () => {},
-  changeStatus: () => {},
+  requestChangeStatus: () => {},
   clearLogs: () => {},
   setFilterBy: () => {},
 });
@@ -39,6 +39,15 @@ export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
         addLog(log);
       },
     },
+    {
+      event: "status_changed",
+      callback: (data: Log) => {
+        console.log("Status changed for log:", data);
+        const logIndex = logs.findIndex((log) => log.id === data.id);
+        logs[logIndex] = data;
+        setLogs(logs);
+      },
+    },
   ]);
 
   useEffect(() => {
@@ -60,15 +69,14 @@ export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
   // const replaceLog = (log: Log) => {
   //   logs.find((logs) => logs.id === log.id)
 
-  const changeStatus = (logId: string, newState: string) => {
-    // setLogs((prevLogs) =>
-    //   prevLogs.map((log) =>
-    //     log.id === logId ? { ...log, status: newState } : log,
-    //   ),
-    // );
-    console.log("Changing status for log:", logId, "to", newState);
+  const requestChangeStatus = (logId: string, response: string) => {
+    console.log("Changing status for log:", logId, "to", response);
     // Emit the change
-    socketService.send("change_status", { logId: logId, status: newState });
+    if (response === "loaded") {
+      socketService.send("fms_loaded", { logId: logId });
+    } else {
+      socketService.send("change_status", { logId: logId, status: response });
+    }
   };
 
   const clearLogs = () => {
@@ -89,7 +97,7 @@ export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
         currentLog,
         setCurrentLog,
         addLog,
-        changeStatus,
+        requestChangeStatus,
         clearLogs,
         setFilterBy,
       }}

@@ -139,7 +139,7 @@
   }
 
   .message-content {
-    @apply text-white/70 font-semibold text-base mb-2 leading-relaxed;
+    @apply text-white/85 font-semibold text-base mb-2 leading-relaxed;
   }
 
   .message-timestamp {
@@ -156,11 +156,11 @@
 
   .message-downlink-bubble {
     @apply max-w-[80%] rounded-lg p-2 cursor-pointer transition-all duration-200 hover:shadow-lg relative 
-          bg-dark-blue/5 border border-3 border-dark-blue/70 text-white ml-auto;
+          bg-dark-blue/5 border border-3 border-dark-blue/85 text-white ml-auto;
   }
   .message-uplink-bubble {
     @apply max-w-[80%] rounded-lg p-2 cursor-pointer transition-all duration-200 hover:shadow-lg relative 
-          bg-green/5 border border-3 border-green/70 text-white mr-auto;
+          bg-green/5 border border-3 border-green/85 text-white mr-auto;
   }
   .direction-line-downlink {
     @apply absolute top-4 -left-2 border-l border-green-500/30 h-6 opacity-0 group-hover:opacity-100 transition-opacity duration-200;

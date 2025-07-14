@@ -15,10 +15,6 @@ export default function LogsTab() {
 
   useEffect(() => {
     console.log("current log", currentLog);
-    if (!currentLog) return;
-    socketService.send("get_available_actions", {
-      message_id: currentLog.id,
-    });
   }, [currentLog]);
 
   return (
