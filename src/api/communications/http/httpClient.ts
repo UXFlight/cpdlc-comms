@@ -1,4 +1,4 @@
-import { SERVER_URL } from "@/constants/serverURL";
+import { SERVER_URL } from "@/constants/ServerURL";
 
 const baseUrl = SERVER_URL;
 

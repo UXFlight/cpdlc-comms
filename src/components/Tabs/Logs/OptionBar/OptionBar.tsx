@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { socketService } from "@/api/communications/socket/socketService";
 import { LogsContext } from "@/context/LogsContext";
 import ProgressSteps from "../ProgressSteps";
@@ -7,6 +7,8 @@ import { MessageProps } from "@/interface/props/Logs";
 import { useDelay } from "@/hooks/useDelay";
 import { ActionType } from "@/constants/tabs/Logs";
 import DynamicResponses from "./DynamicResponses";
+import { LoadContext } from "@/context/LoadContext";
+import { ProgressStep } from "@/interface/context/LoadContext";
 
 //export const LOADABLE_MESSAGE = "UM74";
 
@@ -16,23 +18,30 @@ export default function OptionBar({ message }: MessageProps) {
   const [isSending, setIsSending] = useState(false);
   const [sendingProgress, setSendingProgress] = useState(0);
   const [done, setDone] = useState(false);
+  const [isLoadable, setIsLoadable] = useState(false);
 
   const { requestChangeStatus, setCurrentLog } = useContext(LogsContext);
+  const {progressStep, setProgressStep} = useContext(LoadContext);
   const { delay } = useDelay();
-
-  let isLoadable: boolean = false;
 
   useSocketListeners([
     {
       event: "message_loadable",
-      callback: () => {
-        isLoadable = true;
-        if (action === "load") {
+      callback: (data) => {
+        setIsLoadable(data);
+        if (action === ActionType.Load) {
+          //revoir
           startSending();
         }
       },
     },
   ]);
+
+  useEffect(() => {
+    if(progressStep === ProgressStep.EXECUTE) {
+      setAction(ActionType.Accept);
+    }
+  }, [progressStep]);
 
   const handleRequest = () => {
     if (!action) return;
@@ -47,6 +56,7 @@ export default function OptionBar({ message }: MessageProps) {
 
   const handleConfirm = () => {
     startSending();
+    setProgressStep(ProgressStep.RESPONSE);
   };
 
   const startSending = async () => {
@@ -71,6 +81,7 @@ export default function OptionBar({ message }: MessageProps) {
       setIsSending(false);
       setSendingProgress(0);
       setDone(true);
+      setProgressStep(ProgressStep.SENT);
     }, 500);
   };
 
@@ -80,6 +91,17 @@ export default function OptionBar({ message }: MessageProps) {
     setSendingProgress(0);
     setDone(false);
   };
+
+  const handleAction = (isDisabled: boolean, action: ActionType) => {
+    if (isDisabled) return;
+    if (action === ActionType.Load) {
+      setAction(action);
+      socketService.send("load_fms", { logId: message.id });
+      return;
+    } else {
+      setAction(action);
+    }
+  }
 
   return (
     <div>
@@ -96,7 +118,6 @@ export default function OptionBar({ message }: MessageProps) {
         )}
       </div>
       <div className="relative w-full rounded-xl overflow-hidden border-2 border-white-20">
-        {/* fond progressif */}
         {isSending && (
           <div
             className="absolute top-0 left-0 h-full z-0 transition-all duration-200 ease-linear"
@@ -109,9 +130,8 @@ export default function OptionBar({ message }: MessageProps) {
         )}
 
         <div className="relative z-10 bg-white/10 p-4 w-full flex flex-col gap-4 items-center">
-          {action === "load" && isSending && <ProgressSteps />}
+          {progressStep !== null && <ProgressSteps />}
 
-          {/* Étape de sélection */}
           {!action && !isSending && !done && (
             <div className="flex flex-row gap-6 border border-white-10 rounded-md items-center justify-around w-[538px] h-[74px] py-4 px-4 bg-nav-bar">
               {[
@@ -119,27 +139,39 @@ export default function OptionBar({ message }: MessageProps) {
                 ActionType.Standby,
                 ActionType.Reject,
                 ActionType.Accept,
-              ].map((item) => (
-                <div
-                  key={item}
-                  className={`logs-options bg-white-10 px-4 py-2 rounded cursor-pointer border ${
-                    item === action
-                      ? "border-2 border-dark-blue"
-                      : "border-transparent"
-                  }`}
-                  onClick={() => {
-                    if (item === "load" && !isLoadable) return;
-                    setAction(item);
-                  }}
-                >
-                  {item}
-                </div>
-              ))}
+              ].map((item) => {
+                const isDisabled = item === ActionType.Load && !isLoadable;
+                const isSelected = item === action;
+
+                return (
+                  <div
+                    key={item}
+                    className={`
+            logs-options
+            px-4 py-2 rounded-lg
+            transition duration-200 ease-in-out transform
+            text-sm font-semibold text-white
+            bg-white-10 border
+            ${isSelected ? "border-dark-blue shadow-lg" : "border-white/20 shadow-md"}
+            ${
+              isDisabled
+                ? "opacity-50"
+                : "cursor-pointer hover:shadow-xl hover:-translate-y-0.5 hover:border-white"
+            }
+          `}
+                    onClick={() => {
+                      handleAction(isDisabled, item);
+                      //setAction(item);
+                    }}
+                  >
+                    {item}
+                  </div>
+                );
+              })}
             </div>
           )}
 
-          {/* Étape de confirmation */}
-          {action && !isSending && !done && (
+          {action !== ActionType.Load && action !== null && !isSending && !done && (
             <div className="flex flex-col items-center gap-2">
               <p className="text-white font-semibold text-lg text-center uppercase tracking-wide">
                 Are you sure you want to{" "}
@@ -185,7 +217,6 @@ export default function OptionBar({ message }: MessageProps) {
             </div>
           )}
 
-          {/* Envoi terminé */}
           {done && (
             <button
               onClick={() => setCurrentLog(null)}

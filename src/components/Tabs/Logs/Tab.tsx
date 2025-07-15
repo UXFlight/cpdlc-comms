@@ -4,8 +4,7 @@ import MessageDisplayTab from "./MessageDisplayTab";
 import OptionBar from "./OptionBar/OptionBar";
 import SelectDropdown from "@/components/General/SelectDropdown";
 import { LogsContext } from "@/context/LogsContext";
-import { ActionType, DROPDOWN_OPTIONS } from "@/constants/tabs/Logs";
-import DynamicResponses from "./OptionBar/DynamicResponses";
+import { DROPDOWN_OPTIONS } from "@/constants/tabs/Logs";
 import { socketService } from "@/api/communications/socket/socketService";
 
 export default function LogsTab() {
@@ -15,6 +14,8 @@ export default function LogsTab() {
 
   useEffect(() => {
     console.log("current log", currentLog);
+    if (!currentLog) return;
+    socketService.send("is_loadable", { logId: currentLog.id });
   }, [currentLog]);
 
   return (

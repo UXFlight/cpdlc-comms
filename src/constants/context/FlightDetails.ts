@@ -31,4 +31,5 @@ export const DEFAULT_FLIGHT_DETAILS: FlightDetails = {
       fuel: "",
     },
   ],
+  tempRoute: null,
 };

@@ -85,7 +85,7 @@
   }
 
   .logs-options {
-    @apply flex-1 min-w-[100px] flex items-center justify-center h-[45px] py-2 px-2 border border-[2px] border-white/10 rounded-md text-[12px] text-white/80 font-bold uppercase cursor-pointer;
+    @apply flex-1 min-w-[100px] flex items-center justify-center h-[45px] py-2 px-2 border border-[2px] border-white/10 rounded-md text-[12px] text-white/80 font-bold uppercase;
   }
 
   .emergency-options {
