@@ -6,16 +6,19 @@ import SelectDropdown from "@/components/General/SelectDropdown";
 import { LogsContext } from "@/context/LogsContext";
 import { DROPDOWN_OPTIONS } from "@/constants/tabs/Logs";
 import { socketService } from "@/api/communications/socket/socketService";
+import { LoadContext } from "@/context/LoadContext";
 
 export default function LogsTab() {
   const [value, setValue] = useState("FILTER BY");
   const { logs, setFilterBy, currentLog, setCurrentLog } =
     useContext(LogsContext);
+  const { setProgressStep } = useContext(LoadContext);
 
   useEffect(() => {
     console.log("current log", currentLog);
     if (!currentLog) return;
     socketService.send("is_loadable", { logId: currentLog.id });
+    setProgressStep(null);
   }, [currentLog]);
 
   return (
