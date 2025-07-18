@@ -34,6 +34,12 @@ export default function RequestTab() {
     setCancelSignal((prev) => prev + 1);
   };
 
+  const handleSend = () => {
+    setPreview(false)
+    setCategory(null);
+    setCancelSignal((prev) => prev + 1);
+  };
+
   return (
     <RequestProvider>
       <div
@@ -65,7 +71,7 @@ export default function RequestTab() {
         {preview && (
           <div className="absolute bottom-0 left-0 w-full px-2 z-50">
             <div className="bg-[#1e1e1e]/95 backdrop-blur-sm shadow-[0_-10px_10000px_rgba(43,43,43,1)] rounded-t-md border-t border-white/10">
-              <MessagePreview onCancel={handleOnCancel} />
+              <MessagePreview onCancel={handleOnCancel} onSent={() => handleSend()} />
             </div>
           </div>
         )}

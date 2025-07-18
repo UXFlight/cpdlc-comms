@@ -1,21 +1,78 @@
 import CpdlcAds from "@/components/Tabs/Reports/CpdlcAds";
 import Monitoring from "@/components/Tabs/Reports/Monitoring";
-import PositionReport from "@/components/Tabs/Reports/PositionReport";
+import PositionReport from "@/components/Tabs/Reports/PositionReport/PositionReport";
 import ReportIndex from "@/components/Tabs/Reports/ReportIndex";
+import MessagePreview from "@/components/Tabs/Request/MessagePreview";
+import { useState } from "react";
 
 export default function ReportsTab() {
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const [activeReport, setActiveReport] = useState<string | null>(null);
+  const [cancelSignal, setCancelSignal] = useState(0);
+
+  const handlePreviewCancel = () => {
+    setIsPreviewOpen(false);
+    setActiveReport(null);
+    setCancelSignal((prev) => prev + 1);
+  };
+
+  const handlePreviewSent = () => {
+    setIsPreviewOpen(false);
+    setActiveReport(null);
+    setCancelSignal((prev) => prev + 1);
+  };
+
   return (
-    <div className="flex flex-col h-full px-4 pt-4 pb-2 gap-4 text-white">
+    <div className="flex flex-col h-full px-4 pt-4 pb-2 gap-4 text-white relative">
       <div className="flex flex-row items-center justify-between">
         <h1>reports</h1>
       </div>
 
       <div className="flex flex-col gap-2 overflow-y-auto max-h-[calc(100vh-120px)] pr-1">
-        <CpdlcAds />
-        <ReportIndex />
-        <Monitoring />
-        <PositionReport />
+        <CpdlcAds
+          disabled={!!activeReport}
+          onSend={() => {
+            setIsPreviewOpen(true);
+            setActiveReport("cpdlc");
+          }}
+          cancelSign={cancelSignal}
+        />
+        <ReportIndex
+          disabled={!!activeReport}
+          onSend={() => {
+            setIsPreviewOpen(true);
+            setActiveReport("index");
+          }}
+          cancelSign={cancelSignal}
+        />
+        <Monitoring
+          disabled={!!activeReport}
+          onSend={() => {
+            setIsPreviewOpen(true);
+            setActiveReport("monitoring");
+          }}
+          cancelSign={cancelSignal}
+        />
+        <PositionReport
+          disabled={!!activeReport}
+          onSend={() => {
+            setIsPreviewOpen(true);
+            setActiveReport("position");
+          }}
+          cancelSign={cancelSignal}
+        />
       </div>
+
+      {isPreviewOpen && (
+        <div className="absolute bottom-0 left-0 w-full px-2 z-50">
+          <div className="bg-[#1e1e1e]/95 backdrop-blur-sm shadow-[0_-10px_10000px_rgba(43,43,43,1)] rounded-t-md border-t border-white/10">
+            <MessagePreview
+              onCancel={handlePreviewCancel}
+              onSent={handlePreviewSent}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

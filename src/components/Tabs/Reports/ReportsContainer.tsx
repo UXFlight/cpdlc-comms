@@ -1,4 +1,3 @@
-import { REPORT_OPTIONS } from "@/constants/tabs/Reports";
 import { ReportsContainerProps } from "@/interface/props/Reports";
 
 export default function ReportsContainer({
@@ -6,12 +5,23 @@ export default function ReportsContainer({
   label,
   isOpen,
   setIsOpen,
+  onSend,
+  onClear,
+  disabled = false,
+  showSendButton = true,
 }: ReportsContainerProps) {
   return (
-    <div className="flex flex-col gap-4 bg-[#1e1e1e] p-4 rounded-md border border-white/10 text-white text-sm">
+    <div
+      className={`flex flex-col bg-[#1e1e1e] p-4 rounded-md border border-white/10 text-white text-sm transition-opacity ${
+        disabled ? "opacity-50 pointer-events-none" : "opacity-100"
+      }`}
+    >
+      {/* Header */}
       <div
         className="h-[22px] w-full flex items-center justify-between cursor-pointer"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => {
+          if (!disabled) setIsOpen(!isOpen);
+        }}
       >
         <p className="text-white font-[500] text-[16px] leading-none font-noto uppercase">
           {label}
@@ -19,20 +29,34 @@ export default function ReportsContainer({
         <img
           src="/arrow-down.svg"
           alt="arrow"
-          className={`w-6 h-6 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+          className={`w-6 h-6 transition-transform duration-200 ${
+            isOpen ? "rotate-180" : ""
+          }`}
         />
       </div>
-      {children}
-      <div className={`flex flex-col gap-4 ${isOpen ? "" : "hidden"}`}>
-        <div className="flex justify-between mt-1 gap-2">
-          {REPORT_OPTIONS.map((label) => (
+
+      {/* Content */}
+      <div className={`${isOpen ? "pt-4 flex flex-col gap-4" : "hidden"}`}>
+        {children}
+
+        {/* Action Buttons */}
+        <div className="flex justify-between">
+          {onClear && (
             <button
-              key={label}
-              className="flex-1 py-2 rounded border border-white/20 bg-[#2b2b2c] text-white/80 hover:bg-white/10 transition text-sm"
+              onClick={onClear}
+              className="bg-white/10 hover:bg-white/20 px-4 py-2 rounded text-white"
             >
-              {label}
+              CLEAR
             </button>
-          ))}
+          )}
+          {showSendButton && (
+            <button
+              onClick={onSend}
+              className="bg-white/10 hover:bg-white/20 px-4 py-2 rounded text-white ml-auto"
+            >
+              SET
+            </button>
+          )}
         </div>
       </div>
     </div>

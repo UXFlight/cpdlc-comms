@@ -21,7 +21,7 @@ export default function OptionBar({ message }: MessageProps) {
   const [isLoadable, setIsLoadable] = useState(false);
 
   const { requestChangeStatus, setCurrentLog } = useContext(LogsContext);
-  const {progressStep, setProgressStep} = useContext(LoadContext);
+  const { progressStep, setProgressStep } = useContext(LoadContext);
   const { delay } = useDelay();
 
   useSocketListeners([
@@ -38,8 +38,9 @@ export default function OptionBar({ message }: MessageProps) {
   ]);
 
   useEffect(() => {
-    if(progressStep === ProgressStep.EXECUTE) {
-      setAction(ActionType.Accept);
+    if (progressStep === ProgressStep.EXECUTE) {
+      setAction(null);
+      setIsLoadable(false);
     }
   }, [progressStep]);
 
@@ -101,7 +102,7 @@ export default function OptionBar({ message }: MessageProps) {
     } else {
       setAction(action);
     }
-  }
+  };
 
   return (
     <div>
@@ -132,7 +133,7 @@ export default function OptionBar({ message }: MessageProps) {
         <div className="relative z-10 bg-white/10 p-4 w-full flex flex-col gap-4 items-center">
           {progressStep !== null && <ProgressSteps />}
 
-          {!action && !isSending && !done && (
+          {(!action || action === ActionType.Load) && !isSending && !done && (
             <div className="flex flex-row gap-6 border border-white-10 rounded-md items-center justify-around w-[538px] h-[74px] py-4 px-4 bg-nav-bar">
               {[
                 ActionType.Load,
@@ -171,35 +172,38 @@ export default function OptionBar({ message }: MessageProps) {
             </div>
           )}
 
-          {action !== ActionType.Load && action !== null && !isSending && !done && (
-            <div className="flex flex-col items-center gap-2">
-              <p className="text-white font-semibold text-lg text-center uppercase tracking-wide">
-                Are you sure you want to{" "}
-                <span className="capitalize text-light-blue font-semibold">
-                  {action}
-                </span>{" "}
-                the message{" "}
-                <span className="text-green font-semibold">
-                  {message.element}
-                </span>
-                ?
-              </p>
-              <div className="flex gap-6">
-                <button
-                  onClick={handleReset}
-                  className="w-10 h-10 rounded-full bg-white-10 text-white hover:bg-white-20 transition"
-                >
-                  ✕
-                </button>
-                <button
-                  onClick={handleConfirm}
-                  className="w-10 h-10 rounded-full bg-white-10 text-white hover:bg-white-20 transition"
-                >
-                  ✓
-                </button>
+          {action !== ActionType.Load &&
+            action !== null &&
+            !isSending &&
+            !done && (
+              <div className="flex flex-col items-center gap-2">
+                <p className="text-white font-semibold text-lg text-center uppercase tracking-wide">
+                  Are you sure you want to{" "}
+                  <span className="capitalize text-light-blue font-semibold">
+                    {action}
+                  </span>{" "}
+                  the message{" "}
+                  <span className="text-green font-semibold">
+                    {message.element}
+                  </span>
+                  ?
+                </p>
+                <div className="flex gap-6">
+                  <button
+                    onClick={handleReset}
+                    className="w-10 h-10 rounded-full bg-white-10 text-white hover:bg-white-20 transition"
+                  >
+                    ✕
+                  </button>
+                  <button
+                    onClick={handleConfirm}
+                    className="w-10 h-10 rounded-full bg-white-10 text-white hover:bg-white-20 transition"
+                  >
+                    ✓
+                  </button>
+                </div>
               </div>
-            </div>
-          )}
+            )}
 
           {isSending && (
             <div className="flex items-center justify-center h-[80px] w-full">

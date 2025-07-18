@@ -13,7 +13,7 @@ import { ProgressStep } from "@/interface/context/LoadContext";
 export default function FmsTable({ route }: FmsTableProps) {
   const noRoute = route.length === 0;
   const { flightDetails, setFlightDetails } = useContext(FlightContext);
-  const {setProgressStep} = useContext(LoadContext);
+  const { setProgressStep } = useContext(LoadContext);
 
   useSocketListeners([
     {
@@ -35,13 +35,13 @@ export default function FmsTable({ route }: FmsTableProps) {
           tempRoute: null,
         }));
         setProgressStep(ProgressStep.EXECUTE);
-      }
-    }
+      },
+    },
   ]);
 
   const handleExecuteRoute = () => {
-    socketService.send("execute_route", {new_route: flightDetails.tempRoute});
-  }
+    socketService.send("execute_route", { new_route: flightDetails.tempRoute });
+  };
 
   const handleRejectRoute = () => {
     setFlightDetails((prev) => ({
@@ -49,7 +49,7 @@ export default function FmsTable({ route }: FmsTableProps) {
       tempRoute: null,
     }));
     setProgressStep(null);
-  }
+  };
 
   return (
     <div className="bg-black text-white font-mono w-full h-full flex flex-col p-4">
@@ -68,27 +68,26 @@ export default function FmsTable({ route }: FmsTableProps) {
         )}
       </div>
       {flightDetails.tempRoute && (
-  <div className="mt-4 p-4 border border-white/20 bg-white/5 rounded-lg text-sm text-white flex flex-col gap-2 shadow-md">
-    <div className="font-semibold text-white">
-      A new route has been received. Do you want to execute it?
-    </div>
-    <div className="flex gap-4 mt-2">
-      <button
-        onClick={handleExecuteRoute}
-        className="bg-green-600 hover:bg-green-700 text-white px-4 py-1 rounded-md transition"
-      >
-        Execute
-      </button>
-      <button
-        onClick={handleRejectRoute}
-        className="bg-red-600 hover:bg-red-700 text-white px-4 py-1 rounded-md transition"
-      >
-        Reject
-      </button>
-    </div>
-  </div>
-)}
-      
+        <div className="mt-4 p-4 border border-white/20 bg-white/5 rounded-lg text-sm text-white flex flex-col gap-2 shadow-md">
+          <div className="font-semibold text-white">
+            A new route has been received. Do you want to execute it?
+          </div>
+          <div className="flex gap-4 mt-2">
+            <button
+              onClick={handleExecuteRoute}
+              className="bg-green-600 hover:bg-green-700 text-white px-4 py-1 rounded-md transition"
+            >
+              Execute
+            </button>
+            <button
+              onClick={handleRejectRoute}
+              className="bg-red-600 hover:bg-red-700 text-white px-4 py-1 rounded-md transition"
+            >
+              Reject
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

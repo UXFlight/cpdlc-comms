@@ -1,9 +1,9 @@
-import ReportSection from "@/components/Tabs/Reports/ReportSection";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReportsContainer from "@/components/Tabs/Reports/ReportsContainer";
-import { ReportRowProps } from "@/interface/props/Reports";
+import ReportSection from "@/components/Tabs/Reports/PositionReport/ReportSection";
+import { ReportRowProps, SectionProps } from "@/interface/props/Reports";
 
-export default function PositionReport() {
+export default function PositionReport({ disabled, onSend, cancelSign }: SectionProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const section1: ReportRowProps[] = [
@@ -29,11 +29,23 @@ export default function PositionReport() {
     { label: "Speed", value: "250" },
   ];
 
+  useEffect(() => {
+    if (isOpen) setIsOpen(false);
+  }, [cancelSign]);
+
+  const handleSend = () => {
+    onSend();
+  };
+
   return (
     <ReportsContainer
       label="Position Report"
       isOpen={isOpen}
-      setIsOpen={setIsOpen}
+      setIsOpen={(v) => !disabled && setIsOpen(v)}
+      onSend={handleSend}
+      onClear={() => {}}
+      disabled={disabled}
+      showSendButton
     >
       <div className={`${isOpen ? "" : "hidden"}`}>
         <ReportSection rows={section1} />

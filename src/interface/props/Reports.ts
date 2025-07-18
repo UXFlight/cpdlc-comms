@@ -10,9 +10,29 @@ export interface ReportsContainerProps {
   label: string;
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
+  onSend: () => void;
+  onClear: () => void;
+  disabled?: boolean;
+  showSendButton?: boolean;
 }
 
 export interface ReportSectionProps {
   title?: string;
   rows: ReportRowProps[];
+}
+
+export interface ReportsInputProps {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  placeholder?: string;
+  className?: string;
+  inputType?: string;
+  maxLength?: number;
+}
+
+export interface SectionProps {
+    disabled: boolean;
+    onSend: () => void;
+    cancelSign: number;
 }

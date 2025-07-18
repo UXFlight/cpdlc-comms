@@ -13,7 +13,7 @@ export default function FmsHeader() {
           MODIFY
         </button>
       )}
-      {(flightDetails.flightInfo.flightId && !flightDetails.tempRoute) && (
+      {flightDetails.flightInfo.flightId && !flightDetails.tempRoute && (
         <button className="text-xs px-2 py-1 border border-white text-white hover:bg-white hover:text-black">
           {flightDetails.flightInfo.flightId}
         </button>

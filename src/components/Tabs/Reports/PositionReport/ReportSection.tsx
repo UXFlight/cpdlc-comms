@@ -1,4 +1,4 @@
-import ReportRow from "@/components/Tabs/Reports/ReportRow";
+import ReportRow from "@/components/Tabs/Reports/PositionReport/ReportRow";
 import { ReportSectionProps } from "@/interface/props/Reports";
 
 export default function ReportSection({ title, rows }: ReportSectionProps) {
