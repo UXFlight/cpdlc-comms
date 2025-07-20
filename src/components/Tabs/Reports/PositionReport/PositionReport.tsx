@@ -3,8 +3,7 @@ import ReportsContainer from "@/components/Tabs/Reports/ReportsContainer";
 import ReportSection from "@/components/Tabs/Reports/PositionReport/ReportSection";
 import { ReportRowProps, SectionProps } from "@/interface/props/Reports";
 
-export default function PositionReport({ disabled, onSend, cancelSign }: SectionProps) {
-  const [isOpen, setIsOpen] = useState(false);
+export default function PositionReport({ isOpen, setIsOpen, disabled, onSend, cancelSign }: SectionProps) {
 
   const section1: ReportRowProps[] = [
     { label: "RPT WPT", value: "XXXX", select: true, options: ["FIX"] },

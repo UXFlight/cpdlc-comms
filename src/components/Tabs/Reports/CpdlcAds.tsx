@@ -7,18 +7,16 @@ const mockContracts = [
   { center: "CZEG001", period: 304, timeNext: 298, event: false },
 ];
 
-export default function CpdlcAds({ disabled, onSend, cancelSign }: SectionProps) {
-  const [isOpen, setIsOpen] = useState(false);
+export default function CpdlcAds({ isOpen, setIsOpen, disabled, onSend, cancelSign }: SectionProps) {
   const [adsEnabled, setAdsEnabled] = useState(true);
   const [adsEmer, setAdsEmer] = useState("OFF");
 
-  // Auto reset when preview is closed
   useEffect(() => {
     if (isOpen) setIsOpen(false);
   }, [cancelSign]);
 
   const handleSend = () => {
-    onSend(); // déclenche le preview
+    onSend();
   };
 
   const handleClear = () => {
@@ -38,7 +36,6 @@ export default function CpdlcAds({ disabled, onSend, cancelSign }: SectionProps)
     >
       <div className="flex flex-col gap-4 text-white">
        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-  {/* ADS-C Box */}
   <div className="relative border border-3 border-white/20 rounded-md px-4 pt-5 pb-3">
     <div className="absolute -top-3 left-4 bg-[#1e1e1e] px-2 text-sm font-semibold text-white/70 tracking-wide">
       ADS-C
@@ -63,7 +60,6 @@ export default function CpdlcAds({ disabled, onSend, cancelSign }: SectionProps)
     </div>
   </div>
 
-  {/* ADS-C EMER Box */}
   <div className="relative border border-3 border-white/20 rounded-md px-4 pt-5 pb-3">
     <div className="absolute -top-3 left-4 bg-[#1e1e1e] px-2 text-sm font-semibold text-white/70 tracking-wide">
       ADS-C EMER
@@ -79,8 +75,8 @@ export default function CpdlcAds({ disabled, onSend, cancelSign }: SectionProps)
   </div>
 </div>
 
-
-        <div className="text-sm mt-4">
+  <div className="uppercase mt-4 text-[14px] bg-white/15">ads contracts</div>
+        <div className="text-sm">
   <div className="grid grid-cols-4 text-left font-semibold text-white/90 border-b border-white/20 pb-2">
     <div className="px-2">ATC CENTER</div>
     <div className="px-2">PERIOD</div>

@@ -16,7 +16,6 @@ export default function ReportsContainer({
         disabled ? "opacity-50 pointer-events-none" : "opacity-100"
       }`}
     >
-      {/* Header */}
       <div
         className="h-[22px] w-full flex items-center justify-between cursor-pointer"
         onClick={() => {
@@ -35,11 +34,9 @@ export default function ReportsContainer({
         />
       </div>
 
-      {/* Content */}
       <div className={`${isOpen ? "pt-4 flex flex-col gap-4" : "hidden"}`}>
         {children}
 
-        {/* Action Buttons */}
         <div className="flex justify-between">
           {onClear && (
             <button

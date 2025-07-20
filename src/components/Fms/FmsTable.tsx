@@ -52,7 +52,7 @@ export default function FmsTable({ route }: FmsTableProps) {
   };
 
   return (
-    <div className="bg-black text-white font-mono w-full h-full flex flex-col p-4">
+    <div className="bg-black bg-opacity-50 text-white font-mono w-full h-full flex flex-col p-4">
       <FmsHeader />
       <FmsTableHeader />
 

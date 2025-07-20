@@ -30,31 +30,42 @@ export default function ReportsTab() {
 
       <div className="flex flex-col gap-2 overflow-y-auto max-h-[calc(100vh-120px)] pr-1">
         <CpdlcAds
-          disabled={!!activeReport}
+          isOpen={activeReport === "cpdlc"}
+          setIsOpen={(v) => setActiveReport(v ? "cpdlc" : null)}
+          disabled={!!activeReport && activeReport !== "cpdlc"}
           onSend={() => {
             setIsPreviewOpen(true);
             setActiveReport("cpdlc");
           }}
           cancelSign={cancelSignal}
         />
+
         <ReportIndex
-          disabled={!!activeReport}
+          isOpen={activeReport === "index"}
+          setIsOpen={(v) => setActiveReport(v ? "index" : null)}
+          disabled={!!activeReport && activeReport !== "index"}
           onSend={() => {
             setIsPreviewOpen(true);
             setActiveReport("index");
           }}
           cancelSign={cancelSignal}
         />
+
         <Monitoring
-          disabled={!!activeReport}
+          isOpen={activeReport === "monitoring"}
+          setIsOpen={(v) => setActiveReport(v ? "monitoring" : null)}
+          disabled={!!activeReport && activeReport !== "monitoring"}
           onSend={() => {
             setIsPreviewOpen(true);
             setActiveReport("monitoring");
           }}
           cancelSign={cancelSignal}
         />
+
         <PositionReport
-          disabled={!!activeReport}
+          isOpen={activeReport === "position"}
+          setIsOpen={(v) => setActiveReport(v ? "position" : null)}
+          disabled={!!activeReport && activeReport !== "position"}
           onSend={() => {
             setIsPreviewOpen(true);
             setActiveReport("position");

@@ -32,6 +32,8 @@ export interface ReportsInputProps {
 }
 
 export interface SectionProps {
+    isOpen: boolean;
+    setIsOpen: (open: boolean) => void;
     disabled: boolean;
     onSend: () => void;
     cancelSign: number;

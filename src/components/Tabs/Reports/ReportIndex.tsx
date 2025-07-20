@@ -1,23 +1,30 @@
 import { useEffect, useState } from "react";
 import ReportsContainer from "@/components/Tabs/Reports/ReportsContainer";
 import { SectionProps } from "@/interface/props/Reports";
+import { useSocketListeners } from "@/hooks/useSocketListeners";
 
 interface ReportEntry {
   id: number;
   label: string;
-  status: "ARMED" | "UNARMED" | "OPEN";
+  status: "ARMED" | "DISARMED" | "OPEN" | "SENT";
 }
 
 const mockReportList: ReportEntry[] = [
   { id: 1, label: "PASSING POSITION", status: "ARMED" },
-  { id: 2, label: "REPORT PASSING YQM", status: "UNARMED" },
+  { id: 2, label: "REPORT PASSING YQM", status: "DISARMED" },
   { id: 3, label: "REPORT ARMED", status: "OPEN" },
 ];
 
-export default function ReportIndex({ disabled, onSend, cancelSign }: SectionProps) {
-  const [isOpen, setIsOpen] = useState(false);
+export default function ReportIndex({isOpen, setIsOpen, disabled, onSend, cancelSign}: SectionProps) {
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [reports, setReports] = useState<ReportEntry[]>(mockReportList);
+
+  useSocketListeners([{
+    event: "report_index_update",
+    callback: (data: ReportEntry[]) => {
+      setReports(data);
+    },
+  }]);
 
   useEffect(() => {
     if (isOpen) {
@@ -32,7 +39,7 @@ export default function ReportIndex({ disabled, onSend, cancelSign }: SectionPro
     setReports((prev) =>
       prev.map((r) =>
         r.id === selectedId && r.status === "ARMED"
-          ? { ...r, status: "UNARMED" }
+          ? { ...r, status: "DISARMED" }
           : r
       )
     );
@@ -44,7 +51,6 @@ export default function ReportIndex({ disabled, onSend, cancelSign }: SectionPro
     const message = reports.find((r) => r.id === selectedId);
     if (!message) return;
 
-    // simulate preview with message label
     console.log("Sending report:", message.label);
     onSend();
   };
