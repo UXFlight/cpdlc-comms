@@ -5,6 +5,8 @@ export interface FlightStatus {
     lon: number | null;
   };
   remaining_fuel: number | null;
+  current_distance: number;
+  total_time: number | null;
   temperature: number | null;
   wind: {
     direction: number | null;

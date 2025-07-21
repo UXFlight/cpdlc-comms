@@ -15,16 +15,24 @@ const mockReportList: ReportEntry[] = [
   { id: 3, label: "REPORT ARMED", status: "OPEN" },
 ];
 
-export default function ReportIndex({isOpen, setIsOpen, disabled, onSend, cancelSign}: SectionProps) {
+export default function ReportIndex({
+  isOpen,
+  setIsOpen,
+  disabled,
+  onSend,
+  cancelSign,
+}: SectionProps) {
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [reports, setReports] = useState<ReportEntry[]>(mockReportList);
 
-  useSocketListeners([{
-    event: "report_index_update",
-    callback: (data: ReportEntry[]) => {
-      setReports(data);
+  useSocketListeners([
+    {
+      event: "report_index_update",
+      callback: (data: ReportEntry[]) => {
+        setReports(data);
+      },
     },
-  }]);
+  ]);
 
   useEffect(() => {
     if (isOpen) {
@@ -40,8 +48,8 @@ export default function ReportIndex({isOpen, setIsOpen, disabled, onSend, cancel
       prev.map((r) =>
         r.id === selectedId && r.status === "ARMED"
           ? { ...r, status: "DISARMED" }
-          : r
-      )
+          : r,
+      ),
     );
   };
 
@@ -88,8 +96,8 @@ export default function ReportIndex({isOpen, setIsOpen, disabled, onSend, cancel
                 entry.status === "ARMED"
                   ? "text-green"
                   : entry.status === "OPEN"
-                  ? "text-light-blue"
-                  : "text-white/50"
+                    ? "text-light-blue"
+                    : "text-white/50"
               } font-semibold`}
             >
               {entry.status}

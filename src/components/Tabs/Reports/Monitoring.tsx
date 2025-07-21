@@ -15,7 +15,13 @@ const facilityOptions = [
   "RADIO",
 ];
 
-export default function Monitoring({isOpen, setIsOpen, disabled, onSend, cancelSign }: SectionProps) {
+export default function Monitoring({
+  isOpen,
+  setIsOpen,
+  disabled,
+  onSend,
+  cancelSign,
+}: SectionProps) {
   const [facility, setFacility] = useState("");
   const [designation, setDesignation] = useState("");
   const [vhf, setVhf] = useState("");
