@@ -46,8 +46,9 @@ export default function RouteProgressBar() {
         flightDetails.status = data.flight;
         console.log("Waypoint change data:", data);
         setCurrentFixIndex(data.currentFixIndex);
-
-        console.log("Index of waypoint:", data.currentFixIndex);
+        const dist = distances[currentFixIndex + 1] ?? 0;
+        const ratio = dist / totalDistance;
+        setProgress(ratio);
       },
     },
     {
@@ -68,7 +69,7 @@ export default function RouteProgressBar() {
 
   return (
     <div className="fixed top-0 left-0 w-full z-50 mt-1">
-      <div className="flex items-center justify-between max-w-[1000px] mx-auto relative px-4 pt-4 pb-2 bg-white/30 rounded-b-md shadow-md">
+      <div className="flex items-center justify-between max-w-[1000px] mx-auto relative px-4 bg-white/30 rounded-b-md shadow-md">
         <div className="flex flex-1 justify-between items-center px- relative z-10">
           {waypoints.map((wp, i) => {
             const dist = distances[i + 1] ?? 0;
@@ -81,9 +82,10 @@ export default function RouteProgressBar() {
                 className="relative flex flex-col items-start"
                 style={{ flexBasis: `${computedWidth}%` }}
               >
+                {/* Avion seulement dans le segment actif */}
                 {i === currentFixIndex && (
                   <div
-                    className="absolute -top-6 transition-all duration-300"
+                    className="relative transition-all duration-300"
                     style={{
                       left: `${progress * 100}%`,
                       transform: "translateX(-50%)",
@@ -99,23 +101,26 @@ export default function RouteProgressBar() {
                   </div>
                 )}
 
+                {/* Point */}
                 <div
-                  className={`w-4 h-4 rounded-full border-2 transition-all duration-300 ${
+                  className={`relative w-4 h-4 rounded-full border-2 transition-all duration-300 ${
                     i <= currentFixIndex
                       ? "bg-blue-500 border-blue-700"
                       : "bg-white border-gray-400"
                   }`}
                 />
 
+                {/* Label */}
                 <span className="text-xs text-black mt-1 font-bold whitespace-nowrap">
                   {typeof wp === "object" && wp !== null && "fix" in wp
                     ? (wp as any).fix
                     : wp}
                 </span>
 
+                {/* Ligne pointillée (sauf dernier) */}
                 {i < waypoints.length - 1 && (
                   <div
-                    className="absolute top-1/2 translate-y-[-1px] left-0 h-[2px] border-t border-dashed border-black z-0"
+                    className="absolute top-8/24 translate-y-[-1px] left-0 h-[2px] border-t border-dashed border-black z-0"
                     style={{
                       width: "100%",
                     }}
