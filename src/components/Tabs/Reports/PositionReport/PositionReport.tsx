@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import ReportsContainer from "@/components/Tabs/Reports/ReportsContainer";
 import ReportSection from "@/components/Tabs/Reports/PositionReport/ReportSection";
 import { ReportRowProps, SectionProps } from "@/interface/props/Reports";

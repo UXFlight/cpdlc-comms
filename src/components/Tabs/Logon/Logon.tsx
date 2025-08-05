@@ -2,7 +2,6 @@ import { useContext, useState } from "react";
 import { GlobalContext } from "@/context/GlobalContext";
 import CharacterInput from "@/components/General/CharacterInput";
 import { socketService } from "@/api/communications/socket/socketService";
-import { useDelay } from "@/hooks/useDelay";
 import { useSocketListeners } from "@/hooks/useSocketListeners";
 
 export default function Logon() {
@@ -14,7 +13,6 @@ export default function Logon() {
     username,
     setUsername,
   } = useContext(GlobalContext);
-  const { delay } = useDelay();
   const [isLoading, setIsLoading] = useState(false);
 
   const validValue = () => {

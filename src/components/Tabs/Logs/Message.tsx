@@ -1,11 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { LogsContext } from "@/context/LogsContext";
 import { GlobalContext } from "@/context/GlobalContext";
 import { MessageProps } from "@/interface/props/Logs";
 import { getStatusClass } from "@/utils/getStatus";
 
 export default function Message({ message }: MessageProps) {
-  const { currentLog, setCurrentLog } = useContext(LogsContext);
+  const { setCurrentLog } = useContext(LogsContext);
   const { username } = useContext(GlobalContext);
   const [showAdditional, setShowAdditional] = useState(false);
 

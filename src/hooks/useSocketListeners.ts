@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { socketService } from "@/api/communications/socket/socketService";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 type Listener<T = any> = {
   event: string;

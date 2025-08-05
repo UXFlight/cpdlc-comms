@@ -1,8 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import CustomRadio from "@/components/General/CustomRadio";
 import RequestContainer from "@/components/Tabs/Request/RequestContainer";
 import { RequestProps } from "@/interface/props/Request";
-import { InputContext } from "@/context/InputContext";
 
 export function ClearanceRequest({
   onSend,
@@ -11,7 +10,6 @@ export function ClearanceRequest({
   cancelSign,
 }: RequestProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const { setTargetInput } = useContext(InputContext);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
   const handleToggle = () => {

@@ -1,8 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import RequestContainer from "@/components/Tabs/Request/RequestContainer";
 import { RequestContext } from "@/context/RequestContext";
-import AdditionalMessages from "../../AdditionalMessages";
-import { ADDITIONAL_MESSAGES } from "@/constants/tabs/Request";
 import { RequestProps } from "@/interface/props/Request";
 import CharacterInput from "@/components/General/CharacterInput";
 

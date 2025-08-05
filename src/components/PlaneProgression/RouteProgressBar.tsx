@@ -1,8 +1,9 @@
 "use client";
-import { use, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FlightContext } from "@/context/FlightContext";
 import { useSocketListeners } from "@/hooks/useSocketListeners";
 import { FlightStatus } from "@/interface/FlightDetails";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 export default function RouteProgressBar() {
   const { flightDetails } = useContext(FlightContext);
@@ -12,7 +13,6 @@ export default function RouteProgressBar() {
   const [distances, setDistances] = useState<number[]>([]);
   const [totalDistance, setTotalDistance] = useState(0);
   const [currentFixIndex, setCurrentFixIndex] = useState(0);
-  const [dynamicPlaneLeft, setDynamicPlaneLeft] = useState("0%");
 
   const [progress, setProgress] = useState(0);
 
@@ -61,11 +61,6 @@ export default function RouteProgressBar() {
       },
     },
   ]);
-
-  const totalWaypoints = waypoints.length;
-  //const currentFixIndex = Math.floor(progress * (totalWaypoints - 1));
-
-  //const dynamicPlaneLeft = `${progress * 100}%`;
 
   return (
     <div className="fixed top-0 left-0 w-full z-50 mt-1">
@@ -125,7 +120,7 @@ export default function RouteProgressBar() {
                       width: "100%",
                     }}
                   />
-                )}
+                ) as any}
               </div>
             );
           })}

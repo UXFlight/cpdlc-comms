@@ -41,17 +41,17 @@ export default function ReportIndex({
     }
   }, [cancelSign]);
 
-  const handleDisarm = () => {
-    if (selectedId === null) return;
+  // const handleDisarm = () => {
+  //   if (selectedId === null) return;
 
-    setReports((prev) =>
-      prev.map((r) =>
-        r.id === selectedId && r.status === "ARMED"
-          ? { ...r, status: "DISARMED" }
-          : r,
-      ),
-    );
-  };
+  //   setReports((prev) =>
+  //     prev.map((r) =>
+  //       r.id === selectedId && r.status === "ARMED"
+  //         ? { ...r, status: "DISARMED" }
+  //         : r,
+  //     ),
+  //   );
+  // };
 
   const handleSend = () => {
     if (selectedId === null) return;

@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { GlobalContext } from "@/context/GlobalContext";
 import { FlightContext } from "@/context/FlightContext";
 
 export default function FmsHeader() {

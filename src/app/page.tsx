@@ -14,7 +14,6 @@ import ConnectionBar from "@/components/ConnectionBar/ConnectionBar";
 import { InputProvider } from "@/context/InputContext";
 import { socketService } from "@/api/communications/socket/socketService";
 import { LogsProvider } from "@/context/LogsContext";
-import { GlobalContext } from "@/context/GlobalContext";
 import { FlightContext } from "@/context/FlightContext";
 import ErrorPopup from "@/components/General/ErrorPopup";
 import FlightStatusPanel from "@/components/FlightStatusPanel/FlightStatusPanel";
