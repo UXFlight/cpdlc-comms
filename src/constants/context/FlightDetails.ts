@@ -7,6 +7,8 @@ export const DEFAULT_FLIGHT_DETAILS: FlightDetails = {
     altitude: null,
     position: { lat: null, lon: null },
     remaining_fuel: null,
+    current_distance: 0,
+    fix_distance: 0,
     temperature: null,
     wind: null,
     turbulence: null,
@@ -19,6 +21,7 @@ export const DEFAULT_FLIGHT_DETAILS: FlightDetails = {
       AFN_CONNECTING: "",
       ATN_AVAILABILITY: "",
     },
+    total_time: null,
   },
   route: [
     {
