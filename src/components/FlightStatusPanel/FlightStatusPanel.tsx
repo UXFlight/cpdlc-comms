@@ -10,9 +10,7 @@ export default function FlightStatusPanel() {
 
   return (
     <>
-      {/* Wrapper: icône + panel */}
       <div className="fixed bottom-6 left-4 z-50 flex flex-col items-start gap-2">
-        {/* Panel visible si ouvert */}
         {isOpen && (
           <div className="bg-medium-gray border border-white/10 rounded-lg shadow-xl p-4 w-[250px] animate-fade-in-up">
             <div className="flex justify-between items-center mb-2">
