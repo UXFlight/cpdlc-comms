@@ -1,4 +1,5 @@
 import { FmsRowProps } from "@/interface/props/Fms";
+import { formatDuration } from "@/utils/formatDuration";
 
 export default function FmsRow({ fix, delay = 0 }: FmsRowProps) {
   return (
@@ -7,10 +8,10 @@ export default function FmsRow({ fix, delay = 0 }: FmsRowProps) {
       style={{ animationDelay: `${delay}s` }}
     >
       <div>{fix.fix}</div>
-      <div>{fix.altitude}</div>
-      <div>{fix.heading}</div>
-      <div>{fix.distance}</div>
-      <div>{fix.duration}</div>
+      <div>{fix.altitude_ft}</div>
+      <div>{fix.heading_deg}</div>
+      <div>{fix.distance_km}</div>
+      <div>{formatDuration(fix.duration_sec)}</div>
     </div>
   );
 }

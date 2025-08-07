@@ -4,7 +4,7 @@ import { FlightContext } from "@/context/FlightContext";
 import { BsAirplaneEngines } from "react-icons/bs";
 
 export default function FlightStatusPanel() {
-  const { flightDetails } = useContext(FlightContext);
+  const { flightDetails, setFlightDetails } = useContext(FlightContext);
   const [isOpen, setIsOpen] = useState(false);
   const status = flightDetails.status;
 

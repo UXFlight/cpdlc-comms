@@ -39,6 +39,11 @@ export default function CpdlcMainView() {
     }
   }, []);
 
+
+  useEffect(() => {
+    console.log("Flight details updated:", flightDetails);
+  }, [flightDetails]);
+
   return (
     <div>
       <FlightStatusPanel />

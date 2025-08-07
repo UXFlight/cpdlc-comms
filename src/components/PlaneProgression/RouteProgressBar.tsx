@@ -10,11 +10,11 @@ import { GlobalContext } from "@/context/GlobalContext";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 export default function RouteProgressBar() {
-  const { flightDetails } = useContext(FlightContext);
+  const { flightDetails, setFlightDetails } = useContext(FlightContext);
   const { connectionState } = useContext(GlobalContext);
   const departure = flightDetails.flightInfo?.departureAirport || "DEP";
   const arrival = flightDetails.flightInfo?.arrivalAirport || "ARR";
-  const waypoints = [departure, ...(flightDetails.route || []), arrival];
+  const waypoints = flightDetails.route || [];
   const [distances, setDistances] = useState<number[]>([]);
   const [totalDistance, setTotalDistance] = useState(0);
   const [currentFixIndex, setCurrentFixIndex] = useState(0);
@@ -37,7 +37,10 @@ export default function RouteProgressBar() {
     {
       event: "plane_partial_progress",
       callback: (data: FlightStatus) => {
-        flightDetails.status = data;
+        setFlightDetails((prev) => ({
+          ...prev,
+          status: { ...data },
+        }));
         const distanceCovered = data.fix_distance;
         const segmentDist = distances[currentFixIndex] || 0;
         const computedProgress = distanceCovered / segmentDist;
@@ -48,7 +51,10 @@ export default function RouteProgressBar() {
     {
       event: "waypoint_change",
       callback: (data: { flight: FlightStatus; currentFixIndex: number }) => {
-        flightDetails.status = data.flight;
+        setFlightDetails((prev) => ({
+          ...prev,
+          status: { ...data.flight },
+        }));
         console.log(
           "Waypoint change data:",
           data,
@@ -64,10 +70,10 @@ export default function RouteProgressBar() {
     {
       event: "plane_arrival",
       callback: (data: FlightStatus) => {
-        console.log(
-          "Plane arrival data !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!:",
-          data,
-        );
+        setFlightDetails((prev) => ({
+          ...prev,
+          status: { ...data },
+        }));
         setCurrentFixIndex(distances.length - 1);
         const dist = distances[currentFixIndex] ?? 0;
         const ratio = dist / totalDistance;

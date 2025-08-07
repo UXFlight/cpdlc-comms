@@ -33,12 +33,22 @@ export interface FlightInfo {
 
 export interface RouteFix {
   fix: string;
-  heading: string;
-  distance: string;
-  altitude: string;
-  mach: string;
-  duration: string;
-  fuel: string;
+  altitude_ft: number;
+  distance_km: number;
+  duration_sec: number;
+  elapsed_time_sec: number;
+  fuel_kg: number;
+  heading_deg: number;
+  icing: "NONE" | "LIGHT" | "MODERATE" | "SEVERE" | "TRACE";
+  speed_kmh: number;
+  speed_samples_kmh: number[];
+  temperature: number;
+  total_distance: number;
+  turbulence: "NONE" | "LIGHT" | "MODERATE" | "SEVERE";
+  wind: {
+    direction: number;
+    speed: number;
+  };
 }
 
 export interface FlightDetails {
