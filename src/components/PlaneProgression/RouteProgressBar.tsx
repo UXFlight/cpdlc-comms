@@ -1,19 +1,24 @@
 "use client";
-import { useContext, useEffect, useState } from "react";
+import { use, useContext, useEffect, useState } from "react";
 import { FlightContext } from "@/context/FlightContext";
 import { useSocketListeners } from "@/hooks/useSocketListeners";
 import { FlightStatus } from "@/interface/FlightDetails";
+import ActionBar from "./ActionBar";
+import { socketService } from "@/api/communications/socket/socketService";
+import { Global } from "@emotion/react";
+import { GlobalContext } from "@/context/GlobalContext";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 export default function RouteProgressBar() {
   const { flightDetails } = useContext(FlightContext);
+  const { connectionState } = useContext(GlobalContext);
   const departure = flightDetails.flightInfo?.departureAirport || "DEP";
   const arrival = flightDetails.flightInfo?.arrivalAirport || "ARR";
   const waypoints = [departure, ...(flightDetails.route || []), arrival];
   const [distances, setDistances] = useState<number[]>([]);
   const [totalDistance, setTotalDistance] = useState(0);
   const [currentFixIndex, setCurrentFixIndex] = useState(0);
-
+  const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -44,7 +49,12 @@ export default function RouteProgressBar() {
       event: "waypoint_change",
       callback: (data: { flight: FlightStatus; currentFixIndex: number }) => {
         flightDetails.status = data.flight;
-        console.log("Waypoint change data:", data, "+", distances[data.currentFixIndex]);
+        console.log(
+          "Waypoint change data:",
+          data,
+          "+",
+          distances[data.currentFixIndex],
+        );
         setCurrentFixIndex(data.currentFixIndex);
         const dist = distances[currentFixIndex] ?? 0;
         const ratio = dist / totalDistance;
@@ -54,7 +64,10 @@ export default function RouteProgressBar() {
     {
       event: "plane_arrival",
       callback: (data: FlightStatus) => {
-        console.log("Plane arrival data !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!:", data);
+        console.log(
+          "Plane arrival data !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!:",
+          data,
+        );
         setCurrentFixIndex(distances.length - 1);
         const dist = distances[currentFixIndex] ?? 0;
         const ratio = dist / totalDistance;
@@ -63,8 +76,47 @@ export default function RouteProgressBar() {
     },
   ]);
 
+  useEffect(() => {
+    if (connectionState === true) {
+      setIsPlaying(true);
+    }
+  }, [connectionState]);
+
+  const handlePlay = () => {
+    setIsPlaying(true);
+    socketService.send("routine_play", {
+      flight_id: flightDetails.flightInfo.flightId,
+    });
+  };
+
+  const handlePause = () => {
+    setIsPlaying(false);
+    socketService.send("routine_pause", {
+      flight_id: flightDetails.flightInfo.flightId,
+    });
+  };
+
+  const handleStepBack = () => {
+    socketService.send("routine_step_back", {
+      flight_id: flightDetails.flightInfo.flightId,
+    });
+  };
+
+  const handleStepForward = () => {
+    socketService.send("routine_step_forward", {
+      flight_id: flightDetails.flightInfo.flightId,
+    });
+  };
+
   return (
     <div className="fixed top-0 left-0 w-full z-50 mt-1">
+      <ActionBar
+        onPlay={handlePlay}
+        onPause={handlePause}
+        onStepBack={handleStepBack}
+        onStepForward={handleStepForward}
+        isPlaying={isPlaying}
+      />
       <div className="flex items-center justify-between max-w-[1000px] mx-auto relative px-4 py-3 bg-white/30 rounded-b-md shadow-md">
         <div className="flex flex-1 justify-between items-center px- relative z-10">
           {waypoints.map((wp, i) => {
@@ -110,14 +162,15 @@ export default function RouteProgressBar() {
                     : wp}
                 </span>
 
-                {i < waypoints.length - 1 && (
-                  <div
-                    className="absolute top-8/24 translate-y-[-1px] left-0 h-[2px] border-t border-dashed border-black z-0"
-                    style={{
-                      width: "100%",
-                    }}
-                  />
-                ) as any}
+                {i < waypoints.length - 1 &&
+                  ((
+                    <div
+                      className="absolute top-8/24 translate-y-[-1px] left-0 h-[2px] border-t border-dashed border-black z-0"
+                      style={{
+                        width: "100%",
+                      }}
+                    />
+                  ) as any)}
               </div>
             );
           })}

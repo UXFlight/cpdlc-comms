@@ -94,14 +94,14 @@ export function WhenCanWeRequest({
                 options={LEVEL_ALTITUDE_OPTIONS}
                 value={level}
                 disabled={!isOpen}
-               onChange={(value) => {
-  setLevel(value);
-  if (value === "LOWER") {
-    setRequest({ messageRef: "DM52" });
-  } else {
-    setRequest({ messageRef: "DM53" });
-  }
-}}
+                onChange={(value) => {
+                  setLevel(value);
+                  if (value === "LOWER") {
+                    setRequest({ messageRef: "DM52" });
+                  } else {
+                    setRequest({ messageRef: "DM53" });
+                  }
+                }}
               />
             </div>
           </div>
@@ -149,7 +149,7 @@ export function WhenCanWeRequest({
                   onChange={(value) => {
                     setClimbDescend(value);
                     setTargetInput("climb_descend");
-                    if(value === "CLIMB") {
+                    if (value === "CLIMB") {
                       setRequest({ messageRef: "DM87" });
                     } else {
                       setRequest({ messageRef: "DM88" });
