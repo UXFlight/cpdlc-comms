@@ -13,15 +13,17 @@ import ResponsiveBar from "@/components/ResponsiveBar/ResponsiveBar";
 import ConnectionBar from "@/components/ConnectionBar/ConnectionBar";
 import { InputProvider } from "@/context/InputContext";
 import { socketService } from "@/api/communications/socket/socketService";
-import { LogsProvider } from "@/context/LogsContext";
+import { LogsContext, LogsProvider } from "@/context/LogsContext";
 import { FlightContext } from "@/context/FlightContext";
 import ErrorPopup from "@/components/General/ErrorPopup";
 import FlightStatusPanel from "@/components/FlightStatusPanel/FlightStatusPanel";
 import RouteProgressBar from "@/components/PlaneProgression/RouteProgressBar";
+import { useSocketListeners } from "@/hooks/useSocketListeners";
 
 export default function CpdlcMainView() {
   const [activeTab, setActiveTab] = useState("logon");
   const { flightDetails } = useContext(FlightContext);
+  const { logs, setLogs, clearLogs } = useContext(LogsContext);
 
   const TAB_COMPONENTS: Record<string, JSX.Element> = {
     logon: <LogonTab />,
@@ -39,6 +41,13 @@ export default function CpdlcMainView() {
     }
   }, []);
 
+  useSocketListeners([{
+    event: "removed_logs",
+    callback: (data) => {
+      clearLogs();
+      setLogs(data);
+    }
+  }]);
 
   useEffect(() => {
     console.log("Flight details updated:", flightDetails);
@@ -64,7 +73,7 @@ export default function CpdlcMainView() {
             {/* contenu de l'onglet */}
             <div className="h-full w-full overflow-auto">
               <InputProvider>
-                <LogsProvider>{TAB_COMPONENTS[activeTab]}</LogsProvider>
+                {TAB_COMPONENTS[activeTab]}
               </InputProvider>
             </div>
 

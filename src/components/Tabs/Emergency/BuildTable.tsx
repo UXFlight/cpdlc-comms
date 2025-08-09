@@ -9,7 +9,7 @@ export default function BuildTable() {
   const [divertTo, setDivertTo] = useState("NONE");
 
   return (
-    <div className="container flex  flex-col gap-[10px] items-start w-[568px] h-auto px-[15.5px] py-[16px]">
+    <div className="container flex flex-col gap-[10px] items-start w-[568px] h-auto px-[15.5px] py-[16px]">
       <div className="emergency-div">
         <p className="emergency-text">Emergency Type</p>
         <div>
@@ -33,6 +33,7 @@ export default function BuildTable() {
               "LOW FUEL",
             ]}
             value={reason}
+            style="min-w-[150px]"
             onChange={setReason}
           />
         </div>

@@ -20,7 +20,7 @@ export default function MessageContainer({ messages }: MessageContainerProps) {
           </div>
         </div>
       ) : (
-        <div className="message-scroll-area">
+        <div className="message-scroll-area overflow-y-auto">
           <div className="message-scroll-inner">
             {messages.map((msg) => {
               return (

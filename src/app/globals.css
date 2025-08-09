@@ -237,8 +237,8 @@
   }
 
   .message-scroll-inner {
-    @apply overflow-y-auto px-2 py-2 space-y-1;
-    height: calc(100% - 64px);
+    @apply overflow-y-auto px-2 space-y-1;
+    height: calc(100% - 40px);
   }
 
   .message-date-separator {
@@ -255,7 +255,7 @@
 
   .message-footer {
     /* @apply sticky bottom-0 p-4 bg-gradient-to-t from-black/80 to-transparent; */
-    @apply absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/80 to-transparent;
+    @apply absolute bottom-0 left-0 w-full py-4 bg-gradient-to-t from-black/80 to-transparent z-10;
   }
 
   .message-footer-meta {

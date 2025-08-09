@@ -3,6 +3,7 @@ import "./globals.css";
 import { FlightProvider } from "@/context/FlightContext";
 import { ErrorProvider } from "@/context/ErrorContext";
 import { LoadProvider } from "@/context/LoadContext";
+import { LogsProvider } from "@/context/LogsContext";
 
 export const metadata = {
   title: "Next.js",
@@ -20,7 +21,9 @@ export default function RootLayout({
         <GlobalProvider>
           <FlightProvider>
             <LoadProvider>
+              <LogsProvider>
               <ErrorProvider>{children}</ErrorProvider>
+              </LogsProvider>
             </LoadProvider>
           </FlightProvider>
         </GlobalProvider>

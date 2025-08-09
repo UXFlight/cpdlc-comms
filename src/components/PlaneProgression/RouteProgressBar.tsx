@@ -138,7 +138,7 @@ export default function RouteProgressBar() {
               >
                 {i === currentFixIndex && (
                   <div
-                    className="absolute -top-3 min-h-[50px] min-w-[50px] transition-all duration-300"
+                    className="absolute -top-3 min-h-[50px] min-w-[50px] transition-all duration-300 z-10"
                     style={{
                       left: `${progress * 100}%`,
                       transform: "translateX(-50%)",
@@ -155,7 +155,7 @@ export default function RouteProgressBar() {
                 )}
 
                 <div
-                  className={` w-4 h-4 rounded-full border-2 transition-all duration-300 ${
+                  className={` w-4 h-4 rounded-full border-2 transition-all duration-300 z-1 ${
                     i <= currentFixIndex
                       ? "bg-blue-500 border-blue-700"
                       : "bg-white border-gray-400"
@@ -171,7 +171,7 @@ export default function RouteProgressBar() {
                 {i < waypoints.length - 1 &&
                   ((
                     <div
-                      className="absolute top-8/24 translate-y-[-1px] left-0 h-[2px] border-t border-dashed border-black z-0"
+                      className="absolute top-6/24 translate-y-[-1px] left-0 h-[2px] border-t border-dashed border-black"
                       style={{
                         width: "100%",
                       }}
