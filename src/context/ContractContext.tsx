@@ -3,12 +3,18 @@ import { DEFAULT_POSITION_REPORT } from "@/constants/context/DefaultReport";
 import { useSocketListeners } from "@/hooks/useSocketListeners";
 import React, { createContext, useState } from "react";
 
+export interface AdsCData {
+  time: string;
+  value: string;
+}
+
 export interface ADSCContract {
   id: string;
   center: string;
   period: string;
-  time_Next: number;
-  is_active: boolean;
+  time_Next: string;
+  trigger: string;
+  is_Active: boolean;
 }
 
 export interface MonitoringReport {
@@ -120,6 +126,12 @@ export const ReportProvider = ({ children }: { children: React.ReactNode }) => {
         callback: (data: MonitoringReport) => {
             setMonitoringReports((prev) => [data, ...prev]);
         }
+    },
+    {
+      event: "load_adsc_reports",
+      callback: (data: ADSCContract[]) => {
+          setAdscContracts(data);
+      }
     }
   ]);
 

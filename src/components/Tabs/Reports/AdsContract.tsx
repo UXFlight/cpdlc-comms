@@ -1,30 +1,18 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ReportsContainer from "@/components/Tabs/Reports/ReportsContainer";
 import { SectionProps } from "@/interface/props/Reports";
 import { useSocketListeners } from "@/hooks/useSocketListeners";
+import { ADSCContract, ReportContext } from "@/context/ContractContext";
 
-export interface AdsContract {
-  id: string;
-  center: string;
-  period: number;
-  timeNext: number;
-  event: boolean;
-}
-
-const mockContracts: AdsContract[] = [
-  { id: "1", center: "CZEG001", period: 304, timeNext: 298, event: false },
-  { id: "2", center: "CZQM001", period: 304, timeNext: 283, event: true }
-];
-
-export default function CpdlcAds({
+export default function AdsContract({
   isOpen,
   setIsOpen,
   disabled,
   onSend,
   cancelSign,
 }: SectionProps) {
-  const [ setContracts] = useState(mockContracts);
-  const [adsEnabled, setAdsEnabled] = useState(false); // Default to OFF or to ON ???
+  const {adscContracts, setAdscContracts} = useContext(ReportContext);
+  const [adsEnabled, setAdsEnabled] = useState(true); // Default to OFF or to ON ???
   const [adsEmer, setAdsEmer] = useState("OFF");
 
   useEffect(() => {
@@ -33,9 +21,10 @@ export default function CpdlcAds({
 
   useSocketListeners([
     {
-      event: "ads_new_contract",
-      callback: (data: AdsContract) => {
-        //addContract(data);
+      event: "adsc_countdown",
+      callback: (data: ADSCContract[]) => {
+        setAdscContracts(data);
+        console.log("ADS-C Contracts updated:", data);
       }
     }
   ])
@@ -44,9 +33,9 @@ export default function CpdlcAds({
     onSend();
   };
 
-  // const addContract = (newContract: AdsContract) => {
-  //   setContracts((prevContracts) => [newContract, ...prevContracts]);
-  // };
+  const addContract = (newContract: ADSCContract) => {
+    setAdscContracts((prevContracts) => [newContract, ...prevContracts]);
+  };
 
   const handleClear = () => {
     setAdsEnabled(true);
@@ -115,15 +104,15 @@ export default function CpdlcAds({
             <div className="px-2">EVENT</div>
           </div>
 
-          {mockContracts.map((c, idx) => (
+          {adscContracts.map((c, idx) => (
             <div
               key={idx}
               className="grid grid-cols-4 text-left border-b border-white/10 py-2 text-white/90"
             >
               <div className="px-2">{c.center}</div>
               <div className="px-2">{c.period} SEC</div>
-              <div className="px-2">{c.timeNext} SEC</div>
-              <div className="px-2">{c.event ? "YES" : "NO"}</div>
+              <div className="px-2">{c.time_Next} SEC</div>
+              <div className="px-2">{c.is_Active ? "YES" : "NO"}</div>
             </div>
           ))}
         </div>

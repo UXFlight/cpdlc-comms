@@ -45,4 +45,5 @@ export const DEFAULT_FLIGHT_DETAILS: FlightDetails = {
     }
   ],
   tempRoute: null,
+  currentFixIndex: 0,
 }

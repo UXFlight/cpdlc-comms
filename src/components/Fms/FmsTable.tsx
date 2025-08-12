@@ -2,7 +2,7 @@ import FmsHeader from "@/components/Fms/FmsHeader";
 import FmsTableHeader from "@/components/Fms/FmsTableHeader";
 import FmsRow from "@/components/Fms/FmsRow";
 import { FmsTableProps } from "@/interface/props/Fms";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { RouteFix } from "@/interface/FlightDetails";
 import { useSocketListeners } from "@/hooks/useSocketListeners";
 import { FlightContext } from "@/context/FlightContext";
@@ -14,6 +14,11 @@ export default function FmsTable({ route }: FmsTableProps) {
   const noRoute = route.length === 0;
   const { flightDetails, setFlightDetails } = useContext(FlightContext);
   const { setProgressStep } = useContext(LoadContext);
+  const [currentFixIndex, setCurrentFixIndex] = useState(0);
+
+  useEffect(() => { 
+    setCurrentFixIndex(flightDetails.currentFixIndex);
+  }, [flightDetails.currentFixIndex]);
 
   useSocketListeners([
     {
@@ -62,9 +67,10 @@ export default function FmsTable({ route }: FmsTableProps) {
             No flight plan available. Please Logon...
           </div>
         ) : (
-          route.map((fix: RouteFix, i: number) => (
-            <FmsRow key={`${fix.fix}-${i}`} fix={fix} delay={i * 0.07} />
-          ))
+          route.map((fix: RouteFix, i: number) => {
+            if (i <= currentFixIndex) return null;
+            return <FmsRow key={`${fix.fix}-${i}`} fix={fix} delay={i * 0.07} />;
+          })
         )}
       </div>
       {flightDetails.tempRoute && (

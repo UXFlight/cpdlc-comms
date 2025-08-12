@@ -12,5 +12,6 @@ export function startingSetUp(data: any) {
     },
     status: { ...data.status },
     route: data.route || [],
+    currentFixIndex: 0
   };
 }

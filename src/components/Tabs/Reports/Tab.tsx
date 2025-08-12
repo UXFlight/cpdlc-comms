@@ -1,4 +1,4 @@
-import CpdlcAds from "@/components/Tabs/Reports/CpdlcAds";
+import CpdlcAds from "@/components/Tabs/Reports/AdsContract";
 import Monitoring from "@/components/Tabs/Reports/Monitoring";
 import PositionReport from "@/components/Tabs/Reports/PositionReport/PositionReport";
 import ReportIndex from "@/components/Tabs/Reports/ReportIndex";

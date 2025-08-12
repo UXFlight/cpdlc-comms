@@ -60,4 +60,5 @@ export interface FlightDetails {
   status: FlightStatus;
   tempRoute?: RouteFix[] | null;
   route: RouteFix[];
+  currentFixIndex: number;
 }

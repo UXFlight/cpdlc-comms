@@ -54,12 +54,17 @@ export default function RequestTab() {
         <div className="flex flex-col gap-3">
           {categories.map(({ key, Component }) => {
             if (category === null || category === key) {
+              const isClearance = key === "clearance";
               return (
                 <Component
                   key={key}
-                  disabled={preview}
+                  disabled={preview || isClearance}                 
                   onSend={() => setPreview(true)}
-                  onOpen={(isOpen: boolean) => setCategory(isOpen ? key : null)}
+                  onOpen={
+                    !isClearance
+                      ? (isOpen: boolean) => setCategory(isOpen ? key : null)
+                      : () => {}                                   
+                  }
                   cancelSign={cancelSignal}
                 />
               );

@@ -50,13 +50,8 @@ export default function RouteProgressBar() {
         setFlightDetails((prev) => ({
           ...prev,
           status: { ...data.flight },
+          currentFixIndex: data.currentFixIndex
         }));
-        console.log(
-          "Waypoint change data:",
-          data,
-          "+",
-          distances[data.currentFixIndex],
-        );
         setCurrentFixIndex(data.currentFixIndex);
         const dist = distances[currentFixIndex] ?? 0;
         const ratio = dist / totalDistance;
