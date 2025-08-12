@@ -3,16 +3,16 @@ import ReportsContainer from "@/components/Tabs/Reports/ReportsContainer";
 import { SectionProps } from "@/interface/props/Reports";
 import { useSocketListeners } from "@/hooks/useSocketListeners";
 
-interface ReportEntry {
-  id: number;
+export interface ReportEntry {
+  id: string;
   label: string;
   status: "ARMED" | "DISARMED" | "OPEN" | "SENT";
 }
 
 const mockReportList: ReportEntry[] = [
-  { id: 1, label: "PASSING POSITION", status: "ARMED" },
-  { id: 2, label: "REPORT PASSING YQM", status: "DISARMED" },
-  { id: 3, label: "REPORT ARMED", status: "OPEN" },
+  { id: "1", label: "PASSING POSITION", status: "ARMED" },
+  { id: "2", label: "REPORT PASSING YQM", status: "DISARMED" },
+  { id: "3", label: "REPORT ARMED", status: "OPEN" },
 ];
 
 export default function ReportIndex({
@@ -22,8 +22,10 @@ export default function ReportIndex({
   onSend,
   cancelSign,
 }: SectionProps) {
-  const [selectedId, setSelectedId] = useState<number | null>(null);
-  const [reports, setReports] = useState<ReportEntry[]>(mockReportList);
+  const [selectedId, setSelectedId] = useState<string   
+  
+  | null>(null);
+  const [reports, setReports] = useState<ReportEntry[]>([]);
 
   useSocketListeners([
     {

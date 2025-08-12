@@ -19,6 +19,7 @@ import ErrorPopup from "@/components/General/ErrorPopup";
 import FlightStatusPanel from "@/components/FlightStatusPanel/FlightStatusPanel";
 import RouteProgressBar from "@/components/PlaneProgression/RouteProgressBar";
 import { useSocketListeners } from "@/hooks/useSocketListeners";
+import { ReportProvider } from "@/context/ContractContext";
 
 export default function CpdlcMainView() {
   const [activeTab, setActiveTab] = useState("logon");
@@ -49,9 +50,9 @@ export default function CpdlcMainView() {
     }
   }]);
 
-  useEffect(() => {
-    console.log("Flight details updated:", flightDetails);
-  }, [flightDetails]);
+  // useEffect(() => {
+  //   console.log("Flight details updated:", flightDetails);
+  // }, [flightDetails]);
 
   return (
     <div>
@@ -72,9 +73,11 @@ export default function CpdlcMainView() {
 
             {/* contenu de l'onglet */}
             <div className="h-full w-full overflow-auto">
+              <ReportProvider>
               <InputProvider>
                 {TAB_COMPONENTS[activeTab]}
               </InputProvider>
+              </ReportProvider>
             </div>
 
             {/* footer en bas */}

@@ -29,7 +29,6 @@ export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
     {
       event: "log_added",
       callback: (log: Log) => {
-        console.log("New log received:", log);
         addLog(log);
       },
     },
@@ -42,7 +41,6 @@ export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
     {
       event: "status_changed",
       callback: (data: Log) => {
-        console.log("Status changed for log:", data);
         const logIndex = logs.findIndex((log) => log.id === data.id);
         logs[logIndex] = data;
         setLogs(logs);
@@ -70,7 +68,6 @@ export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
   //   logs.find((logs) => logs.id === log.id)
 
   const requestChangeStatus = (logId: string, response: string) => {
-    console.log("Changing status for log:", logId, "to", response);
     // Emit the change
     if (response === "loaded") {
       socketService.send("fms_loaded", { logId: logId });

@@ -44,7 +44,6 @@ export default function RouteProgressBar() {
         const distanceCovered = data.fix_distance;
         const segmentDist = distances[currentFixIndex] || 0;
         const computedProgress = distanceCovered / segmentDist;
-        console.log("Partial progress data:", computedProgress);
         setProgress(computedProgress);
       },
     },

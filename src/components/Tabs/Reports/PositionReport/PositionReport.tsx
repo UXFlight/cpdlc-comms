@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { use, useContext, useEffect } from "react";
 import ReportsContainer from "@/components/Tabs/Reports/ReportsContainer";
 import ReportSection from "@/components/Tabs/Reports/PositionReport/ReportSection";
 import { ReportRowProps, SectionProps } from "@/interface/props/Reports";
+import { ReportContext } from "@/context/ContractContext";
 
 export default function PositionReport({
   isOpen,
@@ -10,27 +11,35 @@ export default function PositionReport({
   onSend,
   cancelSign,
 }: SectionProps) {
+  const {positionReports} = useContext(ReportContext);
+
+  useEffect(() => {
+    console.log("Position reports updated:", positionReports);
+  }, [positionReports]);
+
+  const reported_waypoint = ["FIX", "NONE", "NAVAID", "AIRPORT", "LAT/LON", "PLACE/BEARING/DIST"];
+
   const section1: ReportRowProps[] = [
-    { label: "RPT WPT", value: "XXXX", select: true, options: ["FIX"] },
-    { label: "RPT WPT UTC", value: "15:41" },
-    { label: "RPT WPT ALT", value: "8430", select: true, options: ["FIX"] },
+    { label: "RPT WPT", value: positionReports[0].positioncurrent, select: true, options: reported_waypoint },
+    { label: "RPT WPT UTC", value: positionReports[0].timeatpositioncurrent_sec ? `${positionReports[0].timeatpositioncurrent_sec} UTC` : "----"},
+    { label: "RPT WPT ALT", value: positionReports[0].altitude_ft ? `${positionReports[0].altitude_ft} ft` : "----", select: true, options: reported_waypoint},
   ];
 
   const section2: ReportRowProps[] = [
-    { label: "Next Fix", value: "XXXX", select: true, options: ["FIX"] },
-    { label: "Next Fix UTC", value: "15:46" },
-    { label: "Next Fix +1", value: "XXXX", select: true, options: ["FIX"] },
+    { label: "Next Fix", value: positionReports[0].fixnext ? `${positionReports[0].fixnext}` : "----", select: true, options: reported_waypoint },
+    { label: "Next Fix UTC", value: positionReports[0].timeatafixnext_sec ? `${positionReports[0].timeatafixnext_sec} UTC` : "----" },
+    { label: "Next Fix +1", value: positionReports[0].fixnextplusone ? `${positionReports[0].fixnextplusone}` : "----", select: true, options: reported_waypoint },
   ];
 
   const section3: ReportRowProps[] = [
-    { label: "Cur Pos", value: "N4515.4", select: true, options: ["LAT/LON"] },
-    { label: "Cur UTC", value: "15:43" },
-    { label: "Cur ALT", value: "8000" },
-    { label: "Winds ALOFT", value: "331/025 T/KT" },
+    { label: "Cur Pos", value: positionReports[0].positioncurrent, select: true, options: reported_waypoint },
+    { label: "Cur UTC", value: positionReports[0].timeatpositioncurrent_sec ? `${positionReports[0].timeatpositioncurrent_sec} UTC` : "----"},
+    { label: "Cur ALT", value: positionReports[0].altitude_ft ? `${positionReports[0].altitude_ft} ft` : "----"},
+    { label: "Winds ALOFT", value: `${positionReports[0].winds?.winddirection_deg}° ${positionReports[0].winds?.speed_kmh} km/h`},
     { label: "OFFSET", value: "----" },
-    { label: "Dest UTC", value: "15:50" },
-    { label: "Temperature", value: "+03 °C" },
-    { label: "Speed", value: "250" },
+    { label: "Dest UTC", value: positionReports[0].timeatedestination_sec || "----" },
+    { label: "Temperature", value: positionReports[0].temperature_c ? `${positionReports[0].temperature_c} °C` : "----" },
+    { label: "Speed", value: positionReports[0].speed_kmh ? `${positionReports[0].speed_kmh} km/h` : "----" },
   ];
 
   useEffect(() => {

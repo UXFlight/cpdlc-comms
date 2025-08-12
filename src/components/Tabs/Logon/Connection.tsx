@@ -19,10 +19,6 @@ export default function Connection() {
     },
   ]);
 
-  useEffect(() => {
-    console.log({ flightDetails });
-  }, [flightDetails]);
-
   return (
     <div
       className={`${connectionState && isConnectionPossible ? "container" : ""} flex items-center justify-between`}

@@ -1,10 +1,19 @@
 import { useEffect, useState } from "react";
 import ReportsContainer from "@/components/Tabs/Reports/ReportsContainer";
 import { SectionProps } from "@/interface/props/Reports";
+import { useSocketListeners } from "@/hooks/useSocketListeners";
 
-const mockContracts = [
-  { center: "KUSA001", period: 304, timeNext: 283, event: true },
-  { center: "CZEG001", period: 304, timeNext: 298, event: false },
+export interface AdsContract {
+  id: string;
+  center: string;
+  period: number;
+  timeNext: number;
+  event: boolean;
+}
+
+const mockContracts: AdsContract[] = [
+  { id: "1", center: "CZEG001", period: 304, timeNext: 298, event: false },
+  { id: "2", center: "CZQM001", period: 304, timeNext: 283, event: true }
 ];
 
 export default function CpdlcAds({
@@ -14,15 +23,29 @@ export default function CpdlcAds({
   onSend,
   cancelSign,
 }: SectionProps) {
-  const [adsEnabled, setAdsEnabled] = useState(true);
+  const [contracts, setContracts] = useState(mockContracts);
+  const [adsEnabled, setAdsEnabled] = useState(false); // Default to OFF or to ON ???
   const [adsEmer, setAdsEmer] = useState("OFF");
 
   useEffect(() => {
     if (isOpen) setIsOpen(false);
   }, [cancelSign]);
 
+  useSocketListeners([
+    {
+      event: "ads_new_contract",
+      callback: (data: AdsContract) => {
+        addContract(data);
+      }
+    }
+  ])
+
   const handleSend = () => {
     onSend();
+  };
+
+  const addContract = (newContract: AdsContract) => {
+    setContracts((prevContracts) => [newContract, ...prevContracts]);
   };
 
   const handleClear = () => {
@@ -81,11 +104,11 @@ export default function CpdlcAds({
           </div>
         </div>
 
-        <div className="uppercase mt-4 text-[14px] bg-white/15">
+        <div className="uppercase mt-4 pl-2 text-[16px] bg-white/15">
           ads contracts
         </div>
         <div className="text-sm">
-          <div className="grid grid-cols-4 text-left font-semibold text-white/90 border-b border-white/20 pb-2">
+          <div className="grid grid-cols-4 text-left font-normal text-[12px] text-white/60 border-b border-white/20">
             <div className="px-2">ATC CENTER</div>
             <div className="px-2">PERIOD</div>
             <div className="px-2">TIME TO NEXT</div>
@@ -95,7 +118,7 @@ export default function CpdlcAds({
           {mockContracts.map((c, idx) => (
             <div
               key={idx}
-              className="grid grid-cols-4 text-left border-b border-white/10 py-2 text-white/80"
+              className="grid grid-cols-4 text-left border-b border-white/10 py-2 text-white/90"
             >
               <div className="px-2">{c.center}</div>
               <div className="px-2">{c.period} SEC</div>

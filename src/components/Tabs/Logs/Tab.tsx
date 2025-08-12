@@ -15,7 +15,6 @@ export default function LogsTab() {
   const { setProgressStep } = useContext(LoadContext);
 
   useEffect(() => {
-    console.log("current log", currentLog);
     if (!currentLog) return;
     socketService.send("is_loadable", { logId: currentLog.id });
     setProgressStep(null);
