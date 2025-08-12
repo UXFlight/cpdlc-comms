@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { GlobalContext } from "@/context/GlobalContext";
 import { LogsContext } from "@/context/LogsContext";
 import { useSocketListeners } from "@/hooks/useSocketListeners";

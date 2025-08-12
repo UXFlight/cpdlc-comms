@@ -26,13 +26,23 @@ export const DEFAULT_FLIGHT_DETAILS: FlightDetails = {
   route: [
     {
       fix: "",
-      heading: "",
-      distance: "",
-      altitude: "",
-      mach: "",
-      duration: "",
-      fuel: "",
-    },
+      altitude_ft: 0,
+      distance_km: 0,
+      duration_sec: 0,
+      elapsed_time_sec: 0,
+      fuel_kg: 0,
+      heading_deg: 0,
+      icing: "NONE",
+      speed_kmh: 0,
+      speed_samples_kmh: [],
+      temperature: 0,
+      total_distance: 0,
+      turbulence: "NONE",
+      wind: {
+        direction: 0,
+        speed: 0,
+      }
+    }
   ],
   tempRoute: null,
-};
+}

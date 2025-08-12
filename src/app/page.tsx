@@ -13,7 +13,7 @@ import ResponsiveBar from "@/components/ResponsiveBar/ResponsiveBar";
 import ConnectionBar from "@/components/ConnectionBar/ConnectionBar";
 import { InputProvider } from "@/context/InputContext";
 import { socketService } from "@/api/communications/socket/socketService";
-import { LogsContext, LogsProvider } from "@/context/LogsContext";
+import { LogsContext } from "@/context/LogsContext";
 import { FlightContext } from "@/context/FlightContext";
 import ErrorPopup from "@/components/General/ErrorPopup";
 import FlightStatusPanel from "@/components/FlightStatusPanel/FlightStatusPanel";
@@ -24,7 +24,7 @@ import { ReportProvider } from "@/context/ContractContext";
 export default function CpdlcMainView() {
   const [activeTab, setActiveTab] = useState("logon");
   const { flightDetails } = useContext(FlightContext);
-  const { logs, setLogs, clearLogs } = useContext(LogsContext);
+  const { setLogs, clearLogs } = useContext(LogsContext);
 
   const TAB_COMPONENTS: Record<string, JSX.Element> = {
     logon: <LogonTab />,

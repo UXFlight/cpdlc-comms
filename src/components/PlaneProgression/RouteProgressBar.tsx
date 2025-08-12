@@ -1,19 +1,16 @@
 "use client";
-import { use, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FlightContext } from "@/context/FlightContext";
 import { useSocketListeners } from "@/hooks/useSocketListeners";
 import { FlightStatus } from "@/interface/FlightDetails";
 import ActionBar from "./ActionBar";
 import { socketService } from "@/api/communications/socket/socketService";
-import { Global } from "@emotion/react";
 import { GlobalContext } from "@/context/GlobalContext";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 export default function RouteProgressBar() {
   const { flightDetails, setFlightDetails } = useContext(FlightContext);
   const { connectionState } = useContext(GlobalContext);
-  const departure = flightDetails.flightInfo?.departureAirport || "DEP";
-  const arrival = flightDetails.flightInfo?.arrivalAirport || "ARR";
   const waypoints = flightDetails.route || [];
   const [distances, setDistances] = useState<number[]>([]);
   const [totalDistance, setTotalDistance] = useState(0);

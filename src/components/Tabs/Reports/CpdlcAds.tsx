@@ -23,7 +23,7 @@ export default function CpdlcAds({
   onSend,
   cancelSign,
 }: SectionProps) {
-  const [contracts, setContracts] = useState(mockContracts);
+  const [ setContracts] = useState(mockContracts);
   const [adsEnabled, setAdsEnabled] = useState(false); // Default to OFF or to ON ???
   const [adsEmer, setAdsEmer] = useState("OFF");
 
