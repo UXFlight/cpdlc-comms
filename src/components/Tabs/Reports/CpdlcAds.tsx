@@ -35,7 +35,7 @@ export default function CpdlcAds({
     {
       event: "ads_new_contract",
       callback: (data: AdsContract) => {
-        addContract(data);
+        //addContract(data);
       }
     }
   ])
@@ -44,9 +44,9 @@ export default function CpdlcAds({
     onSend();
   };
 
-  const addContract = (newContract: AdsContract) => {
-    setContracts((prevContracts) => [newContract, ...prevContracts]);
-  };
+  // const addContract = (newContract: AdsContract) => {
+  //   setContracts((prevContracts) => [newContract, ...prevContracts]);
+  // };
 
   const handleClear = () => {
     setAdsEnabled(true);
