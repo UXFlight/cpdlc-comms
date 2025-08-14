@@ -13,7 +13,7 @@ export interface ReportsContainerProps {
   onSend: () => void;
   onClear: () => void;
   disabled?: boolean;
-  showSendButton?: boolean;
+  disableSet?: boolean;
 }
 
 export interface ReportSectionProps {
@@ -35,6 +35,6 @@ export interface SectionProps {
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;
   disabled: boolean;
-  onSend: () => void;
+  onSend: (payload?: any) => void;
   cancelSign: number;
 }

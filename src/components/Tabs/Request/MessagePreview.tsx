@@ -6,12 +6,18 @@ import { socketService } from "@/api/communications/socket/socketService";
 import { useDelay } from "@/hooks/useDelay";
 import { MessagePreviewProps } from "@/interface/props/Request";
 import { FlightContext } from "@/context/FlightContext";
+import { on } from "events";
+import { ReportContext } from "@/context/ContractContext";
 
 export default function MessagePreview({
   onCancel,
   onSent,
+  isReport = null,
+  reportData,
 }: MessagePreviewProps) {
   const { request, setRequest, resetRequest } = useContext(RequestContext);
+  const { setAdsEmergency, setAdsEnabled, adsEmergency, adsEnabled } =
+    useContext(ReportContext);
   const { flightDetails } = useContext(FlightContext);
   const [isSending, setIsSending] = useState(false);
   const [sendingProgress, setSendingProgress] = useState(0);
@@ -19,14 +25,23 @@ export default function MessagePreview({
   const { delay } = useDelay();
 
   useEffect(() => {
-    MessageService.getFormattedMessage(request)
-      .then((res) => {
-        setRequest({ formattedMessage: res.message });
-      })
-      .catch((error) => {
-        console.error("Error fetching formatted message:", error);
-      });
+    if (!isReport) {
+      MessageService.getFormattedMessage(request)
+        .then((res) => {
+          setRequest({ formattedMessage: res.message });
+        })
+        .catch((error) => {
+          console.error("Error fetching formatted message:", error);
+        });
+    }
   }, []);
+
+  const addMessageLog = () => {
+    socketService.send("add_log", {
+      flight_id: flightDetails.flightInfo.flightId,
+      request: request,
+    });
+  };
 
   const simulateDelay = async () => {
     const interval = setInterval(() => {
@@ -48,13 +63,6 @@ export default function MessagePreview({
     if (onSent) onSent();
   };
 
-  const addMessageLog = () => {
-    socketService.send("add_log", {
-      flight_id: flightDetails.flightInfo.flightId,
-      request: request,
-    });
-  };
-
   const handleCancel = () => {
     onCancel();
     setIsSending(false);
@@ -63,9 +71,36 @@ export default function MessagePreview({
   };
 
   const handleSend = async () => {
-    setIsSending(true);
-    addMessageLog();
-    simulateDelay();
+    if (!isReport) {
+      setIsSending(true);
+      addMessageLog();
+      simulateDelay();
+    } else {
+      switch (isReport) {
+        case "cpdlc":
+          setIsSending(true);
+          socketService.send(reportData.event);
+          if (reportData.message.includes("Emergency")) {
+            reportData.message.includes("enable")
+              ? setAdsEmergency("ON")
+              : setAdsEmergency("OFF");
+          } else {
+            reportData.message.includes("enable")
+              ? setAdsEnabled(true)
+              : setAdsEnabled(false);
+          }
+          simulateDelay();
+          break;
+        case "index":
+          break;
+        case "monitoring":
+          break;
+        case "position":
+        default:
+          // Handle default case
+          break;
+      }
+    }
   };
 
   return (
@@ -94,7 +129,7 @@ export default function MessagePreview({
         {!isSending && !isSent && (
           <div>
             <div className="w-full px-4 py-3 rounded border-2 border-white-10 bg-medium-gray text-white-100 text-base">
-              {request.formattedMessage}
+              {isReport ? reportData.message : request.formattedMessage}
             </div>
             {request.additional && request.additional.length > 0 && (
               <div className="flex flex-col gap-2 w-full px-4 py-3 mt-[-18px] rounded border-2 border-white-10 bg-medium-gray text-white/90 text-base">
@@ -124,6 +159,7 @@ export default function MessagePreview({
             <button
               className={`flex-1 px-4 py-2 rounded bg-white-20 hover:bg-white-10 cursor-pointer text-white-80 font-semibold tracking-wide uppercase`}
               onClick={handleCancel}
+              disabled={isSent || isSending}
             >
               Cancel
             </button>

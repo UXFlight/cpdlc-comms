@@ -22,9 +22,7 @@ export default function ReportIndex({
   onSend,
   cancelSign,
 }: SectionProps) {
-  const [selectedId, setSelectedId] = useState<string   
-  
-  | null>(null);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
   const [reports, setReports] = useState<ReportEntry[]>([]);
 
   useSocketListeners([
@@ -61,7 +59,6 @@ export default function ReportIndex({
     const message = reports.find((r) => r.id === selectedId);
     if (!message) return;
 
-    console.log("Sending report:", message.label);
     onSend();
   };
 
@@ -78,7 +75,7 @@ export default function ReportIndex({
       onSend={handleSend}
       onClear={handleClear}
       disabled={disabled}
-      showSendButton
+      disableSet={false}
     >
       <div className="flex flex-col gap-2 text-white text-sm">
         {reports.map((entry) => (

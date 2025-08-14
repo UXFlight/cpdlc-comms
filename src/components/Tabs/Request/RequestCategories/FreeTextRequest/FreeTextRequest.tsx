@@ -19,7 +19,6 @@ export function FreeTextRequest({
       arguments: [text],
     });
     onSend();
-    console.log("Free Text Request sent:", { value: text });
   };
 
   useEffect(() => {

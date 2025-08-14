@@ -8,7 +8,7 @@ export function useCooldown(ms = 1000) {
     if (cooling) return false;
     setCooling(true);
     tRef.current = setTimeout(() => setCooling(false), ms);
-    return true;                            
+    return true;
   };
 
   useEffect(() => {

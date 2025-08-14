@@ -22,7 +22,7 @@ export default function RootLayout({
           <FlightProvider>
             <LoadProvider>
               <LogsProvider>
-              <ErrorProvider>{children}</ErrorProvider>
+                <ErrorProvider>{children}</ErrorProvider>
               </LogsProvider>
             </LoadProvider>
           </FlightProvider>

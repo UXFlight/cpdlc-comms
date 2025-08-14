@@ -58,12 +58,12 @@ export default function RequestTab() {
               return (
                 <Component
                   key={key}
-                  disabled={preview || isClearance}                 
+                  disabled={preview || isClearance}
                   onSend={() => setPreview(true)}
                   onOpen={
                     !isClearance
                       ? (isOpen: boolean) => setCategory(isOpen ? key : null)
-                      : () => {}                                   
+                      : () => {}
                   }
                   cancelSign={cancelSignal}
                 />

@@ -8,7 +8,7 @@ export default function ReportsContainer({
   onSend,
   onClear,
   disabled = false,
-  showSendButton = true,
+  disableSet = false,
 }: ReportsContainerProps) {
   return (
     <div
@@ -46,14 +46,13 @@ export default function ReportsContainer({
               CLEAR
             </button>
           )}
-          {showSendButton && (
-            <button
-              onClick={onSend}
-              className="bg-white/10 hover:bg-white/20 px-4 py-2 rounded text-white ml-auto"
-            >
-              SET
-            </button>
-          )}
+          <button
+            onClick={onSend}
+            disabled={disableSet}
+            className="bg-white/10 hover:bg-white/20 px-4 py-2 rounded text-white ml-auto"
+          >
+            SET
+          </button>
         </div>
       </div>
     </div>

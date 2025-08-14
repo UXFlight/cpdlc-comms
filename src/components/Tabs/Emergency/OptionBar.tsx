@@ -1,7 +1,5 @@
 export default function OptionBar() {
-  const handleRequest = (requestType: string) => {
-    console.log(`Request type: ${requestType}`);
-  };
+  const handleRequest = (requestType: string) => {};
 
   return (
     <div className="flex justify-center items-center gap-[33px] w-full overflow-x-hidden px-[15.5px]">

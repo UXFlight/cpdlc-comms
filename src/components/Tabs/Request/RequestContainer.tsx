@@ -24,7 +24,9 @@ export default function RequestContainer({
   }, [isOpen]);
 
   return (
-    <div className={`container flex flex-col items-start py-2 px-[15.5px] overflow-x-hidden relative ${disabled ? "opacity-60 pointer-events-none" : ""}`}>
+    <div
+      className={`container flex flex-col items-start py-2 px-[15.5px] overflow-x-hidden relative ${disabled ? "opacity-60 pointer-events-none" : ""}`}
+    >
       <div
         className="h-[30px] w-full flex items-center justify-between cursor-pointer"
         onClick={!disabled ? onToggle : undefined}

@@ -41,9 +41,9 @@ export const DEFAULT_FLIGHT_DETAILS: FlightDetails = {
       wind: {
         direction: 0,
         speed: 0,
-      }
-    }
+      },
+    },
   ],
   tempRoute: null,
   currentFixIndex: 0,
-}
+};

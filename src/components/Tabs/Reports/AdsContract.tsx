@@ -3,6 +3,7 @@ import ReportsContainer from "@/components/Tabs/Reports/ReportsContainer";
 import { SectionProps } from "@/interface/props/Reports";
 import { useSocketListeners } from "@/hooks/useSocketListeners";
 import { ADSCContract, ReportContext } from "@/context/ContractContext";
+import { socketService } from "@/api/communications/socket/socketService";
 
 export default function AdsContract({
   isOpen,
@@ -11,12 +12,16 @@ export default function AdsContract({
   onSend,
   cancelSign,
 }: SectionProps) {
-  const {adscContracts, setAdscContracts} = useContext(ReportContext);
-  const [adsEnabled, setAdsEnabled] = useState(true); // Default to OFF or to ON ???
-  const [adsEmer, setAdsEmer] = useState("OFF");
+  const { adscContracts, setAdscContracts, adsEmergency, adsEnabled } =
+    useContext(ReportContext);
+  const [tempAdscEnable, setTempAdscEnable] = useState(true);
+  const [tempAdscEmergency, setTempAdscEmergency] = useState("OFF");
 
   useEffect(() => {
+    if (!cancelSign) return;
     if (isOpen) setIsOpen(false);
+    setTempAdscEmergency(adsEmergency);
+    setTempAdscEnable(adsEnabled);
   }, [cancelSign]);
 
   useSocketListeners([
@@ -24,22 +29,30 @@ export default function AdsContract({
       event: "adsc_countdown",
       callback: (data: ADSCContract[]) => {
         setAdscContracts(data);
-        console.log("ADS-C Contracts updated:", data);
-      }
-    }
-  ])
+      },
+    },
+  ]);
 
   const handleSend = () => {
-    onSend();
-  };
-
-  const addContract = (newContract: ADSCContract) => {
-    setAdscContracts((prevContracts) => [newContract, ...prevContracts]);
+    let message;
+    let event;
+    if (tempAdscEnable != adsEnabled) {
+      message = `Are you sure you want to ${tempAdscEnable ? "enable" : "disable"} ADS-C?`;
+      event = "ads_c_disabled";
+    } else if (tempAdscEmergency != adsEmergency) {
+      message = `Are you sure you want to ${tempAdscEmergency === "ON" ? "enable" : "disable"} ADS-C Emergency?`;
+      event = "ads_c_emergency_on";
+    }
+    const payload = {
+      message,
+      event,
+    };
+    onSend(payload);
   };
 
   const handleClear = () => {
-    setAdsEnabled(true);
-    setAdsEmer("OFF");
+    setTempAdscEnable(adsEnabled);
+    setTempAdscEmergency(adsEmergency);
   };
 
   return (
@@ -50,7 +63,9 @@ export default function AdsContract({
       setIsOpen={(v) => !disabled && setIsOpen(v)}
       disabled={disabled}
       onSend={handleSend}
-      showSendButton
+      disableSet={
+        tempAdscEmergency === adsEmergency && tempAdscEnable === adsEnabled
+      }
     >
       <div className="flex flex-col gap-4 text-white">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -62,16 +77,16 @@ export default function AdsContract({
               <label className="flex items-center gap-2 text-white/90">
                 <input
                   type="radio"
-                  checked={!adsEnabled}
-                  onChange={() => setAdsEnabled(false)}
+                  checked={!tempAdscEnable}
+                  onChange={() => setTempAdscEnable(false)}
                 />
                 <span>OFF</span>
               </label>
               <label className="flex items-center gap-2 text-white/90">
                 <input
                   type="radio"
-                  checked={adsEnabled}
-                  onChange={() => setAdsEnabled(true)}
+                  checked={tempAdscEnable}
+                  onChange={() => setTempAdscEnable(true)}
                 />
                 <span>ON</span>
               </label>
@@ -83,8 +98,8 @@ export default function AdsContract({
               ADS-C EMER
             </div>
             <select
-              value={adsEmer}
-              onChange={(e) => setAdsEmer(e.target.value)}
+              value={tempAdscEmergency}
+              onChange={(e) => setTempAdscEmergency(e.target.value)}
               className="bg-black text-white border border-white/20 px-3 py-2 rounded-md w-full"
             >
               <option value="OFF">OFF</option>

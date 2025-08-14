@@ -48,7 +48,7 @@ export interface RouteFix {
   wind: {
     direction: number;
     speed: number;
-  };  
+  };
 }
 
 export interface FlightDetails {

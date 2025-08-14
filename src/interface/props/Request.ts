@@ -34,4 +34,6 @@ export interface BlockDataProps {
 export interface MessagePreviewProps {
   onCancel: () => void;
   onSent: () => void;
+  isReport?: string | null;
+  reportData?: any;
 }

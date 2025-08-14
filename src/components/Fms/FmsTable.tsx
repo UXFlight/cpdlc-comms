@@ -16,7 +16,7 @@ export default function FmsTable({ route }: FmsTableProps) {
   const { setProgressStep } = useContext(LoadContext);
   const [currentFixIndex, setCurrentFixIndex] = useState(0);
 
-  useEffect(() => { 
+  useEffect(() => {
     setCurrentFixIndex(flightDetails.currentFixIndex);
   }, [flightDetails.currentFixIndex]);
 
@@ -69,7 +69,9 @@ export default function FmsTable({ route }: FmsTableProps) {
         ) : (
           route.map((fix: RouteFix, i: number) => {
             if (i <= currentFixIndex) return null;
-            return <FmsRow key={`${fix.fix}-${i}`} fix={fix} delay={i * 0.07} />;
+            return (
+              <FmsRow key={`${fix.fix}-${i}`} fix={fix} delay={i * 0.07} />
+            );
           })
         )}
       </div>

@@ -26,14 +26,13 @@ export default function ActionBar({
   const speedOptions = ["SLOW", "MEDIUM", "FAST", "EXTREME"];
   const [selectedSpeed, setSelectedSpeed] = useState("MEDIUM");
 
-useEffect(() => {
+  useEffect(() => {
     setAltitude(flightDetails.status.altitude);
-}, [flightDetails.status]);
+  }, [flightDetails.status]);
 
-const isDisabled = !connectionState || altitude === 0;
+  const isDisabled = !connectionState || altitude === 0;
 
-  const buttonBase =
-    "p-2 rounded-full transition disabled:opacity-40";
+  const buttonBase = "p-2 rounded-full transition disabled:opacity-40";
   const iconBase = "w-6 h-6";
 
   return (
@@ -79,7 +78,9 @@ const isDisabled = !connectionState || altitude === 0;
       </div>
 
       <div className="flex items-center space-x-2 w-50">
-        <span className="text-end text-sm font-medium text-black">Simulation speed:</span>
+        <span className="text-end text-sm font-medium text-black">
+          Simulation speed:
+        </span>
         <SelectDropdown
           options={speedOptions}
           value={selectedSpeed}

@@ -61,7 +61,9 @@ export default function NavButton({
       ) : (
         <button
           className={`relative w-[65px] h-[73px] flex flex-col items-center justify-center font-bold text-xs ${
-            label === "print" ? "border border-green rounded-full px-1 py-1" : ""
+            label === "print"
+              ? "border border-green rounded-full px-1 py-1"
+              : ""
           }`}
         >
           <img src={icon} alt={label} className="icon w-[28px] h-[28px]" />

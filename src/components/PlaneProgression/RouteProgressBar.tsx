@@ -18,10 +18,6 @@ export default function RouteProgressBar() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
 
-  useEffect(() => {
-    console.log("Waypoints:", distances);
-  }, [distances]);
-
   useSocketListeners([
     {
       event: "routine_load",
@@ -50,7 +46,7 @@ export default function RouteProgressBar() {
         setFlightDetails((prev) => ({
           ...prev,
           status: { ...data.flight },
-          currentFixIndex: data.currentFixIndex
+          currentFixIndex: data.currentFixIndex,
         }));
         setCurrentFixIndex(data.currentFixIndex);
         const dist = distances[currentFixIndex] ?? 0;

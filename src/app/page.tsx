@@ -42,17 +42,15 @@ export default function CpdlcMainView() {
     }
   }, []);
 
-  useSocketListeners([{
-    event: "removed_logs",
-    callback: (data) => {
-      clearLogs();
-      setLogs(data);
-    }
-  }]);
-
-  // useEffect(() => {
-  //   console.log("Flight details updated:", flightDetails);
-  // }, [flightDetails]);
+  useSocketListeners([
+    {
+      event: "removed_logs",
+      callback: (data) => {
+        clearLogs();
+        setLogs(data);
+      },
+    },
+  ]);
 
   return (
     <div>
@@ -74,9 +72,7 @@ export default function CpdlcMainView() {
             {/* contenu de l'onglet */}
             <div className="h-full w-full overflow-auto">
               <ReportProvider>
-              <InputProvider>
-                {TAB_COMPONENTS[activeTab]}
-              </InputProvider>
+                <InputProvider>{TAB_COMPONENTS[activeTab]}</InputProvider>
               </ReportProvider>
             </div>
 

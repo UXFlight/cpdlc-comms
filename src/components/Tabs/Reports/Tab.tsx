@@ -3,23 +3,30 @@ import Monitoring from "@/components/Tabs/Reports/Monitoring";
 import PositionReport from "@/components/Tabs/Reports/PositionReport/PositionReport";
 import ReportIndex from "@/components/Tabs/Reports/ReportIndex";
 import MessagePreview from "@/components/Tabs/Request/MessagePreview";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function ReportsTab() {
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [activeReport, setActiveReport] = useState<string | null>(null);
+  const [reportData, setReportData] = useState<any>(null);
   const [cancelSignal, setCancelSignal] = useState(0);
 
   const handlePreviewCancel = () => {
     setIsPreviewOpen(false);
     setActiveReport(null);
+    setReportData(null);
     setCancelSignal((prev) => prev + 1);
   };
+
+  useEffect(() => {
+    console.log(`active report`, activeReport);
+  }, [activeReport]);
 
   const handlePreviewSent = () => {
     setIsPreviewOpen(false);
     setActiveReport(null);
     setCancelSignal((prev) => prev + 1);
+    setReportData(null);
   };
 
   return (
@@ -33,9 +40,10 @@ export default function ReportsTab() {
           isOpen={activeReport === "cpdlc"}
           setIsOpen={(v) => setActiveReport(v ? "cpdlc" : null)}
           disabled={!!activeReport && activeReport !== "cpdlc"}
-          onSend={() => {
+          onSend={(payload) => {
             setIsPreviewOpen(true);
             setActiveReport("cpdlc");
+            setReportData(payload);
           }}
           cancelSign={cancelSignal}
         />
@@ -80,6 +88,8 @@ export default function ReportsTab() {
             <MessagePreview
               onCancel={handlePreviewCancel}
               onSent={handlePreviewSent}
+              isReport={activeReport}
+              reportData={reportData}
             />
           </div>
         </div>
