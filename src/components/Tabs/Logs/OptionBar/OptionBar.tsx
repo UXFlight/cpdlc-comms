@@ -11,7 +11,6 @@ import { ProgressStep } from "@/interface/context/LoadContext";
 import DynamicResponses from "./DynamicResponses";
 import ProgressSteps from "../ProgressSteps";
 import YesNoOptions from "./YesNoOptions";
-import { i } from "framer-motion/client";
 
 export default function OptionBar({ message }: MessageProps) {
   const { currentLog, handleResponse, setCurrentLog } = useContext(LogsContext);

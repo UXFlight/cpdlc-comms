@@ -69,6 +69,17 @@ export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
         }
       },
     },
+    {
+      event: "thread_ending",
+      callback: (data) => {
+        const logIndex = logs.findIndex((log) => log.id === data);
+        console.log("Thread ending for log:", logs[logIndex]);
+        if (logIndex !== -1) {
+          logs[logIndex].ended = true;
+          setLogs([...logs]);
+        }
+      },
+    }
   ]);
 
   useEffect(() => {

@@ -21,5 +21,6 @@ export const MESSAGE_STATE = {
   OPENED: "opened",
   ACCEPTED: "accepted",
   REJECTED: "rejected",
+  STANDBY: "standby",
   TIMEOUT: "time out",
 };

@@ -3,6 +3,7 @@ import { LogsContext } from "@/context/LogsContext";
 import { GlobalContext } from "@/context/GlobalContext";
 import { MessageProps } from "@/interface/props/Logs";
 import { getStatusClass } from "@/utils/getStatus";
+import { Log } from "@/interface/Logs";
 
 type ThreadViewState = "closed" | "open";
 
@@ -10,37 +11,30 @@ export default function Message({ message }: MessageProps) {
   const { setCurrentLog } = useContext(LogsContext);
   const { username } = useContext(GlobalContext);
   const [showAdditional, setShowAdditional] = useState(false);
-  const [threadView, setThreadView] = useState<ThreadViewState>("closed");
+  const [threadView, setThreadView] = useState<"closed" | "open">("closed");
 
-  // Build full column: parent + thread (main is always the last one)
   const thread = Array.isArray(message.communication_thread)
     ? message.communication_thread
     : [];
-  const messagesInColumn = useMemo(
-    () => (thread.length ? [message, ...thread] : [message]),
-    [message, thread],
-  );
+  const messagesInColumn = useMemo(() => [message, ...thread], [message, thread]);
   const mainMsg = messagesInColumn[messagesInColumn.length - 1];
-  const prevMessages = messagesInColumn.slice(0, -1); // older (inactive) messages
+  const prevMessages = messagesInColumn.slice(0, -1);
   const hiddenCount = prevMessages.length;
 
-  const isDownlinkMain = mainMsg.direction === "downlink"; // DM vs UM
+  const isDownlinkMain = mainMsg.direction === "downlink";
   const containerClass = isDownlinkMain ? "message-downlink" : "message-uplink";
-  const mainBubbleClass = isDownlinkMain
-    ? "message-downlink-bubble"
-    : "message-uplink-bubble";
+  const mainBubbleClass = isDownlinkMain ? "message-downlink-bubble" : "message-uplink-bubble";
   const mainTextAlign = isDownlinkMain ? "text-left" : "text-right";
-  const directionLine = isDownlinkMain
-    ? "direction-line-downlink"
-    : "direction-line-uplink";
+  const directionLine = isDownlinkMain ? "direction-line-downlink" : "direction-line-uplink";
   const extraMessages = isDownlinkMain ? "extra-down" : "extra-up";
 
   const handleMainClick = () => {
-    if (mainMsg.response_required) setCurrentLog(mainMsg);
+    if (!message.ended && mainMsg.response_required) {
+      setCurrentLog(mainMsg);
+    }
   };
 
-  // ✅ Plain thread item now shows FROM/TO + username + timestamp (no status)
-  const renderPlainMsg = (msg: any) => {
+  const renderPlainMsg = (msg: Log) => {
     const isDownlink = msg.direction === "downlink";
     return (
       <div
@@ -55,16 +49,81 @@ export default function Message({ message }: MessageProps) {
           </span>
           <span className="ml-2 shrink-0">{msg.timeStamp}</span>
         </div>
-        <div className="text-white/80 text-sm font-medium mt-1">
-          {msg.element}
-        </div>
+        <div className="text-white/80 text-sm font-medium mt-1">{msg.element}</div>
       </div>
     );
   };
 
+  const renderMainBubble = () => (
+    <div
+      className={`${mainBubbleClass} ${message.ended ? "message-ended" : ""}`}
+      onClick={handleMainClick}
+      role={!message.ended && mainMsg.response_required ? "button" : undefined}
+    >
+      <div className="message-header flex items-center justify-between">
+        {isDownlinkMain ? (
+          <>
+            <div className={`message-status ${getStatusClass(mainMsg)}`}>
+              {String(mainMsg.status).toUpperCase()}
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="message-from">
+                {mainMsg.direction === "uplink" ? "FROM" : "TO"}
+              </span>
+              <span className="message-username">{username}</span>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="flex items-center gap-2">
+              <span className="message-from">
+                {mainMsg.direction === "uplink" ? "FROM" : "TO"}
+              </span>
+              <span className="message-username">{username}</span>
+            </div>
+            <div className={`message-status ${getStatusClass(mainMsg)}`}>
+              {String(mainMsg.status).toUpperCase()}
+            </div>
+          </>
+        )}
+      </div>
+      <div className={mainTextAlign}>
+        <div className="message-content">{mainMsg.element}</div>
+        <div className="message-timestamp">{mainMsg.timeStamp}</div>
+      </div>
+      {Array.isArray(mainMsg.additional) && mainMsg.additional.length > 0 && (
+        <div className={`mt-2 ${mainTextAlign}`}>
+          <div className={`flex items-center ${extraMessages}`}>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowAdditional((v) => !v);
+              }}
+              className="text-white/60 hover:text-white/80 transition-colors text-sm"
+              aria-label="Toggle additional information"
+            >
+              ⋯
+            </button>
+          </div>
+          {showAdditional && (
+            <div className="mt-1 text-sm text-white/70 border-t border-white/20 pt-2">
+              {mainMsg.additional.map((item: any, index: number) => (
+                <div key={index} className="mb-1">
+                  {item}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+      <div className={directionLine}></div>
+    </div>
+  );
+
   return (
     <div className={`message-container ${containerClass}`}>
       <div className="flex flex-col gap-2 w-full">
+        {/* MESSAGES SIMPLES SI ended = true */}
         {threadView === "closed" ? (
           <>
             {hiddenCount >= 1 && renderPlainMsg(prevMessages[0])}
@@ -81,85 +140,12 @@ export default function Message({ message }: MessageProps) {
                 </button>
               </div>
             )}
-            <div
-              className={mainBubbleClass}
-              onClick={handleMainClick}
-              role={mainMsg.response_required ? "button" : undefined}
-            >
-              <div className="message-header flex items-center justify-between">
-                {isDownlinkMain ? (
-                  <>
-                    <div
-                      className={`message-status ${getStatusClass(mainMsg)}`}
-                    >
-                      {String(mainMsg.status).toUpperCase()}
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="message-from">
-                        {mainMsg.direction === "uplink" ? "FROM" : "TO"}
-                      </span>
-                      <span className="message-username">{username}</span>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div className="flex items-center gap-2">
-                      <span className="message-from">
-                        {mainMsg.direction === "uplink" ? "FROM" : "TO"}
-                      </span>
-                      <span className="message-username">{username}</span>
-                    </div>
-                    <div
-                      className={`message-status ${getStatusClass(mainMsg)}`}
-                    >
-                      {String(mainMsg.status).toUpperCase()}
-                    </div>
-                  </>
-                )}
-              </div>
 
-              <div className={mainTextAlign}>
-                <div className="message-content">{mainMsg.element}</div>
-                <div className="message-timestamp">{mainMsg.timeStamp}</div>
-              </div>
-
-              {Array.isArray(mainMsg.additional) &&
-                mainMsg.additional.length > 0 && (
-                  <div className={`mt-2 ${mainTextAlign}`}>
-                    <div className={`flex items-center ${extraMessages}`}>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setShowAdditional((v) => !v);
-                        }}
-                        className="text-white/60 hover:text-white/80 transition-colors text-sm"
-                        aria-label="Toggle additional information"
-                      >
-                        ⋯
-                      </button>
-                    </div>
-                    {showAdditional && (
-                      <div className="mt-1 text-sm text-white/70 border-t border-white/20 pt-2">
-                        {mainMsg.additional.map((item: any, index: number) => (
-                          <div key={index} className="mb-1">
-                            {item}
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                )}
-
-              <div className={directionLine}></div>
-            </div>
+            {message.ended ? renderPlainMsg(mainMsg) : renderMainBubble()}
           </>
         ) : (
           <>
-            {prevMessages.length > 0 && (
-              <div className="relative flex flex-col gap-2 w-full">
-                {prevMessages.map(renderPlainMsg)}
-              </div>
-            )}
+            {messagesInColumn.slice(0, -1).map(renderPlainMsg)}
 
             <div className="w-full flex justify-center -mb-1">
               <button
@@ -171,77 +157,7 @@ export default function Message({ message }: MessageProps) {
               </button>
             </div>
 
-            <div
-              className={mainBubbleClass}
-              onClick={handleMainClick}
-              role={mainMsg.response_required ? "button" : undefined}
-            >
-              <div className="message-header flex items-center justify-between">
-                {isDownlinkMain ? (
-                  <>
-                    <div
-                      className={`message-status ${getStatusClass(mainMsg)}`}
-                    >
-                      {String(mainMsg.status).toUpperCase()}
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="message-from">
-                        {mainMsg.direction === "uplink" ? "FROM" : "TO"}
-                      </span>
-                      <span className="message-username">{username}</span>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div className="flex items-center gap-2">
-                      <span className="message-from">
-                        {mainMsg.direction === "uplink" ? "FROM" : "TO"}
-                      </span>
-                      <span className="message-username">{username}</span>
-                    </div>
-                    <div
-                      className={`message-status ${getStatusClass(mainMsg)}`}
-                    >
-                      {String(mainMsg.status).toUpperCase()}
-                    </div>
-                  </>
-                )}
-              </div>
-
-              <div className={mainTextAlign}>
-                <div className="message-content">{mainMsg.element}</div>
-                <div className="message-timestamp">{mainMsg.timeStamp}</div>
-              </div>
-
-              {Array.isArray(mainMsg.additional) &&
-                mainMsg.additional.length > 0 && (
-                  <div className={`mt-2 ${mainTextAlign}`}>
-                    <div className={`flex items-center ${extraMessages}`}>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setShowAdditional((v) => !v);
-                        }}
-                        className="text-white/60 hover:text-white/80 transition-colors text-sm"
-                        aria-label="Toggle additional information"
-                      >
-                        ⋯
-                      </button>
-                    </div>
-                    {showAdditional && (
-                      <div className="mt-1 text-sm text-white/70 border-t border-white/20 pt-2">
-                        {mainMsg.additional.map((item: any, index: number) => (
-                          <div key={index} className="mb-1">
-                            {item}
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                )}
-
-              <div className={directionLine}></div>
-            </div>
+            {message.ended ? renderPlainMsg(mainMsg) : renderMainBubble()}
           </>
         )}
       </div>
