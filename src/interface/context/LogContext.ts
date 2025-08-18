@@ -8,7 +8,10 @@ export interface LogsContextType {
   currentLog: Log | null;
   setCurrentLog: React.Dispatch<React.SetStateAction<Log | null>>;
   addLog: (log: Log) => void;
-  requestChangeStatus: (logId: string, newState: string) => void;
+  handleResponse: (
+    logId: string,
+    response: { ref: string; text: string },
+  ) => void;
   clearLogs: () => void;
   setFilterBy: (filter: string) => void;
 }

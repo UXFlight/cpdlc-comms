@@ -24,6 +24,11 @@ export default function AdsContract({
     setTempAdscEnable(adsEnabled);
   }, [cancelSign]);
 
+  useEffect(() => {
+    setTempAdscEmergency(adsEmergency);
+    setTempAdscEnable(adsEnabled);
+  }, []);
+
   useSocketListeners([
     {
       event: "adsc_countdown",
@@ -38,10 +43,10 @@ export default function AdsContract({
     let event;
     if (tempAdscEnable != adsEnabled) {
       message = `Are you sure you want to ${tempAdscEnable ? "enable" : "disable"} ADS-C?`;
-      event = "ads_c_disabled";
+      event = `ads_c_${tempAdscEnable ? "enabled" : "disabled"}`;
     } else if (tempAdscEmergency != adsEmergency) {
       message = `Are you sure you want to ${tempAdscEmergency === "ON" ? "enable" : "disable"} ADS-C Emergency?`;
-      event = "ads_c_emergency_on";
+      event = `ads_c_emergency_${tempAdscEmergency === "ON" ? "on" : "off"}`;
     }
     const payload = {
       message,

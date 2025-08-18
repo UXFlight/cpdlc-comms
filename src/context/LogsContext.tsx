@@ -15,7 +15,7 @@ export const LogsContext = createContext<LogsContextType>({
   currentLog: null,
   setCurrentLog: () => {},
   addLog: () => {},
-  requestChangeStatus: () => {},
+  handleResponse: () => {},
   clearLogs: () => {},
   setFilterBy: () => {},
 });
@@ -28,22 +28,45 @@ export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
   useSocketListeners([
     {
       event: "log_added",
-      callback: (log: Log) => {
-        addLog(log);
+      callback: (data: Log) => {
+        const logIndex = logs.findIndex((log) => log.id === data.id);
+        if (logIndex === -1) {
+          const new_logs = [data, ...logs];
+          setLogs(new_logs);
+          return;
+        }
+        logs[logIndex] = data;
+        setLogs(logs);
       },
     },
-    {
-      event: "status_changed",
-      callback: (log: Log) => {
-        addLog(log);
-      },
-    },
+    // {
+    //   event: "status_changed",
+    //   callback: (log: Log) => {
+    //     addLog(log);
+    //   },
+    // },
     {
       event: "status_changed",
       callback: (data: Log) => {
         const logIndex = logs.findIndex((log) => log.id === data.id);
         logs[logIndex] = data;
         setLogs(logs);
+      },
+    },
+    {
+      event: "scenario_log_add",
+      callback: (data) => {
+        socketService.send("add_log", data);
+      },
+    },
+    {
+      event: "add_response",
+      callback: (data) => {
+        const logIndex = logs.findIndex((log) => log.id === data.logId);
+        if (logIndex !== -1) {
+          logs[logIndex].acceptable_responses.push(data.response);
+          setLogs([...logs]);
+        }
       },
     },
   ]);
@@ -60,19 +83,27 @@ export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
       });
   }, [filterBy]);
 
-  const addLog = (log: Log) => {
+  const addLog = (log: Log, threadId = null) => {
+    if (threadId) {
+    }
     setLogs((prev) => [log, ...prev]);
   };
 
   // const replaceLog = (log: Log) => {
   //   logs.find((logs) => logs.id === log.id)
 
-  const requestChangeStatus = (logId: string, response: string) => {
+  const handleResponse = (
+    logId: string,
+    response: { ref: string; text: string },
+  ) => {
     // Emit the change
-    if (response === "loaded") {
+    if (response.ref === "loaded") {
       socketService.send("fms_loaded", { logId: logId });
     } else {
-      socketService.send("change_status", { logId: logId, status: response });
+      socketService.send("pilot_response", {
+        thread_id: logId,
+        log_entry: response,
+      });
     }
   };
 
@@ -94,7 +125,7 @@ export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
         currentLog,
         setCurrentLog,
         addLog,
-        requestChangeStatus,
+        handleResponse,
         clearLogs,
         setFilterBy,
       }}

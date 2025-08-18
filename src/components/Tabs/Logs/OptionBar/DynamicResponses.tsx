@@ -26,7 +26,7 @@ export default function DynamicResponses({
   onSelect,
 }: {
   responses: AcceptableResponse[];
-  onSelect?: (ref: string) => void;
+  onSelect?: (response: AcceptableResponse) => void;
 }) {
   const [selected, setSelected] = useState<string | null>(null);
   const [showAll, setShowAll] = useState(false);
@@ -40,7 +40,7 @@ export default function DynamicResponses({
     : shownOptions.slice(0, VISIBLE_COUNT);
 
   return (
-    <div className="flex flex-col gap-2 w-full">
+    <div className="flex flex-col gap-2 w-full mb-2">
       <div
         className={`flex flex-col gap-2 transition-all ${
           showAll ? "max-h-[280px] overflow-y-auto pr-1" : ""
@@ -54,7 +54,7 @@ export default function DynamicResponses({
               key={response.ref}
               onClick={() => {
                 setSelected(response.ref);
-                onSelect?.(response.ref);
+                onSelect?.(response);
               }}
               className={`px-4 py-2 rounded-md cursor-pointer transition duration-200 select-none w-full
                 ${

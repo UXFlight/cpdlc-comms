@@ -38,8 +38,8 @@ export default function MessagePreview({
 
   const addMessageLog = () => {
     socketService.send("add_log", {
-      flight_id: flightDetails.flightInfo.flightId,
-      request: request,
+      log_entry: request,
+      thread_id: "",
     });
   };
 
