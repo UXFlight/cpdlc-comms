@@ -79,6 +79,28 @@ export interface PositionReportPayload {
   reportedwaypointaltitude_ft?: AltitudeFt | null;
 }
 
+export interface EmergencyData {
+  type: string;
+  reason: string;
+  divertTo: string;
+  descendAlt: string;
+  offsetTo: string;
+  soulsOnBoard: string;
+  fuel: string;
+  remarks: string;
+}
+
+export const MOCK_EMERGENCY_DATA: EmergencyData = {
+  type: "MAYDAY",
+  reason: "NONE",
+  divertTo: "NONE",
+  descendAlt: "",
+  offsetTo: "",
+  soulsOnBoard: "",
+  fuel: "",
+  remarks: "",
+};
+
 export interface ReportContext {
   adscContracts: ADSCContract[];
   adsEmergency: string;
@@ -96,6 +118,8 @@ export interface ReportContext {
   setMonitoringReports: React.Dispatch<
     React.SetStateAction<MonitoringReport[]>
   >;
+  emergencyData: EmergencyData;
+  setEmergencyData: React.Dispatch<React.SetStateAction<EmergencyData>>;
 }
 
 export const ReportContext = createContext<ReportContext>({
@@ -111,6 +135,8 @@ export const ReportContext = createContext<ReportContext>({
   setIndexReports: () => {},
   monitoringReports: [],
   setMonitoringReports: () => {},
+  emergencyData: { ...MOCK_EMERGENCY_DATA },
+  setEmergencyData: () => {},
 });
 
 export const ReportProvider = ({ children }: { children: React.ReactNode }) => {
@@ -124,6 +150,9 @@ export const ReportProvider = ({ children }: { children: React.ReactNode }) => {
   const [monitoringReports, setMonitoringReports] = useState<
     MonitoringReport[]
   >([]);
+  const [emergencyData, setEmergencyData] = useState<EmergencyData>({
+    ...MOCK_EMERGENCY_DATA,
+  });
 
   useSocketListeners([
     {
@@ -167,6 +196,8 @@ export const ReportProvider = ({ children }: { children: React.ReactNode }) => {
         setIndexReports,
         monitoringReports,
         setMonitoringReports,
+        emergencyData,
+        setEmergencyData,
       }}
     >
       {children}

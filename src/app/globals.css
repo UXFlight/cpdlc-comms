@@ -68,7 +68,7 @@
   }
 
   .container {
-    @apply p-4 self-stretch bg-medium-gray rounded;
+    @apply p-4 self-stretch bg-[#1e1e1e] border border-1 border-white/10 rounded-md;
   }
 
   .emergency-text {
@@ -356,4 +356,3 @@ body {
 .animate-fade-in-up {
   animation: fadeInUp 0.4s ease forwards;
 }
-

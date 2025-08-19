@@ -16,16 +16,23 @@ export default function Message({ message }: MessageProps) {
   const thread = Array.isArray(message.communication_thread)
     ? message.communication_thread
     : [];
-  const messagesInColumn = useMemo(() => [message, ...thread], [message, thread]);
+  const messagesInColumn = useMemo(
+    () => [message, ...thread],
+    [message, thread],
+  );
   const mainMsg = messagesInColumn[messagesInColumn.length - 1];
   const prevMessages = messagesInColumn.slice(0, -1);
   const hiddenCount = prevMessages.length;
 
   const isDownlinkMain = mainMsg.direction === "downlink";
   const containerClass = isDownlinkMain ? "message-downlink" : "message-uplink";
-  const mainBubbleClass = isDownlinkMain ? "message-downlink-bubble" : "message-uplink-bubble";
+  const mainBubbleClass = isDownlinkMain
+    ? "message-downlink-bubble"
+    : "message-uplink-bubble";
   const mainTextAlign = isDownlinkMain ? "text-left" : "text-right";
-  const directionLine = isDownlinkMain ? "direction-line-downlink" : "direction-line-uplink";
+  const directionLine = isDownlinkMain
+    ? "direction-line-downlink"
+    : "direction-line-uplink";
   const extraMessages = isDownlinkMain ? "extra-down" : "extra-up";
 
   const handleMainClick = () => {
@@ -49,7 +56,9 @@ export default function Message({ message }: MessageProps) {
           </span>
           <span className="ml-2 shrink-0">{msg.timeStamp}</span>
         </div>
-        <div className="text-white/80 text-sm font-medium mt-1">{msg.element}</div>
+        <div className="text-white/80 text-sm font-medium mt-1">
+          {msg.element}
+        </div>
       </div>
     );
   };
@@ -122,7 +131,7 @@ export default function Message({ message }: MessageProps) {
 
   return (
     <div className={`message-container ${containerClass}`}>
-      <div className="flex flex-col gap-2 w-full">
+      <div className="flex flex-col gap-2 w-full bg-[#1e1e1e]">
         {/* MESSAGES SIMPLES SI ended = true */}
         {threadView === "closed" ? (
           <>

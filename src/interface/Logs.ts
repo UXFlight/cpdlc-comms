@@ -20,7 +20,6 @@ export interface Log {
   ended: boolean;
 }
 
-
 export interface AcceptableResponse {
   ref: string;
   text: string;

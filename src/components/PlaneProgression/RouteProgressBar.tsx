@@ -31,7 +31,6 @@ export default function RouteProgressBar() {
         setDistances(data.distances);
         if (data.current_index) setCurrentFixIndex(data.current_index);
         setProgress(0);
-        
       },
     },
     {

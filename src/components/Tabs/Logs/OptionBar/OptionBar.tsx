@@ -26,7 +26,7 @@ export default function OptionBar({ message }: MessageProps) {
   const [isLoadable, setIsLoadable] = useState(false);
 
   useEffect(() => {
-    if(progressStep === ProgressStep.REJECTED) {
+    if (progressStep === ProgressStep.REJECTED) {
       setAction(ActionType.Reject);
     }
   }, [progressStep]);
@@ -216,7 +216,9 @@ export default function OptionBar({ message }: MessageProps) {
         {renderSendingOverlay()}
 
         <div className="relative z-10 bg-white/10 p-4 w-full flex flex-col gap-4 items-center">
-          {(progressStep !== null && progressStep !== ProgressStep.REJECTED) && <ProgressSteps />}
+          {progressStep !== null && progressStep !== ProgressStep.REJECTED && (
+            <ProgressSteps />
+          )}
 
           {!isSending && !done && (currentResponse || action !== null)
             ? renderConfirmationStep()

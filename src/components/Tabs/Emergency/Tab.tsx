@@ -1,4 +1,5 @@
 import BuildTable from "./BuildTable";
+import EmergencyForm from "./EmergencyForm";
 
 export default function EmergencyTab() {
   return (
@@ -8,7 +9,7 @@ export default function EmergencyTab() {
       </div>
       <div className="flex flex-col gap-4">
         <div className="flex justify-center rounded w-full">
-          <BuildTable />
+          <EmergencyForm />
         </div>
         <div className="flex flex-col gap-4"></div>
       </div>

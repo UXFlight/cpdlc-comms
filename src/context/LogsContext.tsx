@@ -79,7 +79,7 @@ export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
           setLogs([...logs]);
         }
       },
-    }
+    },
   ]);
 
   useEffect(() => {
