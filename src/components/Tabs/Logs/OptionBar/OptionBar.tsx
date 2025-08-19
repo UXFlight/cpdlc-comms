@@ -25,7 +25,12 @@ export default function OptionBar({ message }: MessageProps) {
   const [done, setDone] = useState(false);
   const [isLoadable, setIsLoadable] = useState(false);
 
-  // Écoute socket
+  useEffect(() => {
+    if(progressStep === ProgressStep.REJECTED) {
+      setAction(ActionType.Reject);
+    }
+  }, [progressStep]);
+
   useSocketListeners([
     {
       event: "message_loadable",
@@ -83,6 +88,10 @@ export default function OptionBar({ message }: MessageProps) {
     handleRequest();
     await delay(2000);
 
+    if (progressStep === ProgressStep.EXECUTE) {
+      setProgressStep(ProgressStep.SENT);
+    }
+
     if (action === ActionType.Load) {
       socketService.send("fms_loaded", { logId: message.id });
     }
@@ -90,14 +99,11 @@ export default function OptionBar({ message }: MessageProps) {
       setIsSending(false);
       setSendingProgress(0);
       setDone(true);
-      if (action === ActionType.Load) {
-        setProgressStep(ProgressStep.SENT);
-      }
     }, 500);
   };
 
   const handleConfirm = () => {
-    if (action === ActionType.Load) {
+    if (progressStep === ProgressStep.EXECUTE) {
       setProgressStep(ProgressStep.RESPONSE);
     }
     startSending();
@@ -210,7 +216,7 @@ export default function OptionBar({ message }: MessageProps) {
         {renderSendingOverlay()}
 
         <div className="relative z-10 bg-white/10 p-4 w-full flex flex-col gap-4 items-center">
-          {progressStep !== null && <ProgressSteps />}
+          {(progressStep !== null && progressStep !== ProgressStep.REJECTED) && <ProgressSteps />}
 
           {!isSending && !done && (currentResponse || action !== null)
             ? renderConfirmationStep()

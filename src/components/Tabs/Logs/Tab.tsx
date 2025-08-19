@@ -20,6 +20,10 @@ export default function LogsTab() {
     setProgressStep(null);
   }, [currentLog]);
 
+  useEffect(() => {
+    console.log("logsssss", logs);
+  }, [logs]);
+
   return (
     <div className="flex flex-col h-full">
       {!currentLog && (

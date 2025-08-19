@@ -8,4 +8,5 @@ export enum ProgressStep {
   EXECUTE = "executed",
   RESPONSE = "responded",
   SENT = "sent",
+  REJECTED = "rejected",
 }

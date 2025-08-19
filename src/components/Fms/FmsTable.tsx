@@ -49,11 +49,12 @@ export default function FmsTable({ route }: FmsTableProps) {
   };
 
   const handleRejectRoute = () => {
+    socketService.send("cancel_execute_route");
     setFlightDetails((prev) => ({
       ...prev,
       tempRoute: null,
     }));
-    setProgressStep(null);
+    setProgressStep(ProgressStep.REJECTED);
   };
 
   return (

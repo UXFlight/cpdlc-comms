@@ -1,5 +1,5 @@
 "use client";
-import { useContext, useEffect, useState } from "react";
+import { use, useContext, useEffect, useState } from "react";
 import { FlightContext } from "@/context/FlightContext";
 import { useSocketListeners } from "@/hooks/useSocketListeners";
 import { FlightStatus } from "@/interface/FlightDetails";
@@ -18,13 +18,20 @@ export default function RouteProgressBar() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
 
+  useEffect(() => {
+    console.log("Distances updated:", distances);
+    console.log("Total distance updated:", totalDistance);
+  }, [distances, totalDistance]);
+
   useSocketListeners([
     {
       event: "routine_load",
       callback: (data) => {
         setTotalDistance(data.total_distance);
         setDistances(data.distances);
+        if (data.current_index) setCurrentFixIndex(data.current_index);
         setProgress(0);
+        
       },
     },
     {
@@ -49,9 +56,13 @@ export default function RouteProgressBar() {
           currentFixIndex: data.currentFixIndex,
         }));
         setCurrentFixIndex(data.currentFixIndex);
-        const dist = distances[currentFixIndex] ?? 0;
-        const ratio = dist / totalDistance;
-        setProgress(ratio);
+        // const dist = distances[currentFixIndex] ?? 0;
+        // const ratio = dist / totalDistance;
+        const distanceCovered = 1;
+        const segmentDist = distances[currentFixIndex] || 0;
+        const computedProgress = distanceCovered / segmentDist;
+        setProgress(computedProgress);
+        //setProgress(ratio);
       },
     },
     {
