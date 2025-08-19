@@ -4,6 +4,8 @@ import { FlightProvider } from "@/context/FlightContext";
 import { ErrorProvider } from "@/context/ErrorContext";
 import { LoadProvider } from "@/context/LoadContext";
 import { LogsProvider } from "@/context/LogsContext";
+import { ReportProvider } from "@/context/ContractContext";
+import { RequestProvider } from "@/context/RequestContext";
 
 export const metadata = {
   title: "CPDLC AIR",
@@ -21,9 +23,13 @@ export default function RootLayout({
         <GlobalProvider>
           <FlightProvider>
             <LoadProvider>
-              <LogsProvider>
-                <ErrorProvider>{children}</ErrorProvider>
-              </LogsProvider>
+              <ReportProvider>
+                <RequestProvider>
+                  <LogsProvider>
+                    <ErrorProvider>{children}</ErrorProvider>
+                  </LogsProvider>
+                </RequestProvider>
+              </ReportProvider>
             </LoadProvider>
           </FlightProvider>
         </GlobalProvider>

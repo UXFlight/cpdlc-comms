@@ -2,8 +2,9 @@ import CpdlcAds from "@/components/Tabs/Reports/AdsContract";
 import Monitoring from "@/components/Tabs/Reports/Monitoring";
 import PositionReport from "@/components/Tabs/Reports/PositionReport/PositionReport";
 import ReportIndex from "@/components/Tabs/Reports/ReportIndex";
-import MessagePreview from "@/components/Tabs/Request/MessagePreview";
+import MessagePreview from "@/components/Tabs/Request/RequestMessagePreview";
 import { useEffect, useState } from "react";
+import ReportMessagePreview from "../../General/ReportMessagePreview";
 
 export default function ReportsTab() {
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
@@ -85,10 +86,10 @@ export default function ReportsTab() {
       {isPreviewOpen && (
         <div className="absolute bottom-0 left-0 w-full px-2 z-50">
           <div className="bg-[#1e1e1e]/95 backdrop-blur-sm shadow-[0_-10px_10000px_rgba(43,43,43,1)] rounded-t-md border-t border-white/10">
-            <MessagePreview
+            <ReportMessagePreview
               onCancel={handlePreviewCancel}
               onSent={handlePreviewSent}
-              isReport={activeReport}
+              kind={activeReport}
               reportData={reportData}
             />
           </div>

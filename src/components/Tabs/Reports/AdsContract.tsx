@@ -35,7 +35,7 @@ export default function AdsContract({
       callback: (data: ADSCContract[]) => {
         setAdscContracts(data);
       },
-    },
+    }
   ]);
 
   const handleSend = () => {

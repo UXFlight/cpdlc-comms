@@ -1,32 +1,20 @@
-import { ReportContext } from "@/context/ContractContext";
+import { socketService } from "@/api/communications/socket/socketService";
+import { MOCK_EMERGENCY_DATA, ReportContext } from "@/context/ContractContext";
 import { useContext } from "react";
 
-export default function OptionBar() {
-  const { emergencyData, setEmergencyData } = useContext(ReportContext);
-
-  const handleRequest = (requestType: string) => {
-    if (requestType === "set") {
-      console.log("Emergency data submitted:");
-      console.log(emergencyData);
-    }
-
-    if (requestType === "clear") {
-      console.log("Clear clicked");
-    }
-  };
-
+export default function OptionBar({
+  onClear,
+  onSet,
+}: {
+  onClear: () => void;
+  onSet: () => void;
+}) {
   return (
     <div className="flex justify-center items-center gap-[33px] w-full overflow-x-hidden px-[15.5px]">
-      <div
-        className="emergency-options bg-white-10"
-        onClick={() => handleRequest("clear")}
-      >
+      <div className="emergency-options bg-white-10" onClick={onClear}>
         clear
       </div>
-      <div
-        className="emergency-options bg-white-10"
-        onClick={() => handleRequest("set")}
-      >
+      <div className="emergency-options bg-white-10" onClick={onSet}>
         set
       </div>
     </div>

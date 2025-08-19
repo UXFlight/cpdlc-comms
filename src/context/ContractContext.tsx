@@ -91,7 +91,7 @@ export interface EmergencyData {
 }
 
 export const MOCK_EMERGENCY_DATA: EmergencyData = {
-  type: "MAYDAY",
+  type: "NONE",
   reason: "NONE",
   divertTo: "NONE",
   descendAlt: "",
@@ -108,6 +108,7 @@ export interface ReportContext {
   setAdscContracts: React.Dispatch<React.SetStateAction<ADSCContract[]>>;
   setAdsEmergency: React.Dispatch<React.SetStateAction<string>>;
   setAdsEnabled: React.Dispatch<React.SetStateAction<boolean>>;
+  resetAdscState: () => void;
   positionReports: PositionReportPayload[];
   setPositionReports: React.Dispatch<
     React.SetStateAction<PositionReportPayload[]>
@@ -129,6 +130,7 @@ export const ReportContext = createContext<ReportContext>({
   setAdscContracts: () => {},
   setAdsEmergency: () => {},
   setAdsEnabled: () => {},
+  resetAdscState: () => {},
   positionReports: [],
   setPositionReports: () => {},
   indexReports: [],
@@ -181,6 +183,11 @@ export const ReportProvider = ({ children }: { children: React.ReactNode }) => {
     },
   ]);
 
+  const resetAdscState = () => {
+    setAdsEmergency("OFF");
+    setAdsEnabled(true);
+  };
+
   return (
     <ReportContext.Provider
       value={{
@@ -190,6 +197,7 @@ export const ReportProvider = ({ children }: { children: React.ReactNode }) => {
         setAdscContracts,
         setAdsEmergency,
         setAdsEnabled,
+        resetAdscState,
         positionReports,
         setPositionReports,
         indexReports,

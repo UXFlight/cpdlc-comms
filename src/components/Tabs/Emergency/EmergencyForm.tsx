@@ -2,7 +2,7 @@ import InputField from "@/components/General/EmergencyInputField";
 import SelectDropdown from "@/components/General/SelectDropdown";
 import { useContext, useEffect, useState } from "react";
 import OptionBar from "./OptionBar";
-import { ReportContext } from "@/context/ContractContext";
+import { EmergencyData, ReportContext } from "@/context/ContractContext";
 
 const emergencyTypes = ["MAYDAY", "PAN", "NONE"];
 const emergencyReasons = [
@@ -16,7 +16,13 @@ const emergencyReasons = [
 ];
 const divertOptions = ["NONE", "CYUL", "CYOW", "CYYZ", "CYQB"];
 
-export default function EmergencyForm() {
+export default function EmergencyForm({
+  handleClear,
+  handleSet,
+}: {
+  handleClear: () => void;
+  handleSet: (data: EmergencyData) => void;
+}) {
   const { emergencyData, setEmergencyData } = useContext(ReportContext);
 
   useEffect(() => {
@@ -171,7 +177,7 @@ export default function EmergencyForm() {
         />
       </div>
 
-      <OptionBar />
+      <OptionBar onClear={handleClear} onSet={() => handleSet(emergencyData)} />
     </div>
   );
 }

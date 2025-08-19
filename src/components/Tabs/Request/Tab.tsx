@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { RequestProvider } from "@/context/RequestContext";
-import MessagePreview from "@/components/Tabs/Request/MessagePreview";
+import MessagePreview from "@/components/Tabs/Request/RequestMessagePreview";
 import RouteModificationRequest from "@/components/Tabs/Request/RequestCategories/RouteModificationRequest/RouteModificationRequest";
 import { OffsetRequest } from "@/components/Tabs/Request/RequestCategories/OffsetRequest/OffsetRequest";
 import { SpeedRequest } from "@/components/Tabs/Request/RequestCategories/SpeedRequest/SpeedRequest";
@@ -10,6 +9,7 @@ import { VmcDescentRequest } from "@/components/Tabs/Request/RequestCategories/V
 import { VoiceContactRequest } from "@/components/Tabs/Request/RequestCategories/VoiceContactRequest/VoiceContactRequest";
 import { FreeTextRequest } from "@/components/Tabs/Request/RequestCategories/FreeTextRequest/FreeTextRequest";
 import AltitudeRequest from "@/components/Tabs/Request/RequestCategories/AltitudeRequest/AltitudeRequest";
+import RequestMessagePreview from "@/components/Tabs/Request/RequestMessagePreview";
 
 export default function RequestTab() {
   const [preview, setPreview] = useState(false);
@@ -41,49 +41,47 @@ export default function RequestTab() {
   };
 
   return (
-    <RequestProvider>
-      <div
-        className={`flex flex-col h-full px-4 pt-4 gap-4 text-white relative ${
-          preview ? "overflow-y-hidden" : ""
-        }`}
-      >
-        <div className="flex flex-row items-center justify-between">
-          <h1>request</h1>
-        </div>
-
-        <div className="flex flex-col gap-3">
-          {categories.map(({ key, Component }) => {
-            if (category === null || category === key) {
-              const isClearance = key === "clearance";
-              return (
-                <Component
-                  key={key}
-                  disabled={preview || isClearance}
-                  onSend={() => setPreview(true)}
-                  onOpen={
-                    !isClearance
-                      ? (isOpen: boolean) => setCategory(isOpen ? key : null)
-                      : () => {}
-                  }
-                  cancelSign={cancelSignal}
-                />
-              );
-            }
-            return null;
-          })}
-        </div>
-
-        {preview && (
-          <div className="absolute bottom-0 left-0 w-full px-2 z-50">
-            <div className="bg-[#1e1e1e]/95 backdrop-blur-sm shadow-[0_-10px_10000px_rgba(43,43,43,1)] rounded-t-md border-t border-white/10">
-              <MessagePreview
-                onCancel={handleOnCancel}
-                onSent={() => handleSend()}
-              />
-            </div>
-          </div>
-        )}
+    <div
+      className={`flex flex-col h-full px-4 pt-4 gap-4 text-white relative ${
+        preview ? "overflow-y-hidden" : ""
+      }`}
+    >
+      <div className="flex flex-row items-center justify-between">
+        <h1>request</h1>
       </div>
-    </RequestProvider>
+
+      <div className="flex flex-col gap-3">
+        {categories.map(({ key, Component }) => {
+          if (category === null || category === key) {
+            const isClearance = key === "clearance";
+            return (
+              <Component
+                key={key}
+                disabled={preview || isClearance}
+                onSend={() => setPreview(true)}
+                onOpen={
+                  !isClearance
+                    ? (isOpen: boolean) => setCategory(isOpen ? key : null)
+                    : () => {}
+                }
+                cancelSign={cancelSignal}
+              />
+            );
+          }
+          return null;
+        })}
+      </div>
+
+      {preview && (
+        <div className="absolute bottom-0 left-0 w-full px-2 z-50">
+          <div className="bg-[#1e1e1e]/95 backdrop-blur-sm shadow-[0_-10px_10000px_rgba(43,43,43,1)] rounded-t-md border-t border-white/10">
+            <RequestMessagePreview
+              onCancel={handleOnCancel}
+              onSent={() => handleSend()}
+            />
+          </div>
+        </div>
+      )}
+    </div>
   );
 }

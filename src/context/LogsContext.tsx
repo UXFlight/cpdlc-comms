@@ -1,11 +1,13 @@
 // context/LogsContext.tsx
 "use client";
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, useContext } from "react";
 import type { Log } from "@/interface/Logs";
 import { socketService } from "@/api/communications/socket/socketService";
 import { MessageService } from "@/api/services/messageService";
 import { LogsContextType } from "@/interface/context/LogContext";
 import { useSocketListeners } from "@/hooks/useSocketListeners";
+import { log } from "console";
+import { ReportContext } from "./ContractContext";
 
 export const LogsContext = createContext<LogsContextType>({
   logs: [],
@@ -24,27 +26,24 @@ export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
   const [logs, setLogs] = useState<Log[]>([]);
   const [filterBy, setFilter] = useState<string>("");
   const [currentLog, setCurrentLog] = useState<Log | null>(null);
+  const { resetAdscState } = useContext(ReportContext);
 
   useSocketListeners([
     {
       event: "log_added",
       callback: (data: Log) => {
         const logIndex = logs.findIndex((log) => log.id === data.id);
+
         if (logIndex === -1) {
-          const new_logs = [data, ...logs];
-          setLogs(new_logs);
+          setLogs([data, ...logs]);
           return;
         }
-        logs[logIndex] = data;
-        setLogs(logs);
-      },
+        const updatedLogs = [...logs];
+        updatedLogs.splice(logIndex, 1);
+        updatedLogs.unshift(data);
+        setLogs(updatedLogs);
+      }
     },
-    // {
-    //   event: "status_changed",
-    //   callback: (log: Log) => {
-    //     addLog(log);
-    //   },
-    // },
     {
       event: "status_changed",
       callback: (data: Log) => {
@@ -82,6 +81,14 @@ export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
     },
   ]);
 
+  const particularMsgHandler = (ref: string) => {
+    console.log("Particular log reference:", ref);
+    if (ref === "DM67ab") {
+      console.log("JE RENTRE DANS LE IFFFFF")
+      resetAdscState();
+    }
+  };
+
   useEffect(() => {
     if (!filterBy) return;
 
@@ -111,6 +118,7 @@ export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
     if (response.ref === "loaded") {
       socketService.send("fms_loaded", { logId: logId });
     } else {
+      particularMsgHandler(response.ref);
       socketService.send("pilot_response", {
         thread_id: logId,
         log_entry: response,
