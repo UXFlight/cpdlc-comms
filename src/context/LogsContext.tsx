@@ -30,28 +30,30 @@ export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
 
   useSocketListeners([
     {
-      event: "log_added",
-      callback: (data: Log) => {
-        const logIndex = logs.findIndex((log) => log.id === data.id);
-
-        if (logIndex === -1) {
-          setLogs([data, ...logs]);
-          return;
-        }
-        const updatedLogs = [...logs];
-        updatedLogs.splice(logIndex, 1);
-        updatedLogs.unshift(data);
-        setLogs(updatedLogs);
-      }
+    event: "log_added",
+    callback: (data: Log) => {
+      setLogs(prev => {
+        const idx = prev.findIndex(l => l.id === data.id);
+        if (idx === -1) return [data, ...prev];
+        const copy = [...prev];
+        copy.splice(idx, 1);
+        copy.unshift(data); // parent mis à jour en tête
+        return copy;
+      });
     },
-    {
-      event: "status_changed",
-      callback: (data: Log) => {
-        const logIndex = logs.findIndex((log) => log.id === data.id);
-        logs[logIndex] = data;
-        setLogs(logs);
-      },
+  },
+  {
+    event: "status_changed",
+    callback: (data: Log) => {
+      setLogs(prev => {
+        const idx = prev.findIndex(l => l.id === data.id);
+        if (idx === -1) return prev;
+        const copy = [...prev];
+        copy[idx] = data;     // pas de mutation in-place
+        return copy;
+      });
     },
+  },
     {
       event: "scenario_log_add",
       callback: (data) => {
@@ -59,26 +61,33 @@ export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
       },
     },
     {
-      event: "add_response",
-      callback: (data) => {
-        const logIndex = logs.findIndex((log) => log.id === data.logId);
-        if (logIndex !== -1) {
-          logs[logIndex].acceptable_responses.push(data.response);
-          setLogs([...logs]);
-        }
-      },
+    event: "add_response",
+    callback: (data) => {
+      setLogs(prev => {
+        const idx = prev.findIndex(l => l.id === data.logId);
+        if (idx === -1) return prev;
+        const copy = [...prev];
+        const target = copy[idx];
+        copy[idx] = {
+          ...target,
+          acceptable_responses: [...(target.acceptable_responses ?? []), data.response],
+        };
+        return copy;
+      });
     },
-    {
-      event: "thread_ending",
-      callback: (data) => {
-        const logIndex = logs.findIndex((log) => log.id === data);
-        console.log("Thread ending for log:", logs[logIndex]);
-        if (logIndex !== -1) {
-          logs[logIndex].ended = true;
-          setLogs([...logs]);
-        }
-      },
+  },
+  {
+    event: "thread_ending",
+    callback: (logId: string) => {
+      setLogs(prev => {
+        const idx = prev.findIndex(l => l.id === logId);
+        if (idx === -1) return prev;
+        const copy = [...prev];
+        copy[idx] = { ...copy[idx], ended: true };
+        return copy;
+      });
     },
+  },
   ]);
 
   const particularMsgHandler = (ref: string) => {
