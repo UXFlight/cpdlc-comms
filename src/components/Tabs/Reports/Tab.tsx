@@ -2,15 +2,22 @@ import CpdlcAds from "@/components/Tabs/Reports/AdsContract";
 import Monitoring from "@/components/Tabs/Reports/Monitoring";
 import PositionReport from "@/components/Tabs/Reports/PositionReport/PositionReport";
 import ReportIndex from "@/components/Tabs/Reports/ReportIndex";
-import MessagePreview from "@/components/Tabs/Request/RequestMessagePreview";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ReportMessagePreview from "../../General/ReportMessagePreview";
+import { ReportContext } from "@/context/ContractContext";
 
 export default function ReportsTab() {
+  const { positionReport } = useContext(ReportContext);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [activeReport, setActiveReport] = useState<string | null>(null);
+
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   const [reportData, setReportData] = useState<any>(null);
   const [cancelSignal, setCancelSignal] = useState(0);
+
+  useEffect(() => {
+    console.log(`report data changed`, reportData);
+  }, [reportData]);
 
   const handlePreviewCancel = () => {
     setIsPreviewOpen(false);
@@ -53,9 +60,10 @@ export default function ReportsTab() {
           isOpen={activeReport === "index"}
           setIsOpen={(v) => setActiveReport(v ? "index" : null)}
           disabled={!!activeReport && activeReport !== "index"}
-          onSend={() => {
+          onSend={(payload) => {
             setIsPreviewOpen(true);
             setActiveReport("index");
+            setReportData(payload);
           }}
           cancelSign={cancelSignal}
         />
@@ -64,9 +72,10 @@ export default function ReportsTab() {
           isOpen={activeReport === "monitoring"}
           setIsOpen={(v) => setActiveReport(v ? "monitoring" : null)}
           disabled={!!activeReport && activeReport !== "monitoring"}
-          onSend={() => {
+          onSend={(payload) => {
             setIsPreviewOpen(true);
             setActiveReport("monitoring");
+            setReportData(payload);
           }}
           cancelSign={cancelSignal}
         />
@@ -78,6 +87,11 @@ export default function ReportsTab() {
           onSend={() => {
             setIsPreviewOpen(true);
             setActiveReport("position");
+            setReportData({
+              ref: "DM48",
+              message: `POSITION REPORT OF ${positionReport.positioncurrent}`,
+              badges: { positionReport },
+            });
           }}
           cancelSign={cancelSignal}
         />

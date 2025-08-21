@@ -31,6 +31,8 @@ export interface ReportsInputProps {
   maxLength?: number;
 }
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 export interface SectionProps {
   isOpen: boolean;
   setIsOpen: (open: boolean) => void;

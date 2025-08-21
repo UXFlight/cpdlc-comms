@@ -56,7 +56,7 @@ export default function PreviewShell({
             </div>
 
             {badges.length > 0 && (
-              <div className="flex flex-col gap-2 w-full px-4 py-3 mt-[-18px] rounded border-2 border-white-10 bg-medium-gray text-white/90 text-base">
+              <div className="flex flex-col gap-2 w-full px-4 py-3 mt-[-8px] rounded border-2 border-white-10 bg-medium-gray text-white/90 text-base">
                 <ul className="flex flex-wrap gap-2">
                   {badges.map((msg, idx) => (
                     <li

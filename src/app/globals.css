@@ -118,7 +118,7 @@
   /*messages styles*/
 
   .message-container {
-    @apply mb-4 bg-white/10;
+    @apply mb-4 bg-white/10 p-2;
   }
 
   .message-bubble {

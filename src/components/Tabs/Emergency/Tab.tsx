@@ -1,13 +1,10 @@
-import { useContext, useEffect, useState } from "react";
-import MessagePreview from "../Request/RequestMessagePreview";
-import BuildTable from "./BuildTable";
+import { useContext, useState } from "react";
 import EmergencyForm from "./EmergencyForm";
 import {
   EmergencyData,
   MOCK_EMERGENCY_DATA,
   ReportContext,
 } from "@/context/ContractContext";
-import { socketService } from "@/api/communications/socket/socketService";
 import { RequestContext } from "@/context/RequestContext";
 import ReportMessagePreview from "../../General/ReportMessagePreview";
 

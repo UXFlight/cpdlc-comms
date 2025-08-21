@@ -2,10 +2,11 @@
 import { useContext, useState } from "react";
 import { RequestContext } from "@/context/RequestContext";
 import { ReportContext } from "@/context/ContractContext";
-import { FlightContext } from "@/context/FlightContext";
 import { socketService } from "@/api/communications/socket/socketService";
 import { useDelay } from "@/hooks/useDelay";
 import PreviewShell from "@/components/General/PreviewShell";
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 export default function ReportMessagePreview({
   onCancel,
@@ -56,32 +57,41 @@ export default function ReportMessagePreview({
   const handleSend = async () => {
     setIsSending(true);
 
+    const requestSnap = { ...request };
+    const emergencySnap = { ...emergencyData };
+    const payloadSnap = reportData ? { ...reportData } : null;
+
     switch (kind) {
-      case "cpdlc":
-        console.log("je suis au bon endroit");
-        socketService.send(reportData.event);
-        if (reportData.message.includes("Emergency")) {
-          reportData.message.includes("enable")
-            ? setAdsEmergency("ON")
-            : setAdsEmergency("OFF");
+      case "cpdlc": {
+        socketService.send(payloadSnap?.event);
+        if (payloadSnap?.message?.includes("Emergency")) {
+          setAdsEmergency(
+            payloadSnap.message.includes("enable") ? "ON" : "OFF",
+          );
         } else {
-          reportData.message.includes("enable")
-            ? setAdsEnabled(true)
-            : setAdsEnabled(false);
+          setAdsEnabled(Boolean(payloadSnap?.message?.includes("enable")));
         }
         break;
+      }
 
-      case "emergency":
+      case "emergency": {
         socketService.send("emergency_report", {
-          request,
-          emergencyData,
+          request: requestSnap,
+          emergencyData: emergencySnap,
         });
         break;
+      }
 
-      case "index":
-      case "monitoring":
+      case "monitoring": {
+        socketService.send("monitoring_report", payloadSnap);
+        break;
+      }
+
+      case "index": {
+        socketService.send("index_report", payloadSnap);
+      }
       case "position":
-        // TODO: envoi spécifique à implémenter si besoin
+        socketService.send("position_report", payloadSnap);
         break;
 
       default:
@@ -93,10 +103,10 @@ export default function ReportMessagePreview({
 
   const mainText =
     kind === "emergency"
-      ? request.formattedMessage || "" // si tu la renseignes côté tab
+      ? request.formattedMessage || ""
       : reportData?.message || "";
 
-  const badges = request.additional || [];
+  const badges = reportData?.badges ?? (request.additional || []);
 
   return (
     <PreviewShell

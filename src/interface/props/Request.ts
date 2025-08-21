@@ -31,6 +31,8 @@ export interface BlockDataProps {
   disabled: boolean;
 }
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 export interface MessagePreviewProps {
   onCancel: () => void;
   onSent: () => void;

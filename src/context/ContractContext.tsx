@@ -1,5 +1,4 @@
 "use client";
-import { DEFAULT_POSITION_REPORT } from "@/constants/context/DefaultReport";
 import { useSocketListeners } from "@/hooks/useSocketListeners";
 import React, { createContext, useState } from "react";
 
@@ -17,17 +16,38 @@ export interface ADSCContract {
   is_Active: boolean;
 }
 
-export interface MonitoringReport {
-  facility: string;
-  facility_designation: string;
-  facility_name: string;
-  vhf: number;
-}
+export type MonitoringFacility =
+  | "CENTER"
+  | "APPROACH"
+  | "TOWER"
+  | "FINAL"
+  | "GROUND CONTROL"
+  | "CLEARANCE DELIVERY"
+  | "DEPARTURE"
+  | "CONTROL"
+  | "RADIO";
 
+export type MonitoringData = {
+  facility: MonitoringFacility | "";
+  designation: string; // ex: CYUL
+  name: string; // ex: YUL
+  vhf: string; // ex: 118.900
+  ref: string;
+};
+
+export const MOCK_MONITORING_DATA: MonitoringData = {
+  facility: "CENTER",
+  designation: "CYUL",
+  name: "YUL",
+  vhf: "118.900",
+  ref: "DM89",
+};
 export interface IndexReport {
+  ref: string;
   id: string;
   label: string;
   status: string;
+  result?: { ref: string; text: string };
 }
 
 //position report
@@ -91,14 +111,39 @@ export interface EmergencyData {
 }
 
 export const MOCK_EMERGENCY_DATA: EmergencyData = {
-  type: "NONE",
-  reason: "NONE",
+  type: "MAYDAY",
+  reason: "WEATHER",
   divertTo: "NONE",
   descendAlt: "",
   offsetTo: "",
   soulsOnBoard: "",
   fuel: "",
   remarks: "",
+};
+
+export const DEFAULT_POSITION_REPORT: PositionReportPayload = {
+  altitude_ft: 0,
+  distance_km: 0, // distance parcourue totale depuis départ (mets ce que tu veux)
+  positioncurrent: "---", // point courant
+  fixnext: "---", // prochain point
+  fixnextplusone: "---", // +1
+  remainingfuel_kg: 0,
+  temperature_c: 0,
+  winds: { winddirection_deg: 0, speed_kmh: 0 },
+  turbulence: "NONE",
+  icing: "LIGHT",
+  speed_kmh: 0,
+  speedground_kmh: 0,
+  verticalchange: null,
+  trackangle_deg: null,
+  trueheading_deg: 0,
+  timeatpositioncurrent_sec: 0, // 5 min (exemple)
+  timeatafixnext_sec: 0, // ~22 min 41 s (exemple)
+  timeatedestination_sec: null, // mets un "HH:MM:SS" si tu en as un
+  supplementaryinformation: "---",
+  reportedwaypointposition: "---",
+  reportedwaypointtime_sec: 0,
+  reportedwaypointaltitude_ft: 0,
 };
 
 export interface ReportContext {
@@ -109,16 +154,14 @@ export interface ReportContext {
   setAdsEmergency: React.Dispatch<React.SetStateAction<string>>;
   setAdsEnabled: React.Dispatch<React.SetStateAction<boolean>>;
   resetAdscState: () => void;
-  positionReports: PositionReportPayload[];
-  setPositionReports: React.Dispatch<
-    React.SetStateAction<PositionReportPayload[]>
+  positionReport: PositionReportPayload;
+  setPositionReport: React.Dispatch<
+    React.SetStateAction<PositionReportPayload>
   >;
   indexReports: IndexReport[];
   setIndexReports: React.Dispatch<React.SetStateAction<IndexReport[]>>;
-  monitoringReports: MonitoringReport[];
-  setMonitoringReports: React.Dispatch<
-    React.SetStateAction<MonitoringReport[]>
-  >;
+  monitoringReport: MonitoringData;
+  setMonitoringReport: React.Dispatch<React.SetStateAction<MonitoringData>>;
   emergencyData: EmergencyData;
   setEmergencyData: React.Dispatch<React.SetStateAction<EmergencyData>>;
 }
@@ -131,12 +174,12 @@ export const ReportContext = createContext<ReportContext>({
   setAdsEmergency: () => {},
   setAdsEnabled: () => {},
   resetAdscState: () => {},
-  positionReports: [],
-  setPositionReports: () => {},
+  positionReport: DEFAULT_POSITION_REPORT,
+  setPositionReport: () => {},
   indexReports: [],
   setIndexReports: () => {},
-  monitoringReports: [],
-  setMonitoringReports: () => {},
+  monitoringReport: MOCK_MONITORING_DATA,
+  setMonitoringReport: () => {},
   emergencyData: { ...MOCK_EMERGENCY_DATA },
   setEmergencyData: () => {},
 });
@@ -145,13 +188,12 @@ export const ReportProvider = ({ children }: { children: React.ReactNode }) => {
   const [adscContracts, setAdscContracts] = useState<ADSCContract[]>([]);
   const [adsEmergency, setAdsEmergency] = useState("OFF"); // Default to OFF or to ON ???
   const [adsEnabled, setAdsEnabled] = useState(true);
-  const [positionReports, setPositionReports] = useState<
-    PositionReportPayload[]
-  >([DEFAULT_POSITION_REPORT]);
+  const [positionReport, setPositionReport] = useState<PositionReportPayload>(
+    DEFAULT_POSITION_REPORT,
+  );
   const [indexReports, setIndexReports] = useState<IndexReport[]>([]);
-  const [monitoringReports, setMonitoringReports] = useState<
-    MonitoringReport[]
-  >([]);
+  const [monitoringReport, setMonitoringReport] =
+    useState<MonitoringData>(MOCK_MONITORING_DATA);
   const [emergencyData, setEmergencyData] = useState<EmergencyData>({
     ...MOCK_EMERGENCY_DATA,
   });
@@ -160,19 +202,24 @@ export const ReportProvider = ({ children }: { children: React.ReactNode }) => {
     {
       event: "position_report",
       callback: (data: PositionReportPayload) => {
-        setPositionReports((prev) => [data, ...prev]);
+        setPositionReport(data);
       },
     },
     {
-      event: "index_report",
+      event: "index_report_response",
       callback: (data: IndexReport) => {
-        setIndexReports((prev) => [data, ...prev]);
+        console.log("index report response", data);
+        setIndexReports((prev) =>
+          prev.map((r) =>
+            r.id === data.id ? { ...r, result: data.result } : r,
+          ),
+        );
       },
     },
     {
       event: "monitoring_report",
-      callback: (data: MonitoringReport) => {
-        setMonitoringReports((prev) => [data, ...prev]);
+      callback: (data: MonitoringData) => {
+        setMonitoringReport(data);
       },
     },
     {
@@ -198,12 +245,12 @@ export const ReportProvider = ({ children }: { children: React.ReactNode }) => {
         setAdsEmergency,
         setAdsEnabled,
         resetAdscState,
-        positionReports,
-        setPositionReports,
+        positionReport,
+        setPositionReport,
         indexReports,
         setIndexReports,
-        monitoringReports,
-        setMonitoringReports,
+        monitoringReport,
+        setMonitoringReport,
         emergencyData,
         setEmergencyData,
       }}

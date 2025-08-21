@@ -39,7 +39,10 @@ export default function NavButton({
   return (
     <div
       onClick={() => {
-        if (connectionState) onTabChange(id);
+        if (connectionState) {
+          if (id === "settings" || id === "print") return;
+          onTabChange(id);
+        }
       }}
       className={`button-base ${connectionState ? "btn-3d" : ""} ${
         active

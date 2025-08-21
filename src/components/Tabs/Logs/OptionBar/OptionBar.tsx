@@ -26,6 +26,12 @@ export default function OptionBar({ message }: MessageProps) {
   const [isLoadable, setIsLoadable] = useState(false);
 
   useEffect(() => {
+    if (done) {
+      setCurrentLog(null);
+    }
+  }, [done]);
+
+  useEffect(() => {
     if (progressStep === ProgressStep.REJECTED) {
       setAction(ActionType.Reject);
     }
@@ -130,7 +136,6 @@ export default function OptionBar({ message }: MessageProps) {
     );
 
   const renderConfirmationStep = () => {
-    const target = currentResponse?.text || action;
     return (
       <div className="flex flex-col items-center gap-2">
         <p className="text-white text-lg font-semibold uppercase tracking-wide text-center">

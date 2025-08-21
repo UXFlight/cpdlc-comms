@@ -1,5 +1,5 @@
 "use client";
-import { use, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FlightContext } from "@/context/FlightContext";
 import { useSocketListeners } from "@/hooks/useSocketListeners";
 import { FlightStatus } from "@/interface/FlightDetails";

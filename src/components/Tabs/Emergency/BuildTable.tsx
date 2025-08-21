@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Input from "@/components/Tabs/Emergency/Input";
-import OptionBar from "@/components/Tabs/Emergency/OptionBar";
+import OptionBar from "@/components/General/OptionBar";
 import SelectDropdown from "@/components/General/SelectDropdown";
 
 export default function BuildTable() {

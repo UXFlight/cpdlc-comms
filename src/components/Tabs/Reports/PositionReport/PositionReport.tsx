@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import ReportsContainer from "@/components/Tabs/Reports/ReportsContainer";
 import ReportSection from "@/components/Tabs/Reports/PositionReport/ReportSection";
 import { ReportRowProps, SectionProps } from "@/interface/props/Reports";
@@ -11,7 +11,11 @@ export default function PositionReport({
   onSend,
   cancelSign,
 }: SectionProps) {
-  const { positionReports } = useContext(ReportContext);
+  const { positionReport } = useContext(ReportContext);
+
+  // --- AJOUTS: état "figé" + flash snapshot ---
+  const [locked, setLocked] = useState(false);
+  const [snap, setSnap] = useState(false);
 
   const reported_waypoint = [
     "FIX",
@@ -25,20 +29,20 @@ export default function PositionReport({
   const section1: ReportRowProps[] = [
     {
       label: "RPT WPT",
-      value: positionReports[0].positioncurrent,
+      value: positionReport.positioncurrent,
       select: true,
       options: reported_waypoint,
     },
     {
       label: "RPT WPT UTC",
-      value: positionReports[0].timeatpositioncurrent_sec
-        ? `${positionReports[0].timeatpositioncurrent_sec} UTC`
+      value: positionReport.timeatpositioncurrent_sec
+        ? `${positionReport.timeatpositioncurrent_sec} UTC`
         : "----",
     },
     {
       label: "RPT WPT ALT",
-      value: positionReports[0].altitude_ft
-        ? `${positionReports[0].altitude_ft} ft`
+      value: positionReport.altitude_ft
+        ? `${positionReport.altitude_ft} ft`
         : "----",
       select: true,
       options: reported_waypoint,
@@ -48,22 +52,20 @@ export default function PositionReport({
   const section2: ReportRowProps[] = [
     {
       label: "Next Fix",
-      value: positionReports[0].fixnext
-        ? `${positionReports[0].fixnext}`
-        : "----",
+      value: positionReport.fixnext ? `${positionReport.fixnext}` : "----",
       select: true,
       options: reported_waypoint,
     },
     {
       label: "Next Fix UTC",
-      value: positionReports[0].timeatafixnext_sec
-        ? `${positionReports[0].timeatafixnext_sec} UTC`
+      value: positionReport.timeatafixnext_sec
+        ? `${positionReport.timeatafixnext_sec} UTC`
         : "----",
     },
     {
       label: "Next Fix +1",
-      value: positionReports[0].fixnextplusone
-        ? `${positionReports[0].fixnextplusone}`
+      value: positionReport.fixnextplusone
+        ? `${positionReport.fixnextplusone}`
         : "----",
       select: true,
       options: reported_waypoint,
@@ -73,51 +75,59 @@ export default function PositionReport({
   const section3: ReportRowProps[] = [
     {
       label: "Cur Pos",
-      value: positionReports[0].positioncurrent,
+      value: positionReport.positioncurrent,
       select: true,
       options: reported_waypoint,
     },
     {
       label: "Cur UTC",
-      value: positionReports[0].timeatpositioncurrent_sec
-        ? `${positionReports[0].timeatpositioncurrent_sec} UTC`
+      value: positionReport.timeatpositioncurrent_sec
+        ? `${positionReport.timeatpositioncurrent_sec} UTC`
         : "----",
     },
     {
       label: "Cur ALT",
-      value: positionReports[0].altitude_ft
-        ? `${positionReports[0].altitude_ft} ft`
+      value: positionReport.altitude_ft
+        ? `${positionReport.altitude_ft} ft`
         : "----",
     },
     {
       label: "Winds ALOFT",
-      value: `${positionReports[0].winds?.winddirection_deg}° ${positionReports[0].winds?.speed_kmh} km/h`,
+      value: `${positionReport.winds?.winddirection_deg}° ${positionReport.winds?.speed_kmh} km/h`,
     },
     { label: "OFFSET", value: "----" },
     {
       label: "Dest UTC",
-      value: positionReports[0].timeatedestination_sec || "----",
+      value: positionReport.timeatedestination_sec || "----",
     },
     {
       label: "Temperature",
-      value: positionReports[0].temperature_c
-        ? `${positionReports[0].temperature_c} °C`
+      value: positionReport.temperature_c
+        ? `${positionReport.temperature_c} °C`
         : "----",
     },
     {
       label: "Speed",
-      value: positionReports[0].speed_kmh
-        ? `${positionReports[0].speed_kmh} km/h`
+      value: positionReport.speed_kmh
+        ? `${positionReport.speed_kmh} km/h`
         : "----",
     },
   ];
 
   useEffect(() => {
     if (isOpen) setIsOpen(false);
+    // défige quand le preview est annulé/envoyé
+    setLocked(false);
   }, [cancelSign]);
 
+  // --- AJOUT: animation + freeze au clic SET ---
   const handleSend = () => {
-    onSend();
+    setSnap(true); // flash rapide
+    setTimeout(() => {
+      setSnap(false);
+      setLocked(true); // fige la section
+      onSend();
+    }, 220);
   };
 
   return (
@@ -127,13 +137,47 @@ export default function PositionReport({
       setIsOpen={(v) => !disabled && setIsOpen(v)}
       onSend={handleSend}
       onClear={() => {}}
-      disabled={disabled}
+      disabled={disabled || locked} // fige l’interaction
       disableSet={false}
     >
-      <div className={`${isOpen ? "" : "hidden"}`}>
-        <ReportSection rows={section1} />
-        <ReportSection rows={section2} />
-        <ReportSection rows={section3} />
+      <div className={`${isOpen ? "relative" : "hidden"}`}>
+        {/* contenu figé visuellement quand locked */}
+        <div
+          className={`transition-all ${
+            locked ? "grayscale opacity-80 pointer-events-none" : ""
+          }`}
+        >
+          <ReportSection rows={section1} />
+          <ReportSection rows={section2} />
+          <ReportSection rows={section3} />
+        </div>
+
+        {/* badge snapshot */}
+        {locked && (
+          <div className="absolute top-2 right-2 bg-white/10 border border-white/20 rounded px-2 py-1 text-[11px] tracking-wide">
+            FROZEN SNAPSHOT
+          </div>
+        )}
+
+        {/* overlay flash */}
+        {snap && (
+          <div className="pointer-events-none absolute inset-0 bg-white/70 animate-pr-flash rounded-md" />
+        )}
+
+        {/* keyframes locales */}
+        <style jsx>{`
+          @keyframes pr-flash {
+            0% {
+              opacity: 0.85;
+            }
+            100% {
+              opacity: 0;
+            }
+          }
+          .animate-pr-flash {
+            animation: pr-flash 220ms ease-out forwards;
+          }
+        `}</style>
       </div>
     </ReportsContainer>
   );

@@ -5,6 +5,7 @@ import { GlobalContext } from "@/context/GlobalContext";
 import { Play, Pause, ChevronsLeft, ChevronsRight } from "lucide-react";
 import SelectDropdown from "@/components/General/SelectDropdown";
 import { socketService } from "@/api/communications/socket/socketService";
+import { useSocketListeners } from "@/hooks/useSocketListeners";
 
 export default function ActionBar({
   onPlay,
@@ -29,6 +30,21 @@ export default function ActionBar({
   useEffect(() => {
     setAltitude(flightDetails.status.altitude);
   }, [flightDetails.status]);
+
+  useSocketListeners([
+    {
+      event: "flight_paused",
+      callback: () => {
+        onPause();
+      },
+    },
+    {
+      event: "flight_playing",
+      callback: () => {
+        onPlay();
+      },
+    },
+  ]);
 
   const isDisabled = !connectionState || altitude === 0;
 

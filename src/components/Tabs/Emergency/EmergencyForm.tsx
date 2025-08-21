@@ -1,7 +1,7 @@
 import InputField from "@/components/General/EmergencyInputField";
 import SelectDropdown from "@/components/General/SelectDropdown";
-import { useContext, useEffect, useState } from "react";
-import OptionBar from "./OptionBar";
+import { useContext, useEffect } from "react";
+import OptionBar from "../../General/OptionBar";
 import { EmergencyData, ReportContext } from "@/context/ContractContext";
 
 const emergencyTypes = ["MAYDAY", "PAN", "NONE"];

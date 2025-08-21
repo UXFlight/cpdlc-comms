@@ -3,7 +3,6 @@ import ReportsContainer from "@/components/Tabs/Reports/ReportsContainer";
 import { SectionProps } from "@/interface/props/Reports";
 import { useSocketListeners } from "@/hooks/useSocketListeners";
 import { ADSCContract, ReportContext } from "@/context/ContractContext";
-import { socketService } from "@/api/communications/socket/socketService";
 
 export default function AdsContract({
   isOpen,
@@ -35,7 +34,7 @@ export default function AdsContract({
       callback: (data: ADSCContract[]) => {
         setAdscContracts(data);
       },
-    }
+    },
   ]);
 
   const handleSend = () => {

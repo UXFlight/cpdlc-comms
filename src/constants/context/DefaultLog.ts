@@ -14,4 +14,5 @@ export const DEFAULT_LOG: Log = {
   response_required: false,
   acceptable_responses: [],
   communication_thread: [],
+  ended: false,
 };

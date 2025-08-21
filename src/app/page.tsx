@@ -19,8 +19,6 @@ import ErrorPopup from "@/components/General/ErrorPopup";
 import FlightStatusPanel from "@/components/FlightStatusPanel/FlightStatusPanel";
 import RouteProgressBar from "@/components/PlaneProgression/RouteProgressBar";
 import { useSocketListeners } from "@/hooks/useSocketListeners";
-import { ReportProvider } from "@/context/ContractContext";
-import { RequestProvider } from "@/context/RequestContext";
 
 export default function CpdlcMainView() {
   const [activeTab, setActiveTab] = useState("logon");

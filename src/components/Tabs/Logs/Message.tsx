@@ -5,7 +5,7 @@ import { MessageProps } from "@/interface/props/Logs";
 import { getStatusClass } from "@/utils/getStatus";
 import { Log } from "@/interface/Logs";
 
-type ThreadViewState = "closed" | "open";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 export default function Message({ message }: MessageProps) {
   const { setCurrentLog } = useContext(LogsContext);
@@ -131,7 +131,7 @@ export default function Message({ message }: MessageProps) {
 
   return (
     <div className={`message-container ${containerClass}`}>
-      <div className="flex flex-col gap-2 w-full bg-[#1e1e1e]">
+      <div className="flex flex-col gap-2 w-full">
         {/* MESSAGES SIMPLES SI ended = true */}
         {threadView === "closed" ? (
           <>
