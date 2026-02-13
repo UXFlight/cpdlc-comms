@@ -52,6 +52,6 @@ export function maybeArmFromLog(log: Log) {
 
   const id = log.id;
 
-  const entry: IndexReport = { ref, id, label, status: "ARMED" };
+  const entry: IndexReport = { ref, id, label, status: "DISARMED" };
   return entry;
 }

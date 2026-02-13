@@ -88,7 +88,9 @@ export default function ReportMessagePreview({
       }
 
       case "index": {
-        socketService.send("index_report", payloadSnap);
+        console.log("Sending index report:", payloadSnap);
+        socketService.send("add_log", {"log_entry": {"messageRef":payloadSnap.message.ref, "formattedMessage": payloadSnap.message.text}, "thread_id": payloadSnap.data.selected.id});
+        break;
       }
       case "position":
         socketService.send("position_report", payloadSnap);
@@ -101,10 +103,15 @@ export default function ReportMessagePreview({
     simulateDelay();
   };
 
-  const mainText =
-    kind === "emergency"
-      ? request.formattedMessage || ""
-      : reportData?.message || "";
+  const mainText = () => {
+    if (kind === "emergency") {
+      return request.formattedMessage || "";
+    } else if (kind === "index") {
+      return reportData?.message?.text || "";
+    } else {
+      return reportData?.message ||  "";
+    }
+  };
 
   const badges = reportData?.badges ?? (request.additional || []);
 
@@ -113,11 +120,11 @@ export default function ReportMessagePreview({
       isSending={isSending}
       isSent={isSent}
       sendingProgress={sendingProgress}
-      mainText={mainText}
+      mainText={mainText()}
       badges={badges}
       onCancel={handleCancel}
       onSend={handleSend}
-      sendingLabel={`Sending ${mainText || kind} ...`}
+      sendingLabel={`Sending ${mainText() || kind} ...`}
     />
   );
 }

@@ -5,6 +5,7 @@ import ReportIndex from "@/components/Tabs/Reports/ReportIndex";
 import { useContext, useEffect, useState } from "react";
 import ReportMessagePreview from "../../General/ReportMessagePreview";
 import { ReportContext } from "@/context/ContractContext";
+import { socketService } from "@/api/communications/socket/socketService";
 
 export default function ReportsTab() {
   const { positionReport } = useContext(ReportContext);
@@ -27,7 +28,7 @@ export default function ReportsTab() {
   };
 
   useEffect(() => {
-    console.log(`active report`, activeReport);
+    activeReport === "cpdlc" ? socketService.send("request_adsc_data") : socketService.send("stop_adsc_data") //!!!corriger pour que l evenement ne s envoi pas a chaque ouverture des autres tabs
   }, [activeReport]);
 
   const handlePreviewSent = () => {

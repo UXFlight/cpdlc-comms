@@ -36,10 +36,9 @@ export default function ReportIndex({
 
     const payload = {
       label: current.label,
-      event: "report_index_send",
       badges: [current.status],
       data: { selected: current },
-      message: current.result?.text ?? null,
+      message: current.result ?? null
     };
     onSend(payload);
   };
