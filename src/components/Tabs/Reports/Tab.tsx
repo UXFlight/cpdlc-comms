@@ -28,7 +28,8 @@ export default function ReportsTab() {
   };
 
   useEffect(() => {
-    activeReport === "cpdlc" ? socketService.send("request_adsc_data") : socketService.send("stop_adsc_data") //!!!corriger pour que l evenement ne s envoi pas a chaque ouverture des autres tabs
+    if (activeReport === "cpdlc") return socketService.send("request_adsc_data");
+    socketService.send("stop_adsc_data");
   }, [activeReport]);
 
   const handlePreviewSent = () => {
