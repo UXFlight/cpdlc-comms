@@ -13,6 +13,8 @@ export default function NavButton({
   const { connectionState } = useContext(GlobalContext);
   const { logs } = useContext(LogsContext);
   const isHome = id === "logon";
+  const isDisconnectedTab = !connectionState && !isHome;
+  const buttonTitle = isDisconnectedTab ? "Must be connected" : label;
 
   const isLogsTab = id === "logs";
   const [unread, setUnread] = useState(0);
@@ -44,16 +46,18 @@ export default function NavButton({
           onTabChange(id);
         }
       }}
+      title={buttonTitle}
       className={`button-base ${connectionState ? "btn-3d" : ""} ${
         active
           ? "bg-white-10 border-b-4 border-green"
           : "border-b-4 border-transparent"
-      }`}
+      } ${isDisconnectedTab ? "opacity-45 grayscale cursor-not-allowed" : ""}`}
     >
       {isHome ? (
         <button
           onClick={() => onTabChange(id)}
           className="w-full h-[73px] flex flex-col items-center justify-center relative"
+          title={label}
         >
           <img
             src="/CPDLC.svg"
@@ -67,7 +71,8 @@ export default function NavButton({
             label === "print"
               ? "border border-green rounded-full px-1 py-1"
               : ""
-          }`}
+          } ${isDisconnectedTab ? "cursor-not-allowed" : "cursor-pointer"}`}
+          title={buttonTitle}
         >
           <img src={icon} alt={label} className="icon w-[28px] h-[28px]" />
           <h3>{label}</h3>

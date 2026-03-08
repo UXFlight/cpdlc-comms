@@ -23,7 +23,7 @@ export default function AtcConnection() {
       <h2>Connection</h2>
       <div className="flex items-center justify-between w-full">
         <p className="secondary-text pt-[10px]">ATC Data Link</p>
-        <label className="relative inline-block w-[110px] h-[31px] cursor-pointer">
+        <label className="relative inline-block w-[110px] h-[31px] cursor-default">
           <input
             readOnly
             type="checkbox"
