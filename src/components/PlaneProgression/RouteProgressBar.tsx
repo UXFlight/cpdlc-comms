@@ -120,7 +120,7 @@ export default function RouteProgressBar() {
         onStepForward={handleStepForward}
         isPlaying={isPlaying}
       />
-      <div className="flex items-center justify-between w-[80%] mx-auto relative px-6 py-6 bg-black text-white rounded-b-md shadow-md">
+      <div className="flex items-center rounded-xl justify-between w-[80%] mx-auto relative px-6 py-6 bg-black text-white rounded-b-md shadow-md">
         <div className="flex flex-1 justify-between items-center px- relative z-10">
           {waypoints.map((wp, i) => {
             const dist = distances[i] ?? 0;
