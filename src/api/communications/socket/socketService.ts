@@ -6,8 +6,10 @@ class SocketClientService {
 
   constructor() {
     this.socket = io(SERVER_URL, {
-      autoConnect: false,
-    });
+      path: "/socket.io/",
+      transports: ["websocket", "polling"],
+      autoConnect: false
+    })
   }
 
   connect() {
