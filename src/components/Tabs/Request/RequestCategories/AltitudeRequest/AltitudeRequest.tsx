@@ -42,10 +42,18 @@ export default function AltitudeRequest({
   };
 
   useEffect(() => {
-    if (isOpen) {
-      handleToggle();
-    }
-  }, [cancelSign]);
+    if (!cancelSign) return;
+    setIsOpen(false);
+    onOpen(false);
+    setFrom("");
+    setTo("");
+    setPosition("");
+    setPositionSelected(false);
+    setTime({ hh: "", mm: "" });
+    setTimeSelected(false);
+    setExtras([]);
+    setTargetInput("");
+  }, [cancelSign, onOpen, setTargetInput]);
 
   const handleToggle = () => {
     const nextOpen = !isOpen;

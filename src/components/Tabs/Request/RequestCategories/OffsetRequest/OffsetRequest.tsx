@@ -40,10 +40,18 @@ export function OffsetRequest({
   };
 
   useEffect(() => {
-    if (isOpen) {
-      handleToggle();
-    }
-  }, [cancelSign]);
+    if (!cancelSign) return;
+    setIsOpen(false);
+    onOpen(false);
+    setDirection("");
+    setDistance("");
+    setPosition("");
+    setPositionSelected(false);
+    setTime({ hh: "", mm: "" });
+    setTimeSelected(false);
+    setExtras([]);
+    setTargetInput("");
+  }, [cancelSign, onOpen, setTargetInput]);
 
   const handleToggle = () => {
     const newState = !isOpen;

@@ -1,5 +1,6 @@
 import { SelectDropdownProps } from "@/interface/props/General";
 import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 
 export default function SelectDropdown({
   options,
@@ -45,15 +46,23 @@ export default function SelectDropdown({
         >
           <div className="flex items-center gap-2 min-w-0">
             {icon && (
-              <img src={icon} alt="icon" className="w-[20px] h-[20px]" />
+              <Image
+                src={icon}
+                alt="icon"
+                width={20}
+                height={20}
+                className="w-[20px] h-[20px]"
+              />
             )}
             <span className="whitespace-nowrap text-center text-[clamp(10px,3vw,14px)] leading-tight max-w-[110px]">
               {value}
             </span>
           </div>
-          <img
+          <Image
             src="/arrow-down.svg"
             alt="arrow"
+            width={16}
+            height={16}
             className={`w-4 h-4 ml-3 transition-transform duration-200 ${
               isOpen ? "rotate-180" : ""
             }`}

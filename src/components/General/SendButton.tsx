@@ -1,6 +1,7 @@
 import { useDelay } from "@/hooks/useDelay";
 import { SendButtonProps } from "@/interface/props/General";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 export default function SendButton({ onSend }: SendButtonProps) {
   const [isSending, setIsSending] = useState(false);
@@ -13,7 +14,7 @@ export default function SendButton({ onSend }: SendButtonProps) {
       setIsSent(true);
       setIsSending(false);
     }
-  }, [isSending]);
+  }, [isSending, delay]);
 
   if (isSent) {
     return (
@@ -22,7 +23,13 @@ export default function SendButton({ onSend }: SendButtonProps) {
         className="flex items-center justify-center gap-2 flex-1 px-4 py-2 rounded bg-green text-white font-semibold tracking-wide w-full uppercase"
       >
         <span className="uppercase">Sent</span>
-        <img src="/check.svg" alt="Check Icon" className="w-6 h-6" />
+        <Image
+          src="/check.svg"
+          alt="Check Icon"
+          width={24}
+          height={24}
+          className="w-6 h-6"
+        />
       </button>
     );
   }

@@ -20,7 +20,7 @@ export default function ErrorPopup() {
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
-  }, [currentError, hovered]);
+  }, [currentError, hovered, clearCurrentError]);
 
   if (!currentError) return null;
 

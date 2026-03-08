@@ -118,7 +118,7 @@ export default function PositionReport({
     if (isOpen) setIsOpen(false);
     // défige quand le preview est annulé/envoyé
     setLocked(false);
-  }, [cancelSign]);
+  }, [cancelSign, isOpen, setIsOpen]);
 
   // --- AJOUT: animation + freeze au clic SET ---
   const handleSend = () => {

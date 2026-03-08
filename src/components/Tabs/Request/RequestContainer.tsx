@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { RequestContext } from "@/context/RequestContext";
 import { InputContext } from "@/context/InputContext";
 import { RequestContainerProps } from "@/interface/props/Request";
+import Image from "next/image";
 
 export default function RequestContainer({
   requestType,
@@ -21,7 +22,7 @@ export default function RequestContainer({
     } else {
       setTargetInput("");
     }
-  }, [isOpen]);
+  }, [isOpen, resetRequest, setTargetInput]);
 
   return (
     <div
@@ -34,9 +35,11 @@ export default function RequestContainer({
         <p className="text-white font-normal text-[17px] leading-none font-noto uppercase">
           {requestType}
         </p>
-        <img
+        <Image
           src="/arrow-down.svg"
           alt="arrow"
+          width={24}
+          height={24}
           className={`w-6 h-6 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
         />
       </div>

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { GlobalContext } from "@/context/GlobalContext";
 import { InputContext } from "@/context/InputContext";
 import { CharacterInputProps } from "@/interface/props/General";
@@ -17,16 +17,19 @@ export default function CharacterInput({
   const { targetInput } = useContext(InputContext);
   const [isFocused, setIsFocused] = useState(false);
 
-  const handleChange = (value: string) => {
-    const clean = value
-      .toUpperCase()
-      .replace(/[^A-Z0-9]/g, "")
-      .slice(0, length);
-    onChange(clean);
-    if (onEnter) {
-      onEnter(clean);
-    }
-  };
+  const handleChange = useCallback(
+    (nextValue: string) => {
+      const clean = nextValue
+        .toUpperCase()
+        .replace(/[^A-Z0-9]/g, "")
+        .slice(0, length);
+      onChange(clean);
+      if (onEnter) {
+        onEnter(clean);
+      }
+    },
+    [length, onChange, onEnter],
+  );
 
   useEffect(() => {
     if (isConnectionPossible) {
@@ -34,13 +37,11 @@ export default function CharacterInput({
     } else {
       handleChange("");
     }
-  }, [isConnectionPossible]);
+  }, [isConnectionPossible, handleChange]);
 
   useEffect(() => {
-    if (targetInput === name && isConnectionPossible) {
-      inputRef.current?.focus();
-    }
-  }, [targetInput, isConnectionPossible]);
+    if (targetInput === name && isConnectionPossible) inputRef.current?.focus();
+  }, [targetInput, name, isConnectionPossible]);
 
   return (
     <div className={`flex ${style}`}>

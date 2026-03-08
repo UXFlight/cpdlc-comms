@@ -13,13 +13,12 @@ export default function Message({ message }: MessageProps) {
   const [showAdditional, setShowAdditional] = useState(false);
   const [threadView, setThreadView] = useState<"closed" | "open">("closed");
 
-  const thread = Array.isArray(message.communication_thread)
-    ? message.communication_thread
-    : [];
-  const messagesInColumn = useMemo(
-    () => [message, ...thread],
-    [message, thread],
-  );
+  const messagesInColumn = useMemo(() => {
+    const thread = Array.isArray(message.communication_thread)
+      ? message.communication_thread
+      : [];
+    return [message, ...thread];
+  }, [message]);
   const mainMsg = messagesInColumn[messagesInColumn.length - 1];
   const prevMessages = messagesInColumn.slice(0, -1);
   const hiddenCount = prevMessages.length;

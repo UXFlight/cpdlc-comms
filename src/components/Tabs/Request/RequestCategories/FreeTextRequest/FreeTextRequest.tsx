@@ -22,10 +22,11 @@ export function FreeTextRequest({
   };
 
   useEffect(() => {
-    if (isOpen) {
-      handleToggle();
-    }
-  }, [cancelSign]);
+    if (!cancelSign) return;
+    setIsOpen(false);
+    setText("");
+    onOpen(false);
+  }, [cancelSign, onOpen]);
 
   const handleToggle = () => {
     const nextOpen = !isOpen;

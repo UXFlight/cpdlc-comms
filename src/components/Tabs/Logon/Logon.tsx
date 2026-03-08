@@ -3,6 +3,7 @@ import { GlobalContext } from "@/context/GlobalContext";
 import CharacterInput from "@/components/General/CharacterInput";
 import { socketService } from "@/api/communications/socket/socketService";
 import { useSocketListeners } from "@/hooks/useSocketListeners";
+import Image from "next/image";
 
 export default function Logon() {
   const length = 4;
@@ -91,9 +92,11 @@ export default function Logon() {
                 : "bg-white-10"
             } text-white text-sm font-semibold rounded-md`}
           >
-            <img
+            <Image
               src="/send.svg"
               alt="Send Icon"
+              width={20}
+              height={20}
               className="w-[20px] h-[20px]"
             />
             <span className="text-white-80 text-[14px] leading-[18px] whitespace-nowrap font-bold text-center">

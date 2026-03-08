@@ -37,10 +37,14 @@ export function SpeedRequest({
   };
 
   useEffect(() => {
-    if (isOpen) {
-      handleToggle();
-    }
-  }, [cancelSign]);
+    if (!cancelSign) return;
+    setIsOpen(false);
+    onOpen(false);
+    setFrom("");
+    setTo("");
+    setExtras([]);
+    setTargetInput("");
+  }, [cancelSign, onOpen, setTargetInput]);
 
   const handleToggle = () => {
     const newState = !isOpen;

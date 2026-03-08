@@ -18,10 +18,10 @@ export function VmcDescentRequest({
   };
 
   useEffect(() => {
-    if (isOpen) {
-      handleToggle();
-    }
-  }, [cancelSign]);
+    if (!cancelSign) return;
+    setIsOpen(false);
+    onOpen(false);
+  }, [cancelSign, onOpen]);
 
   const handleToggle = () => {
     const newState = !isOpen;

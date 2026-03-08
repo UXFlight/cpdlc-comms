@@ -7,6 +7,7 @@ import { LogsContext } from "@/context/LogsContext";
 import { DROPDOWN_OPTIONS } from "@/constants/Tabs/Logs";
 import { socketService } from "@/api/communications/socket/socketService";
 import { LoadContext } from "@/context/LoadContext";
+import Image from "next/image";
 
 export default function LogsTab() {
   const [value, setValue] = useState("FILTER BY");
@@ -18,7 +19,7 @@ export default function LogsTab() {
     if (!currentLog) return;
     socketService.send("is_loadable", { logId: currentLog.id });
     setProgressStep(null);
-  }, [currentLog]);
+  }, [currentLog, setProgressStep]);
 
   useEffect(() => {
     console.log("logsssss", logs);
@@ -52,9 +53,11 @@ export default function LogsTab() {
               onClick={() => setCurrentLog(null)}
               className="flex gap-0 text-white rounded cursor-pointer justify-center items-center"
             >
-              <img
+              <Image
                 src="/arrow-back.svg"
                 alt="icon"
+                width={25}
+                height={25}
                 className="w-auto h-[25px]"
               />
               <h1>message log</h1>

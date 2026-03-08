@@ -6,6 +6,7 @@ import { FlightStatus } from "@/interface/FlightDetails";
 import ActionBar from "./ActionBar";
 import { socketService } from "@/api/communications/socket/socketService";
 import { GlobalContext } from "@/context/GlobalContext";
+import Image from "next/image";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 export default function RouteProgressBar() {
@@ -141,7 +142,7 @@ export default function RouteProgressBar() {
                       transform: "translateX(-50%)",
                     }}
                   >
-                    <img
+                    <Image
                       src="/airplane.png"
                       alt="airplane"
                       width={50}

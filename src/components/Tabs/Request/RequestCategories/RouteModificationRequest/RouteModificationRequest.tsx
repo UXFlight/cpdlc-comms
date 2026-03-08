@@ -49,9 +49,9 @@ export default function RouteModificationRequest({
   };
 
   useEffect(() => {
-    if (isOpen) {
-      handleToggle();
-    }
+    if (!cancelSign) return;
+    setIsOpen(false);
+    resetAllInputs();
   }, [cancelSign]);
 
   const handleSend = () => {

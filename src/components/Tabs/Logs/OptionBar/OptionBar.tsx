@@ -11,6 +11,7 @@ import { ProgressStep } from "@/interface/context/LoadContext";
 import DynamicResponses from "./DynamicResponses";
 import ProgressSteps from "../ProgressSteps";
 import YesNoOptions from "./YesNoOptions";
+import Image from "next/image";
 
 export default function OptionBar({ message }: MessageProps) {
   const { currentLog, handleResponse, setCurrentLog } = useContext(LogsContext);
@@ -29,7 +30,7 @@ export default function OptionBar({ message }: MessageProps) {
     if (done) {
       setCurrentLog(null);
     }
-  }, [done]);
+  }, [done, setCurrentLog]);
 
   useEffect(() => {
     if (progressStep === ProgressStep.REJECTED) {
@@ -192,7 +193,13 @@ export default function OptionBar({ message }: MessageProps) {
       onClick={() => setCurrentLog(null)}
       className="flex items-center gap-2 text-light-blue hover:text-light-blue/60 text-[20px] font-medium transition"
     >
-      <img src="/arrow-back.svg" alt="Back arrow" className="w-5 h-5" />
+      <Image
+        src="/arrow-back.svg"
+        alt="Back arrow"
+        width={20}
+        height={20}
+        className="w-5 h-5"
+      />
       Message sent. Go back to message logs
     </button>
   );

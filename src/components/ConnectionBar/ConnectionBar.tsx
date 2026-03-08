@@ -1,5 +1,6 @@
 "use client";
 import { useContext } from "react";
+import Image from "next/image";
 import Time from "@/components/Time/Time";
 import { GlobalContext } from "@/context/GlobalContext";
 
@@ -12,9 +13,11 @@ export default function ConnectionBar() {
         ${connectionState ? "bg-green" : "bg-nav-bar"}`}
     >
       <div className="flex items-center gap-2">
-        <img
+        <Image
           src={connectionState ? "/connected.svg" : "/disconnected.svg"}
           alt={connectionState ? "Connected" : "Not Connected"}
+          width={20}
+          height={20}
           className="w-5 h-5"
         />
         <p className="text-white-80 text-[16px] uppercase">

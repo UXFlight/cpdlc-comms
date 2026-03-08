@@ -1,5 +1,11 @@
 "use client";
-import React, { createContext, useState, useEffect, useContext } from "react";
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  useContext,
+  useRef,
+} from "react";
 import type { Log } from "@/interface/Logs";
 import { socketService } from "@/api/communications/socket/socketService";
 import { MessageService } from "@/api/services/messageService";
@@ -23,6 +29,7 @@ export const LogsContext = createContext<LogsContextType>({
 
 export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
   const [logs, setLogs] = useState<Log[]>([]);
+  const logsRef = useRef<Log[]>([]);
   const [filterBy, setFilter] = useState<string>("");
   const [currentLog, setCurrentLog] = useState<Log | null>(null);
   const { resetAdscState, setIndexReports } = useContext(ReportContext);
@@ -112,9 +119,13 @@ export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
+    logsRef.current = logs;
+  }, [logs]);
+
+  useEffect(() => {
     if (!filterBy) return;
 
-    MessageService.filterLogsArray(logs)
+    MessageService.filterLogsArray(logsRef.current)
       .then((res) => {
         setLogs(res.logs);
       })

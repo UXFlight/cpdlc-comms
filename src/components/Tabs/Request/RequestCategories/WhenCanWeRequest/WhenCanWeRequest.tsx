@@ -29,10 +29,16 @@ export function WhenCanWeRequest({
   const [to, setTo] = useState("");
 
   useEffect(() => {
-    if (isOpen) {
-      handleToggle();
-    }
-  }, [cancelSign]);
+    if (!cancelSign) return;
+    setIsOpen(false);
+    onOpen(false);
+    setSelectedOption("");
+    setLevel("");
+    setClimbDescend("CLIMB/DESCENT");
+    setClimbDescendLevel("");
+    setFrom("");
+    setTo("");
+  }, [cancelSign, onOpen]);
 
   const handleSend = () => {
     let args: string[] = [];

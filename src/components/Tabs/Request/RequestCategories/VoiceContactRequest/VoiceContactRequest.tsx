@@ -25,10 +25,11 @@ export function VoiceContactRequest({
   };
 
   useEffect(() => {
-    if (isOpen) {
-      handleToggle();
-    }
-  }, [cancelSign]);
+    if (!cancelSign) return;
+    setIsOpen(false);
+    setFrequency("");
+    onOpen(false);
+  }, [cancelSign, onOpen]);
 
   const handleToggle = () => {
     const newState = !isOpen;

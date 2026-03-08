@@ -2,6 +2,7 @@ import { GlobalContext } from "@/context/GlobalContext";
 import { LogsContext } from "@/context/LogsContext";
 import { NavButtonProps } from "@/interface/props/ResponsiveBar";
 import { useContext, useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 export default function NavButton({
   icon,
@@ -59,9 +60,11 @@ export default function NavButton({
           className="w-full h-[73px] flex flex-col items-center justify-center relative"
           title={label}
         >
-          <img
+          <Image
             src="/CPDLC.svg"
             alt="HOME"
+            width={52}
+            height={52}
             className="w-[52px] h-[52px] bg-gradient-to-l from-teal-600 to-teal-400 rounded-full"
           />
         </button>
@@ -74,7 +77,13 @@ export default function NavButton({
           } ${isDisconnectedTab ? "cursor-not-allowed" : "cursor-pointer"}`}
           title={buttonTitle}
         >
-          <img src={icon} alt={label} className="icon w-[28px] h-[28px]" />
+          <Image
+            src={icon}
+            alt={label}
+            width={28}
+            height={28}
+            className="icon w-[28px] h-[28px]"
+          />
           <h3>{label}</h3>
 
           {isLogsTab && unread > 0 && (

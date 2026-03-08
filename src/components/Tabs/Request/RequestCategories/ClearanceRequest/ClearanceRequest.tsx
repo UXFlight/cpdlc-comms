@@ -24,10 +24,11 @@ export function ClearanceRequest({
   };
 
   useEffect(() => {
-    if (isOpen) {
-      handleToggle();
-    }
-  }, [cancelSign]);
+    if (!cancelSign) return;
+    setIsOpen(false);
+    setSelectedOption(null);
+    onOpen(false);
+  }, [cancelSign, onOpen]);
 
   return (
     <RequestContainer

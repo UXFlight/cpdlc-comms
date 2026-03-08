@@ -21,12 +21,12 @@ export default function AdsContract({
     if (isOpen) setIsOpen(false);
     setTempAdscEmergency(adsEmergency);
     setTempAdscEnable(adsEnabled);
-  }, [cancelSign]);
+  }, [cancelSign, isOpen, setIsOpen, adsEmergency, adsEnabled]);
 
   useEffect(() => {
     setTempAdscEmergency(adsEmergency);
     setTempAdscEnable(adsEnabled);
-  }, []);
+  }, [adsEmergency, adsEnabled]);
 
   useSocketListeners([
     {

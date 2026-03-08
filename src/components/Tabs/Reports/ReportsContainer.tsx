@@ -1,4 +1,5 @@
 import { ReportsContainerProps } from "@/interface/props/Reports";
+import Image from "next/image";
 
 export default function ReportsContainer({
   children,
@@ -25,9 +26,11 @@ export default function ReportsContainer({
         <p className="text-white font-[500] text-[16px] leading-none font-noto uppercase">
           {label}
         </p>
-        <img
+        <Image
           src="/arrow-down.svg"
           alt="arrow"
+          width={24}
+          height={24}
           className={`w-6 h-6 transition-transform duration-200 ${
             isOpen ? "rotate-180" : ""
           }`}
