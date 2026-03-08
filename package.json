@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next dev",
+    "start": "next start",
     "prod": "next build && next start",
     "lint": "next lint",
     "prettier": "prettier --write 'src/**/*.{ts,tsx,js,json,css,md}'"
