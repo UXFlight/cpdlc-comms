@@ -47,55 +47,65 @@ export default function ActionBar({
   ]);
 
   const isDisabled = !connectionState || altitude === 0;
+  const disconnectedTitle = "Must be connected";
 
-  const buttonBase = "p-2 rounded-full transition disabled:opacity-40";
+  const buttonBase =
+    "p-2 rounded-full border transition-colors duration-200 disabled:opacity-40 disabled:cursor-not-allowed";
   const iconBase = "w-6 h-6";
 
   return (
-    <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-white/30 backdrop-blur-md border rounded-xl shadow-lg px-6 py-4 z-50 flex flex-col items-center space-y-3">
+    <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-black text-white backdrop-blur-md border border-white/20 rounded-xl shadow-lg px-6 py-4 z-50 flex flex-col items-center space-y-3">
       <div className="flex items-center space-x-4">
         <button
           disabled={isDisabled}
           onClick={onStepBack}
-          className={`${buttonBase} ${isDisabled ? "" : "hover:bg-gray-200"}`}
-          title="Step Back"
+          className={`${buttonBase} bg-sky-500/20 border-sky-300/40 ${
+            isDisabled ? "" : "hover:bg-sky-400/30"
+          }`}
+          title={!connectionState ? disconnectedTitle : "Step Back"}
         >
-          <ChevronsLeft className={`${iconBase} text-blue-700`} />
+          <ChevronsLeft className={`${iconBase} text-sky-100`} />
         </button>
 
         {isPlaying ? (
           <button
             disabled={isDisabled}
             onClick={onPause}
-            className={`${buttonBase} bg-red-100 ${isDisabled ? "" : "hover:bg-red-200"}`}
-            title="Pause"
+            className={`${buttonBase} bg-rose-500/25 border-rose-300/40 ${
+              isDisabled ? "" : "hover:bg-rose-500/35"
+            }`}
+            title={!connectionState ? disconnectedTitle : "Pause"}
           >
-            <Pause className={`${iconBase} text-red-600`} />
+            <Pause className={`${iconBase} text-rose-100`} />
           </button>
         ) : (
           <button
             disabled={isDisabled}
             onClick={onPlay}
-            className={`${buttonBase} bg-green-100 ${isDisabled ? "" : "hover:bg-green-200"}`}
-            title="Play"
+            className={`${buttonBase} bg-emerald-500/25 border-emerald-300/40 ${
+              isDisabled ? "" : "hover:bg-emerald-500/35"
+            }`}
+            title={!connectionState ? disconnectedTitle : "Play"}
           >
-            <Play className={`${iconBase} text-green-600`} />
+            <Play className={`${iconBase} text-emerald-100`} />
           </button>
         )}
 
         <button
           disabled={isDisabled}
           onClick={onStepForward}
-          className={`${buttonBase} ${isDisabled ? "" : "hover:bg-gray-200"}`}
-          title="Step Forward"
+          className={`${buttonBase} bg-sky-500/20 border-sky-300/40 ${
+            isDisabled ? "" : "hover:bg-sky-400/30"
+          }`}
+          title={!connectionState ? disconnectedTitle : "Step Forward"}
         >
-          <ChevronsRight className={`${iconBase} text-blue-700`} />
+          <ChevronsRight className={`${iconBase} text-sky-100`} />
         </button>
       </div>
 
-      <div className="flex items-center space-x-2 w-50">
-        <span className="text-end text-sm font-medium text-black">
-          Simulation speed:
+      <div className="flex items-center space-x-3 w-52 [&_button]:font-semibold [&_button]:!text-white [&_li_span]:font-semibold [&_ul]:!bg-zinc-900 [&_ul]:!border-white/30">
+        <span className="text-end text-sm font-semibold tracking-wide text-white/90">
+          Speed:
         </span>
         <SelectDropdown
           options={speedOptions}
@@ -105,7 +115,7 @@ export default function ActionBar({
             socketService.send("routine_set_speed", { speed: value });
           }}
           defaultValue="MEDIUM"
-          style="text-black"
+          style="!text-white font-semibold tracking-wide !bg-zinc-900/90 !border-white/30 !px-3 !py-2"
           disabled={isDisabled}
         />
       </div>

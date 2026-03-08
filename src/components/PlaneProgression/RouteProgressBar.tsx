@@ -120,7 +120,7 @@ export default function RouteProgressBar() {
         onStepForward={handleStepForward}
         isPlaying={isPlaying}
       />
-      <div className="flex items-center justify-between w-[65%] mx-auto relative px-6 py-3 bg-white/30 rounded-b-md shadow-md">
+      <div className="flex items-center justify-between w-[80%] mx-auto relative px-6 py-6 bg-black text-white rounded-b-md shadow-md">
         <div className="flex flex-1 justify-between items-center px- relative z-10">
           {waypoints.map((wp, i) => {
             const dist = distances[i] ?? 0;
@@ -155,11 +155,11 @@ export default function RouteProgressBar() {
                   className={` w-4 h-4 rounded-full border-2 transition-all duration-300 z-1 ${
                     i <= currentFixIndex
                       ? "bg-blue-500 border-blue-700"
-                      : "bg-white border-gray-400"
+                      : "bg-slate-700 border-slate-300"
                   }`}
                 />
 
-                <span className="text-xs text-black mt-1 font-bold whitespace-nowrap pr-[4px]">
+                <span className="text-xs text-slate-100 mt-1 font-bold whitespace-nowrap pr-[4px]">
                   {typeof wp === "object" && wp !== null && "fix" in wp
                     ? (wp as any).fix
                     : wp}
@@ -168,7 +168,7 @@ export default function RouteProgressBar() {
                 {i < waypoints.length - 1 &&
                   ((
                     <div
-                      className="absolute top-6/24 translate-y-[-1px] left-0 h-[2px] border-t border-dashed border-black"
+                      className="absolute top-6/24 translate-y-[-1px] left-0 h-[2px] border-t border-dashed border-slate-200/70"
                       style={{
                         width: "100%",
                       }}
