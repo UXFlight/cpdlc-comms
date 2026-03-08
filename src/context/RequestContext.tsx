@@ -4,7 +4,7 @@ import React, { createContext, useState } from "react";
 import type { Request } from "@/interface/Request";
 import { DEFAULT_REQUEST } from "@/constants/context/DefaultRequest";
 import { RequestContextType } from "@/interface/context/RequestContext";
-import { RequestCategory } from "@/constants/tabs/Request";
+import { RequestCategory } from "@/constants/Tabs/Request";
 
 export const RequestContext = createContext<RequestContextType>({
   request: DEFAULT_REQUEST,

@@ -6,11 +6,11 @@ import {
   ADDITIONAL_MESSAGES,
   DIRECTIONS_OPTIONS,
   RequestCategory,
-} from "@/constants/tabs/Request";
+} from "@/constants/Tabs/Request";
 import StepAtInput from "@/components/General/StepAtInput";
 import CharacterInput from "@/components/General/CharacterInput";
 import { RequestContext } from "@/context/RequestContext";
-import { resolveMessageRef } from "@/utils/messageIdentification";
+import { resolveMessageRef } from "@/utils/MessageIdentification";
 import { InputContext } from "@/context/InputContext";
 import SelectDropdown from "@/components/General/SelectDropdown";
 

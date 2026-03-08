@@ -7,7 +7,7 @@ import CustomRadio from "@/components/General/CustomRadio";
 import SelectDropdown from "@/components/General/SelectDropdown";
 import RequestContainer from "@/components/Tabs/Request/RequestContainer";
 import AdditionalMessages from "@/components/Tabs/Request/AdditionalMessages";
-import { ADDITIONAL_MESSAGES, RequestCategory } from "@/constants/tabs/Request";
+import { ADDITIONAL_MESSAGES, RequestCategory } from "@/constants/Tabs/Request";
 
 const directOptions = ["Waypoint A", "Waypoint B", "Fix XYZ"];
 const weatherOptions = ["Left", "Right", "Avoid"];

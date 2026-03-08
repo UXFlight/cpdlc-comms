@@ -1,5 +1,5 @@
 import { Request } from "@/interface/Request";
-import { RequestCategory } from "@/constants/tabs/Request";
+import { RequestCategory } from "@/constants/Tabs/Request";
 import { FlightDetails } from "@/interface/FlightDetails";
 
 export function resolveMessageRef(

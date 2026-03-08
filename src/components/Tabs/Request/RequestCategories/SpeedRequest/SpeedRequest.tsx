@@ -2,10 +2,10 @@ import { useContext, useEffect, useState } from "react";
 import AdditionalMessages from "@/components/Tabs/Request/AdditionalMessages";
 import RequestContainer from "@/components/Tabs/Request/RequestContainer";
 import { RequestProps } from "@/interface/props/Request";
-import { ADDITIONAL_MESSAGES, RequestCategory } from "@/constants/tabs/Request";
+import { ADDITIONAL_MESSAGES, RequestCategory } from "@/constants/Tabs/Request";
 import BlockData from "@/components/Tabs/Request/BlockData";
 import { RequestContext } from "@/context/RequestContext";
-import { resolveMessageRef } from "@/utils/messageIdentification";
+import { resolveMessageRef } from "@/utils/MessageIdentification";
 import { InputContext } from "@/context/InputContext";
 
 export function SpeedRequest({

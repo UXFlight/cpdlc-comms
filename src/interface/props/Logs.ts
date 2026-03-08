@@ -1,4 +1,4 @@
-import { ActionType } from "@/constants/tabs/Logs";
+import { ActionType } from "@/constants/Tabs/Logs";
 import { Log } from "../Logs";
 
 export interface MessageProps {

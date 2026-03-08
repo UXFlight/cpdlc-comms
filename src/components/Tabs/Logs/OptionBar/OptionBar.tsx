@@ -4,7 +4,7 @@ import { LogsContext } from "@/context/LogsContext";
 import { LoadContext } from "@/context/LoadContext";
 import { useSocketListeners } from "@/hooks/useSocketListeners";
 import { useDelay } from "@/hooks/useDelay";
-import { ActionType } from "@/constants/tabs/Logs";
+import { ActionType } from "@/constants/Tabs/Logs";
 import { MessageProps } from "@/interface/props/Logs";
 import { AcceptableResponse } from "@/interface/Logs";
 import { ProgressStep } from "@/interface/context/LoadContext";

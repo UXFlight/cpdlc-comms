@@ -4,7 +4,7 @@ import MessageDisplayTab from "./MessageDisplayTab";
 import OptionBar from "./OptionBar/OptionBar";
 import SelectDropdown from "@/components/General/SelectDropdown";
 import { LogsContext } from "@/context/LogsContext";
-import { DROPDOWN_OPTIONS } from "@/constants/tabs/Logs";
+import { DROPDOWN_OPTIONS } from "@/constants/Tabs/Logs";
 import { socketService } from "@/api/communications/socket/socketService";
 import { LoadContext } from "@/context/LoadContext";
 

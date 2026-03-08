@@ -1,4 +1,4 @@
-import { RequestCategory } from "@/constants/tabs/Request";
+import { RequestCategory } from "@/constants/Tabs/Request";
 import { Request } from "@/interface/Request";
 
 export interface RequestContextType {

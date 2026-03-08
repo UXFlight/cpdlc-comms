@@ -6,7 +6,7 @@ import SelectDropdown from "@/components/General/SelectDropdown";
 import {
   CLIMB_DESCEND_OPTIONS,
   LEVEL_ALTITUDE_OPTIONS,
-} from "@/constants/tabs/Request";
+} from "@/constants/Tabs/Request";
 import CharacterInput from "@/components/General/CharacterInput";
 import BlockData from "../../BlockData";
 import { RequestContext } from "@/context/RequestContext";
