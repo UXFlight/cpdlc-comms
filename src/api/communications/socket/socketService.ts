@@ -6,7 +6,6 @@ class SocketClientService {
 
   constructor() {
     this.socket = io(SERVER_URL, {
-      transports: ["websocket"],
       autoConnect: false,
     });
   }
