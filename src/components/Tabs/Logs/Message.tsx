@@ -142,7 +142,7 @@ export default function Message({ message }: MessageProps) {
                   onClick={() => setThreadView("open")}
                   className="px-2 py-0.5 text-xs rounded-full bg-white/10 border border-white/15 text-white/80 hover:bg-white/15 transition"
                   aria-label="View all older messages"
-                  title={`${hiddenCount - 1} more messages — View all`}
+                  title={`${hiddenCount - 1} more messages -- View all`}
                 >
                   {hiddenCount - 1} more ▾
                 </button>

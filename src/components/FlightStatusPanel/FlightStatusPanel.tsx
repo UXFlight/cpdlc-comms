@@ -38,8 +38,8 @@ export default function FlightStatusPanel() {
               </p>
               <p>Turbulence: {status.turbulence ?? "N/A"}</p>
               <p>Icing: {status.icing ?? "N/A"}</p>
-              <p>Lat: {status.position.lat ?? "—"}</p>
-              <p>Lon: {status.position.lon ?? "—"}</p>
+              <p>Lat: {status.position.lat ?? "--"}</p>
+              <p>Lon: {status.position.lon ?? "--"}</p>
             </div>
           </div>
         )}

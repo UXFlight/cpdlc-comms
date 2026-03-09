@@ -120,7 +120,7 @@ export default function ReportIndex({
                     SELECTED
                   </span>
                 ) : (
-                  <span className="text-white/40 text-[11px]">—</span>
+                  <span className="text-white/40 text-[11px]">--</span>
                 )}
               </div>
             </div>
