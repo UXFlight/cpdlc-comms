@@ -7,7 +7,7 @@ class SocketClientService {
   constructor() {
     this.socket = io(SERVER_URL, {
       path: "/socket.io/",
-      transports: ["websocket", "polling"],
+      transports: ["polling", "websocket"],
       autoConnect: false
     })
   }
