@@ -54,7 +54,7 @@ export default function ActionBar({
   const iconBase = "w-6 h-6";
 
   return (
-    <div className="fixed top-22 left-1/2 transform -translate-x-1/2 bg-black text-white backdrop-blur-md rounded-b-xl rounded-t-none shadow-lg px-6 py-4 z-50 flex flex-col items-center space-y-3">
+    <div className="fixed top-22 left-1/2 transform -translate-x-1/2 bg-black text-white backdrop-blur-md rounded-b-xl rounded-t-none shadow-lg px-3 py-4 z-50 flex flex-col items-center space-y-3">
       <div className="flex items-center space-x-4">
         <button
           disabled={isDisabled}
