@@ -11,6 +11,7 @@ const websiteJsonLd = {
   name: SITE_NAME,
   url: SITE_URL,
   description: DEFAULT_DESCRIPTION,
+  inLanguage: "en",
 };
 
 const organizationJsonLd = {
@@ -18,7 +19,7 @@ const organizationJsonLd = {
   "@type": "Organization",
   name: SITE_NAME,
   url: SITE_URL,
-  description: "Research-based open-source CPDLC web application.",
+  description: "Open-source CPDLC interface research web application.",
   logo: SOCIAL_IMAGE_URL,
 };
 
@@ -36,4 +37,3 @@ const StructuredData = () => (
 );
 
 export default StructuredData;
-

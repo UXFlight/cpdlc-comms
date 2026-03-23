@@ -3,17 +3,27 @@ import type { Metadata } from "next";
 export const SITE_NAME = "CPDLC AIR";
 export const SITE_URL = "https://mycpdlc.com";
 export const SOCIAL_IMAGE_URL = `${SITE_URL}/logo.png`;
+export const HOME_TITLE = "CPDLC AIR - Open-Source CPDLC Research Prototype";
+export const PROJECT_CATEGORY = "Aviation Human Factors Research Software";
 
 export const DEFAULT_DESCRIPTION =
-  "CPDLC AIR is an open-source web application built from CPDLC interface research, designed to explore pilot-controller datalink communication workflows, usability, and interface clarity in aviation.";
+  "CPDLC AIR is an open-source web application based on CPDLC interface research. It helps explore pilot-controller datalink communication workflows, usability, and interface clarity in aviation.";
 
 export const SHARE_DESCRIPTION =
   "Open-source CPDLC interface research, brought to the web.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+  applicationName: SITE_NAME,
+  creator: "Irina Maximciuc",
+  authors: [
+    { name: "Irina Maximciuc" },
+    { name: "Sabrina Knappe" },
+    { name: "Philippe Doyon-Poulin" },
+  ],
+  category: PROJECT_CATEGORY,
   title: {
-    default: SITE_NAME,
+    default: HOME_TITLE,
     template: `%s | ${SITE_NAME}`,
   },
   description: DEFAULT_DESCRIPTION,
@@ -33,7 +43,7 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: SITE_NAME,
+    title: HOME_TITLE,
     description: SHARE_DESCRIPTION,
     url: SITE_URL,
     siteName: SITE_NAME,
@@ -41,13 +51,13 @@ export const metadata: Metadata = {
     images: [
       {
         url: SOCIAL_IMAGE_URL,
-        alt: SITE_NAME,
+        alt: "CPDLC AIR logo - open-source CPDLC research web application",
       },
     ],
   },
   twitter: {
     card: "summary",
-    title: SITE_NAME,
+    title: HOME_TITLE,
     description: SHARE_DESCRIPTION,
     images: [SOCIAL_IMAGE_URL],
   },
@@ -68,4 +78,3 @@ export const metadata: Metadata = {
     apple: "/logo.png",
   },
 };
-
