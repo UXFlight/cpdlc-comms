@@ -1,8 +1,8 @@
 import {
   DEFAULT_DESCRIPTION,
+  LOGO_IMAGE_URL,
   SITE_NAME,
   SITE_URL,
-  SOCIAL_IMAGE_URL,
 } from "@/lib/seo/metadata";
 
 const websiteJsonLd = {
@@ -20,7 +20,7 @@ const organizationJsonLd = {
   name: SITE_NAME,
   url: SITE_URL,
   description: "Open-source CPDLC interface research web application.",
-  logo: SOCIAL_IMAGE_URL,
+  logo: LOGO_IMAGE_URL,
 };
 
 const StructuredData = () => (

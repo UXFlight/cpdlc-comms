@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 
 export const SITE_NAME = "CPDLC AIR";
 export const SITE_URL = "https://mycpdlc.com";
-export const SOCIAL_IMAGE_URL = `${SITE_URL}/logo.png`;
+export const LOGO_IMAGE_URL = `${SITE_URL}/logo.png`;
+export const OG_IMAGE_URL = `${SITE_URL}/og.png`;
 export const HOME_TITLE = "CPDLC AIR - Open-Source CPDLC Research Prototype";
 export const PROJECT_CATEGORY = "Aviation Human Factors Research Software";
 
@@ -50,8 +51,8 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: SOCIAL_IMAGE_URL,
-        alt: "CPDLC AIR logo - open-source CPDLC research web application",
+        url: OG_IMAGE_URL,
+        alt: "CPDLC AIR open graph preview image",
       },
     ],
   },
@@ -59,7 +60,7 @@ export const metadata: Metadata = {
     card: "summary",
     title: HOME_TITLE,
     description: SHARE_DESCRIPTION,
-    images: [SOCIAL_IMAGE_URL],
+    images: [OG_IMAGE_URL],
   },
   robots: {
     index: true,
