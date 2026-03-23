@@ -52,7 +52,9 @@ export const metadata: Metadata = {
     images: [
       {
         url: OG_IMAGE_URL,
-        alt: "CPDLC AIR open graph preview image",
+        width: 1200,
+        height: 630,
+        alt: "CPDLC AIR - Open-Source CPDLC Research Prototype",
       },
     ],
   },
