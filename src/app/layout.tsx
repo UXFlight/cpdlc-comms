@@ -6,6 +6,7 @@ import { LoadProvider } from "@/context/LoadContext";
 import { LogsProvider } from "@/context/LogsContext";
 import { ReportProvider } from "@/context/ContractContext";
 import { RequestProvider } from "@/context/RequestContext";
+import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 
 export const metadata = {
   title: "CPDLC AIR",
@@ -20,6 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="overflow-hidden bg-[url('/bg-5.png')]">
+        <GoogleAnalytics />
         <GlobalProvider>
           <FlightProvider>
             <LoadProvider>
