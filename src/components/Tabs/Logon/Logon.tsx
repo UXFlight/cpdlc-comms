@@ -81,11 +81,6 @@ export default function Logon() {
             setUsername(val);
           }}
         />
-        {codesError && (
-          <p className="absolute mt-1 text-[10px] text-red-300">
-            Supported codes are unavailable.
-          </p>
-        )}
       </div>
       <div className="ml-52">
         {isLoading ? (
