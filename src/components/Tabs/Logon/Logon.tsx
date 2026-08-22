@@ -1,8 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { GlobalContext } from "@/context/GlobalContext";
 import CharacterInput from "@/components/General/CharacterInput";
 import { socketService } from "@/api/communications/socket/socketService";
-import { SupportedCodesService } from "@/api/services/supportedCodesService";
 import { useSocketListeners } from "@/hooks/useSocketListeners";
 import Image from "next/image";
 
@@ -18,22 +17,11 @@ export default function Logon() {
   const [isLoading, setIsLoading] = useState(false);
   const [supportedCodes, setSupportedCodes] = useState<string[]>([]);
 
-  useEffect(() => {
-    let isMounted = true;
-
-    SupportedCodesService.getAll()
-      .then(({ codes }) => {
-        if (isMounted) setSupportedCodes(codes);
-      })
-      .catch(() => undefined);
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
   const validValue = () => {
-    return supportedCodes.includes(username);
+    return (
+      username.length === length &&
+      (supportedCodes.length === 0 || supportedCodes.includes(username))
+    );
   };
 
   const handleLogon = () => {
@@ -42,6 +30,10 @@ export default function Logon() {
   };
 
   useSocketListeners([
+    {
+      event: "supported_codes",
+      callback: (codes: string[]) => setSupportedCodes(codes),
+    },
     {
       event: "logon_success",
       callback: () => {
