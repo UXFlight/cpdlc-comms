@@ -86,10 +86,10 @@ export default function Connection() {
         ) : username.length === 4 ? (
           <div className="flex flex-col items-center justify-center py-8 text-yellow-200 bg-[#2b2b2b]/50 rounded-lg gap-2 border border-yellow-300/20">
             <p className="text-sm font-bold tracking-wide uppercase">
-              Connexion non établie
+              Connection not established
             </p>
             <p className="text-xs text-yellow-100">
-              ATC {username} n’est disponible pour le moment.
+              Code {username} is not supported. Choose a code from the list.
             </p>
           </div>
         ) : (

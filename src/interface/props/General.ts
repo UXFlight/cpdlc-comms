@@ -6,6 +6,7 @@ export interface CharacterInputProps {
   disabled?: boolean;
   onChange: (value: string) => void;
   onEnter?: (value: string) => void;
+  options?: string[];
 }
 
 export interface CustomCheckboxProps {

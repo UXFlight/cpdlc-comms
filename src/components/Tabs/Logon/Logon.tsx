@@ -1,7 +1,8 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "@/context/GlobalContext";
 import CharacterInput from "@/components/General/CharacterInput";
 import { socketService } from "@/api/communications/socket/socketService";
+import { SupportedCodesService } from "@/api/services/supportedCodesService";
 import { useSocketListeners } from "@/hooks/useSocketListeners";
 import Image from "next/image";
 
@@ -15,9 +16,27 @@ export default function Logon() {
     setUsername,
   } = useContext(GlobalContext);
   const [isLoading, setIsLoading] = useState(false);
+  const [supportedCodes, setSupportedCodes] = useState<string[]>([]);
+  const [codesError, setCodesError] = useState(false);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    SupportedCodesService.getAll()
+      .then(({ codes }) => {
+        if (isMounted) setSupportedCodes(codes);
+      })
+      .catch(() => {
+        if (isMounted) setCodesError(true);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const validValue = () => {
-    return username.length === length;
+    return supportedCodes.includes(username);
   };
 
   const handleLogon = () => {
@@ -54,13 +73,19 @@ export default function Logon() {
           value={username}
           length={length}
           disabled={!isConnectionPossible}
+          options={supportedCodes}
           onChange={(val) => {
-            if (val.length < 3) {
+            if (val !== username) {
               setConnectionState(null);
             }
             setUsername(val);
           }}
         />
+        {codesError && (
+          <p className="absolute mt-1 text-[10px] text-red-300">
+            Supported codes are unavailable.
+          </p>
+        )}
       </div>
       <div className="ml-52">
         {isLoading ? (

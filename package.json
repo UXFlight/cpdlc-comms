@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --webpack",
     "build": "next build --webpack",
     "start": "next start -H 127.0.0.1 -p 3000",
     "prod": "npm run build && npm start",
-    "lint": "next lint",
+    "lint": "eslint src",
     "prettier": "prettier --write 'src/**/*.{ts,tsx,js,json,css,md}'"
   },
   "dependencies": {
