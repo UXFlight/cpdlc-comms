@@ -5,3 +5,6 @@ export const SERVER_URL =
   process.env.NODE_ENV === "production"
     ? PROD_SERVER_URL!
     : DEV_SERVER_URL;
+
+export const API_URL =
+  process.env.NODE_ENV === "production" ? "/api/" : DEV_SERVER_URL;

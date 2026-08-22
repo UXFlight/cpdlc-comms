@@ -17,7 +17,6 @@ export default function Logon() {
   } = useContext(GlobalContext);
   const [isLoading, setIsLoading] = useState(false);
   const [supportedCodes, setSupportedCodes] = useState<string[]>([]);
-  const [codesError, setCodesError] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -26,9 +25,7 @@ export default function Logon() {
       .then(({ codes }) => {
         if (isMounted) setSupportedCodes(codes);
       })
-      .catch(() => {
-        if (isMounted) setCodesError(true);
-      });
+      .catch(() => undefined);
 
     return () => {
       isMounted = false;

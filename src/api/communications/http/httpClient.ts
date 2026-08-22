@@ -1,6 +1,6 @@
-import { SERVER_URL } from "@/constants/serverURL";
+import { API_URL } from "@/constants/serverURL";
 
-const baseUrl = SERVER_URL;
+const baseUrl = API_URL;
 
 const handleResponse = async <T>(response: Response): Promise<T> => {
   if (!response.ok) {
