@@ -111,11 +111,7 @@ export const LogsProvider = ({ children }: { children: React.ReactNode }) => {
   ]);
 
   const particularMsgHandler = (ref: string) => {
-    console.log("Particular log reference:", ref);
-    if (ref === "DM67ab") {
-      console.log("JE RENTRE DANS LE IFFFFF");
-      resetAdscState();
-    }
+    if (ref === "DM67ab") resetAdscState();
   };
 
   useEffect(() => {

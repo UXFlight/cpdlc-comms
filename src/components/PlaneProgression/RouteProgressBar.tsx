@@ -19,10 +19,6 @@ export default function RouteProgressBar() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
 
-  useEffect(() => {
-    console.log("Distances updated:", distances);
-    console.log("Total distance updated:", totalDistance);
-  }, [distances, totalDistance]);
 
   useSocketListeners([
     {

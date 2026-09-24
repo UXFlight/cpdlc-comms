@@ -208,7 +208,6 @@ export const ReportProvider = ({ children }: { children: React.ReactNode }) => {
     {
       event: "index_report_response",
       callback: (data: IndexReport) => {
-        console.log("index report response", data);
         setIndexReports((prev) =>
           prev.map((r) =>
             r.id === data.id ? { ...r, result: data.result } : r,

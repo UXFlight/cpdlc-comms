@@ -17,7 +17,6 @@ export default function ReportsTab() {
   const [cancelSignal, setCancelSignal] = useState(0);
 
   useEffect(() => {
-    console.log(`report data changed`, reportData);
   }, [reportData]);
 
   const handlePreviewCancel = () => {

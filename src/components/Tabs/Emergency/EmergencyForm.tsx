@@ -1,6 +1,6 @@
 import InputField from "@/components/General/EmergencyInputField";
 import SelectDropdown from "@/components/General/SelectDropdown";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import OptionBar from "../../General/OptionBar";
 import { EmergencyData, ReportContext } from "@/context/ContractContext";
 
@@ -24,10 +24,6 @@ export default function EmergencyForm({
   handleSet: (data: EmergencyData) => void;
 }) {
   const { emergencyData, setEmergencyData } = useContext(ReportContext);
-
-  useEffect(() => {
-    console.log(emergencyData);
-  }, [emergencyData]);
 
   const update = (field: keyof typeof emergencyData, value: string) => {
     setEmergencyData((prev) => ({ ...prev, [field]: value }));

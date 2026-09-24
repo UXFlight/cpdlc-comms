@@ -17,7 +17,7 @@ export function ClearanceRequest({
     setIsOpen(nextOpen);
     onOpen(nextOpen);
     if (!nextOpen) {
-      console.log("Closing Clearance Request");
+      // console.log("Closing Clearance Request");
     } else {
       //setTargetInput("block-data-from");
     }

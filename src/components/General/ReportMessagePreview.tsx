@@ -88,7 +88,6 @@ export default function ReportMessagePreview({
       }
 
       case "index": {
-        console.log("Sending index report:", payloadSnap);
         socketService.send("add_log", {"log_entry": {"messageRef":payloadSnap.message.ref, "formattedMessage": payloadSnap.message.text}, "thread_id": payloadSnap.data.selected.id});
         break;
       }
